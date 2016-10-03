@@ -1,0 +1,7 @@
+<div class="users" ng-cloak>
+	<link rel="stylesheet" type="text/css" href="./dist/routes/users/users.css" >
+	<h1>users</h1>
+    <ul>
+        <li ng-repeat="user in users.userlist track by $index">username: {{ user.username }} password: {{user.password}}</li>
+    </ul>
+</div>

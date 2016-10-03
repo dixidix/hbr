@@ -1,0 +1,54 @@
+/** Devices Breakpoints **/
+$phone: 480px !default; //xs
+$tablet: 768px !default; // sm
+$desktop: 992px !default; // md
+$desktop-large: 1200px !default; //lg
+
+
+/** Mixins for responsive content **/
+@mixin phone {
+  @media screen and (max-width: #{$tablet - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (min-width: #{$tablet}) and (max-width: #{$desktop - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: #{$desktop}) and (max-width: #{$desktop-large - 1px}){
+    @content;
+  }
+}
+@mixin large-desktop {
+  @media screen and (min-width: #{$desktop-large}) {
+    @content;
+  }
+}
+@mixin responsive($devices...) {
+    @each $device in $devices {
+        @if $device == phone {
+            @include phone {
+                @content;
+            }
+        }
+        @if $device == tablet {
+            @include tablet {
+                @content;
+            }
+        }
+        @if $device == desktop {
+            @include desktop {
+                @content;
+            }
+        }
+        @if $device == large-desktop {
+            @include large-desktop {
+                @content;
+            }
+        }
+    }
+}
