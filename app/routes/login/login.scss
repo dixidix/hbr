@@ -1,0 +1,37 @@
+@import '../../styles/base';
+
+
+
+.login{
+      position: absolute;
+      z-index: 1;      
+      box-shadow: 0px 2px 15px 1px $black;
+      margin-bottom:5%;
+    @include responsive(large-desktop){
+        top: 33%;
+        left: 30%;
+        width: 40%;
+        height: initial;
+    }
+    @include responsive(large-xl-desktop){      
+        top:32%;
+        left:30%;
+        width: 40%;
+        height: initial;
+    }
+    background:$snow;
+    width:100%;    
+    height: 100vh;
+    color:$hbr-blue;
+    border-radius:3px;
+    .btn-hbr-blue{
+        @include hbr-btn-blue(100%,50px,$hbr-green);
+    }
+    form{
+        padding:50px;
+    }
+    h1{
+        padding:30px  50px 0px;
+        margin:0;
+    }
+}

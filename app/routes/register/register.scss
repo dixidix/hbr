@@ -1,0 +1,71 @@
+@import '../../styles/base';
+
+.register{
+    position: relative;
+    background:$snow;
+    width: 100%;
+    margin-bottom:5%;
+    &__success{
+        padding:5% 0;
+
+            .fa.fa-check-circle{
+                font-size: 160px;
+                color: $hbr-green;
+            }
+
+        p{
+            font-size:18px;
+            @include responsive(large-xl-desktop){
+            font-size:24px;
+            }
+            padding:5% 0;
+        }
+        .btn-hbr-blue{
+            @include hbr-btn-blue(100%,50px,$hbr-green);
+        }
+    }
+    @include responsive(desktop, large-desktop,large-xl-desktop){
+        position: absolute;
+        padding-top:0;
+        top:25%;
+        left:25%;
+        width: 50%;
+        box-shadow: 0px 2px 15px 1px $black;
+    }    
+     @include responsive(ipad-landscape){
+        position: absolute;
+        padding-top:0;
+        top:25%;
+        left:10%;
+        width:80%;
+     }
+    padding:2%;
+    color:$hbr-blue;
+    border-radius:3px;
+
+    .btn-hbr-green{
+        @include hbr-btn-green(100%,50px,$hbr-blue);
+    }
+
+    form{     
+        padding-top:80px; 
+        @include responsive(desktop, large-desktop){
+            padding-top: 5%;
+        }  
+        select{
+            width:25%;
+            float:left;
+            border-radius:3px 0px 0px 3px;
+            border-right:none;
+        }
+        #idCode{
+            width:75%;
+            float:right;
+            border-radius:0px 3px 3px 0px;
+        }
+    }
+    h1{
+        padding:30px  50px 0px;
+        margin:0;
+    }
+}

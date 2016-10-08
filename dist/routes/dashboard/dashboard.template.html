@@ -1,0 +1,43 @@
+<div class="dashboard container-fluid" ng-cloak>
+    <link rel="stylesheet" type="text/css" href="./dist/routes/dashboard/dashboard.css">
+    <aside ng-class="dashboard.collapse ? 'dashboard__sidebar--collapsed':'dashboard__sidebar'">
+        <ul>
+            <a href="" ng-if="!dashboard.collapse" data-ng-click="dashboard.collapse_sidebar()">
+                <li>
+                    <i class="fa fa-eye-slash"></i>
+                    <span>Ocultar barra</span>
+                </li>
+            </a>
+            <a href="" ng-if="dashboard.collapse" data-ng-click="dashboard.collapse_sidebar()" tooltip-placement="right" uib-tooltip="Mostrar barra">
+                <li>
+                    <i class="fa fa-eye"></i>
+                </li>
+            </a>
+            <a href="" ui-sref="dashboard.profile" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Ver Perfil">
+                <li><i class="fa fa-user"></i></li>
+            </a>
+            <a href="" ui-sref="dashboard.profile" ng-if="!dashboard.collapse">
+                <li><i class="fa fa-user"></i><span> Ver Perfil </span></li>
+            </a>
+            <a href="" ui-sref="dashboard.shopping" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Agregar Compra">
+                <li><i class="fa fa-shopping-cart"></i></li>
+            </a>
+            <a href="" ui-sref="dashboard.shopping" ng-if="!dashboard.collapse">
+                <li><i class="fa fa-shopping-cart"></i><span> Agregar Compra </span></li>
+            </a>
+            <a href="" ui-sref="dashboard.shopping_list" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Ver Compras">
+                <li><i class="fa fa-list-alt"></i></li>
+            </a>
+            <a href="" ui-sref="dashboard.shopping_list" ng-if="!dashboard.collapse">
+                <li><i class="fa fa-list-alt"></i><span> Ver Compras </span></li>
+            </a>
+        </ul>
+    </aside>
+    <section ng-class="dashboard.collapse ? 'dashboard__content--collapsed':'dashboard__content'">
+        <div ui-view>
+            <div class="container-img">
+                <img  src="http://tucourier.com.ar/wp-content/uploads/2014/11/logo_home_2-1.png">
+            </div>
+        </div>
+    </section>
+</div>

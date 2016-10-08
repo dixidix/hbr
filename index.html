@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="baseapp">
+<head>
+
+	<meta charset="utf-8" /> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>HBR | {{ $state.current.data.title }}</title>
+	<link rel="icon" href="http://tucourier.com.ar/wp-content/uploads/2016/09/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="./dist/styles/modules/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="./dist/styles/modules/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./dist/styles/modules/ui-bootstrap-csp.css">
+	<link rel="stylesheet" type="text/css" href="./dist/styles/base.css">
+	<link rel="stylesheet" type="text/css" href="./dist/styles/fonts/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+	<navbar></navbar>
+	<div ui-view></div>
+	<script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfUKzZehW_5drIhbXZYq-FjAhbOooHtIQ&libraries=places"></script>
+	<script type="text/javascript" src="./dist/libs.bundle.min.js"></script>
+	<script type="text/javascript" src="./dist/app.bundle.min.js"></script>
+</body>
+</html>

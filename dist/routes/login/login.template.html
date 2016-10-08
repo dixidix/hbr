@@ -1,0 +1,10 @@
+<div class="login container" ng-cloak>
+	<link rel="stylesheet" type="text/css" href="./dist/routes/login/login.css" >
+	<form ng-if="!login.loggedIn">
+        <label for="username">Usuario (*)</label><br>
+        <input class="form-control" type="text" name="username" ng-model="login.user.username" placeholder="Usuario"><br>
+         <label for="username">Contrase&ntilde;a (*)</label><br>
+        <input class="form-control" type="password" name="password" ng-model="login.user.password" placeholder="Contrase&ntilde;a"><br>
+        <button class="btn btn-hbr-blue" type="submit" ng-click="login.login()">INGRESAR</button>
+    </form>
+</div>

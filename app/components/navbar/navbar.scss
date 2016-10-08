@@ -1,0 +1,77 @@
+@import '../../styles/base';
+
+.navbar{
+    width: 100%;
+    min-height: 60px;
+    border-radius: 0;
+    background-color: $snow;
+    color:$hbr-blue;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-left: 2%;
+    border:none;
+    margin:0;
+    box-shadow: 0px 1px 7px 0px $black;
+    position: fixed;
+    z-index: 1;
+    @include responsive(desktop, large-desktop){
+        position: relative;
+    }
+    &-brand{
+        float:left;
+        width:20%;
+        height: 40px;
+        @include responsive(desktop, large-desktop,large-xl-desktop){
+            width:20%;
+            height: 65px;
+        }
+        padding:5px;
+        margin:0;
+        img{
+            height:100%;
+        }
+    }
+    ul{
+        width:80%;
+        float:right;
+        list-style: none;
+        padding:0;
+        margin:0;
+        a{
+        display:flex;
+        flex-direction: row;
+        float:right;
+        justify-content: space-between;
+        color:$hbr-blue;
+        font-size: 12px;
+        @include responsive(desktop, large-desktop,large-xl-desktop){
+            font-size: 18px;
+        }
+        text-decoration: none;
+           li{
+               i{
+                   margin:0 10px;
+               }
+            cursor:pointer;
+            align-content: center;
+            align-items: center;
+            display:flex;
+            flex-direction: row;
+            padding:0 15px;
+            @include responsive(desktop, large-desktop){
+            padding:0 15px;
+            }
+            height: 65px;
+            transition: .2s all ease-in-out;
+            border-bottom:5px solid transparent;
+                &:hover{
+                    border-bottom:5px solid $hbr-green;
+                }
+            }
+        }
+        
+    }
+}

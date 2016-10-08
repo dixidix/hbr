@@ -1,0 +1,14 @@
+@import '../mixins/main';
+
+form{
+    padding:10px 0px;
+    .form-control{
+        height: 40px;
+        margin-bottom:10px;
+        border-radius:3px;
+    }
+    label{
+        font-family: $museoSans-500;
+        font-weight: bold;
+    }
+}

@@ -1,0 +1,24 @@
+<div class="navbar container-fluid">
+    <link rel="stylesheet" type="text/css" href="./dist/components/navbar/navbar.css">
+    <a class="navbar-brand" href="http://tucourier.com.ar/#home">
+        <img class="img-responsive" src="http://tucourier.com.ar/wp-content/uploads/2014/11/logo_home_2-1.png" alt="logo">
+    </a>
+    <ul>
+        <a href="" ui-sref="home.login" ng-if="!isLogged">
+            <li>Ingresar</li>
+        </a>
+        <a href="" ui-sref="home.register" ng-if="!isLogged">
+            <li>Registrarme</li>
+        </a>
+        <a href="" ng-if="isLogged" ng-click="navbar.logout()">
+            <li>Salir</li>
+        </a>
+        <a href="" ng-if="isLogged">
+            <li><i class="fa fa-user"> </i> {{ username }} </li>
+        </a>
+
+        <a href="http://tucourier.com.ar/#home">
+            <li>Home</li>
+        </a>
+    </ul>
+</div>
