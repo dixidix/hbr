@@ -11,7 +11,7 @@ $request = explode("/", substr(@$_SERVER['PATH_INFO'], 1));
 
 switch ($method) {
 	case 'PUT':
-								if (empty($errors)){
+	if (empty($errors)){
 		$data = $_POST;
 		editUser($data);
 	}
@@ -20,7 +20,7 @@ switch ($method) {
 	}
 	break;
 	case 'POST':
-								if (empty($errors)){
+	if (empty($errors)){
 		$data = $_POST;
 		if($data['method']=='POST'){
 			addUser($data);
@@ -34,7 +34,7 @@ switch ($method) {
 	}
 	break;
 	case 'GET':
-								if (empty($errors)){
+	if (empty($errors)){
 		$data = $_GET;
 		getUsers($data);
 	}
@@ -44,7 +44,7 @@ switch ($method) {
 	break;
 	
 	default:
-								print_r($errors);
+	print_r($errors);
 	break;
 }
 
@@ -53,13 +53,13 @@ function adduser($data){
 	if(count($data) > 0){
 		switch ($data['action']) {
 			case 'register':
-																								register($data);
+			register($data);
 			break;
 			case 'logout':
-																								logout($data);
+			logout($data);
 			break;
 			default:
-																								print_r($errors);
+			print_r($errors);
 			break;
 		}
 	}
@@ -74,15 +74,15 @@ function editUser($data){
 function getUsers($data){
 	if(count($data) > 0){
 		//f		unciones para traer usuarios
-																switch ($data['action']) {
+		switch ($data['action']) {
 			case 'login':
-																								login($data);
+			login($data);
 			break;
 			case 'getUserById':
-																								getUserById($data);
+			getUserById($data);
 			break;
 			default:
-																								print_r($errors);
+			print_r($errors);
 			break;
 		}
 		

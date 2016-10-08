@@ -1,10 +1,15 @@
 <div class="login container" ng-cloak>
 	<link rel="stylesheet" type="text/css" href="./dist/routes/login/login.css" >
-	<form ng-if="!login.loggedIn">
-        <label for="username">Usuario (*)</label><br>
-        <input class="form-control" type="text" name="username" ng-model="login.user.username" placeholder="Usuario"><br>
-         <label for="username">Contrase&ntilde;a (*)</label><br>
-        <input class="form-control" type="password" name="password" ng-model="login.user.password" placeholder="Contrase&ntilde;a"><br>
-        <button class="btn btn-hbr-blue" type="submit" ng-click="login.login()">INGRESAR</button>
-    </form>
+	<form ng-if="!login.loggedIn" name="login.loginForm" novalidate data-ng-submit="login.loginForm.$valid && !login.loginForm.$pristine && login.loginForm.$submitted && login.login()">
+	<div class="form-group" data-ng-class="{'has-error': login.loginError && login.loginForm.$submitted}">
+			<label for="username" class="control-label">Usuario (*)</label><br>
+			<input class="form-control" type="text" name="username" ng-model="login.user.username" placeholder="Usuario"><br>
+			<label for="username"  class="control-label">Contrase&ntilde;a (*)</label><br>
+			<input class="form-control" type="password" name="password" ng-model="login.user.password" placeholder="Contrase&ntilde;a"><br>
+            <span class="has-error col-xs-12 help-block" ng-if="login.loginError">
+                <i class="fa fa-times-circle"></i>  {{:: login.loginError}}
+            </span>
+		</div>
+		<button class="btn btn-hbr-blue" type="submit">INGRESAR</button>
+	</form>
 </div>
