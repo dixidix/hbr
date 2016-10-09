@@ -13,21 +13,22 @@ function loginController(angular, app) {
         function login() {
             authenticationService.login(self.user)
             .then(function (response) {
-                if(!response.data.error){
-                    sessionStorage.setItem("sskey", response.sskey);
-                    sessionStorage.username = response.name + " " + response.lastname;
+                console.log(response);
+                if(!response.data.errors){
+                    sessionStorage.setItem("sskey", response.data.sskey);
+                    sessionStorage.username = response.data.name + " " + response.data.lastname;
                     $state.go('dashboard',{reload:true});
                     self.loginForm.username.$invalid = false;
                     self.loginForm.username.$valid = true;
                     self.loginForm.password.$invalid = false;
                     self.loginForm.password.$valid = true;
-                    self.registerForm.$invalid = false;
-                    self.registerForm.$valid = true;
+                    self.loginForm.$invalid = false;
+                    self.loginForm.$valid = true;
                 } else {
-                    self.loginError = response.data.error.loginError;
+                    self.loginError = response.data.errors.loginError;
                     self.loginForm.username.$invalid = true;
                     self.loginForm.password.$invalid = true;
-                    self.registerForm.$invalid = true;
+                    self.loginForm.$invalid = true;
                 }
             });
         }
@@ -35,8 +36,6 @@ function loginController(angular, app) {
         function init() {
             self.user = {};
             self.login = login;
-            self.loggedIn = sessionStorage.getItem('isLogged') || false;
-            self.user.username = JSON.parse(sessionStorage.getItem('username'));
         }
         init();
     }

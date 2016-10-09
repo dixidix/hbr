@@ -13,12 +13,15 @@
         <a href="" ng-if="isLogged" ng-click="navbar.logout()">
             <li>Salir</li>
         </a>
-        <a href="" ng-if="isLogged">
-            <li><i class="fa fa-user"> </i> {{ username }} </li>
+        <a href="" ng-if="isLogged" ui-sref="dashboard.profile" ng-if="dashboard.collapse" tooltip-placement="bottom" uib-tooltip="Ver Perfil">
+            <li> {{ username }} </li>
         </a>
 
-        <a href="http://tucourier.com.ar/#home">
+        <a ng-if="!isLogged" href="http://tucourier.com.ar/#home">
             <li>Home</li>
+        </a>
+        <a ng-if="isLogged" href="" ui-sref="dashboard">
+            <li>Inicio</li>
         </a>
     </ul>
 </div>

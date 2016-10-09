@@ -5,12 +5,7 @@ function authenticationService(angular, app) {
 	authenticationService.$inject = ['$http', '$q'];
 	function authenticationService($http, $q) {
 		this.checkAuth = function () {
-			if (sessionStorage.getItem('sskey')) {
-				return true;
-			} else {
-				console.log("pase aca");
-				return false;
-			}
+			return $http.post('./dist/php/session.php',{ sskey: sessionStorage.getItem('sskey') });			
 		};
 		this.login = function (user) {
 			var deffered = $q.defer();

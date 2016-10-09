@@ -1,4 +1,35 @@
 <div class="shopping container-fluid" ng-cloak>
-    <link rel="stylesheet" type="text/css" href="./dist/routes/shopping/shopping.css">
-     <h1>Shopping</h1>
-</div>
+	<link rel="stylesheet" type="text/css" href="./dist/routes/shopping/shopping.css">
+	<h1>Agregar Compra</h1>
+	<form  name="shopping.shoppingForm" novalidate data-ng-submit="shopping.shoppingForm.$valid && !shopping.shoppingForm.$pristine && shopping.shoppingForm.$submitted && shopping.buy()">
+		<div>
+			<h2>Datos de usuario</h2>
+			<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm.name.$invalid && shopping.shoppingForm.$submitted}">
+				<label class="control-label" for="name">Direcci&oacute;n de entrega (*)</label><br>
+				<input id="name" class="form-control" type="text" name="name" ng-model="shopping.purchase.name" placeholder="Nombre"  autocomplete="off" required>
+			</div>
+			<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm.name.$invalid && shopping.shoppingForm.$submitted}">
+				<label class="control-label" for="name">Localidad (*)</label><br>
+				<input id="name" class="form-control" type="text" name="name" ng-model="shopping.purchase.name" placeholder="Nombre"  autocomplete="off" required>
+			</div>
+			<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm.name.$invalid && shopping.shoppingForm.$submitted}">
+				<label class="control-label" for="name">C&oacute;digo postal (*)</label><br>
+				<input id="name" class="form-control" type="text" name="name" ng-model="shopping.purchase.name" placeholder="Nombre"  autocomplete="off" required>
+			</div>
+		</div>
+		<div class="form-group col-xs-12 col-sm-12" data-ng-class="{'has-error': shopping.shoppingForm.name.$invalid && shopping.shoppingForm.$submitted}">
+			<label class="control-label" for="name">Direcci&oacute;n de entrega (*)</label><br>
+			<input id="name" class="form-control" type="text" name="name" ng-model="shopping.purchase.name" placeholder="Nombre"  autocomplete="off" required>
+		</div>
+		<div>
+			<h2>Datos de compras</h2>
+			<div class="form-group col-xs-12 col-sm-6" data-ng-class="{'has-error': shopping.shoppingForm.name.$invalid && shopping.shoppingForm.$submitted}">
+				<label class="control-label" for="name">Localidad (*)</label><br>
+				<input id="name" class="form-control" type="text" name="name" ng-model="shopping.purchase.name" placeholder="Nombre"  autocomplete="off" required>
+			</div>
+			<div class="form-group col-xs-12 col-sm-6" data-ng-class="{'has-error': shopping.shoppingForm.name.$invalid && shopping.shoppingForm.$submitted}">
+				<label class="control-label" for="name">C&oacute;digo postal (*)</label><br>
+				<input id="name" class="form-control" type="text" name="name" ng-model="shopping.purchase.name" placeholder="Nombre"  autocomplete="off" required>
+			</div>
+		</div>
+	</div>

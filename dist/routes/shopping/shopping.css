@@ -89,3 +89,8 @@ html {
     padding: 0;
     height: 100%;
     font-family: "museoSans-100", Arial; }
+
+.shopping form {
+  width: 80%;
+  padding-left: 10%;
+  padding-top: 5%; }

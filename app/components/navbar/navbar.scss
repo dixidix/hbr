@@ -1,6 +1,10 @@
 @import '../../styles/base';
 
 .navbar{
+        .tooltip-inner {
+        background-color:$hbr-blue;
+        color:$hbr-green;
+    }
     width: 100%;
     min-height: 60px;
     border-radius: 0;
