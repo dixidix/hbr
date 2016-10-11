@@ -165,90 +165,32 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td><span>a</span></td>
-						<td><span>b</span></td>
-						<td><span>c</span></td>
-						<td><span>a</span></td>
-						<td><span>b</span></td>
-						<td><span>c</span></td>
-						<td><span>a</span></td>
-						<td><span>b</span></td>
+					<tr ng-repeat="product in shopping.purchase.products track by $index">
+						<td><span>{{ product.productType }}</span></td>
+						<td><span>{{ product.quantity }}</span></td>
+						<td><span>{{ product.price }}</span></td>
+						<td><span>{{ product.establishment }}</span></td>
+						<td><span>{{ product.weight }}</span></td>
+						<td><span>{{ product.bill_number }}</span></td>
+						<td><span>{{ product.postal }}</span></td>
+						<td><span>{{ product.tracking_number }}</span></td>
 						<td><span><i class="fa fa-file-pdf-o"></i></span></td>
 						<td><span><i class="fa fa-edit"></i></span><span><i class="fa fa-close"></i></span></td>
-					</tr>
-					<tr>
-						<td><span>a</span></td>
-						<td><span>b</span></td>
-						<td><span>c</span></td>
-						<td><span>a</span></td>
-						<td><span>b</span></td>
-						<td><span>c</span></td>
-						<td><span>a</span></td>
-						<td><span>b</span></td>
-						<td><span><i class="fa fa-file-pdf-o"></i></span></td>
-						<td><span><i class="fa fa-edit"></i></span><span><i class="fa fa-close"></i></span></td>
-					</tr>
-					<tr>
-						<td><span>a</span></td>
-						<td><span>b</span></td>
-						<td><span>c</span></td>
-						<td><span>a</span></td>
-						<td><span>b</span></td>
-						<td><span>c</span></td>
-						<td><span>a</span></td>
-						<td><span>b</span></td>
-						<td><span><i class="fa fa-file-pdf-o"></i></span></td>
-						<td><span><i class="fa fa-edit"></i></span><span><i class="fa fa-close"></i></span></td>
-					</tr>
-					<tr>
-						<td><span>a</span></td>
-						<td><span>b</span></td>
-						<td><span>c</span></td>
-						<td><span>a</span></td>
-						<td><span>b</span></td>
-						<td><span>c</span></td>
-						<td><span>a</span></td>
-						<td><span>b</span></td>
-						<td><span><i class="fa fa-file-pdf-o"></i></span></td>
-						<td><span><i class="fa fa-edit"></i></span><span><i class="fa fa-close"></i></span></td>
-					</tr>
-					<tr>
-						<td><span>a</span></td>
-						<td><span>b</span></td>
-						<td><span>c</span></td>
-						<td><span>a</span></td>
-						<td><span>b</span></td>
-						<td><span>c</span></td>
-						<td><span>a</span></td>
-						<td><span>b</span></td>
-						<td><span><i class="fa fa-file-pdf-o"></i></span></td>
-						<td><span><i class="fa fa-edit"></i></span><span><i class="fa fa-close"></i></span></td>
-					</tr>
-					<tr>
-						<td><span>a</span></td>
-						<td><span>b</span></td>
-						<td><span>c</span></td>
-						<td><span>a</span></td>
-						<td><span>b</span></td>
-						<td><span>c</span></td>
-						<td><span>a</span></td>
-						<td><span>b</span></td>
-						<td><span><i class="fa fa-file-pdf-o"></i></span></td>
-						<td><span><i class="fa fa-edit"></i></span><span><i class="fa fa-close"></i></span></td>
+
 					</tr>
 				</tbody>
 			</table>
 			<div class="well well-lg">
 				<ul>
-					<li><strong>Peso Total:</strong> <span class="pull-right">50 Kg.</span></li>
-					<li><strong>Peso Excedente:</strong><span class="pull-right"> 50 Kg.</span></li>
-					<li><strong>Precio Parcial:</strong><span class="pull-right"> $ 2000,00</span></li>
-					<li><strong>Transporte:</strong><span class="pull-right"> $ 2000,00</span></li>
-					<li><strong>Excedente Peso:</strong><span class="pull-right"> $ 2000,00</span></li>
-					<li><strong>Tasas e Intereses:</strong><span class="pull-right"> $ 2000,00</span></li>
+					<li><strong>Peso Total:</strong> <span class="pull-right">{{ shopping.purchase.peso_total }} Kg.</span></li>
+					<li><strong>Peso Excedente:</strong><span class="pull-right"> {{ shopping.purchase.peso_excedente }} Kg.</span></li>
+					<li><strong>Precio Parcial:</strong><span class="pull-right"> $ {{ shopping.purchase.parcial_price }}</span></li>
+					<li><strong>Cantidad de productos:</strong><span class="pull-right"> {{ shopping.purchase.total_quantity }}</span></li>
+					<li><strong>Transporte:</strong><span class="pull-right"> $ {{ shopping.purchase.transporte }}</span></li>
+					<li><strong>Excedente Peso:</strong><span class="pull-right"> $ {{ shopping.purchase.excedente_peso }}</span></li>
+					<li><strong>Tasas e Intereses:</strong><span class="pull-right"> $ {{ shopping.purchase.tasas }}</span></li>
 					<br>
-					<li><strong>Total Factura:</strong><span class="pull-right"> $ 2000,00</span></li>
+					<li><strong>Total Factura:</strong><span class="pull-right"> $ {{ shopping.purchase.total }}</span></li>
 				</ul>
 			</div>
 			<button class="btn btn-hbr-blue pull-right">Cancelar compra</button><button class="btn btn-hbr-blue pull-right">Enviar</button>

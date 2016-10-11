@@ -18,6 +18,10 @@ function shoppingController(angular, app) {
 
         function add_purchase(){
            self.purchase.products.push(self.purchase.data);
+           self.purchase.parcial_price =  parseFloat(self.purchase.parcial_price) + parseFloat(self.purchase.data.price);
+           self.purchase.total_quantity =  parseInt(self.purchase.total_quantity) + parseInt(self.purchase.data.quantity);
+           self.purchase.peso_total =  parseInt(self.purchase.peso_total) + parseInt(self.purchase.data.weight);
+           self.purchase.total = parseFloat(self.purchase.total) + parseFloat(self.purchase.parcial_price);
            self.purchase.data = {};
            self.shoppingForm_purchase.$valid = true;
            self.shoppingForm_purchase.$setPristine();
@@ -28,7 +32,15 @@ function shoppingController(angular, app) {
             self.purchase = {
                 user: {},
                 data:{},
-                products : []
+                products : [],
+                parcial_price: 0.00,
+                peso_total:0,
+                peso_excedente:0,
+                transporte:0,
+                excedente_peso:0,
+                tasas:0,
+                total:0.00,
+                total_quantity:0
             };
             self.collapse_personal = true;
             self.collapse_purchase = true;
