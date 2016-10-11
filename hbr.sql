@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Oct 08, 2016 at 11:05 
--- Server version: 10.1.13-MariaDB
--- PHP Version: 5.6.23
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 11-10-2016 a las 05:12:31
+-- Versión del servidor: 10.1.16-MariaDB
+-- Versión de PHP: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `hbr`
+-- Base de datos: `hbr`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Estructura de tabla para la tabla `users`
 --
 
 CREATE TABLE `users` (
@@ -46,29 +46,29 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `lastname`, `tel`, `cel`, `email`, `password`, `sskey`, `codeType`, `idCode`, `deleted`, `address`, `localidad`, `postalcode`, `registerToken`, `registertimestamp`) VALUES
-(1, 'nicolas', 'sigal', '123456', 0, 'nicolas.sigal@gmail.com', '7815696ecbf1c96e6894b779456d330e', NULL, 2, '12312312312', 1, 'asd', 'asd', 'asd', 'f417ce37dd230210ddeb5aed3e880cac', 1475947824),
-(2, 'pedro', 'sigal', '123456', 0, 'nicolas.sigal@gmail.com', '7815696ecbf1c96e6894b779456d330e', NULL, 2, '12312312312', 0, 'asd', 'asd', 'asd', 'dc5bf6a1066853fd41383614831c4d5e', 1475949774);
+(1, 'Nicolas', 'Sigal', '1234', 0, 'nicolas.sigal@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'ad3aae64d2bd12c72fc0da37a4276f75', 2, '12345678', 0, 'tabanera 3385', 'mendoza', '5500', '0d75211910d3131a7d2472c4c41cead1', 1475968389),
+(2, 'Nicolas Emiliano', 'Sigal', '1234', 0, 'nicolas.e.sigal@gmail.com', '21232f297a57a5a743894a0e4a801fc3', NULL, 1, '12345678', 0, 'tabanera 3385', 'mendoza', '5500', '308192ed9a7cf69af0c004179844ace7', 1475968761);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `users`
+-- Indices de la tabla `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
