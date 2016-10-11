@@ -5,9 +5,12 @@
 	margin:0;
 	padding:0;
 	padding-top:60px;
+	background: $snow;
+	height: 100vh;
 	.tooltip-inner {
 		background-color:$hbr-blue;
 		color:$hbr-green;
+		z-index: 9999999999;
 	}
 	@include responsive(desktop, large-desktop){
 		padding-top:0;
@@ -19,9 +22,10 @@
 			}
 			width: 15%;
 			height: 100%;
-			position: absolute;
-			padding-top:30px;
+			position: fixed;
+			padding-top: 100px;
 			background-color:$hbr-blue;	
+			border-right: 5px solid $hbr-green;
 			transition: all .1s ease-in-out;
 			cursor:pointer;
 			ul{
@@ -49,10 +53,11 @@
 			}
 			&--collapsed{
 				width:5%;
-				height: calc(100% - 60px);
-				padding-top:30px;
-				position: absolute;
+				height: 100vh;
+				padding-top: 100px;
+				position: fixed;
 				background-color:$hbr-blue;		
+				border-right: 5px solid $hbr-green;
 				transition: all .1s ease-in-out;
 				cursor:pointer;
 				ul{
@@ -98,9 +103,10 @@
 			}
 			width: 15%;
 			height: calc(100% - 60px);
-			position: absolute;
-			padding-top:30px;
+			position: fixed;
+			padding-top: 100px;
 			background-color:$hbr-blue;		
+			border-right: 5px solid $hbr-green;
 			transition: all .1s ease-in-out;
 			cursor:pointer;
 			ul{
@@ -127,10 +133,11 @@
 			}
 			&--collapsed{
 				width:5%;
-				height: calc(100% - 60px);
-				padding-top:30px;
-				position: absolute;
+				height: 100vh;
+				padding-top: 100px;
+				position: fixed;
 				background-color:$hbr-blue;		
+				border-right: 5px solid $hbr-green;
 				transition: all .1s ease-in-out;
 				cursor:pointer;
 				ul{
@@ -173,6 +180,7 @@
 		width:85%;
 		height: 100%;
 		padding:2% 5% 0% 2%;
+		padding-top: 100px;
 		transition: all .1s ease-in-out;
 		.container-img{
 			width: 100%;
@@ -187,6 +195,7 @@
 			width:95%;
 			height: 100%;
 			padding:2% 5% 0% 2%;
+			padding-top: 100px;
 			transition: all .1s ease-in-out;
 			.container-img{
 				width: 100%;

@@ -1,35 +1,258 @@
 <div class="shopping container-fluid" ng-cloak>
 	<link rel="stylesheet" type="text/css" href="./dist/routes/shopping/shopping.css">
-	<h1>Agregar Compra</h1>
-	<form  name="shopping.shoppingForm" novalidate data-ng-submit="shopping.shoppingForm.$valid && !shopping.shoppingForm.$pristine && shopping.shoppingForm.$submitted && shopping.buy()">
-		<div>
-			<h2>Datos de usuario</h2>
-			<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm.name.$invalid && shopping.shoppingForm.$submitted}">
-				<label class="control-label" for="name">Direcci&oacute;n de entrega (*)</label><br>
-				<input id="name" class="form-control" type="text" name="name" ng-model="shopping.purchase.name" placeholder="Nombre"  autocomplete="off" required>
+	<h3><i class="fa fa-shopping-cart"></i> Agregar Compras</h3>
+	<hr>
+	<div class="col-xs-12 content">
+		<a ng-click="shopping.collapse_personal = !shopping.collapse_personal"> <i ng-class="shopping.collapse_personal ? 'fa fa-chevron-right' : 'fa fa-chevron-down'"></i> Informaci&oacute;n Personal</a>
+		<hr>
+		<div uib-collapse="shopping.collapse_personal"  class="shopping__data">
+			<div class="well well-lg">
+				<span class="help-block"><i class="fa fa-warning"></i>  Revisa tu informaci&oacute;n personal antes de solicitar el env&iacute;o de tus productos. Puedes modificar tu informaci&oacute;n haciendo click en tu nombre ubicado en la barra de navegaci&oacute;n.</span>
 			</div>
-			<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm.name.$invalid && shopping.shoppingForm.$submitted}">
-				<label class="control-label" for="name">Localidad (*)</label><br>
-				<input id="name" class="form-control" type="text" name="name" ng-model="shopping.purchase.name" placeholder="Nombre"  autocomplete="off" required>
-			</div>
-			<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm.name.$invalid && shopping.shoppingForm.$submitted}">
-				<label class="control-label" for="name">C&oacute;digo postal (*)</label><br>
-				<input id="name" class="form-control" type="text" name="name" ng-model="shopping.purchase.name" placeholder="Nombre"  autocomplete="off" required>
-			</div>
+			<form name="shopping.shoppingForm_data_data" novalidate data-ng-submit="shopping.shoppingForm_data_data.$valid && !shopping.shoppingForm_data_data.$pristine && shopping.shoppingForm_data_data.$submitted">
+				<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_data_data.name.$invalid && shopping.shoppingForm_data_data.$submitted}">
+					<label class="control-label" for="name">Nombre</label><br>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+						<input disabled id="name" class="form-control" type="text" name="name" ng-model="shopping.purchase.user.name" placeholder="Nombre"  autocomplete="off" required>
+					</div>
+				</div>
+				<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_data_data.lastname.$invalid && shopping.shoppingForm_data_data.$submitted}">
+					<label class="control-label" for="lastname">Apellido</label><br>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+						<input disabled id="lastname" class="form-control" type="text" name="lastname" ng-model="shopping.purchase.user.lastname" placeholder="Apellido"  autocomplete="off" required>
+					</div>
+				</div>
+				<div ng-if="shopping.purchase.user.tel > 0" class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_data_data.tel.$invalid && shopping.shoppingForm_data.$submitted}">
+					<label class="control-label" for="tel">Tel&eacute;fono Fijo</label><br>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><i class="fa fa-phone"></i></span>
+						<input disabled id="tel" class="form-control" type="text" name="tel" ng-model="shopping.purchase.user.tel" placeholder="Tel&eacute;fono"  autocomplete="off" required>
+					</div>
+				</div>
+				<div class="form-group col-xs-12 col-sm-4" ng-if="shopping.purchase.user.cel > 0" data-ng-class="{'has-error': shopping.shoppingForm_data.cel.$invalid && shopping.shoppingForm_data.$submitted}">
+					<label class="control-label" for="cel">Tel&eacute;fono Celular</label><br>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><i class="fa fa-mobile"></i></span>
+						<input disabled id="cel" class="form-control" type="text" name="cel" ng-model="shopping.purchase.user.cel" placeholder="Tel&eacute;fono Celular"  autocomplete="off" required>
+					</div>
+				</div>
+				<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_data.mail.$invalid && shopping.shoppingForm_data.$submitted}">
+					<label class="control-label" for="mail">E-Mail</label><br>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope"></i></span>
+						<input disabled id="mail" class="form-control" type="text" name="mail" ng-model="shopping.purchase.user.email" placeholder="E-Mail"  autocomplete="off" required>
+					</div>
+				</div>
+				<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_data.code.$invalid && shopping.shoppingForm_data.$submitted}">
+					<div ng-if="shopping.purchase.user.codeType == '2'"><label class="control-label" for="code" >Cuit</label><br></div>
+					<div  ng-if="shopping.purchase.user.codeType == '1'"><label class="control-label" for="code">Cuil</label><br></div>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><i class="fa fa-hashtag"></i></span>
+						<input disabled id="code" class="form-control" type="text" name="code" ng-model="shopping.purchase.user.idCode" placeholder="Cuit/Cuil"  autocomplete="off" required>
+					</div>
+				</div>
+				<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_data.address.$invalid && shopping.shoppingForm_data.$submitted}">
+					<label class="control-label" for="address">Direcci&oacute;n de entrega</label><br>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><i class="fa fa-map"></i></span>
+						<input disabled id="address" class="form-control" type="text" name="address" ng-model="shopping.purchase.user.address" placeholder="Direcci&oacute;n de entrega"  autocomplete="off" required>
+					</div>
+				</div>
+				<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_data.localidad.$invalid && shopping.shoppingForm_data.$submitted}">
+					<label class="control-label" for="localidad">Localidad</label><br>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><i class="fa fa-map"></i></span>
+						<input disabled id="localidad" class="form-control" type="text" name="localidad" ng-model="shopping.purchase.user.localidad" placeholder="Localidad"  autocomplete="off" required>
+					</div>
+				</div>
+				<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_data.postal.$invalid && shopping.shoppingForm_data.$submitted}">
+					<label class="control-label" for="postal">C&oacute;digo postal</label><br>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><i class="fa fa-map"></i></span>
+						<input disabled id="postal" class="form-control" type="text" name="postal" ng-model="shopping.purchase.user.postalcode" placeholder="C&oacute;digo Postal"  autocomplete="off" required>
+					</div>
+				</div>
+			</form>
 		</div>
-		<div class="form-group col-xs-12 col-sm-12" data-ng-class="{'has-error': shopping.shoppingForm.name.$invalid && shopping.shoppingForm.$submitted}">
-			<label class="control-label" for="name">Direcci&oacute;n de entrega (*)</label><br>
-			<input id="name" class="form-control" type="text" name="name" ng-model="shopping.purchase.name" placeholder="Nombre"  autocomplete="off" required>
+		<a ng-click="shopping.collapse_purchase = !shopping.collapse_purchase"> <i ng-class="shopping.collapse_purchase ? 'fa fa-chevron-right' : 'fa fa-chevron-down'"></i> Agregar Compras</a>
+		<hr>
+		<div uib-collapse="shopping.collapse_purchase" class="shopping__purchase">
+			<form  name="shopping.shoppingForm_purchase"  novalidate data-ng-submit="shopping.shoppingForm_purchase.$valid && !shopping.shoppingForm_purchase.$pristine && shopping.shoppingForm_purchase.$submitted && shopping.add_purchase()">
+				<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_purchase.name.$invalid && shopping.shoppingForm_purchase.$submitted}">
+					<label class="control-label" for="productType">Tipo de producto (*)</label><br>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><i class="fa fa-shopping-cart"></i></span>
+						<input id="productType" class="form-control" type="text" name="productType" ng-model="shopping.purchase.data.productType" placeholder="Tipo de producto"  autocomplete="off" required>						
+					</div>
+				</div>
+				<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_purchase.name.$invalid && shopping.shoppingForm_purchase.$submitted}">
+					<label class="control-label" for="quantity">Cantidad (*)</label><br>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><i class="fa fa-shopping-cart"></i></span>
+						<input id="quantity" class="form-control" type="text" name="quantity" ng-model="shopping.purchase.data.quantity" placeholder="Cantidad de productos"  autocomplete="off" required>
+					</div>
+				</div>
+				<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_purchase.name.$invalid && shopping.shoppingForm_purchase.$submitted}">
+					<label class="control-label" for="price">Precio (*)</label><br>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><i class="fa fa-usd"></i></span>
+						<input id="price" class="form-control" type="text" name="name" ng-model="shopping.purchase.data.price" placeholder="Precio de factura"  autocomplete="off" required>
+					</div>
+				</div>
+				<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_purchase.name.$invalid && shopping.shoppingForm_purchase.$submitted}">
+					<label class="control-label" for="establishment">Establecimiento (*)</label><br>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><i class="fa fa-shopping-bag"></i></span>
+						<input id="establishment" class="form-control" type="text" name="establishment" ng-model="shopping.purchase.data.establishment" placeholder="Establecimiento de la compra"  autocomplete="off" required>
+					</div>
+				</div>
+				<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_purchase.name.$invalid && shopping.shoppingForm_purchase.$submitted}">
+					<label class="control-label" for="weight">Peso en KG. (*)</label><br>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><strong>Kg.</strong></span>
+						<input id="weight" class="form-control" type="text" name="weight" ng-model="shopping.purchase.data.weight" placeholder="Peso del producto"  autocomplete="off" required>
+					</div>
+				</div>
+				<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_purchase.name.$invalid && shopping.shoppingForm_purchase.$submitted}">
+					<label class="control-label" for="bill_number">N&uacute;mero de Factura (*)</label><br>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><i class="fa fa-file-text"></i></span>
+						<input id="bill_number" class="form-control" type="text" name="bill_number" ng-model="shopping.purchase.data.bill_number" placeholder="N&uacute;mero de factura"  autocomplete="off" required>
+					</div>
+				</div>
+				<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_purchase.name.$invalid && shopping.shoppingForm_purchase.$submitted}">
+					<label class="control-label" for="postal">Prestador Postal (*)</label><br>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><i class="fa fa-truck"></i></span>
+						<input id="postal" class="form-control" type="text" name="postal" ng-model="shopping.purchase.data.postal" placeholder="Nombre del prestador postal"  autocomplete="off" required>
+					</div>
+				</div>
+				<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_purchase.name.$invalid && shopping.shoppingForm_purchase.$submitted}">
+					<label class="control-label" for="tracking_number">N&uacute;mero de Tracking de la compra (*)</label><br>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><i class="fa fa-map"></i></span>
+						<input id="tracking_number" class="form-control" type="text" name="tracking_number" ng-model="shopping.purchase.data.tracking_number" placeholder="N&uacute;mero de seguimiento"  autocomplete="off" required>
+					</div>
+				</div>
+				<div class="form-group col-xs-12" data-ng-class="{'has-error': shopping.shoppingForm_purchase.bill.$invalid && shopping.shoppingForm_purchase.$submitted}">
+					<label for="bill" class="control-label">Agregar Factura ( PDF ) (*)</label>
+					<input type="file" name="bill" id="bill" ng-model="shopping.purchase.data.bill" uploader-model="shopping.purchase.data.bill"
+					/>
+				</div>
+				<div class="form-group col-xs-12">
+					<button class="btn btn-hbr-blue">Agregar Compra</button>
+				</div>
+			</form>
 		</div>
-		<div>
-			<h2>Datos de compras</h2>
-			<div class="form-group col-xs-12 col-sm-6" data-ng-class="{'has-error': shopping.shoppingForm.name.$invalid && shopping.shoppingForm.$submitted}">
-				<label class="control-label" for="name">Localidad (*)</label><br>
-				<input id="name" class="form-control" type="text" name="name" ng-model="shopping.purchase.name" placeholder="Nombre"  autocomplete="off" required>
+		<a ng-click="shopping.collapse_list = !shopping.collapse_list"> <i ng-class="shopping.collapse_list ? 'fa fa-chevron-right' : 'fa fa-chevron-down'"></i> Lista de compras <span class="badge" ng-if="shopping.purchase.products.length > 0">{{ shopping.purchase.products.length }}</span></a>
+		<hr>
+		<div uib-collapse="shopping.collapse_list" class="shopping__purchase-list">
+			<table class="table table-bordered table-striped table-curved rounded">
+				<thead>
+					<tr>
+						<td><span>Tipo de producto</span></td>
+						<td><span>Cantidad</span></td>
+						<td><span>Precio</span></td>
+						<td><span>Establecimiento</span></td>
+						<td><span>Peso</span></td>
+						<td><span>N&uacute;m. Factura</span></td>
+						<td><span>Prestador Postal</span></td>
+						<td><span>N&uacute;m Tracking</span></td>
+						<td><span>Factura</span></td>
+						<td><span>Acciones</span></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><span>a</span></td>
+						<td><span>b</span></td>
+						<td><span>c</span></td>
+						<td><span>a</span></td>
+						<td><span>b</span></td>
+						<td><span>c</span></td>
+						<td><span>a</span></td>
+						<td><span>b</span></td>
+						<td><span><i class="fa fa-file-pdf-o"></i></span></td>
+						<td><span><i class="fa fa-edit"></i></span><span><i class="fa fa-close"></i></span></td>
+					</tr>
+					<tr>
+						<td><span>a</span></td>
+						<td><span>b</span></td>
+						<td><span>c</span></td>
+						<td><span>a</span></td>
+						<td><span>b</span></td>
+						<td><span>c</span></td>
+						<td><span>a</span></td>
+						<td><span>b</span></td>
+						<td><span><i class="fa fa-file-pdf-o"></i></span></td>
+						<td><span><i class="fa fa-edit"></i></span><span><i class="fa fa-close"></i></span></td>
+					</tr>
+					<tr>
+						<td><span>a</span></td>
+						<td><span>b</span></td>
+						<td><span>c</span></td>
+						<td><span>a</span></td>
+						<td><span>b</span></td>
+						<td><span>c</span></td>
+						<td><span>a</span></td>
+						<td><span>b</span></td>
+						<td><span><i class="fa fa-file-pdf-o"></i></span></td>
+						<td><span><i class="fa fa-edit"></i></span><span><i class="fa fa-close"></i></span></td>
+					</tr>
+					<tr>
+						<td><span>a</span></td>
+						<td><span>b</span></td>
+						<td><span>c</span></td>
+						<td><span>a</span></td>
+						<td><span>b</span></td>
+						<td><span>c</span></td>
+						<td><span>a</span></td>
+						<td><span>b</span></td>
+						<td><span><i class="fa fa-file-pdf-o"></i></span></td>
+						<td><span><i class="fa fa-edit"></i></span><span><i class="fa fa-close"></i></span></td>
+					</tr>
+					<tr>
+						<td><span>a</span></td>
+						<td><span>b</span></td>
+						<td><span>c</span></td>
+						<td><span>a</span></td>
+						<td><span>b</span></td>
+						<td><span>c</span></td>
+						<td><span>a</span></td>
+						<td><span>b</span></td>
+						<td><span><i class="fa fa-file-pdf-o"></i></span></td>
+						<td><span><i class="fa fa-edit"></i></span><span><i class="fa fa-close"></i></span></td>
+					</tr>
+					<tr>
+						<td><span>a</span></td>
+						<td><span>b</span></td>
+						<td><span>c</span></td>
+						<td><span>a</span></td>
+						<td><span>b</span></td>
+						<td><span>c</span></td>
+						<td><span>a</span></td>
+						<td><span>b</span></td>
+						<td><span><i class="fa fa-file-pdf-o"></i></span></td>
+						<td><span><i class="fa fa-edit"></i></span><span><i class="fa fa-close"></i></span></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="well well-lg">
+				<ul>
+					<li><strong>Peso Total:</strong> <span class="pull-right">50 Kg.</span></li>
+					<li><strong>Peso Excedente:</strong><span class="pull-right"> 50 Kg.</span></li>
+					<li><strong>Precio Parcial:</strong><span class="pull-right"> $ 2000,00</span></li>
+					<li><strong>Transporte:</strong><span class="pull-right"> $ 2000,00</span></li>
+					<li><strong>Excedente Peso:</strong><span class="pull-right"> $ 2000,00</span></li>
+					<li><strong>Tasas e Intereses:</strong><span class="pull-right"> $ 2000,00</span></li>
+					<br>
+					<li><strong>Total Factura:</strong><span class="pull-right"> $ 2000,00</span></li>
+				</ul>
 			</div>
-			<div class="form-group col-xs-12 col-sm-6" data-ng-class="{'has-error': shopping.shoppingForm.name.$invalid && shopping.shoppingForm.$submitted}">
-				<label class="control-label" for="name">C&oacute;digo postal (*)</label><br>
-				<input id="name" class="form-control" type="text" name="name" ng-model="shopping.purchase.name" placeholder="Nombre"  autocomplete="off" required>
-			</div>
-		</div>
+			<button class="btn btn-hbr-blue pull-right">Cancelar compra</button><button class="btn btn-hbr-blue pull-right">Enviar</button>
+		</ul>
 	</div>
+</div>
+</div>

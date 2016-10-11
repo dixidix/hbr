@@ -93,10 +93,13 @@ html {
 .dashboard {
   margin: 0;
   padding: 0;
-  padding-top: 60px; }
+  padding-top: 60px;
+  background: #fcfcfc;
+  height: 100vh; }
   .dashboard .tooltip-inner {
     background-color: #19156a;
-    color: #b4ec13; }
+    color: #b4ec13;
+    z-index: 9999999999; }
   @media screen and (min-width: 992px) and (max-width: 1199px) {
     .dashboard {
       padding-top: 0; } }
@@ -107,9 +110,10 @@ html {
     .dashboard__sidebar {
       width: 15%;
       height: 100%;
-      position: absolute;
-      padding-top: 30px;
+      position: fixed;
+      padding-top: 100px;
       background-color: #19156a;
+      border-right: 5px solid #b4ec13;
       transition: all .1s ease-in-out;
       cursor: pointer; }
       .dashboard__sidebar i {
@@ -134,10 +138,11 @@ html {
               color: #19156a; }
       .dashboard__sidebar--collapsed {
         width: 5%;
-        height: calc(100% - 60px);
-        padding-top: 30px;
-        position: absolute;
+        height: 100vh;
+        padding-top: 100px;
+        position: fixed;
         background-color: #19156a;
+        border-right: 5px solid #b4ec13;
         transition: all .1s ease-in-out;
         cursor: pointer; }
         .dashboard__sidebar--collapsed ul {
@@ -170,9 +175,10 @@ html {
     .dashboard__sidebar {
       width: 15%;
       height: 100%;
-      position: absolute;
-      padding-top: 30px;
+      position: fixed;
+      padding-top: 100px;
       background-color: #19156a;
+      border-right: 5px solid #b4ec13;
       transition: all .1s ease-in-out;
       cursor: pointer; }
       .dashboard__sidebar i {
@@ -197,10 +203,11 @@ html {
               color: #19156a; }
       .dashboard__sidebar--collapsed {
         width: 5%;
-        height: calc(100% - 60px);
-        padding-top: 30px;
-        position: absolute;
+        height: 100vh;
+        padding-top: 100px;
+        position: fixed;
         background-color: #19156a;
+        border-right: 5px solid #b4ec13;
         transition: all .1s ease-in-out;
         cursor: pointer; }
         .dashboard__sidebar--collapsed ul {
@@ -233,9 +240,10 @@ html {
     .dashboard__sidebar {
       width: 15%;
       height: calc(100% - 60px);
-      position: absolute;
-      padding-top: 30px;
+      position: fixed;
+      padding-top: 100px;
       background-color: #19156a;
+      border-right: 5px solid #b4ec13;
       transition: all .1s ease-in-out;
       cursor: pointer; }
       .dashboard__sidebar i {
@@ -259,10 +267,11 @@ html {
               color: #19156a; }
       .dashboard__sidebar--collapsed {
         width: 5%;
-        height: calc(100% - 60px);
-        padding-top: 30px;
-        position: absolute;
+        height: 100vh;
+        padding-top: 100px;
+        position: fixed;
         background-color: #19156a;
+        border-right: 5px solid #b4ec13;
         transition: all .1s ease-in-out;
         cursor: pointer; }
         .dashboard__sidebar--collapsed ul {
@@ -296,6 +305,7 @@ html {
     width: 85%;
     height: 100%;
     padding: 2% 5% 0% 2%;
+    padding-top: 100px;
     transition: all .1s ease-in-out; }
     .dashboard__content .container-img {
       width: 100%;
@@ -309,6 +319,7 @@ html {
       width: 95%;
       height: 100%;
       padding: 2% 5% 0% 2%;
+      padding-top: 100px;
       transition: all .1s ease-in-out; }
       .dashboard__content--collapsed .container-img {
         width: 100%;

@@ -2,5 +2,68 @@
 
 
 .shoppingList{
-
+	.content{
+		margin:0;
+		width:98%; 
+		margin-left:2%;
+		margin-bottom: 10%;
+	}
+	h3{
+		color:$hbr-blue;
+		margin-top: 0;
+	}
+	hr { 
+		background-color: $hbr-blue; 
+		height: 1px;
+		border: 0; 
+		margin-bottom: 50px;
+	}
+	.table {
+		border: 0.1px solid $hbr-blue;
+	}
+	.table-bordered > thead > tr > th,
+	.table-bordered > tbody > tr > th,
+	.table-bordered > tfoot > tr > th,
+	.table-bordered > thead > tr > td,
+	.table-bordered > tbody > tr > td,
+	.table-bordered > tfoot > tr > td {
+		border: 0.1px solid $hbr-blue;
+		text-align: center;
+	}
+	.rounded{
+		margin-top:5%;
+		thead{
+			tr{
+				font-family: $museoSans-500;
+				background:$hbr-green;
+				color:$hbr-blue;
+				text-align: center;
+			}
+		}
+		tbody{
+			tr{
+				td{
+					text-align: center;
+					vertical-align: middle;
+					span{
+						i{
+							cursor: pointer;
+							vertical-align: middle;
+							margin:0 5px;
+							font-size: 15px;
+								&.fa.fa-file-pdf-o{
+									color:#DA251C;
+								}
+							&.fa.fa-edit{
+								color:green;
+							}
+							&.fa.fa-close{
+								color:red;
+							}
+						}
+					}
+				}
+			}			
+		}
+	}
 }

@@ -89,3 +89,53 @@ html {
     padding: 0;
     height: 100%;
     font-family: "museoSans-100", Arial; }
+
+.shoppingList .content {
+  margin: 0;
+  width: 98%;
+  margin-left: 2%;
+  margin-bottom: 10%; }
+
+.shoppingList h3 {
+  color: #19156a;
+  margin-top: 0; }
+
+.shoppingList hr {
+  background-color: #19156a;
+  height: 1px;
+  border: 0;
+  margin-bottom: 50px; }
+
+.shoppingList .table {
+  border: 0.1px solid #19156a; }
+
+.shoppingList .table-bordered > thead > tr > th,
+.shoppingList .table-bordered > tbody > tr > th,
+.shoppingList .table-bordered > tfoot > tr > th,
+.shoppingList .table-bordered > thead > tr > td,
+.shoppingList .table-bordered > tbody > tr > td,
+.shoppingList .table-bordered > tfoot > tr > td {
+  border: 0.1px solid #19156a;
+  text-align: center; }
+
+.shoppingList .rounded {
+  margin-top: 5%; }
+  .shoppingList .rounded thead tr {
+    font-family: "museoSans-500", Arial;
+    background: #b4ec13;
+    color: #19156a;
+    text-align: center; }
+  .shoppingList .rounded tbody tr td {
+    text-align: center;
+    vertical-align: middle; }
+    .shoppingList .rounded tbody tr td span i {
+      cursor: pointer;
+      vertical-align: middle;
+      margin: 0 5px;
+      font-size: 15px; }
+      .shoppingList .rounded tbody tr td span i.fa.fa-file-pdf-o {
+        color: #DA251C; }
+      .shoppingList .rounded tbody tr td span i.fa.fa-edit {
+        color: green; }
+      .shoppingList .rounded tbody tr td span i.fa.fa-close {
+        color: red; }

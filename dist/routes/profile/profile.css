@@ -89,3 +89,45 @@ html {
     padding: 0;
     height: 100%;
     font-family: "museoSans-100", Arial; }
+
+.profile h3 {
+  color: #19156a;
+  margin-top: 0; }
+
+.profile hr {
+  background-color: #19156a;
+  height: 1px;
+  border: 0;
+  margin-bottom: 50px; }
+
+.profile .content {
+  margin: 0;
+  width: 98%;
+  margin-left: 2%;
+  margin-bottom: 10%; }
+
+.profile .input-group-addon {
+  background-color: #b4ec13;
+  color: #19156a;
+  border-color: #19156a;
+  font-family: "museoSans-500", Arial;
+  min-width: 45px; }
+
+.profile .btn-hbr-blue {
+  margin-left: 5px;
+  margin-top: 25px;
+  width: auto;
+  height: 50px;
+  color: #b4ec13;
+  background: #19156a;
+  border: none;
+  border-radius: 3px;
+  padding: 15px 30px;
+  font-size: 16px;
+  font-family: "museoSans-500", Arial;
+  font-weight: bold; }
+
+.profile .form-control {
+  outline: none;
+  border-color: #19156a;
+  box-shadow: none; }

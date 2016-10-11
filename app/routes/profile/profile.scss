@@ -2,5 +2,37 @@
 
 
 .profile{
-
+	h3{
+		color:$hbr-blue;
+		margin-top: 0;
+	}
+	hr { 
+		background-color: $hbr-blue; 
+		height: 1px;
+		border: 0; 
+		margin-bottom: 50px;
+	}
+	.content{
+		margin:0;
+		width:98%; 
+		margin-left:2%;
+		margin-bottom: 10%;
+	}
+	.input-group-addon{
+		background-color:$hbr-green;
+		color:$hbr-blue;
+		border-color: $hbr-blue;
+		font-family: $museoSans-500;	
+		min-width: 45px;
+	}
+	.btn-hbr-blue{
+		margin-left:5px;
+		margin-top:25px;
+		@include hbr-btn-blue(auto,50px,$hbr-green);
+	}
+	.form-control{
+		outline: none;
+		border-color: $hbr-blue;
+		box-shadow: none;
+	}
 }

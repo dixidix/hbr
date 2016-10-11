@@ -81,6 +81,9 @@ function getUsers($data){
 			case 'getUserById':
 			getUserById($data);
 			break;
+			case 'getUserBySskey':
+			getUserBySskey($data);
+			break;
 			default:
 			print_r($errors);
 			break;
@@ -138,6 +141,41 @@ function login($data){
 //Traer un determinado usuario por ID
 function getUserById($data){
 	echo 'userId: '.$data['userId'];
+}
+
+//Traer datos de usuario segun la key de sesion
+function getUserBySskey($data){
+	$errors = array();
+	$resolve_data = array();
+	$sskey = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['sskey']));
+
+	$res = MysqliDB::getInstance()->query("SELECT * FROM users WHERE sskey='" . $sskey . "' AND deleted='0'");
+	
+	$rows = mysqli_num_rows($res);
+	
+	if ($rows == 1){
+		$rss = $res->fetch_array(MYSQLI_ASSOC);
+		
+		$resolve_data['name'] = $rss['name'];
+		$resolve_data['lastname'] = $rss['lastname'];
+		$resolve_data['tel'] = $rss['tel'];
+		$resolve_data['cel'] = $rss['cel'];
+		$resolve_data['email'] = $rss['email'];
+		$resolve_data['codeType'] = $rss['codeType'];
+		$resolve_data['idCode'] = $rss['idCode'];
+		$resolve_data['address'] = $rss['address'];
+		$resolve_data['localidad'] = $rss['localidad'];
+		$resolve_data['postalcode'] = $rss['postalcode'];
+
+		echo json_encode($resolve_data);
+	}
+	else{
+		$errors['getUserError'] = 'No se encontro usuario relacionado a esa sesion.';
+		$resolve_data['errors'] = $errors;
+		echo json_encode($resolve_data);
+	}
+	
+	MysqliDB::getInstance()->close();
 }
 // LOG OUT
 function logout($data){

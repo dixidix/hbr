@@ -91,6 +91,8 @@ html {
     font-family: "museoSans-100", Arial; }
 
 .navbar {
+  z-index: 9999999999;
+  position: fixed;
   width: 100%;
   min-height: 60px;
   border-radius: 0;
@@ -112,10 +114,12 @@ html {
     color: #b4ec13; }
   @media screen and (min-width: 992px) and (max-width: 1199px) {
     .navbar {
-      position: relative; } }
+      z-index: 9999999999;
+      position: fixed; } }
   @media screen and (min-width: 1200px) and (max-width: 1399px) {
     .navbar {
-      position: relative; } }
+      z-index: 9999999999;
+      position: fixed; } }
   .navbar-brand {
     float: left;
     width: 20%;
