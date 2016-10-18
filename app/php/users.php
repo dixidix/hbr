@@ -112,7 +112,7 @@ function login($data){
 	$username = stripslashes($username);
 	$password = md5(stripslashes($password));
 	
-	$res = MysqliDB::getInstance()->query("SELECT id,name,lastname FROM users WHERE email='" . $username . "' AND password='" . $password . "' AND deleted='0'");
+	$res = MysqliDB::getInstance()->query("SELECT id,name,lastname,isAdmin FROM users WHERE email='" . $username . "' AND password='" . $password . "' AND deleted='0'");
 	
 	$rows = mysqli_num_rows($res);
 	
@@ -122,6 +122,7 @@ function login($data){
 		$id = $rss['id'];
 		$resolve_data['name'] = $rss['name'];
 		$resolve_data['lastname'] = $rss['lastname'];
+		$resolve_data['isAdmin'] = $rss['isAdmin'];
 		
 		MysqliDB::getInstance()->query("UPDATE `users` SET `sskey`='".$sskey."' WHERE `id`='$id'");
 		$resolve_data['sskey'] = $sskey;
@@ -156,6 +157,7 @@ function getUserBySskey($data){
 	if ($rows == 1){
 		$rss = $res->fetch_array(MYSQLI_ASSOC);
 		
+		$resolve_data['id'] = $rss['id'];
 		$resolve_data['name'] = $rss['name'];
 		$resolve_data['lastname'] = $rss['lastname'];
 		$resolve_data['tel'] = $rss['tel'];

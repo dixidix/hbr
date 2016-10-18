@@ -5,9 +5,9 @@ function dashboardController(angular, app) {
 
     app.controller('dashboardCtrl', dashboardCtrl);
 
-    dashboardCtrl.$inject = ['$http'];
+    dashboardCtrl.$inject = ['$http','$state'];
 
-    function dashboardCtrl($http) {
+    function dashboardCtrl($http, $state) {
         var self = this; //jshint ignore:line
         function collapse_sidebar(){
             self.collapse = !self.collapse;
@@ -15,6 +15,7 @@ function dashboardController(angular, app) {
         function init() {
             self.collapse = false;
             self.collapse_sidebar = collapse_sidebar;
+            self.isAdmin  = sessionStorage.getItem('isAdmin') || 0;
         }
         init();
     }

@@ -90,6 +90,56 @@ html {
     height: 100%;
     font-family: "museoSans-100", Arial; }
 
+.modal-dialog {
+  width: 90%;
+  margin-top: 100px; }
+  .modal-dialog .btn-hbr-blue {
+    width: 150px;
+    height: 50px;
+    color: #b4ec13;
+    background: #19156a;
+    border: none;
+    border-radius: 3px;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-family: "museoSans-500", Arial;
+    font-weight: bold; }
+  .modal-dialog .modal-body .table {
+    border: 0.1px solid #19156a; }
+  .modal-dialog .modal-body .table-bordered > thead > tr > th,
+  .modal-dialog .modal-body .table-bordered > tbody > tr > th,
+  .modal-dialog .modal-body .table-bordered > tfoot > tr > th,
+  .modal-dialog .modal-body .table-bordered > thead > tr > td,
+  .modal-dialog .modal-body .table-bordered > tbody > tr > td,
+  .modal-dialog .modal-body .table-bordered > tfoot > tr > td {
+    border: 0.1px solid #19156a;
+    text-align: center; }
+  .modal-dialog .modal-body .rounded thead tr {
+    font-family: "museoSans-500", Arial;
+    background: #b4ec13;
+    color: #19156a;
+    text-align: center; }
+  .modal-dialog .modal-body .rounded tbody tr td {
+    text-align: center;
+    vertical-align: middle; }
+    .modal-dialog .modal-body .rounded tbody tr td span i {
+      cursor: pointer;
+      vertical-align: middle;
+      margin: 0 5px;
+      font-size: 15px; }
+      .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-file-pdf-o {
+        color: #DA251C; }
+      .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-edit {
+        color: green; }
+      .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-close {
+        color: red; }
+
+.shoppingList .payed {
+  color: green; }
+
+.shoppingList .unpayed {
+  color: red; }
+
 .shoppingList .content {
   margin: 0;
   width: 98%;

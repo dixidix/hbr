@@ -95,7 +95,7 @@
 					</div>
 				</div>
 				<div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_purchase.name.$invalid && shopping.shoppingForm_purchase.$submitted}">
-					<label class="control-label" for="price">Precio (*)</label><br>
+					<label class="control-label" for="price">Precio Individual(*)</label><br>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><i class="fa fa-usd"></i></span>
 						<input id="price" class="form-control" type="text" name="name" ng-model="shopping.purchase.data.price" placeholder="Precio de factura"  autocomplete="off" required>
@@ -154,9 +154,11 @@
 					<tr>
 						<td><span>Tipo de producto</span></td>
 						<td><span>Cantidad</span></td>
-						<td><span>Precio</span></td>
+						<td><span>Precio Ind. </span></td>
+						<td><span>Precio Total</span></td>
 						<td><span>Establecimiento</span></td>
-						<td><span>Peso</span></td>
+						<td><span>Peso Ind.</span></td>
+						<td><span>Peso Total</span></td>
 						<td><span>N&uacute;m. Factura</span></td>
 						<td><span>Prestador Postal</span></td>
 						<td><span>N&uacute;m Tracking</span></td>
@@ -168,8 +170,10 @@
 					<tr ng-repeat="product in shopping.purchase.products track by $index">
 						<td><span>{{ product.productType }}</span></td>
 						<td><span>{{ product.quantity }}</span></td>
+						<td><span>{{ product.price / product.quantity }}</span></td>
 						<td><span>{{ product.price }}</span></td>
 						<td><span>{{ product.establishment }}</span></td>
+						<td><span>{{ product.weight / product.quantity }}</span></td>
 						<td><span>{{ product.weight }}</span></td>
 						<td><span>{{ product.bill_number }}</span></td>
 						<td><span>{{ product.postal }}</span></td>
@@ -193,7 +197,7 @@
 					<li><strong>Total Factura:</strong><span class="pull-right"> $ {{ shopping.purchase.total }}</span></li>
 				</ul>
 			</div>
-			<button class="btn btn-hbr-blue pull-right">Cancelar compra</button><button class="btn btn-hbr-blue pull-right">Enviar</button>
+			<button class="btn btn-hbr-blue pull-right">Cancelar compra</button><button class="btn btn-hbr-blue pull-right" ng-click="shopping.finish()">Enviar</button>
 		</ul>
 	</div>
 </div>

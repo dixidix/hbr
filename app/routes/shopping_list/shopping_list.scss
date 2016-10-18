@@ -1,7 +1,69 @@
 @import '../../styles/base';
 
+.modal-dialog{
+	width:90%;
+	margin-top:100px;
+		.btn-hbr-blue{
+			@include hbr-btn-blue(150px,50px,$hbr-green);
+		}
+	.modal-body{
 
+		.table {
+			border: 0.1px solid $hbr-blue;
+		}
+		.table-bordered > thead > tr > th,
+		.table-bordered > tbody > tr > th,
+		.table-bordered > tfoot > tr > th,
+		.table-bordered > thead > tr > td,
+		.table-bordered > tbody > tr > td,
+		.table-bordered > tfoot > tr > td {
+			border: 0.1px solid $hbr-blue;
+			text-align: center;
+		}
+		.rounded{
+			thead{
+				tr{
+					font-family: $museoSans-500;
+					background:$hbr-green;
+					color:$hbr-blue;
+					text-align: center;
+				}
+			}
+			tbody{
+				tr{
+					td{
+						text-align: center;
+						vertical-align: middle;
+						span{
+							i{
+								cursor: pointer;
+								vertical-align: middle;
+								margin:0 5px;
+								font-size: 15px;
+								&.fa.fa-file-pdf-o{
+									color:#DA251C;
+								}
+								&.fa.fa-edit{
+									color:green;
+								}
+								&.fa.fa-close{
+									color:red;
+								}
+							}
+						}
+					}
+				}			
+			}
+		}
+	}
+}
 .shoppingList{
+	.payed{
+		color:green;
+	}
+	.unpayed{
+		color:red;
+	}
 	.content{
 		margin:0;
 		width:98%; 
@@ -51,9 +113,9 @@
 							vertical-align: middle;
 							margin:0 5px;
 							font-size: 15px;
-								&.fa.fa-file-pdf-o{
-									color:#DA251C;
-								}
+							&.fa.fa-file-pdf-o{
+								color:#DA251C;
+							}
 							&.fa.fa-edit{
 								color:green;
 							}

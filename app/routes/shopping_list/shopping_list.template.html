@@ -6,94 +6,83 @@
 		<table class="table table-bordered table-striped table-curved rounded">
 			<thead>
 				<tr>
-					<td><span>Tipo de producto</span></td>
-					<td><span>Cantidad</span></td>
-					<td><span>Precio</span></td>
-					<td><span>Establecimiento</span></td>
-					<td><span>Peso</span></td>
-					<td><span>N&uacute;m. Factura</span></td>
-					<td><span>Prestador Postal</span></td>
-					<td><span>N&uacute;m Tracking</span></td>
-					<td><span>Factura</span></td>
-					<td><span>Acciones</span></td>
+					<td><span>Lote #</span></td>
+					<td><span>Peso Excedente</span></td>
+					<td><span>Precio Parcial</span></td>					
+					<td><span>Tasas e Intereses</span></td>					
+					<td><span>Cantidad total</span></td>
+					<td><span>Gastos Transporte</span></td>
+					<td><span>Fecha de solicitud</span></td>					
+					<td><span>Peso Total </span></td>
+					<td><span>Total</span></td>
+					<td><span>M&aacute;s Info.</span></td>
+					<td><span>Pagar lote</span></td>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td><span>a</span></td>
-					<td><span>b</span></td>
-					<td><span>c</span></td>
-					<td><span>a</span></td>
-					<td><span>b</span></td>
-					<td><span>c</span></td>
-					<td><span>a</span></td>
-					<td><span>b</span></td>
-					<td><span><i class="fa fa-file-pdf-o"></i></span></td>
-					<td><span><i class="fa fa-edit"></i></span><span><i class="fa fa-close"></i></span></td>
-				</tr>
-				<tr>
-					<td><span>a</span></td>
-					<td><span>b</span></td>
-					<td><span>c</span></td>
-					<td><span>a</span></td>
-					<td><span>b</span></td>
-					<td><span>c</span></td>
-					<td><span>a</span></td>
-					<td><span>b</span></td>
-					<td><span><i class="fa fa-file-pdf-o"></i></span></td>
-					<td><span><i class="fa fa-edit"></i></span><span><i class="fa fa-close"></i></span></td>
-				</tr>
-				<tr>
-					<td><span>a</span></td>
-					<td><span>b</span></td>
-					<td><span>c</span></td>
-					<td><span>a</span></td>
-					<td><span>b</span></td>
-					<td><span>c</span></td>
-					<td><span>a</span></td>
-					<td><span>b</span></td>
-					<td><span><i class="fa fa-file-pdf-o"></i></span></td>
-					<td><span><i class="fa fa-edit"></i></span><span><i class="fa fa-close"></i></span></td>
-				</tr>
-				<tr>
-					<td><span>a</span></td>
-					<td><span>b</span></td>
-					<td><span>c</span></td>
-					<td><span>a</span></td>
-					<td><span>b</span></td>
-					<td><span>c</span></td>
-					<td><span>a</span></td>
-					<td><span>b</span></td>
-					<td><span><i class="fa fa-file-pdf-o"></i></span></td>
-					<td><span><i class="fa fa-edit"></i></span><span><i class="fa fa-close"></i></span></td>
-				</tr>
-				<tr>
-					<td><span>a</span></td>
-					<td><span>b</span></td>
-					<td><span>c</span></td>
-					<td><span>a</span></td>
-					<td><span>b</span></td>
-					<td><span>c</span></td>
-					<td><span>a</span></td>
-					<td><span>b</span></td>
-					<td><span><i class="fa fa-file-pdf-o"></i></span></td>
-					<td><span><i class="fa fa-edit"></i></span><span><i class="fa fa-close"></i></span></td>
-				</tr>
-				<tr>
-					<td><span>a</span></td>
-					<td><span>b</span></td>
-					<td><span>c</span></td>
-					<td><span>a</span></td>
-					<td><span>b</span></td>
-					<td><span>c</span></td>
-					<td><span>a</span></td>
-					<td><span>b</span></td>
-					<td><span><i class="fa fa-file-pdf-o"></i></span></td>
-					<td><span><i class="fa fa-edit"></i></span><span><i class="fa fa-close"></i></span></td>
+				<tr  ng-repeat="venta in shoppingList.ventas track by $index">
+					<td><span>{{ venta.id }}</span></td>
+					<td><span>{{ venta.peso_excedente }}</span></td>
+					<td><span>${{ venta.parcial_price }}</span></td>					
+					<td><span>${{ venta.tasas }}</span></td>					
+					<td><span>{{ venta.total_quantity }}</span></td>
+					<td><span>${{ venta.transporte }}</span></td>
+					<td><span>{{ venta.timestamp | date:'MM/dd/yyyy'}}</span></td>
+					<td><span>{{ venta.peso_total }}</span></td>
+					<td><span>${{ venta.total }}</span></td>					
+					<td>
+						<button ng-click="shoppingList.moreInfo(venta.products)" class="btn btn-default"> VER MAS </button> 
+					</td>
+					<td ng-if="venta.state == 1 || venta.state == 2" ng-class="venta.state == 1 ? 'payed':venta.state == 2 ? 'unpayed' : 'unpayed' "><span ng-bind="venta.state == 1 ? 'Pagado' : venta.state == 2 ? 'Pendiente' : 'Sin Pagar'"></span></td>	
+					<td ng-if="venta.state == 0">
+						<button ng-click="shoppingList.pay(venta)" class="btn btn-default"> PAGAR </button>
+					</td>
 				</tr>
 			</tbody>
 		</table>
-		<uib-pagination next-text="Siguiente" previous-text="Anterior" total-items="3" data-num-pages="1"
-		ng-model="1" class="pagination-sm" items-per-page="3" boundary-link-numbers="true"></uib-pagination>
-	</div>
+<!-- 		<uib-pagination next-text="Siguiente" previous-text="Anterior" total-items="3" data-num-pages="1"
+	ng-model="1" class="pagination-sm" items-per-page="3" boundary-link-numbers="true"></uib-pagination> -->
+</div>
+<script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Art&iacute;culos</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+			<table class="table table-bordered table-striped table-curved rounded">
+				<thead>
+					<tr>
+						<td><span>Tipo de producto</span></td>
+						<td><span>Cantidad</span></td>
+						<td><span>Precio Ind. </span></td>
+						<td><span>Precio Total</span></td>
+						<td><span>Establecimiento</span></td>
+						<td><span>Peso Ind.</span></td>
+						<td><span>Peso Total</span></td>
+						<td><span>N&uacute;m. Factura</span></td>
+						<td><span>Prestador Postal</span></td>
+						<td><span>N&uacute;m Tracking</span></td>
+						<td><span>Factura</span></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="product in seeMore.products track by $index">
+						<td><span>{{ product.productType }}</span></td>
+						<td><span>{{ product.quantity }}</span></td>
+						<td><span>{{ product.price / product.quantity }}</span></td>
+						<td><span>{{ product.price }}</span></td>
+						<td><span>{{ product.establishment }}</span></td>
+						<td><span>{{ product.weight / product.quantity }}</span></td>
+						<td><span>{{ product.weight }}</span></td>
+						<td><span>{{ product.bill_number }}</span></td>
+						<td><span>{{ product.postal }}</span></td>
+						<td><span>{{ product.tracking_number }}</span></td>
+						<td><span><i class="fa fa-file-pdf-o"></i></span></td>
+					</tr>
+				</tbody>
+			</table>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-hbr-blue" ng-click="seeMore.cancel()">Cerrar</button>
+        </div>
+    </script>
 </div>
