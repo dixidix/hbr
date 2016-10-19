@@ -50,7 +50,13 @@ switch ($method) {
 
 //EDITAR UN USUARIO
 function editPurchase($data){
-	echo 'edit one: '.$data['data'];
+	$errors = array();
+	$resolve_data = array();
+	$v_id = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['id']));
+	$paymentGatewayUrl = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['paymentGatewayUrl']));
+	$token = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['token']));
+	echo "UPDATE `ventas` SET `paymentGatewayUrl`='".$paymentGatewayUrl."',`token`='".$token."' where `id` = '".$v_id."'";
+	MysqliDB::getInstance()->query("UPDATE `ventas` SET `paymentGatewayUrl`='".$paymentGatewayUrl."',`token`='".$token."' where `id` = '".$v_id."'");
 }
 
 //TRAER UN USUARIO O TODOS
@@ -72,46 +78,46 @@ function getPurchase($data){
 }
 function getAll(){
 
-$res = MysqliDB::getInstance()->query("SELECT * from ventas WHERE deleted = 0");
-$outp="";
-while($rs = $res->fetch_array(MYSQLI_ASSOC)) {
-	$outpm ="";
-	if ($outp != "") {$outp .= ",";}
+	$res = MysqliDB::getInstance()->query("SELECT * from ventas WHERE deleted = 0");
+	$outp="";
+	while($rs = $res->fetch_array(MYSQLI_ASSOC)) {
+		$outpm ="";
+		if ($outp != "") {$outp .= ",";}
 
-	$outp .= '{"id":"'  . $rs["id"] . '",';
-	$outp .= '"uid":"'  . $rs["uid"] . '",';
-	$outp .= '"peso_excedente":"'  . $rs["peso_excedente"] . '",';
-	$outp .= '"parcial_price":"'  . $rs["parcial_price"] . '",';
-	$outp .= '"peso_total":"'  . $rs["peso_total"] . '",';
-	$outp .= '"tasas":"'  . $rs["tasas"] . '",';
-	$outp .= '"total": '  . $rs["total"] . ',';
-	$outp .= '"total_quantity":"'  . $rs["total_quantity"] . '",';
-	$outp .= '"transporte":"'  . $rs["transporte"] . '",';
-	$outp .= '"state":"'  . $rs["state"] . '",';
-	$outp .= '"paymentGatewayUrl":"'  . $rs["todopago"] . '",';
+		$outp .= '{"id":"'  . $rs["id"] . '",';
+		$outp .= '"uid":"'  . $rs["uid"] . '",';
+		$outp .= '"peso_excedente":"'  . $rs["peso_excedente"] . '",';
+		$outp .= '"parcial_price":"'  . $rs["parcial_price"] . '",';
+		$outp .= '"peso_total":"'  . $rs["peso_total"] . '",';
+		$outp .= '"tasas":"'  . $rs["tasas"] . '",';
+		$outp .= '"total": '  . $rs["total"] . ',';
+		$outp .= '"total_quantity":"'  . $rs["total_quantity"] . '",';
+		$outp .= '"transporte":"'  . $rs["transporte"] . '",';
+		$outp .= '"state":"'  . $rs["state"] . '",';
+		$outp .= '"paymentGatewayUrl":"'  . $rs["paymentGatewayUrl"] . '",';
 
-	$uname = MysqliDB::getInstance()->query("SELECT * FROM producto WHERE venta_id=" . $rs["id"]);
-	while($rss = $uname->fetch_array(MYSQLI_ASSOC)) {
-		if ($outpm != "") {$outpm .= ",";}
-		$outpm .= '{"id":'   . $rss["product_id"].',';
-		$outpm .= '"productType":"'  . $rss["productType"] . '",';
-		$outpm .= '"quantity":'  . $rss["quantity"] . ',';
-		$outpm .= '"partial_price":'  . $rss["partial_price"] . ',';
-		$outpm .= '"price":'  . $rss["price"] . ',';
-		$outpm .= '"partial_weight":'  . $rss["partial_weight"] . ',';
-		$outpm .= '"weight":'  . $rss["weight"] . ',';
-		$outpm .= '"establishment":"'  . $rss["establishment"] . '",';
-		$outpm .= '"postal":"'  . $rss["postal"] . '",';
-		$outpm .= '"bill_number":"'  . $rss["bill_number"] . '",';
-		$outpm .= '"tracking_number":"'   . $rss["tracking_number"].'"}';
+		$uname = MysqliDB::getInstance()->query("SELECT * FROM producto WHERE venta_id=" . $rs["id"]);
+		while($rss = $uname->fetch_array(MYSQLI_ASSOC)) {
+			if ($outpm != "") {$outpm .= ",";}
+			$outpm .= '{"id":'   . $rss["product_id"].',';
+			$outpm .= '"productType":"'  . $rss["productType"] . '",';
+			$outpm .= '"quantity":'  . $rss["quantity"] . ',';
+			$outpm .= '"partial_price":'  . $rss["partial_price"] . ',';
+			$outpm .= '"price":'  . $rss["price"] . ',';
+			$outpm .= '"partial_weight":'  . $rss["partial_weight"] . ',';
+			$outpm .= '"weight":'  . $rss["weight"] . ',';
+			$outpm .= '"establishment":"'  . $rss["establishment"] . '",';
+			$outpm .= '"postal":"'  . $rss["postal"] . '",';
+			$outpm .= '"bill_number":"'  . $rss["bill_number"] . '",';
+			$outpm .= '"tracking_number":"'   . $rss["tracking_number"].'"}';
+		}
+
+		$outp .='"products":['.$outpm.'],';
+		$outp .= '"timestamp":"'   . $rs["timestamp"]  . '"}';
 	}
+	$outp ='{"ventas":['.$outp.']}';
 
-	$outp .='"products":['.$outpm.'],';
-	$outp .= '"timestamp":"'   . $rs["timestamp"]  . '"}';
-}
-$outp ='{"ventas":['.$outp.']}';
-
-echo($outp);
+	echo($outp);
 
 }
 function addPurchase($data){

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-10-2016 a las 13:53:12
+-- Tiempo de generación: 19-10-2016 a las 04:20:55
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -85,7 +85,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `lastname`, `tel`, `cel`, `email`, `password`, `sskey`, `codeType`, `idCode`, `deleted`, `address`, `localidad`, `postalcode`, `registerToken`, `registertimestamp`, `isAdmin`) VALUES
-(1, 'Nicolas', 'Sigal', '1234', 0, 'nicolas.sigal@gmail.com', '21232f297a57a5a743894a0e4a801fc3', NULL, 2, '12345678', 0, 'tabanera 3385', 'mendoza', '5500', '0d75211910d3131a7d2472c4c41cead1', 1475968389, 0),
+(1, 'Nicolas', 'Sigal', '1234', 0, 'nicolas.sigal@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'b025ba7949e4d25d521d899f0809a3da', 2, '12345678', 0, 'tabanera 3385', 'mendoza', '5500', '0d75211910d3131a7d2472c4c41cead1', 1475968389, 1),
 (2, 'Nicolas Emiliano', 'Sigal', '1234', 0, 'nicolas.e.sigal@gmail.com', '21232f297a57a5a743894a0e4a801fc3', NULL, 1, '12345678', 0, 'tabanera 3385', 'mendoza', '5500', '308192ed9a7cf69af0c004179844ace7', 1475968761, 0);
 
 -- --------------------------------------------------------
@@ -106,18 +106,19 @@ CREATE TABLE `ventas` (
   `transporte` float NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` int(1) NOT NULL DEFAULT '0',
-  `todopago` varchar(150) NOT NULL,
-  `state` int(11) NOT NULL DEFAULT '0'
+  `paymentGatewayUrl` varchar(150) NOT NULL,
+  `state` int(11) NOT NULL DEFAULT '0',
+  `token` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ventas`
 --
 
-INSERT INTO `ventas` (`id`, `uid`, `peso_excedente`, `parcial_price`, `peso_total`, `tasas`, `total`, `total_quantity`, `transporte`, `timestamp`, `deleted`, `todopago`, `state`) VALUES
-(1, 1, 0, 1900, 17, 0, 1900, 5, 0, '2016-10-18 02:41:07', 0, '', 1),
-(2, 1, 0, 2000, 12, 0, 2000, 3, 0, '2016-10-18 03:51:40', 0, 'https://forms.todopago.com.ar/formulario/commands?command=formulario&m=eeb6c6dac731199da5bcc4c23248531c', 0),
-(3, 1, 0, 210, 30, 0, 210, 24, 0, '2016-10-18 03:51:35', 0, 'https://forms.todopago.com.ar/formulario/commands?command=formulario&m=dac8ac59e8b6f787f8bf66a1dbd74ad2', 0);
+INSERT INTO `ventas` (`id`, `uid`, `peso_excedente`, `parcial_price`, `peso_total`, `tasas`, `total`, `total_quantity`, `transporte`, `timestamp`, `deleted`, `paymentGatewayUrl`, `state`, `token`) VALUES
+(1, 1, 0, 1900, 17, 0, 1900, 5, 0, '2016-10-19 00:34:26', 0, 'https://forms.todopago.com.ar/formulario/commands?command=formulario&m=dac8ac59e8b6f787f8bf66a1dbd74ad2', 1, ''),
+(2, 1, 0, 2000, 12, 0, 2000, 3, 0, '2016-10-19 00:43:15', 0, 'https://forms.todopago.com.ar/formulario/commands?command=formulario&m=dac8ac59e8b6f787f8bf66a1dbd74ad2', 1, 'ad106169bea86ab7e7ba91e6adf5723d'),
+(3, 1, 0, 210, 30, 0, 210, 24, 0, '2016-10-19 00:34:30', 0, 'https://forms.todopago.com.ar/formulario/commands?command=formulario&m=dac8ac59e8b6f787f8bf66a1dbd74ad2', 0, '');
 
 --
 -- Índices para tablas volcadas

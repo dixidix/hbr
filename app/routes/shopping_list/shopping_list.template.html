@@ -33,8 +33,8 @@
 					<td>
 						<button ng-click="shoppingList.moreInfo(venta.products)" class="btn btn-default"> VER MAS </button> 
 					</td>
-					<td ng-if="venta.state == 1 || venta.state == 2" ng-class="venta.state == 1 ? 'payed':venta.state == 2 ? 'unpayed' : 'unpayed' "><span ng-bind="venta.state == 1 ? 'Pagado' : venta.state == 2 ? 'Pendiente' : 'Sin Pagar'"></span></td>	
-					<td ng-if="venta.state == 0">
+					<td ng-if="!venta.paymentGatewayUrl || venta.state == '1'" ng-class="venta.state == 1 ? 'payed' : 'unpayed' "><span ng-bind="venta.state == 0 ? 'Pendiente de aprobaci&oacute;n' : 'Pagado'"></span></td>	
+					<td ng-if="venta.paymentGatewayUrl && venta.state == '0'">
 						<button ng-click="shoppingList.pay(venta)" class="btn btn-default"> PAGAR </button>
 					</td>
 				</tr>

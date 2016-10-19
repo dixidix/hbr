@@ -5,10 +5,10 @@
             <a href="" ng-if="!dashboard.collapse" data-ng-click="dashboard.collapse_sidebar()">
                 <li>
                     <i class="fa fa-eye-slash"></i>
-                    <span>Ocultar barra</span>
+                    <span>Ocultar Menu</span>
                 </li>
             </a>
-            <a href="" ng-if="dashboard.collapse" data-ng-click="dashboard.collapse_sidebar()" tooltip-placement="right" uib-tooltip="Mostrar barra">
+            <a href="" ng-if="dashboard.collapse" data-ng-click="dashboard.collapse_sidebar()" tooltip-placement="right" uib-tooltip="Mostrar Menu">
                 <li>
                     <i class="fa fa-eye"></i>
                 </li>
@@ -28,16 +28,16 @@
                 </a>
             </div>
             <div ng-if="dashboard.isAdmin == 1">
-                <a href="" ui-sref="dashboard.shopping_list" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Procesar Pagos">
+                <a href="" ui-sref="dashboard.process_payments" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Procesar Pagos">
                     <li><i class="fa fa-usd"></i></li>
                 </a>
-                <a href="" ui-sref="dashboard.shopping_list" ng-if="!dashboard.collapse">
+                <a href="" ui-sref="dashboard.process_payments" ng-if="!dashboard.collapse">
                     <li><i class="fa fa-usd"></i><span> Procesar Pagos </span></li>
                 </a>
-                <a href="" ui-sref="dashboard.shopping_list" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Admin. Usuarios">
+                <a href="" ui-sref="dashboard.users" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Admin. Usuarios">
                     <li><i class="fa fa-users"></i></li>
                 </a>
-                <a href="" ui-sref="dashboard.shopping_list" ng-if="!dashboard.collapse">
+                <a href="" ui-sref="dashboard.users" ng-if="!dashboard.collapse">
                     <li><i class="fa fa-users"></i><span> Admin. Usuarios </span></li>
                 </a>
             </div>

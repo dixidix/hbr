@@ -1,0 +1,17 @@
+@import '../../styles/base';
+
+.error{
+	i, h4{
+		color:red;
+	}
+	h3{
+		color:red;
+		margin-top: 0;
+	}
+	hr { 
+		background-color: $hbr-blue; 
+		height: 1px;
+		border: 0; 
+		margin-bottom: 50px;
+	}
+}

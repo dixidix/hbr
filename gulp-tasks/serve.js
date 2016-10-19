@@ -1,4 +1,3 @@
-
 function serve(gulp, $) {
 	'use strict';
 	var browserSync = require('browser-sync'),

@@ -1,0 +1,17 @@
+@import '../../styles/base';
+
+.success{
+	i, h4{
+		color:green;
+	}
+	h3{
+		color:green;
+		margin-top: 0;
+	}
+	hr { 
+		background-color: $hbr-blue; 
+		height: 1px;
+		border: 0; 
+		margin-bottom: 50px;
+	}
+}

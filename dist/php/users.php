@@ -91,7 +91,7 @@ function getUsers($data){
 		
 	}
 	else{
-		echo "getAll";
+		getAllUsers($data);
 	}
 }
 
@@ -138,10 +138,61 @@ function login($data){
 	
 	MysqliDB::getInstance()->close();
 }
+function getAllUsers($data){
+$res = MysqliDB::getInstance()->query("SELECT * from users WHERE deleted = 0");
+	$outp="";
+	while($rs = $res->fetch_array(MYSQLI_ASSOC)) {
+		$outpm ="";
+		if ($outp != "") {$outp .= ",";}
+		$outp .= '{"id":"'  . $rs["id"] . '",';
+		$outp .= '"name":"'  . $rs["name"] . '",';
+		$outp .= '"lastname":"'  . $rs["lastname"] . '",';
+		$outp .= '"tel":"'  . $rs["tel"] . '",';
+		$outp .= '"cel":"'  . $rs["cel"] . '",';
+		$outp .= '"email":"'  . $rs["email"] . '",';
+		$outp .= '"codeType": '  . $rs["codeType"] . ',';
+		$outp .= '"idCode":"'  . $rs["idCode"] . '",';
+		$outp .= '"address":"'  . $rs["address"] . '",';
+		$outp .= '"localidad":"'  . $rs["localidad"] . '",';
+		$outp .= '"postalcode":"'  . $rs["postalcode"] . '",';
+		$outp .= '"isAdmin":"'   . $rs["isAdmin"]  . '"}';
+	}
+	$outp ='{"users":['.$outp.']}';
 
+	echo($outp);
+}
 //Traer un determinado usuario por ID
 function getUserById($data){
-	echo 'userId: '.$data['userId'];
+	$errors = array();
+	$resolve_data = array();
+	$uid = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['id']));
+	$res = MysqliDB::getInstance()->query("SELECT * FROM users WHERE id='" . $uid . "' AND deleted='0'");
+
+	$rows = mysqli_num_rows($res);
+	
+	if ($rows == 1){
+		$rss = $res->fetch_array(MYSQLI_ASSOC);
+		
+		$resolve_data['id'] = $rss['id'];
+		$resolve_data['name'] = $rss['name'];
+		$resolve_data['lastname'] = $rss['lastname'];
+		$resolve_data['tel'] = $rss['tel'];
+		$resolve_data['cel'] = $rss['cel'];
+		$resolve_data['email'] = $rss['email'];
+		$resolve_data['codeType'] = $rss['codeType'];
+		$resolve_data['idCode'] = $rss['idCode'];
+		$resolve_data['address'] = $rss['address'];
+		$resolve_data['localidad'] = $rss['localidad'];
+		$resolve_data['postalcode'] = $rss['postalcode'];
+
+		echo json_encode($resolve_data);
+	}else{
+		$errors['getUserError'] = 'No se encontro usuario.';
+		$resolve_data['errors'] = $errors;
+		echo json_encode($resolve_data);
+	}
+	
+	MysqliDB::getInstance()->close();
 }
 
 //Traer datos de usuario segun la key de sesion
