@@ -13,7 +13,7 @@
 		.state('dashboard.shopping', { url: "/shopping", templateUrl: "./dist/routes/shopping/shopping.template.html", data: { title: 'Comprar', requireAuth: true }, controller: "shoppingCtrl", controllerAs: "shopping" })
 		.state('dashboard.shopping_list', { url: "/shopping/list", templateUrl: "./dist/routes/shopping_list/shopping_list.template.html", data: { title: 'Lista de compras', requireAuth: true }, controller: "shoppingListCtrl", controllerAs: "shoppingList" })
 		.state('dashboard.checkout', { url: "/shopping/checkout", params: { paymentGatewayUrl: null }, templateUrl: "./dist/routes/checkout/checkout.template.html", data: { title: 'Checkout', requireAuth: true }, controller: "checkoutCtrl", controllerAs: "checkout" })
-		.state('dashboard.success', { url: "/shopping/checkout/success/token", templateUrl: "./dist/routes/success/success.template.html", data: { title: 'Pago Exitoso', requireAuth: true }, controller: "successCtrl", controllerAs: "success" })
+		.state('dashboard.success', { url: "/shopping/checkout/success/:token", templateUrl: "./dist/routes/success/success.template.html", data: { title: 'Pago Exitoso', requireAuth: true }, controller: "successCtrl", controllerAs: "success" })
 		.state('dashboard.error', { url: "/shopping/checkout/error",  templateUrl: "./dist/routes/error/error.template.html", data: { title: 'Error', requireAuth: true }, controller: "errorCtrl", controllerAs: "error" })
 		.state('dashboard.users', { url: "/usuarios",  templateUrl: "./dist/routes/users/users.template.html", data: { title: 'Adm. usuarios', requireAuth: true }, controller: "usersCtrl", controllerAs: "users" })
 		.state('dashboard.process_payments', { url: "/pagos",  templateUrl: "./dist/routes/process_payments/process_payments.template.html", data: { title: 'Procesar Pagos', requireAuth: true }, controller: "processPaymentsCtrl", controllerAs: "processPayments" });
@@ -24,9 +24,7 @@
 		$rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
 
 			if (toState.data.requireAuth) {
-				console.log(toState.data.requireAuth);
 				authenticationService.checkAuth().then(function (response){
-					console.log(response);
 					if(!response.data.isLogged){
 						$state.go('home.login');
 					}
@@ -53,5 +51,7 @@
 	require('./routes/shopping_list/shopping_list.js')(angular, app);
 	require('./routes/profile/profile.js')(angular, app);
 	require('./services/authentication/authentication.js')(angular, app);
+	require('./services/uploadService.js')(angular, app);
 	require('./components/navbar/navbar.js')(angular, app);
+	require('./components/uploader/uploader.js')(angular, app);
 })();

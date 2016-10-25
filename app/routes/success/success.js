@@ -15,6 +15,13 @@ function successController(angular, app) {
             .then(function success(response){
                 if(!response.data.validate){
                     $state.go('dashboard.error',{},{reload:true});
+                } else {
+                    $http.post('./dist/php/notificacion_venta.php', { 
+                        email: response.data.email,
+                        name: response.data.name +  " " + response.data.lastname,
+                        lote: response.data.lote,
+                        date: response.data.date
+                    });
                 }
             });            
         }

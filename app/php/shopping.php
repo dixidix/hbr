@@ -169,6 +169,16 @@ function addPurchase($data){
 		MysqliDB::getInstance()->query("INSERT INTO `producto`(`venta_id`, `productType`, `quantity`, `partial_price`, `price`, `partial_weight`, `weight`, `establishment`, `postal`, `tracking_number`, `bill_number`) VALUES (".$venta_id.",'".$productType."',".$quantity.",".$partial_price.",".$price.",".$partial_weight.",".$weight.",'".$establishment."','".$postal."','".$tracking_number."','".$bill_number."')");
 
 	}
+	$res3 = MysqliDB::getInstance()->query("SELECT * FROM users WHERE id='".$uid."' AND deleted='0'");
+	$rows3 = mysqli_num_rows($res3);
+	if ($rows3 == 1){
+		$rss3 = $res3->fetch_array(MYSQLI_ASSOC);
+		$resolve_data['name'] = $rss3['name'];
+		$resolve_data['lastname'] = $rss3['lastname'];
+		$resolve_data['email'] = $rss3['email'];
+		$resolve_data['lote'] = $venta_id;
+		$resolve_data['date'] = $timestamp;
+	}
 	MysqliDB::getInstance()->close();
 	$resolve_data['success'] = true;
 	echo json_encode($resolve_data);

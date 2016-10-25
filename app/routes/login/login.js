@@ -13,7 +13,6 @@ function loginController(angular, app) {
         function login() {
             authenticationService.login(self.user)
             .then(function (response) {
-                console.log(response);
                 if(!response.data.errors){
                     sessionStorage.setItem("sskey", response.data.sskey);
                     sessionStorage.setItem("isAdmin", response.data.isAdmin);

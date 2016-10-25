@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body{
+            padding:0;
+            margin:0;
+        }
+        body{
+            background-color: #fcfcfc;
+        }
+        .row{
+            margin:0 15px;
+        }
+        .mail-content{
+            position: relative;
+        }
+        article{
+            padding:2% 5%;
+            color:#19156a;      
+            font-family: helvetica; 
+        }
+        .col-xs-6{
+            width:50%;
+        }
+        .col-xs-6 > img {
+            width:100%;
+        }
+        .left-panel{
+            float:left;
+        }
+        .right-panel{
+            float:right;
+        }
+        .brand{            
+            background-color:#19156a;
+        }
+        footer{
+            position: relative;
+            bottom:0;
+            background-color:#19156a;
+            width: 100%;
+            text-align: center;
+            border-top:5px solid #b4ec13;
+            color:#b4ec13;
+            font-family: helvetica;
+            font-size:13px;
+            line-height: 25px;
+            padding:10px 0px;
+        }
+        footer  a {
+            text-decoration: none;
+            color:#b4ec13;
+        }
+        footer > img {
+            width:70px;
+        }
+        footer > p {
+            margin:0;
+        }
+        .brand > img {
+            padding:20px;
+        }
+        .brand hr{
+            background-color: #b4ec13;
+            height: 5px;
+            border: 0;
+
+        }
+        ul{
+            list-style: none;
+            padding:2%;
+            margin:0;
+        }
+        ul li{
+            padding-bottom:10px;
+        }
+        span{
+            color:gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="brand">
+            <img src="http://tucourier.com.ar/wp-content/uploads/2016/09/160x40.png" alt="logo">
+            <hr>
+        </div>
+    </div>
+    <div class="row mail-content">
+        <article>
+            <header>
+                <h3>Solicitud de venta:</h3>
+            </header>
+            <p> el usuario <strong>$name</strong> ha solicitado la activaci&oacute;n del lote <strong>N° $lote</strong> para su compra.
+            </p>
+            <p>
+                <strong>Fecha de solicitud:</strong>$date
+            </p>
+            <p>Recuerde que los pasos para gestionar la compra de un lote son: </p>
+            </p>
+            <ul>
+                <li><strong>1)</strong> dirigirse a my HBR > Procesar pagos y localizar el lote que se desea publicar.</li>
+                <li><strong>2)</strong> Seleccionar el botón PROCESAR VENTA.</li>
+                <li><strong>3)</strong> realizar click en  "Generar url de pago exitoso"</li>
+                <li><strong>4)</strong> copiar el enlace de pago exitoso</li>
+                <li><strong>5)</strong> Dirigirse a todopago haciendo click en el enlace "ir a todopago".</li>
+                <li><strong>6)</strong> Ingresar sus datos para iniciar sesi&oacute;n y dirigirse a herramientas.</li>
+                <li><strong>7)</strong> Hacer click en el cuadro con descripci&oacute;n "PARA SITIO WEB[?]" </li>
+                <li><strong>8)</strong> Completar informaci&oacute;n del lote a vender y los medios de pago y seleccionar continuar. </li>
+                <li><strong>9)</strong> En vista previa seleccionar la solapa "Formulario de pago" y pegar el enlace de pago exitoso que generamos en myHBR. luego hacer click en crear bot&oacute;n </li>
+                <li><strong>10)</strong> Copiar el enlace ubicado en el c&oacute;digo que nos muestra el cuadro, regresar a myHBR y pegarlo en la secci&oacute;n Bot&oacute;n de todopago y hacer click en guardar.<br><br>
+                para identificar el enlace a copiar en el codigo guiarse por el siguiente formato de ejemplo:<br><br>
+                <span>https://forms.todopago.com.ar/formulario/commands?command=formulario&m=f9beb66a83242940d73505d643d8e3f1</span> <br>
+                </li>
+
+            </ul>             
+            <p>
+                <strong>E-Mail de contacto del solicitante:</strong> $email 
+            </p>
+            <p>
+                Desde ya muchas gracias por utilizar los servicios de myHBR.
+            </p>
+        </article>
+    </div>
+    <footer>
+        <!--  <img src="http://tucourier.com.ar/wp-content/uploads/2016/09/160x40.png" alt="logo"> -->
+        <p>
+           Arregui 6395 | Tercer Piso "C" | CABA (1408) 
+       </p>   
+       <p>
+           155311-6210 | 153168-8888 
+       </p>
+       <p>
+          <a href="http://tucourier.com.ar/">www.tucourier.com.ar</a>
+      </p>
+  </footer>
+</body>
+</html>

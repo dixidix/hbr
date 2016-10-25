@@ -5,16 +5,25 @@
 	<div class="col-xs-12 content">
 
 		<table class="table table-bordered table-striped table-curved rounded">
-			<form>
-				<label class="radio-inline">
-					<input ng-value="" checked="checked" ng-model="selectedFilter" type="radio" name="optradio">Ver todos
-				</label>
-				<label class="radio-inline">
-					<input ng-value="1" ng-model="selectedFilter" type="radio" name="optradio">Filtrar pagados
-				</label>
-				<label class="radio-inline">
-					<input ng-value="0" ng-model="selectedFilter" type="radio" name="optradio">Filtrar sin pagar
-				</label>
+			<div class="col-xs-6 form-inline" style="margin-bottom:10px;float:right">
+				<div class="form-group pull-right">
+					<label for="loteseach">Buscar N° Lote   
+						<input style="margin-left:5px;" id="loteseach"  type="search" ng-model="searchLote" name="lote" placeholder="buscar lote" class="form-control">
+					</label>
+				</div>			
+			</div>
+			<form style="vertical-align: middle;">
+				<div class="col-xs-5" style="margin-top: 5px;">
+					<label class="radio-inline">
+						<input ng-value="" checked="checked" ng-model="selectedFilter" type="radio" name="optradio">Ver todos
+					</label>
+					<label class="radio-inline">
+						<input ng-value="1" ng-model="selectedFilter" type="radio" name="optradio">Filtrar pagados
+					</label>
+					<label class="radio-inline">
+						<input ng-value="0" ng-model="selectedFilter" type="radio" name="optradio">Filtrar sin pagar
+					</label>	
+				</div>	
 			</form>
 			<thead>
 				<tr>
@@ -32,7 +41,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr  ng-repeat="venta in processPayments.ventas |filter: { state: selectedFilter }  track by $index">
+				<tr  ng-repeat="venta in processPayments.ventas |filter: { state: selectedFilter,  id: searchLote }  track by $index">
 					<td><span>{{ venta.id }}</span></td>
 					<td><span>{{ venta.peso_excedente }}</span></td>
 					<td><span>${{ venta.parcial_price }}</span></td>					

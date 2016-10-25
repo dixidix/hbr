@@ -55,8 +55,14 @@ function processPaymentsController(angular, app) {
         function send () {
           $http.put('./dist/php/shopping.php', { paymentGatewayUrl: self.paymentGatewayUrl, id: self.venta.id, token: self.token })
           .then(function success(response){
+            $http.post('./dist/php/cargar_venta.php', {
+             lote: self.venta.id,
+             name: self.user.name + " " + self.user.lastname,
+             email: self.user.email
+              }).then( function success(response){
             $state.reload();
             $uibModalInstance.dismiss('cancel');
+            });
           });
           
         };

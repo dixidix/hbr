@@ -16,7 +16,7 @@ function shoppingListController(angular, app) {
           $state.go('dashboard.checkout',{paymentGatewayUrl: venta.paymentGatewayUrl, reload:true});
         }
         function downloadBill(bill){
-          console.log(bill);
+
         }
         function openModal(size, items){
           var modalInstance = $uibModal.open({
@@ -37,7 +37,6 @@ function shoppingListController(angular, app) {
         function init() {
           $http.get('./dist/php/shopping.php', { params: { action: "getAll" } })
           .then(function(response){
-            console.log(response.data.ventas);
             self.ventas = response.data.ventas;
             self.moreInfo = moreInfo;
             self.downloadBill = downloadBill;

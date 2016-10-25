@@ -5,9 +5,9 @@ function shoppingController(angular, app) {
 
     app.controller('shoppingCtrl', shoppingCtrl);
 
-    shoppingCtrl.$inject = ['$http','$state'];
+    shoppingCtrl.$inject = ['$http','$state','uploadService'];
 
-    function shoppingCtrl($http,$state) {
+    function shoppingCtrl($http, $state, uploadService) {
       'use strict';
         var self = this; //jshint ignore:line
         function get_userdata(){
@@ -17,7 +17,7 @@ function shoppingController(angular, app) {
           });
         }
         function finish(){
-          console.log(self.purchase);
+
           $http.post('./dist/php/shopping.php',{ 
             peso_excedente: self.purchase.peso_excedente,
             parcial_price: self.purchase.parcial_price,
@@ -28,19 +28,30 @@ function shoppingController(angular, app) {
             transporte:  self.purchase.transporte,
             products: self.purchase.products,
             userId: self.purchase.user.id,
-            method:"POST" })
+            method:"POST" })      
           .then(function success(response){
             if(response.data.errors){
-              console.log(response.data.errors.error);
+
             }
             if(response.data.success){
-              $state.go('dashboard.shopping_list',{reload: true});
+              uploadService.uploadFile(self.purchase.products, './dist/php/add_file.php');
+              // .then(function uploaded(response){
+              //   $http.post('./dist/php/solicitud_venta.php',{ 
+              //     lote: response.data.lote,
+              //     date: response.data.date,
+              //     email: response.data.email,
+              //     name: response.data.name + " " + response.data.lastname
+              //   }).then(function success(response){
+              //     $state.go('dashboard.shopping_list',{reload: true});
+              //   });
+              // });
             }
           });
         }
         function add_purchase(){
           self.purchase.data.price = self.purchase.data.quantity * self.purchase.data.price;
           self.purchase.data.weight = self.purchase.data.quantity * self.purchase.data.weight;
+          console.log(self.purchase.data.bill);
           self.purchase.products.push(self.purchase.data);
           self.purchase.parcial_price =  self.purchase.parcial_price + self.purchase.data.price;
           self.purchase.total_quantity =  parseInt(self.purchase.total_quantity) + parseInt(self.purchase.data.quantity);
@@ -51,7 +62,6 @@ function shoppingController(angular, app) {
           self.shoppingForm_purchase.$valid = true;
           self.shoppingForm_purchase.$setPristine();
           self.shoppingForm_purchase.$submitted = false;
-          console.log(self.purchase);
         }
         function init() {
           self.purchase = {

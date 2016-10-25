@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-10-2016 a las 04:20:55
+-- Tiempo de generación: 23-10-2016 a las 20:52:08
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -47,12 +47,8 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`product_id`, `venta_id`, `productType`, `quantity`, `partial_price`, `price`, `partial_weight`, `weight`, `establishment`, `postal`, `tracking_number`, `bill_number`, `deleted`) VALUES
-(1, 1, 'asdasd', 2, 200, 400, 1, 2, 'asdasdasd', 'asdas', 'dasdasd', '123123123', 0),
-(2, 1, 'aaaaaaaa', 3, 500, 1500, 5, 15, 'asdasd', 'asd', 'asd', '123123123', 0),
-(3, 2, 'Zapatillas', 2, 250, 500, 5, 10, 'Nike', 'DHL', '99988778', '123123123', 0),
-(4, 2, 'Notebook', 1, 1500, 1500, 1.5, 1.5, 'Apple Store', 'DHL', '1112112', '123123123', 0),
-(5, 3, 'Manzanas', 12, 5, 60, 0.5, 6, 'Verduleria', 'DHL', '1123123', '123123123', 0),
-(6, 3, 'Zanahorias', 12, 12.5, 150, 2, 24, 'Verduleria', 'DHL', '11111', '123123123', 0);
+(1, 1, 'asd', 1, 1, 1, 1, 1, 'asd', 'asd', 'asd', 'asd', 0),
+(2, 2, 'Zapatilla', 2, 200, 400, 5, 10, 'Nike', 'DHL', 'as9asma9ask', 'gght3330', 0);
 
 -- --------------------------------------------------------
 
@@ -85,8 +81,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `lastname`, `tel`, `cel`, `email`, `password`, `sskey`, `codeType`, `idCode`, `deleted`, `address`, `localidad`, `postalcode`, `registerToken`, `registertimestamp`, `isAdmin`) VALUES
-(1, 'Nicolas', 'Sigal', '1234', 0, 'nicolas.sigal@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'b025ba7949e4d25d521d899f0809a3da', 2, '12345678', 0, 'tabanera 3385', 'mendoza', '5500', '0d75211910d3131a7d2472c4c41cead1', 1475968389, 1),
-(2, 'Nicolas Emiliano', 'Sigal', '1234', 0, 'nicolas.e.sigal@gmail.com', '21232f297a57a5a743894a0e4a801fc3', NULL, 1, '12345678', 0, 'tabanera 3385', 'mendoza', '5500', '308192ed9a7cf69af0c004179844ace7', 1475968761, 0);
+(1, 'Nicolas', 'Sigal', '1234', 0, 'nicolas.sigal@gmail.com', '21232f297a57a5a743894a0e4a801fc3', NULL, 2, '12345678', 0, 'tabanera 3385', 'mendoza', '5500', '0d75211910d3131a7d2472c4c41cead1', 1475968389, 0),
+(2, 'Santiago', 'Lloret', '1234', 0, 'santi', '21232f297a57a5a743894a0e4a801fc3', NULL, 1, '12345678', 0, 'tabanera 3385', 'mendoza', '5500', '308192ed9a7cf69af0c004179844ace7', 1475968761, 1),
+(3, 'Roberto', 'Gomez', '4998877', 153997755, 'dix.inferno@gmail.com', '21232f297a57a5a743894a0e4a801fc3', NULL, 2, '7895761231', 0, 'cadetes chilenos 173', 'mendoz', '5500', 'c417aee12cc67a34d94aabdfd93377b4', 1477164242, 0);
 
 -- --------------------------------------------------------
 
@@ -116,9 +113,8 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`id`, `uid`, `peso_excedente`, `parcial_price`, `peso_total`, `tasas`, `total`, `total_quantity`, `transporte`, `timestamp`, `deleted`, `paymentGatewayUrl`, `state`, `token`) VALUES
-(1, 1, 0, 1900, 17, 0, 1900, 5, 0, '2016-10-19 00:34:26', 0, 'https://forms.todopago.com.ar/formulario/commands?command=formulario&m=dac8ac59e8b6f787f8bf66a1dbd74ad2', 1, ''),
-(2, 1, 0, 2000, 12, 0, 2000, 3, 0, '2016-10-19 00:43:15', 0, 'https://forms.todopago.com.ar/formulario/commands?command=formulario&m=dac8ac59e8b6f787f8bf66a1dbd74ad2', 1, 'ad106169bea86ab7e7ba91e6adf5723d'),
-(3, 1, 0, 210, 30, 0, 210, 24, 0, '2016-10-19 00:34:30', 0, 'https://forms.todopago.com.ar/formulario/commands?command=formulario&m=dac8ac59e8b6f787f8bf66a1dbd74ad2', 0, '');
+(1, 1, 0, 1, 1, 0, 1, 1, 0, '2016-10-22 19:05:17', 0, 'https://forms.todopago.com.ar/formulario/commands?command=formulario&m=2794237fd0b17fcf9a9a970a0524c1d8', 1, '533bd36086cf9d3d4b5bf15b6a9e6645'),
+(2, 3, 0, 400, 10, 0, 400, 2, 0, '2016-10-22 19:30:17', 0, 'https://forms.todopago.com.ar/formulario/commands?command=formulario&m=8cde20b0cd3a6d98e5c750662a6e551b', 0, '58e68a0920dc3d29d2855a7d0954f041');
 
 --
 -- Índices para tablas volcadas
@@ -150,17 +146,17 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

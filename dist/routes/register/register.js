@@ -10,7 +10,6 @@ function registerController(angular, app) {
     function registerCtrl($http, $state, authenticationService) {
         var self = this; //jshint ignore:line
         function register() {
-            console.log(self.user);
             authenticationService.register(self.user)
             	.then(function (response) {
                     if(!response.data.errors){

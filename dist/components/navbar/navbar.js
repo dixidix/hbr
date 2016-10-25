@@ -31,7 +31,7 @@ function navbarDirective(angular, app) {
                         $state.go('home.login', { reload: true });
                     },
                     function error(error) {
-                        console.log(error);
+
                     });
 
             }
