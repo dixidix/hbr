@@ -151,7 +151,6 @@ function addPurchase($data){
 		$resolve_data['errors'] = $errors;
 		echo json_encode($resolve_data);
 	}
-
 	foreach ( $products as $key => $value) {
 
 		$productType = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($value['productType']));
@@ -167,7 +166,6 @@ function addPurchase($data){
 		$partial_weight = $weight / $quantity;
 
 		MysqliDB::getInstance()->query("INSERT INTO `producto`(`venta_id`, `productType`, `quantity`, `partial_price`, `price`, `partial_weight`, `weight`, `establishment`, `postal`, `tracking_number`, `bill_number`) VALUES (".$venta_id.",'".$productType."',".$quantity.",".$partial_price.",".$price.",".$partial_weight.",".$weight.",'".$establishment."','".$postal."','".$tracking_number."','".$bill_number."')");
-
 	}
 	$res3 = MysqliDB::getInstance()->query("SELECT * FROM users WHERE id='".$uid."' AND deleted='0'");
 	$rows3 = mysqli_num_rows($res3);
@@ -178,6 +176,7 @@ function addPurchase($data){
 		$resolve_data['email'] = $rss3['email'];
 		$resolve_data['lote'] = $venta_id;
 		$resolve_data['date'] = $timestamp;
+		$resolve_data['productsId'] = $productsId;
 	}
 	MysqliDB::getInstance()->close();
 	$resolve_data['success'] = true;
