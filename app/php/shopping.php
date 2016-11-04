@@ -109,6 +109,8 @@ function getAll(){
 			$outpm .= '"establishment":"'  . $rss["establishment"] . '",';
 			$outpm .= '"postal":"'  . $rss["postal"] . '",';
 			$outpm .= '"bill_number":"'  . $rss["bill_number"] . '",';
+			$outpm .= '"bill_name":"'  . $rss["bill_name"] . '",';
+			$outpm .= '"bill_file":"'  . $rss["bill_file"] . '",';
 			$outpm .= '"tracking_number":"'   . $rss["tracking_number"].'"}';
 		}
 
@@ -133,7 +135,7 @@ function addPurchase($data){
 	$total_quantity = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['total_quantity']));
 	$transporte = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['transporte']));
 	$uid = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['userId']));
-	$products = $data['products'];
+	// $products = $data['products'];
 
 	if (empty($errors)){
 		$timestamp = round(microtime(true) * 1000);
@@ -151,22 +153,7 @@ function addPurchase($data){
 		$resolve_data['errors'] = $errors;
 		echo json_encode($resolve_data);
 	}
-	foreach ( $products as $key => $value) {
 
-		$productType = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($value['productType']));
-		$tracking_number = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($value['tracking_number']));
-		$establishment = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($value['establishment']));
-		$postal = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($value['postal']));
-		$bill_number = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($value['bill_number']));
-		$quantity = $value['quantity'];
-		$price = $value['price'];		
-		$weight = $value['weight'];
-
-		$partial_price = $price / $quantity;
-		$partial_weight = $weight / $quantity;
-
-		MysqliDB::getInstance()->query("INSERT INTO `producto`(`venta_id`, `productType`, `quantity`, `partial_price`, `price`, `partial_weight`, `weight`, `establishment`, `postal`, `tracking_number`, `bill_number`) VALUES (".$venta_id.",'".$productType."',".$quantity.",".$partial_price.",".$price.",".$partial_weight.",".$weight.",'".$establishment."','".$postal."','".$tracking_number."','".$bill_number."')");
-	}
 	$res3 = MysqliDB::getInstance()->query("SELECT * FROM users WHERE id='".$uid."' AND deleted='0'");
 	$rows3 = mysqli_num_rows($res3);
 	if ($rows3 == 1){
@@ -176,7 +163,7 @@ function addPurchase($data){
 		$resolve_data['email'] = $rss3['email'];
 		$resolve_data['lote'] = $venta_id;
 		$resolve_data['date'] = $timestamp;
-		$resolve_data['productsId'] = $productsId;
+		$resolve_data['ventaId'] = $venta_id;
 	}
 	MysqliDB::getInstance()->close();
 	$resolve_data['success'] = true;

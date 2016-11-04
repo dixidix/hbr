@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    
+    RewriteRule ^.*$ - [NC,L]
+    RewriteRule ^(.*)$ index.html [QSA,L]
+
+</IfModule>

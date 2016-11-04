@@ -3,17 +3,21 @@ function uploadService(angular, app) {
 	app.service('uploadService', uploadService);
 	uploadService.$inject = ["$http", "$q"];
 	function uploadService($http, $q){
-		this.uploadFile = function (form, url) {
-
+		this.uploadProducts = function (products, ventaId, timestamp) {
 			var deferred = $q.defer();
-			var formData = new FormData();
-			angular.forEach(form, function(key,value){
-				formData.append(value,key);
-			});
-			formData.append("method","POST");
-			$http.post(url, formData, {
-				transformRequest: angular.identity,
-				headers: {'Content-Type': "text/json"}
+			angular.forEach(products, function (product) {
+				product.ventaId = ventaId;
+				product.timestamp = timestamp;
+				var formData = new FormData();
+				angular.forEach(product, function(key,value){
+					console.log(value, key);
+					formData.append(value,key);
+				});
+
+				$http.post('./myhbr/dist/php/add_products.php', formData, {
+					transformRequest: angular.identity,
+					headers: {'Content-Type': undefined}
+				});
 			});
 			return deferred.promise;
 		}

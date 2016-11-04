@@ -17,37 +17,31 @@ function shoppingController(angular, app) {
           });
         }
         function finish(){
-           uploadService.uploadFile(self.purchase, './dist/php/shopping.php');
-          // $http.post('./dist/php/shopping.php',{ 
-          //   peso_excedente: self.purchase.peso_excedente,
-          //   parcial_price: self.purchase.parcial_price,
-          //   peso_total:  self.purchase.peso_total,
-          //   tasas:  self.purchase.tasas,
-          //   total:  self.purchase.total,
-          //   total_quantity:  self.purchase.total_quantity,
-          //   transporte:  self.purchase.transporte,
-          //   products: self.purchase.products,
-          //   userId: self.purchase.user.id,
-          //   method:"POST" })      
-          // .then(function success(response){
-          //   console.log(response.data);
-          //   if(response.data.errors){
-
-          //   }
-          //   if(response.data.success){
-          //     uploadService.uploadFile(self.purchase.products, './dist/php/add_file.php');
-          //     // .then(function uploaded(response){
-          //     //   $http.post('./dist/php/solicitud_venta.php',{ 
-          //     //     lote: response.data.lote,
-          //     //     date: response.data.date,
-          //     //     email: response.data.email,
-          //     //     name: response.data.name + " " + response.data.lastname
-          //     //   }).then(function success(response){
-          //     //     $state.go('dashboard.shopping_list',{reload: true});
-          //     //   });
-          //     // });
-          //   }
-          // });
+          $http.post('./dist/php/shopping.php',{ 
+            peso_excedente: self.purchase.peso_excedente,
+            parcial_price: self.purchase.parcial_price,
+            peso_total:  self.purchase.peso_total,
+            tasas:  self.purchase.tasas,
+            total:  self.purchase.total,
+            total_quantity:  self.purchase.total_quantity,
+            transporte:  self.purchase.transporte,
+            userId: self.purchase.user.id,
+            method:"POST" })      
+          .then(function success(response){
+            if(response.data.success){              
+              uploadService.uploadProducts(self.purchase.products, response.data.ventaId, (new Date).getTime());
+              // .then(function uploaded(response){
+                $http.post('./dist/php/solicitud_venta.php',{ 
+                  lote: response.data.lote,
+                  date: response.data.date,
+                  email: response.data.email,
+                  name: response.data.name + " " + response.data.lastname
+                }).then(function success(response){
+                  $state.go('dashboard.shopping_list',{reload: true});
+                });
+              // });
+            }
+          });
         }
         function add_purchase(){
           self.purchase.data.price = self.purchase.data.quantity * self.purchase.data.price;
@@ -59,10 +53,12 @@ function shoppingController(angular, app) {
           self.purchase.peso_total =  self.purchase.peso_total + self.purchase.data.weight;
           self.purchase.total = 0;
           self.purchase.total =  self.purchase.parcial_price;
+          $('#bill').val("");
           self.purchase.data = {};
           self.shoppingForm_purchase.$valid = true;
           self.shoppingForm_purchase.$setPristine();
           self.shoppingForm_purchase.$submitted = false;
+
         }
         function init() {
           self.purchase = {

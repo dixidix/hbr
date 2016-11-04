@@ -8,7 +8,7 @@ function navbarDirective(angular, app) {
         return {
             restrict: "E",
             replace: true,
-            templateUrl: './dist/components/navbar/navbar.template.html',
+            templateUrl: './myhbr/dist/components/navbar/navbar.template.html',
             link: link,
             controllerAs: 'navbar',
             controller: controller

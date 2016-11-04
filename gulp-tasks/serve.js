@@ -6,7 +6,7 @@ function serve(gulp, $) {
 
 	function serve() {
 		browserSync({
-			browser: ["google-chrome"],
+			browser: ["chrome"],
 			server: {
 				baseDir: "./"
 			}

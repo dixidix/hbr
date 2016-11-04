@@ -38,6 +38,7 @@ function shoppingListController(angular, app) {
           $http.get('./dist/php/shopping.php', { params: { action: "getAll" } })
           .then(function(response){
             self.ventas = response.data.ventas;
+            console.log(response.data);
             self.moreInfo = moreInfo;
             self.downloadBill = downloadBill;
             self.pay = pay;
