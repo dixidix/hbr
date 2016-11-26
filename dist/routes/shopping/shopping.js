@@ -11,13 +11,13 @@ function shoppingController(angular, app) {
       'use strict';
         var self = this; //jshint ignore:line
         function get_userdata(){
-          $http.get('./dist/php/users.php', { params: { sskey: sessionStorage.getItem('sskey'), action: "getUserBySskey" } })
+          $http.get('./hbr-selfie/dist/php/users.php', { params: { sskey: sessionStorage.getItem('sskey'), action: "getUserBySskey" } })
           .then(function(response){
             self.purchase.user = response.data;
           });
         }
         function finish(){
-          $http.post('./dist/php/shopping.php',{ 
+          $http.post('./hbr-selfie/dist/php/shopping.php',{ 
             peso_excedente: self.purchase.peso_excedente,
             parcial_price: self.purchase.parcial_price,
             peso_total:  self.purchase.peso_total,
@@ -31,7 +31,7 @@ function shoppingController(angular, app) {
             if(response.data.success){              
               uploadService.uploadProducts(self.purchase.products, response.data.ventaId, (new Date).getTime());
               // .then(function uploaded(response){
-                $http.post('./dist/php/solicitud_venta.php',{ 
+                $http.post('./hbr-selfie/dist/php/solicitud_venta.php',{ 
                   lote: response.data.lote,
                   date: response.data.date,
                   email: response.data.email,

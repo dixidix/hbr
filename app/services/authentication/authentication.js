@@ -5,15 +5,15 @@ function authenticationService(angular, app) {
 	authenticationService.$inject = ['$http', '$q'];
 	function authenticationService($http, $q) {
 		this.checkAuth = function () {
-			return $http.post('./myhbr/dist/php/session.php',{ sskey: sessionStorage.getItem('sskey') });			
+			return $http.post('./hbr-selfie/dist/php/session.php',{ sskey: sessionStorage.getItem('sskey') });			
 		};
 		this.login = function (user) {
 			var deffered = $q.defer();
-			return $http.get('./myhbr/dist/php/users.php', { params: { username: user.username, password: user.password, action: "login" } });
+			return $http.get('./hbr-selfie/dist/php/users.php', { params: { username: user.username, password: user.password, action: "login" } });
 		};
 		this.logout = function () {
 			var deffered = $q.defer();
-			$http.post('./myhbr/dist/php/users.php',{ sskey: sessionStorage.getItem("sskey"),method:"POST", action: "logout" })
+			$http.post('./hbr-selfie/dist/php/users.php',{ sskey: sessionStorage.getItem("sskey"),method:"POST", action: "logout" })
 			.success(function (response) {
 				sessionStorage.clear();
 				deffered.resolve();
@@ -25,7 +25,7 @@ function authenticationService(angular, app) {
 		};
 		this.register = function (user) {
 			var deffered = $q.defer();
-			return $http.post('./myhbr/dist/php/users.php',{
+			return $http.post('./hbr-selfie/dist/php/users.php',{
 				name: user.name,
 				lastname: user.lastname,
 				tel: user.tel,

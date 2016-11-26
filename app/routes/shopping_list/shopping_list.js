@@ -35,7 +35,7 @@ function shoppingListController(angular, app) {
           openModal('md', items);
         }
         function init() {
-          $http.get('./dist/php/shopping.php', { params: { action: "getAll" } })
+          $http.get('./hbr-selfie/dist/php/shopping.php', { params: { action: "getAll" } })
           .then(function(response){
             self.ventas = response.data.ventas;
             console.log(response.data);

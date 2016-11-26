@@ -4,9 +4,9 @@ class MysqliDB{
 	private static $_instance;
 //--------------DB LOCALHOST---------------
 	protected $host='localhost';
-	protected $user='root';
-	protected $passwd='';
-	protected $db='hbr';
+	protected $user='feedback_hbrusr';
+	protected $passwd='reset2016';
+	protected $db='feedback_tucourier';
 	//--------------DB SERVER--------------
 	// protected $host='localhost';
 	// protected $user='root';

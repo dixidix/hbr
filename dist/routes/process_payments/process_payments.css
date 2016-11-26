@@ -1,0 +1,207 @@
+/*Colours*/
+/*Variables*/
+/* Fonts */
+/** Devices Breakpoints **/
+/** Mixins for responsive content **/
+/*Colours*/
+/*Variables*/
+/* Fonts */
+/** Devices Breakpoints **/
+/** Mixins for responsive content **/
+form {
+  padding: 10px 0px; }
+  form .form-control {
+    height: 40px;
+    margin-bottom: 10px;
+    border-radius: 3px; }
+  form label {
+    font-family: "museoSans-500", Arial;
+    font-weight: bold; }
+
+@font-face {
+  font-family: 'museoSans-100';
+  font-weight: 100;
+  src: url("./../styles/fonts/MuseoSans-100.otf"); }
+
+@font-face {
+  font-family: 'museoSans-300';
+  font-weight: 300;
+  src: url("./../styles/fonts/MuseoSans300.otf"); }
+
+@font-face {
+  font-family: 'museoSans-500';
+  font-weight: 500;
+  src: url("./../styles/fonts/MuseoSans500.otf"); }
+
+@font-face {
+  font-family: 'RobotoRegular';
+  font-weight: 400;
+  font-style: normal;
+  src: url("./../styles/fonts/Roboto-Regular.ttf"); }
+
+@font-face {
+  font-family: 'RobotoLight';
+  font-weight: 300;
+  font-style: normal;
+  src: url("./../styles/fonts/Roboto-Light.ttf"); }
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url("./../styles/fonts/MaterialIcons-Regular.eot");
+  /* For IE6-8 */
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url("./../styles/fonts/MaterialIcons-Regular.woff2") format("woff2"), url("./../styles/fonts/MaterialIcons-Regular.woff") format("woff"), url("./../styles/fonts/MaterialIcons-Regular.ttf") format("truetype"); }
+
+/*Colours*/
+/*Variables*/
+/* Fonts */
+/** Devices Breakpoints **/
+/** Mixins for responsive content **/
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for IE. */
+  font-feature-settings: 'liga'; }
+
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%; }
+  html body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: "museoSans-100", Arial; }
+
+.modal-dialog {
+  width: 90%;
+  margin-top: 100px; }
+  .modal-dialog .btn-hbr-blue {
+    width: 150px;
+    height: 50px;
+    color: #b4ec13;
+    background: #19156a;
+    border: none;
+    border-radius: 3px;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-family: "museoSans-500", Arial;
+    font-weight: bold; }
+  .modal-dialog .modal-body a {
+    outline: none;
+    box-shadow: none;
+    text-shadow: none;
+    text-decoration: none;
+    cursor: pointer; }
+  .modal-dialog .modal-body input {
+    width: 100%; }
+  .modal-dialog .modal-body ul {
+    list-style: none; }
+    .modal-dialog .modal-body ul li strong {
+      font-family: "museoSans-500", Arial; }
+  .modal-dialog .modal-body .table {
+    border: 0.1px solid #19156a; }
+  .modal-dialog .modal-body .table-bordered > thead > tr > th,
+  .modal-dialog .modal-body .table-bordered > tbody > tr > th,
+  .modal-dialog .modal-body .table-bordered > tfoot > tr > th,
+  .modal-dialog .modal-body .table-bordered > thead > tr > td,
+  .modal-dialog .modal-body .table-bordered > tbody > tr > td,
+  .modal-dialog .modal-body .table-bordered > tfoot > tr > td {
+    border: 0.1px solid #19156a;
+    text-align: center; }
+  .modal-dialog .modal-body .rounded {
+    padding-top: 2%; }
+    .modal-dialog .modal-body .rounded thead {
+      margin-top: 5%; }
+      .modal-dialog .modal-body .rounded thead tr {
+        font-family: "museoSans-500", Arial;
+        background: #b4ec13;
+        color: #19156a;
+        text-align: center; }
+    .modal-dialog .modal-body .rounded tbody tr td {
+      text-align: center;
+      vertical-align: middle; }
+      .modal-dialog .modal-body .rounded tbody tr td span i {
+        cursor: pointer;
+        vertical-align: middle;
+        margin: 0 5px;
+        font-size: 15px; }
+        .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-file-pdf-o {
+          color: #DA251C; }
+        .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-edit {
+          color: green; }
+        .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-close {
+          color: red; }
+
+.process_payments .payed {
+  color: green; }
+
+.process_payments .unpayed {
+  color: red; }
+
+.process_payments .content {
+  margin: 0;
+  width: 98%;
+  margin-left: 2%;
+  margin-bottom: 10%; }
+
+.process_payments h3 {
+  color: #19156a;
+  margin-top: 0; }
+
+.process_payments hr {
+  background-color: #19156a;
+  height: 1px;
+  border: 0;
+  margin-bottom: 50px; }
+
+.process_payments .table {
+  border: 0.1px solid #19156a; }
+
+.process_payments .table-bordered > thead > tr > th,
+.process_payments .table-bordered > tbody > tr > th,
+.process_payments .table-bordered > tfoot > tr > th,
+.process_payments .table-bordered > thead > tr > td,
+.process_payments .table-bordered > tbody > tr > td,
+.process_payments .table-bordered > tfoot > tr > td {
+  border: 0.1px solid #19156a;
+  text-align: center; }
+
+.process_payments .rounded {
+  margin-top: 2%; }
+  .process_payments .rounded thead tr {
+    font-family: "museoSans-500", Arial;
+    background: #b4ec13;
+    color: #19156a;
+    text-align: center; }
+  .process_payments .rounded tbody tr td {
+    text-align: center;
+    vertical-align: middle; }
+    .process_payments .rounded tbody tr td span i {
+      cursor: pointer;
+      vertical-align: middle;
+      margin: 0 5px;
+      font-size: 15px; }
+      .process_payments .rounded tbody tr td span i.fa.fa-file-pdf-o {
+        color: #DA251C; }
+      .process_payments .rounded tbody tr td span i.fa.fa-edit {
+        color: green; }
+      .process_payments .rounded tbody tr td span i.fa.fa-close {
+        color: red; }
