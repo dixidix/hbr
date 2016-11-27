@@ -34,11 +34,23 @@
                 <a href="" ui-sref="dashboard.process_payments" ng-if="!dashboard.collapse">
                     <li><i class="fa fa-usd"></i><span> Procesar Pagos </span></li>
                 </a>
-                <a href="" ui-sref="dashboard.users" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Admin. Usuarios">
+                <a href="" ui-sref="dashboard.users" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Admin. Particulares">
                     <li><i class="fa fa-users"></i></li>
                 </a>
                 <a href="" ui-sref="dashboard.users" ng-if="!dashboard.collapse">
-                    <li><i class="fa fa-users"></i><span> Admin. Usuarios </span></li>
+                <li><i class="fa fa-users"></i><span> Particulares </span></li>
+                </a>
+                <a href="" ui-sref="dashboard.business" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Admin. Empresas">
+                    <li><i class="fa fa-building"></i></li>
+                </a>
+                <a href="" ui-sref="dashboard.business" ng-if="!dashboard.collapse">
+                    <li><i class="fa fa-building"></i><span> Empresas </span></li>
+                </a>
+                <a href="" ui-sref="dashboard.warehouse" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Admin. Warehouse">
+                    <li><i class="fa fa-home"></i></li>
+                </a>
+                <a href="" ui-sref="dashboard.warehouse" ng-if="!dashboard.collapse">
+                    <li><i class="fa fa-home"></i><span> Warehouse </span></li>
                 </a>
             </div>
         </ul>

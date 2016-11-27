@@ -50,10 +50,16 @@ function usersController(angular, app) {
          alert(priv);
        }
        function init() {
-        $http.get('./hbr-selfie/dist/php/users.php')
-        .then(function(response){
+        self.client_type = $state.params.client_type;
+        $http.get('./hbr-selfie/dist/php/users.php', {
+          params: {
+            client_type: self.client_type,
+            action: 'getAll'
+          }
+        }).then(function(response){
           self.users = response.data.users;
         });
+
         self.editUser = editUser;
         self.removeUser = removeUser;
         self.changePrivileges = changePrivileges;

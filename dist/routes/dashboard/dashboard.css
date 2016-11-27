@@ -131,6 +131,8 @@ html {
           font-size: 14px; }
           .dashboard__sidebar ul a:hover {
             font-family: "museoSans-500", Arial; }
+          .dashboard__sidebar ul a i {
+            font-size: 18px; }
           .dashboard__sidebar ul a li {
             padding: 20px 20px; }
             .dashboard__sidebar ul a li:hover {
@@ -196,6 +198,8 @@ html {
           font-size: 14px; }
           .dashboard__sidebar ul a:hover {
             font-family: "museoSans-500", Arial; }
+          .dashboard__sidebar ul a i {
+            font-size: 18px; }
           .dashboard__sidebar ul a li {
             padding: 20px 20px; }
             .dashboard__sidebar ul a li:hover {

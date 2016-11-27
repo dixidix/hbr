@@ -42,6 +42,25 @@ function authenticationService(angular, app) {
 				action: "register"
 			});
 		};
+		this.registerCompany = function (company) {
+			var deffered = $q.defer();
+			return $http.post('./hbr-selfie/dist/php/users.php',{
+				company_name: company.company_name,
+				company_real_name: company.company_real_name,
+				tel: company.tel,
+				cel: company.cel,
+				codeType: company.codeType.toString(),
+				idCode: company.idCode,
+				email: company.email,
+				address: company.address,
+				localidad: company.localidad,
+				postalCode: company.postalCode,
+				password: company.password,
+				password2: company.password2,
+				method:"POST",
+				action: "register"
+			});
+		};
 	}
 }
 module.exports = authenticationService;

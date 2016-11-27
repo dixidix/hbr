@@ -1,12 +1,15 @@
 <div class="users container-fluid" ng-cloak>
 	<link rel="stylesheet" type="text/css" href="./hbr-selfie/dist/routes/users/users.css">
-	<h3><i class="fa fa-users"></i> Administrar usuarios</h3>
+	<h3 ng-if="users.client_type == 0"><i class="fa fa-users"></i> Administrar usuarios</h3>
+	<h3 ng-if="users.client_type == 1"><i class="fa fa-building"></i> Administrar Empresas</h3>
 	<hr>
 	<table class="table table-bordered table-striped table-curved rounded">
 		<thead>
 			<tr>
-				<td><span>Nombre</span></td>
-				<td><span>Apellido</span></td>
+				<td ng-if="users.client_type == 0"><span>Nombre</span></td>
+				<td ng-if="users.client_type == 0"><span>Apellido</span></td>
+				<td ng-if="users.client_type == 1"><span>Nom. Empresa</span></td>
+				<td ng-if="users.client_type == 1"><span>Raz&oacute;n Social</span></td>
 				<td><span>Tel.</span></td>
 				<td><span>Cel.</span></td>
 				<td><span>Direcci&oacute;n</span></td>
@@ -20,8 +23,10 @@
 		</thead>
 		<tbody>
 			<tr  ng-repeat="user in users.users   track by $index">
-				<td><span>{{ user.name }}</span></td>
-				<td><span>{{ user.lastname }}</span></td>
+				<td ng-if="users.client_type == 0"><span>{{ user.name }}</span></td>
+				<td ng-if="users.client_type == 0"><span>{{ user.lastname }}</span></td>
+				<td ng-if="users.client_type == 1"><span>{{ user.company_name }}</span></td>
+				<td ng-if="users.client_type == 1"><span>{{ user.company_real_name }}</span></td>
 				<td><span>{{ user.tel }}</span></td>
 				<td><span>{{ user.cel }}</span></td>
 				<td><span>{{ user.address }}</span></td>

@@ -84,6 +84,9 @@ function getUsers($data){
 			case 'getUserBySskey':
 			getUserBySskey($data);
 			break;
+			case 'getAll':
+			getAllUsers($data);
+			break;
 			default:
 			print_r($errors);
 			break;
@@ -139,14 +142,25 @@ function login($data){
 	MysqliDB::getInstance()->close();
 }
 function getAllUsers($data){
-$res = MysqliDB::getInstance()->query("SELECT * from users WHERE deleted = 0");
+	$client_type = $data['client_type'];
+	$res = MysqliDB::getInstance()->query("SELECT * from users WHERE client_type = '" . $client_type . "' and deleted = 0");
 	$outp="";
 	while($rs = $res->fetch_array(MYSQLI_ASSOC)) {
 		$outpm ="";
 		if ($outp != "") {$outp .= ",";}
 		$outp .= '{"id":"'  . $rs["id"] . '",';
-		$outp .= '"name":"'  . $rs["name"] . '",';
-		$outp .= '"lastname":"'  . $rs["lastname"] . '",';
+		if(!empty($rs["name"])){
+			$outp .= '"name":"'  . $rs["name"] . '",';
+		}
+		if(!empty($rs["lastname"])){
+			$outp .= '"lastname":"'  . $rs["lastname"] . '",';
+		}
+		if(!empty($rs["company_name"])){
+			$outp .= '"company_name":"'  . $rs["company_name"] . '",';
+		}
+		if(!empty($rs["company_real_name"])){
+			$outp .= '"company_real_name":"'  . $rs["company_real_name"] . '",';
+		}
 		$outp .= '"tel":"'  . $rs["tel"] . '",';
 		$outp .= '"cel":"'  . $rs["cel"] . '",';
 		$outp .= '"email":"'  . $rs["email"] . '",';
@@ -295,8 +309,21 @@ function register($data){
 	}
 	if (empty($errors)){
 		$timestamp = time();
-		MysqliDB::getInstance()->query("INSERT INTO `users`( `name`, `lastname`, `tel`, `cel`, `email`, `password`, `codeType`, `idCode`,`deleted`, `address`, `localidad`, `postalcode`, `registerToken`, `registertimestamp`)
-			VALUES ('".$name."','".$lastname."','".$tel."','".$cel."','".$email."','".$password."','".$codeType."','".$idCode."',0,'".$address."','".$localidad."','".$postalCode."','".$registerToken."',".$timestamp.")");
+
+		$aux_name = !empty($data['name']) ? $data['name'] : '';
+		$aux_lastname = !empty($data['lastname']) ? $data['lastname'] : '';
+		$aux_company_name = !empty($data['company_name']) ? $data['company_name'] : '';
+		$aux_company_real_name = !empty($data['company_real_name']) ? $data['company_real_name'] : '';
+
+		if($aux_name && $aux_lastname){
+			$client_type = 0;
+		}
+		if($aux_company_name && $aux_company_real_name){
+			$client_type = 1;
+		}
+
+		MysqliDB::getInstance()->query("INSERT INTO `users`( `name`, `lastname`, `company_name`, `company_real_name`, `tel`, `cel`, `email`, `password`, `codeType`, `idCode`,`deleted`, `address`, `localidad`, `postalcode`, `registerToken`, `registertimestamp`, `client_type`)
+			VALUES ('".$aux_name."','".$aux_lastname."','".$aux_company_name."','".$aux_company_real_name."','".$tel."','".$cel."','".$email."','".$password."','".$codeType."','".$idCode."',0,'".$address."','".$localidad."','".$postalCode."','".$registerToken."',".$timestamp.",".$client_type.")");
 		
 		MysqliDB::getInstance()->close();
 		$resolve_data['registerToken'] = $registerToken;

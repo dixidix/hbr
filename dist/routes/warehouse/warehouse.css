@@ -107,60 +107,60 @@ html {
   .modal-dialog .modal-body p {
     font-size: 18px; }
 
-.users h3 {
+.warehouse h3 {
   color: #19156a;
   margin-top: 0; }
-  .users h3 i {
+  .warehouse h3 i {
     font-size: 24px; }
 
-.users hr {
+.warehouse hr {
   background-color: #19156a;
   height: 1px;
   border: 0;
   margin-bottom: 50px; }
 
-.users i {
+.warehouse i {
   vertical-align: middle;
   cursor: pointer;
   font-size: 16px;
   padding: 0px 5px; }
-  .users i.fa.fa-edit {
+  .warehouse i.fa.fa-edit {
     color: green; }
-  .users i.fa.fa-close {
+  .warehouse i.fa.fa-close {
     color: red; }
-  .users i.fa.fa-lock, .users i.fa.fa-unlock {
+  .warehouse i.fa.fa-lock, .warehouse i.fa.fa-unlock {
     color: #2e2e2e; }
 
-.users .table {
+.warehouse .table {
   border: 0.1px solid #19156a; }
 
-.users .table-bordered > thead > tr > th,
-.users .table-bordered > tbody > tr > th,
-.users .table-bordered > tfoot > tr > th,
-.users .table-bordered > thead > tr > td,
-.users .table-bordered > tbody > tr > td,
-.users .table-bordered > tfoot > tr > td {
+.warehouse .table-bordered > thead > tr > th,
+.warehouse .table-bordered > tbody > tr > th,
+.warehouse .table-bordered > tfoot > tr > th,
+.warehouse .table-bordered > thead > tr > td,
+.warehouse .table-bordered > tbody > tr > td,
+.warehouse .table-bordered > tfoot > tr > td {
   border: 0.1px solid #19156a;
   text-align: center; }
 
-.users .rounded {
+.warehouse .rounded {
   margin-top: 2%; }
-  .users .rounded thead tr {
+  .warehouse .rounded thead tr {
     font-family: "museoSans-500", Arial;
     background: #b4ec13;
     color: #19156a;
     text-align: center; }
-  .users .rounded tbody tr td {
+  .warehouse .rounded tbody tr td {
     text-align: center;
     vertical-align: middle; }
-    .users .rounded tbody tr td span i {
+    .warehouse .rounded tbody tr td span i {
       cursor: pointer;
       vertical-align: middle;
       margin: 0 5px;
       font-size: 15px; }
-      .users .rounded tbody tr td span i.fa.fa-file-pdf-o {
+      .warehouse .rounded tbody tr td span i.fa.fa-file-pdf-o {
         color: #DA251C; }
-      .users .rounded tbody tr td span i.fa.fa-edit {
+      .warehouse .rounded tbody tr td span i.fa.fa-edit {
         color: green; }
-      .users .rounded tbody tr td span i.fa.fa-close {
+      .warehouse .rounded tbody tr td span i.fa.fa-close {
         color: red; }
