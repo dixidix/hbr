@@ -1,12 +1,16 @@
 <div class="warehouse container-fluid" ng-cloak>
 	<link rel="stylesheet" type="text/css" href="./hbr-selfie/dist/routes/warehouse/warehouse.css">
-	<h3><i class="fa fa-home"></i> Administrar Warehouse</h3>
+	<div>
+		<h3 class="pull-left"><i class="fa fa-home"></i> Administrar Warehouse</h3>
+		<button class="btn btn-hbr-blue pull-right" ng-click="warehouses.newWarehouse()"><i class="fa fa-plus"></i>Warehouse</button>
+	</div>
+	<br><br>
 	<hr>
+	
 	<table class="table table-bordered table-striped table-curved rounded">
 		<thead>
 			<tr>
 				<td><span>Nombre Warehouse</span></td>
-				<td><span>Descripci&oacute;n</span></td>
 				<td><span>Tel.</span></td>
 				<td><span>Cel.</span></td>
 				<td><span>E-Mail</span></td>
@@ -21,19 +25,20 @@
 		</thead>
 		<tbody>
 			<tr  ng-repeat="warehouse in warehouses.warehouses   track by $index">
-				<td><span> </span></td>
-				<td><span> </span></td>
-				<td><span> </span></td>
-				<td><span> </span></td>
-				<td><span> </span></td>
-				<td><span> </span></td>
-				<td><span> </span></td>
-				<td><span> </span></td>
-				<td><span> </span></td>
-				<td><span> </span></td>
+				<td><span> {{warehouse.name }} </span></td>
+				<td><span> {{warehouse.tel }} </span></td>
+				<td><span> {{warehouse.cel }} </span></td>
+				<td><span> {{warehouse.email }} </span></td>
+				<td><span> {{warehouse.address }} </span></td>
+				<td><span> {{warehouse.localidad }} </span></td>
+				<td><span> {{warehouse.postalcode }} </span></td>
+				<td ng-if="warehouse.codeType == 2"><span>Cuil</span></td>
+				<td ng-if="warehouse.codeType == 1"><span>Cuit</span></td>
+				<td><span> {{warehouse.idCode }} </span></td>
+				
 				<td class="actions">
-					<i class="fa fa-edit" tooltip-placement="left" uib-tooltip="Editar" ng-click="warehouses.editwarehouse(warehouse)"></i>
-					<i class="fa fa-close" tooltip-placement="top" uib-tooltip="Eliminar" ng-click="warehouses.removewarehouse(warehouse)"></i>
+					<i class="fa fa-edit" tooltip-placement="left" uib-tooltip="Editar" ng-click="warehouses.editWarehouse(warehouse)"></i>
+					<i class="fa fa-close" tooltip-placement="top" uib-tooltip="Eliminar" ng-click="warehouses.removeWarehouse(warehouse)"></i>
 				</td>
 			</tr>
 		</tbody>

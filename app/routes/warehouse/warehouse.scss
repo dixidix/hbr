@@ -10,12 +10,18 @@
 			font-size: 18px;
 		}
 	}
+	.modal-footer{
+		.btn-hbr-blue{
+			@include hbr-btn-blue(150px,50px,$hbr-green);
+		}
+	}
 }
 .warehouse{
+
 	h3{
 		color:$hbr-blue;
 		margin-top: 0;
-				i {
+		i {
 			font-size: 24px;
 		}
 	}
@@ -24,6 +30,17 @@
 		height: 1px;
 		border: 0; 
 		margin-bottom: 50px;
+	}
+	.btn-hbr-blue{		
+		@include hbr-btn-blue(120px,auto,$hbr-green);
+
+		margin-bottom: 20px;
+		font-size: 12px;
+		display: flex;
+		padding:10px 15px !important;
+		flex-direction: row;
+		align-content: center;
+		align-items: center;
 	}
 	i{
 		&.fa.fa-edit{
@@ -86,6 +103,13 @@
 					}
 				}
 			}			
+		}
+	}
+	&.wh-modal{
+		.btn-hbr-blue{
+			@include hbr-btn-blue(150px,50px,$hbr-green);
+			display: initial;	
+			margin-bottom: 0;
 		}
 	}
 }

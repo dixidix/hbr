@@ -115,7 +115,7 @@ function login($data){
 	$username = stripslashes($username);
 	$password = md5(stripslashes($password));
 	
-	$res = MysqliDB::getInstance()->query("SELECT id,name,lastname,isAdmin FROM users WHERE email='" . $username . "' AND password='" . $password . "' AND deleted='0'");
+	$res = MysqliDB::getInstance()->query("SELECT id,name,lastname,company_name, warehouse_name, isAdmin FROM users WHERE email='" . $username . "' AND password='" . $password . "' AND deleted='0'");
 	
 	$rows = mysqli_num_rows($res);
 	
@@ -123,7 +123,15 @@ function login($data){
 		$rss = $res->fetch_array(MYSQLI_ASSOC);
 		
 		$id = $rss['id'];
-		$resolve_data['name'] = $rss['name'];
+		if(!empty($rss['name'])){
+			$resolve_data['name'] = $rss['name'];
+		}
+		if(!empty($rss['company_name'])){
+			$resolve_data['name'] = $rss['company_name'];
+		}
+		if(!empty($rss['warehouse_name'])){
+			$resolve_data['name'] = $rss['warehouse_name'];
+		}
 		$resolve_data['lastname'] = $rss['lastname'];
 		$resolve_data['isAdmin'] = $rss['isAdmin'];
 		
@@ -314,7 +322,8 @@ function register($data){
 		$aux_lastname = !empty($data['lastname']) ? $data['lastname'] : '';
 		$aux_company_name = !empty($data['company_name']) ? $data['company_name'] : '';
 		$aux_company_real_name = !empty($data['company_real_name']) ? $data['company_real_name'] : '';
-
+		$aux_warehouse_name = !empty($data['warehouse_name']) ? $data['warehouse_name'] : '';
+		$password  = $idCode;
 		if($aux_name && $aux_lastname){
 			$client_type = 0;
 		}
@@ -322,8 +331,8 @@ function register($data){
 			$client_type = 1;
 		}
 
-		MysqliDB::getInstance()->query("INSERT INTO `users`( `name`, `lastname`, `company_name`, `company_real_name`, `tel`, `cel`, `email`, `password`, `codeType`, `idCode`,`deleted`, `address`, `localidad`, `postalcode`, `registerToken`, `registertimestamp`, `client_type`)
-			VALUES ('".$aux_name."','".$aux_lastname."','".$aux_company_name."','".$aux_company_real_name."','".$tel."','".$cel."','".$email."','".$password."','".$codeType."','".$idCode."',0,'".$address."','".$localidad."','".$postalCode."','".$registerToken."',".$timestamp.",".$client_type.")");
+		MysqliDB::getInstance()->query("INSERT INTO `users`( `name`, `lastname`, `company_name`, `company_real_name`,`warehouse_name`, `tel`, `cel`, `email`, `password`, `codeType`, `idCode`,`deleted`, `address`, `localidad`, `postalcode`, `registerToken`, `registertimestamp`, `client_type`)
+			VALUES ('".$aux_name."','".$aux_lastname."','".$aux_company_name."','".$aux_company_real_name."','".$aux_warehouse_name."','".$tel."','".$cel."','".$email."','".$password."','".$codeType."','".$idCode."',0,'".$address."','".$localidad."','".$postalCode."','".$registerToken."',".$timestamp.",".$client_type.")");
 		
 		MysqliDB::getInstance()->close();
 		$resolve_data['registerToken'] = $registerToken;

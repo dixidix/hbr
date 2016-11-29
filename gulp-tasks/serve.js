@@ -1,15 +1,17 @@
 function serve(gulp, $) {
 	'use strict';
 	var browserSync = require('browser-sync'),
-		connect = require('gulp-connect-php'),
-		reload = browserSync.reload;
+	connect = require('gulp-connect-php'),
+	reload = browserSync.reload;
 
 	function serve() {
 		browserSync({
-			browser: ["chrome"],
-			server: {
-				baseDir: "./"
-			}
+			proxy: "localhost/hbr-selfie",
+			online: true,	
+			browser: ["chrome"]
+			// server: {
+			// 	baseDir: "./"
+			// }
 		});
 		gulp.watch(['app/styles/**/*.scss  ', 'app/routes/**/*.scss', 'app/components/**/*.scss'], ['styles', reload]);
 		gulp.watch(['app/*.html', 'app/**/*.html'], ['html', reload]);

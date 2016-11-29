@@ -28,7 +28,6 @@
 
 			if (toState.data.requireAuth) {
 				authenticationService.checkAuth().then(function (response){
-					console.log(response.data, toState.data.requireAuth);
 					if(!response.data.isLogged){
 						$state.go('home.login');
 					}
@@ -56,6 +55,7 @@
 	require('./routes/shopping_list/shopping_list.js')(angular, app);
 	require('./routes/profile/profile.js')(angular, app);
 	require('./services/authentication/authentication.js')(angular, app);
+	require('./services/forms/warehouse.js')(angular, app);
 	require('./services/uploadService.js')(angular, app);
 	require('./components/navbar/navbar.js')(angular, app);
 	require('./components/uploader/uploader.js')(angular, app);
