@@ -13,7 +13,16 @@ switch ($method) {
 	case 'PUT':
 	if (empty($errors)){
 		$data = $_POST;
-		editUser($data);
+		if($data['action'] === "edit"){
+			editUser($data);
+		}
+
+		if($data['action'] === "delete"){
+			deleteUser($data);
+		}
+		if($data['action'] === "changeRoles"){
+			changePrivileges($data);
+		}
 	}
 	else{
 		print_r($errors);
@@ -68,6 +77,68 @@ function adduser($data){
 //EDITAR UN USUARIO
 function editUser($data){
 	echo 'edit one: '.$data['data'];
+	$errors = array();
+	$resolve_data = array();
+	foreach($data as $key=>$value) {		
+		if($key !== "tel" && $key !== "cel"){
+			if(!empty($data[$key])){				
+				$$key = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data[$key]));
+			}
+			else {
+				$errors[$key] = "error al obtener $key";
+			}
+		}
+	}
+
+	
+	if (empty($data['tel']) && empty($data['cel'])){
+		$errors['telError'] = 'Debe indicar al menos un número de contacto.';
+	}
+	else {
+		if(!empty($data['tel'])){
+			$tel = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['tel']));
+		}
+		else {
+			$tel = null;
+		}
+		if(!empty($data['cel'])){
+			$cel = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['cel']));
+		}
+		else {
+			$cel = null;
+		}
+	}
+	if($password !== $password2){
+		$errors['passwordError'] = 'Las contraseñas no coinciden.';
+	}
+	else {
+		$password = md5(stripslashes($password));
+	}
+	if (empty($errors)){
+		$timestamp = time();
+
+		$aux_name = !empty($data['name']) ? $data['name'] : '';
+		$aux_lastname = !empty($data['lastname']) ? $data['lastname'] : '';
+		$aux_company_name = !empty($data['company_name']) ? $data['company_name'] : '';
+		$aux_company_real_name = !empty($data['company_real_name']) ? $data['company_real_name'] : '';
+		$aux_warehouse_name = !empty($data['warehouse_name']) ? $data['warehouse_name'] : '';
+
+		if($aux_name && $aux_lastname){
+			$client_type = 0;
+		}
+		if($aux_company_name && $aux_company_real_name){
+			$client_type = 1;
+		}
+
+		MysqliDB::getInstance()->query("UPDATE `users` SET `name`='" .$aux_name. "',`lastname`='" .$aux_lastname. "',`tel`='" .$tel. "',`cel`='" .$cel. "',`email`='" .$email. "',`password`='" .$password. "', `codeType`='" .$codeType. "',`idCode`='" .$idCode. "',`address`='" .$address. "',`localidad`='" .$localidad. "',`postalcode`='" .$postalcode. "'  WHERE id='" .$id. "'");
+		
+		MysqliDB::getInstance()->close();
+		echo json_encode($resolve_data);
+	}
+	else {
+		$resolve_data['errors'] = $errors;
+		echo json_encode($resolve_data);
+	}
 }
 
 //TRAER UN USUARIO O TODOS
@@ -100,7 +171,27 @@ function getUsers($data){
 
 //ELIMINAR UN USUARIO
 function deleteUser($data){
-	echo 'delete one: '. $data['data'];
+	$errors = array();
+	$resolve_data = array();
+
+	$id = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['id']));
+	echo $id;
+
+	MysqliDB::getInstance()->query("UPDATE `users` SET `deleted` = 1 WHERE id='" .$id. "'");
+	MysqliDB::getInstance()->close();
+	echo json_encode($resolve_data);
+}
+
+function changePrivileges($data){
+	$errors = array();
+	$resolve_data = array();
+
+	$id = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['id']));
+	$role = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['isAdmin']));
+
+	MysqliDB::getInstance()->query("UPDATE `users` SET `isAdmin` = " .$role. " WHERE id='" .$id. "' ");
+	MysqliDB::getInstance()->close();
+	echo json_encode($resolve_data);
 }
 
 //LOGIN
@@ -323,12 +414,13 @@ function register($data){
 		$aux_company_name = !empty($data['company_name']) ? $data['company_name'] : '';
 		$aux_company_real_name = !empty($data['company_real_name']) ? $data['company_real_name'] : '';
 		$aux_warehouse_name = !empty($data['warehouse_name']) ? $data['warehouse_name'] : '';
-		$password  = $idCode;
+		
 		if($aux_name && $aux_lastname){
 			$client_type = 0;
 		}
 		if($aux_company_name && $aux_company_real_name){
 			$client_type = 1;
+			$password  = $idCode;
 		}
 
 		MysqliDB::getInstance()->query("INSERT INTO `users`( `name`, `lastname`, `company_name`, `company_real_name`,`warehouse_name`, `tel`, `cel`, `email`, `password`, `codeType`, `idCode`,`deleted`, `address`, `localidad`, `postalcode`, `registerToken`, `registertimestamp`, `client_type`)

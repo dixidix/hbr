@@ -241,7 +241,7 @@ function deleteWarehouse($data){
 
 	$id = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['id']));
 	echo $id;
-	echo "UPDATE `users` SET `deleted` = 0 WHERE id='" .$id. "'";
+
 	MysqliDB::getInstance()->query("UPDATE `users` SET `deleted` = 1 WHERE id='" .$id. "'");
 	MysqliDB::getInstance()->close();
 	echo json_encode($resolve_data);

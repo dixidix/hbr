@@ -42,8 +42,8 @@ function warehouseService(angular, app) {
 				address: warehouse.address,
 				localidad: warehouse.localidad,
 				postalcode: warehouse.postalcode,
-				password: warehouse.idCode,
-				password2: warehouse.idCode,
+				password: warehouse.password || warehouse.idCode,
+				password2: warehouse.password2 || warehouse.idCode,
 				client_type:'2',
 				action:"edit"
 
