@@ -34,6 +34,18 @@
                 <a href="" ui-sref="dashboard.process_payments" ng-if="!dashboard.collapse">
                     <li><i class="fa fa-usd"></i><span> Procesar Pagos </span></li>
                 </a>
+                <a href="" ui-sref="dashboard.categories" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Cargar Categor&iacute;as">
+                    <li><i class="fa fa-book"></i></li>
+                </a>
+                <a href="" ui-sref="dashboard.categories" ng-if="!dashboard.collapse">
+                    <li><i class="fa fa-book"></i><span> Categor&iacute;as </span></li>
+                </a>
+                <a href="" ui-sref="dashboard.products" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Cargar Productos">
+                    <li><i class="fa fa-list-alt"></i></li>
+                </a>
+                <a href="" ui-sref="dashboard.products" ng-if="!dashboard.collapse">
+                    <li><i class="fa fa-list-alt"></i><span> Productos </span></li>
+                </a>
                 <a href="" ui-sref="dashboard.users" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Admin. Particulares">
                     <li><i class="fa fa-users"></i></li>
                 </a>

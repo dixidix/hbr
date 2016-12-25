@@ -268,6 +268,7 @@ function getAllUsers($data){
 		$outp .= '"address":"'  . $rs["address"] . '",';
 		$outp .= '"localidad":"'  . $rs["localidad"] . '",';
 		$outp .= '"postalcode":"'  . $rs["postalcode"] . '",';
+		$outp .= '"isPremium":"'  . $rs["isPremium"] . '",';
 		$outp .= '"isAdmin":"'   . $rs["isAdmin"]  . '"}';
 	}
 	$outp ='{"users":['.$outp.']}';
@@ -297,6 +298,7 @@ function getUserById($data){
 		$resolve_data['address'] = $rss['address'];
 		$resolve_data['localidad'] = $rss['localidad'];
 		$resolve_data['postalcode'] = $rss['postalcode'];
+		$resolve_data['isPremium'] = $rss['isPremium'];
 
 		echo json_encode($resolve_data);
 	}else{
@@ -332,6 +334,7 @@ function getUserBySskey($data){
 		$resolve_data['address'] = $rss['address'];
 		$resolve_data['localidad'] = $rss['localidad'];
 		$resolve_data['postalcode'] = $rss['postalcode'];
+		$resolve_data['isPremium'] = $rss['isPremium'];
 
 		echo json_encode($resolve_data);
 	}

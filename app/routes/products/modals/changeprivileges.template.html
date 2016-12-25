@@ -1,0 +1,13 @@
+<div class="category wh-modal container-fluid" ng-cloak>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="modalChangeprivileges.cancel()">&times;</button>
+		<h3><i class="fa fa-list-alt"></i> Actualizar Premium</h3>
+	</div>
+	<div class="modal-body">
+	<p>¿ Esta seguro que desea {{ modalChangeprivileges.action }} a el producto "{{modalChangeprivileges.product.name}}" ?</p>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-hbr-blue" ng-click="modalChangeprivileges.changeprivileges()">Actualizar</button>
+		<button class="btn btn-hbr-blue" ng-click="modalChangeprivileges.cancel()">Cancelar</button>
+	</div>
+</div>

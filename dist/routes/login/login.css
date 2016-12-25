@@ -104,13 +104,13 @@ html {
     .login {
       top: 33%;
       left: 30%;
-      width: 40%;
+      width: 45%;
       height: initial; } }
   @media screen and (min-width: 1400px) {
     .login {
       top: 32%;
       left: 30%;
-      width: 40%;
+      width: 45%;
       height: initial; } }
   .login .btn-hbr-blue {
     width: 100%;
@@ -122,7 +122,8 @@ html {
     padding: 15px 30px;
     font-size: 16px;
     font-family: "museoSans-500", Arial;
-    font-weight: bold; }
+    font-weight: bold;
+    border: 2px solid #b4ec13; }
   .login form {
     padding: 50px; }
   .login h1 {

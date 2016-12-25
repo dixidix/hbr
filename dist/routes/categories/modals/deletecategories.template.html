@@ -1,0 +1,16 @@
+<div class="category wh-modal container-fluid" ng-cloak>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="modalDeletecategory.cancel()">&times;</button>
+        <h3><i class="fa fa-book"></i> Eliminar Categor&iacute;a</h3>
+    </div>
+    <div class="modal-body">
+        <p>¿ Realmente desea eliminar la categor&iacute;a {{modalDeletecategory.category.name}} ?
+            <br>
+            <br>
+        <strong><i class="fa fa-warning"></i> Si la Elimina, se eliminar&aacute;n todos los productos asociados a ella.</strong></p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-hbr-blue" ng-click="modalDeletecategory.deletecategory()">Eliminar</button>
+        <button class="btn btn-hbr-blue" ng-click="modalDeletecategory.cancel()">Cancelar</button>
+    </div>
+</div>

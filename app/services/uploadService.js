@@ -10,7 +10,6 @@ function uploadService(angular, app) {
 				product.timestamp = timestamp;
 				var formData = new FormData();
 				angular.forEach(product, function(key,value){
-					console.log(value, key);
 					formData.append(value,key);
 				});
 

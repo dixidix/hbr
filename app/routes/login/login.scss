@@ -10,13 +10,13 @@
     @include responsive(large-desktop){
         top: 33%;
         left: 30%;
-        width: 40%;
+        width: 45%;
         height: initial;
     }
     @include responsive(large-xl-desktop){      
         top:32%;
         left:30%;
-        width: 40%;
+        width: 45%;
         height: initial;
     }
     background:$snow;
@@ -26,6 +26,7 @@
     border-radius:3px;
     .btn-hbr-blue{
         @include hbr-btn-blue(100%,50px,$hbr-green);
+        border:2px solid $hbr-green;
     }
     form{
         padding:50px;

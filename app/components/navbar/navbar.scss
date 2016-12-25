@@ -5,7 +5,7 @@
         background-color:$hbr-blue;
         color:$hbr-green;
     }
-    z-index: 9999999999;
+    z-index: 1035;
     position: fixed;
     width: 100%;
     min-height: 60px;
@@ -20,6 +20,7 @@
     padding-left: 2%;
     border:none;
     margin:0;
+
     box-shadow: 0px 1px 7px 0px $black;
     position: fixed;
     z-index: 1;
@@ -33,7 +34,7 @@
         height: 40px;
         @include responsive(desktop, large-desktop,large-xl-desktop){
             width:20%;
-            height: 65px;
+            height: $navbar-height;
         }
         padding:5px;
         margin:0;
@@ -71,7 +72,7 @@
             @include responsive(desktop, large-desktop){
             padding:0 15px;
             }
-            height: 65px;
+            height: $navbar-height;
             transition: .2s all ease-in-out;
             border-bottom:5px solid transparent;
                 &:hover{

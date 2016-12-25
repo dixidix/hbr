@@ -95,12 +95,14 @@ function getAll(){
 		$outp .= '"transporte":"'  . $rs["transporte"] . '",';
 		$outp .= '"state":"'  . $rs["state"] . '",';
 		$outp .= '"paymentGatewayUrl":"'  . $rs["paymentGatewayUrl"] . '",';
-
-		$uname = MysqliDB::getInstance()->query("SELECT * FROM producto WHERE venta_id=" . $rs["id"]);
+		$uname = MysqliDB::getInstance()->query("SELECT * FROM producto INNER JOIN categories ON producto.category_id = categories.category_id where producto.venta_id =" . $rs["id"]);
 		while($rss = $uname->fetch_array(MYSQLI_ASSOC)) {
 			if ($outpm != "") {$outpm .= ",";}
 			$outpm .= '{"id":'   . $rss["product_id"].',';
-			$outpm .= '"productType":"'  . $rss["productType"] . '",';
+			$outpm .= '"category_id":"'  . $rss["category_id"] . '",';
+			$outpm .= '"category_name":"'  . $rss["category_name"] . '",';
+			$outpm .= '"product_name":"'  . $rss["product_name"] . '",';
+			$outpm .= '"description":"'  . $rss["product_desc"] . '",';
 			$outpm .= '"quantity":'  . $rss["quantity"] . ',';
 			$outpm .= '"partial_price":'  . $rss["partial_price"] . ',';
 			$outpm .= '"price":'  . $rss["price"] . ',';

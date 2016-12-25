@@ -91,7 +91,7 @@ html {
     font-family: "museoSans-100", Arial; }
 
 .navbar {
-  z-index: 9999999999;
+  z-index: 1035;
   position: fixed;
   width: 100%;
   min-height: 60px;

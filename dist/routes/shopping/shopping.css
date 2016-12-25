@@ -94,6 +94,10 @@ html {
   /*
  * Adding the animation to our element
  */ }
+  .shopping input[type=number]::-webkit-inner-spin-button,
+  .shopping input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0; }
   .shopping h3 {
     color: #19156a;
     margin-top: 0; }
@@ -195,21 +199,24 @@ html {
     font-family: "museoSans-500", Arial;
     background: #b4ec13;
     color: #19156a;
-    text-align: center; }
-  .shopping__purchase-list .rounded tbody tr td {
     text-align: center;
-    vertical-align: middle; }
-    .shopping__purchase-list .rounded tbody tr td span i {
-      cursor: pointer;
-      vertical-align: middle;
-      margin: 0 5px;
-      font-size: 15px; }
-      .shopping__purchase-list .rounded tbody tr td span i.fa.fa-file-pdf-o {
-        color: #DA251C; }
-      .shopping__purchase-list .rounded tbody tr td span i.fa.fa-edit {
-        color: green; }
-      .shopping__purchase-list .rounded tbody tr td span i.fa.fa-close {
-        color: red; }
+    font-size: 12px; }
+  .shopping__purchase-list .rounded tbody {
+    font-size: 12px; }
+    .shopping__purchase-list .rounded tbody tr td {
+      text-align: center;
+      vertical-align: middle; }
+      .shopping__purchase-list .rounded tbody tr td span i {
+        cursor: pointer;
+        vertical-align: middle;
+        margin: 0 5px;
+        font-size: 15px; }
+        .shopping__purchase-list .rounded tbody tr td span i.fa.fa-file-pdf-o {
+          color: #DA251C; }
+        .shopping__purchase-list .rounded tbody tr td span i.fa.fa-edit {
+          color: green; }
+        .shopping__purchase-list .rounded tbody tr td span i.fa.fa-close {
+          color: red; }
   .shopping__purchase-list .btn-hbr-blue {
     margin-left: 10px;
     width: auto;

@@ -19,6 +19,8 @@
 		.state('dashboard.users', { url: "/usuarios",  params: { client_type: 0 },  templateUrl: "./hbr-selfie/dist/routes/users/users.template.html", data: { title: 'Adm. usuarios', requireAuth: true }, controller: "usersCtrl", controllerAs: "users" })
 		.state('dashboard.business', { url: "/empresas",params: { client_type: 1 },  templateUrl: "./hbr-selfie/dist/routes/users/users.template.html", data: { title: 'Adm. empresas', requireAuth: true }, controller: "usersCtrl", controllerAs: "users" })
 		.state('dashboard.warehouse', { url: "/warehouse",  templateUrl: "./hbr-selfie/dist/routes/warehouse/warehouse.template.html", data: { title: 'warehouse', requireAuth: true }, controller: "warehouseCtrl", controllerAs: "warehouses" })
+		.state('dashboard.products', { url: "/productos",  templateUrl: "./hbr-selfie/dist/routes/products/products.template.html", data: { title: 'Productos', requireAuth: true }, controller: "productCtrl", controllerAs: "products" })
+		.state('dashboard.categories', { url: "/categorias",  templateUrl: "./hbr-selfie/dist/routes/categories/categories.template.html", data: { title: 'Categorias', requireAuth: true }, controller: "categoryCtrl", controllerAs: "categories" })
 		.state('dashboard.process_payments', { url: "hbr-selfie/pagos",  templateUrl: "./hbr-selfie/dist/routes/process_payments/process_payments.template.html", data: { title: 'Procesar Pagos', requireAuth: true }, controller: "processPaymentsCtrl", controllerAs: "processPayments" });
 	}])
 	.run(['$rootScope', '$state', '$stateParams', 'authenticationService', function ($rootScope, $state, $stateParams, authenticationService) {
@@ -54,12 +56,16 @@
 	require('./routes/shopping/shopping.js')(angular, app);
 	require('./routes/shopping_list/shopping_list.js')(angular, app);
 	require('./routes/profile/profile.js')(angular, app);
+	require('./routes/products/products.js')(angular, app);
+	require('./routes/categories/categories.js')(angular, app);
 
 	require('./services/authentication/authentication.js')(angular, app);
 	require('./services/forms/warehouse.js')(angular, app);
+	require('./services/forms/products.js')(angular, app);
 	require('./services/forms/users.js')(angular, app);
+	require('./services/forms/categories.js')(angular, app);
 	require('./services/uploadService.js')(angular, app);
-	
+
 	require('./components/navbar/navbar.js')(angular, app);
 	require('./components/uploader/uploader.js')(angular, app);
 })();

@@ -6,15 +6,15 @@
 		<table class="table table-bordered table-striped table-curved rounded">
 			<thead>
 				<tr>
-					<td><span>Lote #</span></td>
-					<td><span>Peso Excedente</span></td>
-					<td><span>Precio Parcial</span></td>					
-					<td><span>Tasas e Intereses</span></td>					
-					<td><span>Cantidad total</span></td>
-					<td><span>Gastos Transporte</span></td>
-					<td><span>Fecha de solicitud</span></td>					
+					<td><span>#ID Compra</span></td>
+					<td class="large-row"><span>Fecha de solicitud</span></td>
+					<td><span>Cant. Lotes</span></td>
+					<td><span>Precio Art&iacute;culos</span></td>
 					<td><span>Peso Total </span></td>
-					<td><span>Total</span></td>
+					<td><span>Cantidad Compras</span></td>
+					<td class="large-row"><span>Total Warehouse</span></td>
+					<td class="large-row"><span>Total Flete</span></td>
+					<td class="large-row"><span>Total</span></td>
 					<td><span>M&aacute;s Info.</span></td>
 					<td><span>Pagar lote</span></td>
 				</tr>
@@ -22,14 +22,15 @@
 			<tbody>
 				<tr  ng-repeat="venta in shoppingList.ventas track by $index">
 					<td><span>{{ venta.id }}</span></td>
-					<td><span>{{ venta.peso_excedente }}</span></td>
-					<td><span>${{ venta.parcial_price }}</span></td>					
-					<td><span>${{ venta.tasas }}</span></td>					
+					<td><span>{{ venta.timestamp}}</span></td>
+					<td ng-if="venta.peso_excedente !== '0'"><span>{{ venta.peso_excedente }}</span></td>
+					<td ng-if="venta.peso_excedente == '0'"><span class="unpayed"> Procesando Info.</span></td>
+					<td><span>U$D {{ venta.parcial_price }}</span></td>
+					<td><span>{{ venta.peso_total }} Kg.</span></td>
 					<td><span>{{ venta.total_quantity }}</span></td>
-					<td><span>${{ venta.transporte }}</span></td>
-					<td><span>{{ venta.timestamp | date:'MM/dd/yyyy'}}</span></td>
-					<td><span>{{ venta.peso_total }}</span></td>
-					<td><span>${{ venta.total }}</span></td>					
+					<td><span> U$D {{270}} </span></td>
+					<td><span> U$D {{ 250 }} </span></td>
+					<td><span>U$D {{ venta.total }}</span></td>
 					<td>
 						<button ng-click="shoppingList.moreInfo(venta.products)" class="btn btn-default"> VER MAS </button> 
 					</td>
@@ -48,16 +49,29 @@
             <h3 class="modal-title" id="modal-title">Art&iacute;culos</h3>
         </div>
         <div class="modal-body" id="modal-body">
-			<table class="table table-bordered table-striped table-curved rounded">
+			<div class="overflow-table_container">
+			<table class="table overflow-table table-bordered table-striped table-curved rounded">
 				<thead>
 					<tr>
-						<td><span>Tipo de producto</span></td>
+						<td><span>Categor&iacute;a</span></td>
+						<td><span>Producto</span></td>
 						<td><span>Cantidad</span></td>
-						<td><span>Precio Ind. </span></td>
-						<td><span>Precio Total</span></td>
+						<td><span>FOB Parcial</span></td>
+						<td><span>FOB Total</span></td>
+						<td><span>Peso Parcial </span></td>
+						<td><span>Peso Total </span></td>
+						<td><span>Flete</span></td>
+						<td><span>Seguro</span></td>
+						<td><span>CIF</span></td>
+						<td><span>Derechos</span></td>
+						<td><span>Estad&iacute;stica</span></td>
+						<td><span>Total Derechos</span></td>
+						<td><span>Manejo Doc. BUE</span></td>
+						<td><span>Base IVA</span></td>
+						<td><span>IVA</span></td>
+						<td><span>IVA Adic.</span></td>
+						<td><span>Total IVA</span></td>
 						<td><span>Establecimiento</span></td>
-						<td><span>Peso Ind.</span></td>
-						<td><span>Peso Total</span></td>
 						<td><span>N&uacute;m. Factura</span></td>
 						<td><span>Prestador Postal</span></td>
 						<td><span>N&uacute;m Tracking</span></td>
@@ -66,13 +80,25 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="product in seeMore.products track by $index">
-						<td><span>{{ product.productType }}</span></td>
+						<td><span>{{ product.category_name }}</span></td>
+						<td><span>{{ product.product_name }}</span></td>
 						<td><span>{{ product.quantity }}</span></td>
-						<td><span>{{ product.price / product.quantity }}</span></td>
-						<td><span>{{ product.price }}</span></td>
+						<td><span>U$D {{ product.price / product.quantity }}</span></td>
+						<td><span>U$D {{ product.price }}</span></td>
+						<td><span>{{ product.weight / product.quantity }} Kg.</span></td>
+						<td><span>{{ product.weight }} Kg.</span></td>
+						<td><span>U$D {{ product.price }}</span></td>
+						<td><span>U$D {{ product.price }}</span></td>
+						<td><span>U$D {{ product.price }}</span></td>
+						<td><span>U$D {{ product.price }}</span></td>
+						<td><span>U$D {{ product.price }}</span></td>
+						<td><span>U$D {{ product.price }}</span></td>
+						<td><span>U$D {{ product.price }}</span></td>
+						<td><span>U$D {{ product.price }}</span></td>
+						<td><span>U$D {{ product.price }}</span></td>
+						<td><span>U$D {{ product.price }}</span></td>
+						<td><span>U$D {{ product.price }}</span></td>
 						<td><span>{{ product.establishment }}</span></td>
-						<td><span>{{ product.weight / product.quantity }}</span></td>
-						<td><span>{{ product.weight }}</span></td>
 						<td><span>{{ product.bill_number }}</span></td>
 						<td><span>{{ product.postal }}</span></td>
 						<td><span>{{ product.tracking_number }}</span></td>
@@ -80,6 +106,47 @@
 					</tr>
 				</tbody>
 			</table>
+			</div>
+			<h4>Cargos Warehouse</h4>
+			<span>Peso M&iacute;nimo a cobrar 5 Kg.</span>
+			<table class="table table-bordered table-striped table-curved rounded">
+				<thead>
+				<tr>
+					<td><span>Peso Total </span></td>
+					<td><span>Ingreso al Warehouse</span></td>
+					<td><span>Kg Adicional</span></td>
+					<td><span>Cargos adicionales</span></td>
+					<td><span>Total</span></td>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td><span>{{ seeMore.venta.peso_total }} Kg.</span></td>
+					<td><span> U$D {{seeMore.wh_entry_fare }} </span></td>
+					<td><span> U$D {{ seeMore.aditional_weight }} </span></td>
+					<td><span> U$D {{ seeMore.aditional_charges }} </span></td>
+					<td><span> U$D {{seeMore.total_warehouse_price }} </span></td>
+				</tr>
+				</tbody>
+			</table>
+			<h4>Cargos Flete a BUE</h4>
+			<table class="table table-bordered table-striped table-curved rounded">
+				<thead>
+				<tr>
+					<td><span>Cant. Productos</span></td>
+					<td><span>Valor x Unidad</span></td>
+					<td><span>Total</span></td>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td><span>{{ seeMore.venta.total_quantity }}</span></td>
+					<td><span> U$D {{ seeMore.shipment_value }}</span></td>
+					<td><span> U$D {{ seeMore.total_shipment }}</span></td>
+				</tr>
+				</tbody>
+			</table>
+			<h4>Total: U$D {{ seeMore.total_sale }} </h4>
         </div>
         <div class="modal-footer">
             <button class="btn btn-hbr-blue" ng-click="seeMore.cancel()">Cerrar</button>

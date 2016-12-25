@@ -1,0 +1,150 @@
+@import '../../styles/base';
+
+.modal-dialog {
+  width: 60%;
+  margin-top: 100px;
+  .btn-hbr-blue {
+    @include hbr-btn-blue(150px, 50px, $hbr-green);
+  }
+  .modal-body {
+    p {
+      font-size: 18px;
+    }
+  }
+  .modal-footer {
+    .btn-hbr-blue {
+      @include hbr-btn-blue(150px, 50px, $hbr-green);
+    }
+  }
+}
+
+.product {
+  textarea {
+    resize: none;
+    height:100px;
+  }
+  .long-text {
+    width:150px;
+    p{
+      width:150px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+  h3 {
+    color: $hbr-blue;
+    margin-top: 0;
+    i {
+      font-size: 24px;
+    }
+  }
+  hr {
+    background-color: $hbr-blue;
+    height: 1px;
+    border: 0;
+    margin-bottom: 50px;
+  }
+  .input-group-addon{
+    background-color:$hbr-green;
+    color:$hbr-blue;
+    border-color: $hbr-blue;
+    font-family: $museoSans-500;
+    min-width: 45px;
+  }
+  .form-control{
+    outline: none;
+    border-color: $hbr-blue;
+    box-shadow: none;
+  }
+  .btn-hbr-blue {
+    @include hbr-btn-blue(120px, auto, $hbr-green);
+
+    margin-bottom: 20px;
+    font-size: 12px;
+    display: flex;
+    padding: 10px 15px !important;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+  }
+  .actions {
+    position: relative;
+    .star-border{
+      position: absolute;
+      top: 16px;
+    }
+  }
+
+  i {
+    &.fa.fa-edit {
+      color: green;
+    }
+    &.fa.fa-close {
+      color: red;
+    }
+    &.fa.fa-lock, &.fa.fa-unlock {
+      color: #2e2e2e;
+    }
+    vertical-align: middle;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0px 5px;
+  }
+  .table {
+    border: 0.1px solid $hbr-blue;
+  }
+  .table-bordered > thead > tr > th,
+  .table-bordered > tbody > tr > th,
+  .table-bordered > tfoot > tr > th,
+  .table-bordered > thead > tr > td,
+  .table-bordered > tbody > tr > td,
+  .table-bordered > tfoot > tr > td {
+    border: 0.1px solid $hbr-blue;
+    text-align: center;
+  }
+  .rounded {
+    margin-top: 2%;
+    thead {
+      tr {
+        font-family: $museoSans-500;
+        background: $hbr-green;
+        color: $hbr-blue;
+        text-align: center;
+      }
+    }
+    tbody {
+      tr {
+        td {
+
+          text-align: center;
+          vertical-align: middle;
+          span {
+            i {
+              cursor: pointer;
+              vertical-align: middle;
+              margin: 0 5px;
+              font-size: 15px;
+              &.fa.fa-file-pdf-o {
+                color: #DA251C;
+              }
+              &.fa.fa-edit {
+                color: green;
+              }
+              &.fa.fa-close {
+                color: red;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  &.wh-modal {
+    .btn-hbr-blue {
+      @include hbr-btn-blue(150px, 50px, $hbr-green);
+      display: initial;
+      margin-bottom: 0;
+    }
+  }
+}

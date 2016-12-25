@@ -22,6 +22,7 @@
         }
         .btn-hbr-blue{
             @include hbr-btn-blue(100%,50px,$hbr-green);
+            border:1px solid $hbr-blue;
         }
     }
     @include responsive(desktop, large-desktop,large-xl-desktop){
@@ -45,6 +46,7 @@
 
     .btn-hbr-green{
         @include hbr-btn-green(100%,50px,$hbr-blue);
+        border:1px solid $hbr-blue;
     }
 
     form{     

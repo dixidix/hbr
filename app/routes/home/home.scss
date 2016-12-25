@@ -1,18 +1,20 @@
 @import '../../styles/base';
 
-.home{
-	&-bgimg{
-		max-height: 50vh;
-		position:relative;
-		overflow: hidden;
-		 
-		img{
-			filter: grayscale(10%) opacity(50%) blur(3px);
-		margin-top:-200px;
-		width: 100%;
-		}		
-	}
-	h1{
-		color:$black;	
-	}
+.home {
+  &-bgimg {
+    height: calc(100% - #{$navbar-height});
+    position: relative;
+    overflow: hidden;
+
+    img {
+      position: fixed;
+
+      filter:  opacity(100%) contrast(95%) brightness(70%);
+      width: 100%;
+      height: 100%;
+    }
+  }
+  h1 {
+    color: $black;
+  }
 }
