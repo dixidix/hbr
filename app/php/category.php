@@ -143,7 +143,7 @@ function getAllcategories($data){
 		if ($outp != "") {$outp .= ",";}
 		$outp .= '{"category_id":"'  . $rs["category_id"] . '",';
 
-		$ress = MysqliDB::getInstance()->query("SELECT COUNT(*) as amount from products WHERE category_id=".$rs['category_id']." and deleted = 0");
+		$ress = MysqliDB::getInstance()->query("SELECT COUNT(*) as amount from producto WHERE category_id=".$rs['category_id']." and deleted = 0");
 		while($rss = $ress->fetch_array(MYSQLI_ASSOC)) {
 		$outp .= '"product_amount":"'  . $rss["amount"] . '",';
 		}

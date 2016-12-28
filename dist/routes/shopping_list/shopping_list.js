@@ -59,17 +59,7 @@ function shoppingListController(angular, app) {
         function init(){
           self.products = items;
           self.venta = venta[0];
-          self.wh_entry_fare = parseFloat(14.00).toFixed(2);
-          self.aditional_charges = parseFloat(0).toFixed(2);
-          self.aditional_weight = 0;
-          self.shipment_value = 35;
-          self.total_shipment = parseFloat(self.venta.total_quantity * self.shipment_value).toFixed(2);
-          if (self.venta.peso_total > 5) {
-              self.aditional_weight = parseFloat((self.venta.peso_total - 5) * 2.80).toFixed(2);
-          }
-          self.total_warehouse_price = (parseFloat(self.wh_entry_fare) + parseFloat(self.aditional_weight) + parseFloat(self.aditional_charges)).toFixed(2);
           self.cancel = cancel;
-          self.total_sale = (parseFloat(self.total_warehouse_price) + parseFloat(self.total_shipment)).toFixed(2);
         }
         init();
       }

@@ -14,6 +14,12 @@
 </head>
 <body>
 	<navbar></navbar>
+	<div class="loadingSpinner" ng-show="$root.showSpinner">
+		<div class="spinner-backdrop"></div>
+		<div class="spinner-container">
+			<i class="fa fa-circle-o-notch fa-spin fa-3x"></i>
+		</div>
+	</div>
 	<div ui-view></div>
 	<script type="text/javascript" src="./hbr-selfie/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfUKzZehW_5drIhbXZYq-FjAhbOooHtIQ&libraries=places"></script>

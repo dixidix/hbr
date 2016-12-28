@@ -7,12 +7,30 @@
 			@include hbr-btn-blue(150px,50px,$hbr-green);
 		}
 	.modal-body{
+		.input-group-addon{
+			background-color:$hbr-green;
+			color:$hbr-blue;
+			border-color: $hbr-blue;
+			font-family: $museoSans-500;
+			min-width: 45px;
+		}
+		.form-control{
+			outline: none;
+			border-color: $hbr-blue;
+			box-shadow: none;
+		}
+
 		a{
 			outline: none;
 			box-shadow:none;
 			text-shadow: none;
 			text-decoration: none;
 			cursor:pointer;
+		}
+		.product-action{
+			a{
+				padding:0px 10px;
+			}
 		}
 		input{
 			width:100%;

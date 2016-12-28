@@ -5,12 +5,13 @@ function loginController(angular, app) {
 
     app.controller('loginCtrl', loginCtrl);
 
-    loginCtrl.$inject = ['$http', '$state','authenticationService'];
+    loginCtrl.$inject = ['$http', '$state','authenticationService', '$rootScope'];
 
-    function loginCtrl($http, $state,authenticationService) {
+    function loginCtrl($http, $state,authenticationService, $rootScope) {
         var self = this; //jshint ignore:line
 
         function login() {
+            $rootScope.showSpinner = true;
             authenticationService.login(self.user)
             .then(function (response) {
                 if(!response.data.errors){
@@ -24,6 +25,8 @@ function loginController(angular, app) {
                     self.loginForm.password.$valid = true;
                     self.loginForm.$invalid = false;
                     self.loginForm.$valid = true;
+                    $rootScope.showSpinner = false;
+
                 } else {
                     self.loginError = response.data.errors.loginError;
                     self.loginForm.username.$invalid = true;
@@ -36,6 +39,7 @@ function loginController(angular, app) {
         function init() {
             self.user = {};
             self.login = login;
+            $rootScope.showSpinner = false;
         }
         init();
     }

@@ -5,13 +5,13 @@ function homeController(angular, app) {
 
     app.controller('homeCtrl', homeCtrl);
 
-    homeCtrl.$inject = ['$http'];
+    homeCtrl.$inject = ['$http', '$rootScope'];
 
-    function homeCtrl($http) {
+    function homeCtrl($http, $rootScope) {
         var self = this; //jshint ignore:line
 
         function init() {
-
+            $rootScope.ShowSpinner = false;
         }
         init();
     }

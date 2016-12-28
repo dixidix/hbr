@@ -1,5 +1,11 @@
 <div class="shopping container-fluid" ng-cloak>
     <link rel="stylesheet" type="text/css" href="./hbr-selfie/dist/routes/shopping/shopping.css">
+    <div class="loadingSpinner" ng-show="shopping.spinner">
+        <div class="spinner-backdrop"></div>
+        <div class="spinner-container">
+            <i class="fa fa-circle-o-notch fa-spin fa-3x"></i>
+        </div>
+    </div>
     <h3><i class="fa fa-shopping-cart"></i> Agregar Compras</h3>
     <hr>
     <div class="col-xs-12 content">
@@ -148,7 +154,7 @@
                 <div class="form-group col-xs-12">
                     <label for="product_description">m&aacute;s Informaci&oacute;n:</label>
                     <textarea placeholder="m&aacute;s Informaci&oacute;n del producto..." style="height:65px;resize:none;"
-                              name="desc" id="product_description" ng-model="shopping.product_description"
+                              name="desc" id="product_description" ng-model="shopping.purchase.data.product_desc"
                               class="form-control"></textarea>
                 </div>
                 <div class="form-group col-xs-12 col-sm-4"
@@ -288,7 +294,7 @@
 
                     <br>
                     <hr>
-                    <li><strong>Total Factura:</strong><span class="pull-right"> $ {{ shopping.purchase.total }}</span>
+                    <li><strong>Total Factura:</strong><span class="pull-right"> U$D {{ shopping.purchase.total }}</span>
                     </li>
                 </ul>
             </div>

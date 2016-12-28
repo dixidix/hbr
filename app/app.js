@@ -25,9 +25,13 @@
 	}])
 	.run(['$rootScope', '$state', '$stateParams', 'authenticationService', function ($rootScope, $state, $stateParams, authenticationService) {
 		$rootScope.$state = $state;
-		$rootScope.$stateParams = $stateParams;
+		$rootScope.$stateParams = $stateParams
+        $rootScope.showSpinner = false;
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+            $rootScope.showSpinner = true;
+		});
 		$rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-
+            $rootScope.showSpinner = false;
 			if (toState.data.requireAuth) {
 				authenticationService.checkAuth().then(function (response){
 					if(!response.data.isLogged){

@@ -5,9 +5,9 @@ function registerController(angular, app) {
 
 	app.controller('registerCtrl', registerCtrl);
 
-	registerCtrl.$inject = ['$http', '$state', 'authenticationService'];
+	registerCtrl.$inject = ['$http', '$state', 'authenticationService', '$rootScope'];
 
-	function registerCtrl($http, $state, authenticationService) {
+	function registerCtrl($http, $state, authenticationService, $rootScope) {
 		var self = this; //jshint ignore:line
 		function register() {
 			if(self.client_type == 0){
@@ -19,10 +19,12 @@ function registerController(angular, app) {
 		}
 
 		function registerUser(){
+            $rootScope.showSpinner = true;
 			authenticationService.register(self.user)
 			.then(function (response) {
 				if(!response.data.errors){
 					self.success = true;
+                    $rootScope.showSpinner = false;
 				} else {
 					if(response.data.errors.existingEmail){
 						self.existingEmail = response.data.errors.existingEmail;
@@ -62,10 +64,12 @@ function registerController(angular, app) {
 			});
 		}
 		function registerCompany(){
+            $rootScope.showSpinner = true;
 			authenticationService.registerCompany(self.company)
 			.then(function (response) {
 				if(!response.data.errors){
 					self.success = true;
+                    $rootScope.showSpinner = false;
 				} else {
 					if(response.data.errors.existingEmail){
 						self.existingEmail = response.data.errors.existingEmail;

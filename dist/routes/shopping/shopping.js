@@ -23,6 +23,7 @@ function shoppingController(angular, app) {
         }
 
         function finish() {
+            self.spinner = true;
             angular.forEach(self.purchase.products, function(k,v){
                k.category = parseInt(k.category.category_id );
             });
@@ -49,6 +50,7 @@ function shoppingController(angular, app) {
                             name: response.data.name + " " + response.data.lastname
                         }).then(function success(response) {
                             $state.go('dashboard.shopping_list', {reload: true});
+                            self.spinner = false;
                         });
                     }
                 });
@@ -111,6 +113,7 @@ function shoppingController(angular, app) {
             self.collapse_list = true;
             self.add_purchase = add_purchase;
             self.finish = finish;
+            self.spinner = false;
             get_userdata();
 
         }

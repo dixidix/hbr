@@ -3,7 +3,13 @@
 	<h3><i class="fa fa-shopping-cart"></i> Compras</h3>
 	<hr>
 	<div class="col-xs-12 content">
-		<table class="table table-bordered table-striped table-curved rounded">
+		<div class="row" ng-if="!shoppingList.ventas.length">
+			<div class="empty-list">
+			<h3>No se han registrado compras asociadas a&uacute;n.</h3>
+			<button class="btn btn-hbr-blue" ui-sref="dashboard.shopping"><i class="fa fa-shopping-cart"></i> Agregar Compras</button>
+			</div>
+		</div>
+		<table class="table table-bordered table-striped table-curved rounded" ng-if="shoppingList.ventas.length">
 			<thead>
 				<tr>
 					<td><span>#ID Compra</span></td>

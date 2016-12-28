@@ -13,6 +13,7 @@ $postal = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_stri
 $bill_number = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['bill_number']));
 $venta_id = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['ventaId']));
 $timestamp =   MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['timestamp']));
+$product_desc =   MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['product_desc']));
 
 $quantity = $_POST['quantity'];
 $price = $_POST['price'];		
@@ -47,7 +48,7 @@ if(!file_exists("../files/".$timestamp."/")){
 }
 
 if(!$errors){
-	MysqliDB::getInstance()->query("INSERT INTO `producto`(`venta_id`,`category_id`, `product_name`, `quantity`, `partial_price`, `price`, `partial_weight`, `weight`, `establishment`, `postal`, `tracking_number`, `bill_number`, `bill_name`, `bill_file`) VALUES (".$venta_id.",".$category_id.",'".$product_name."',".$quantity.",".$partial_price.",".$price.",".$partial_weight.",".$weight.",'".$establishment."','".$postal."','".$tracking_number."','".$bill_number."','".$file_name_bill."','".$path_bill."')");
+	MysqliDB::getInstance()->query("INSERT INTO `producto`(`venta_id`,`category_id`, `product_name`,`product_desc`, `quantity`, `partial_price`, `price`, `partial_weight`, `weight`, `establishment`, `postal`, `tracking_number`, `bill_number`, `bill_name`, `bill_file`) VALUES (".$venta_id.",".$category_id.",'".$product_name."','".$product_desc."',".$quantity.",".$partial_price.",".$price.",".$partial_weight.",".$weight.",'".$establishment."','".$postal."','".$tracking_number."','".$bill_number."','".$file_name_bill."','".$path_bill."')");
 
 	MysqliDB::getInstance()->close();
 	$resolve_data['success'] = true;

@@ -3,7 +3,7 @@ function navbarDirective(angular, app) {
     'use angular template'; //jshint ignore:line
 
     app.directive('navbar', navbar);
-    navbar.$inject = ['$state', 'authenticationService'];
+    navbar.$inject = ['$state', 'authenticationService','$rootScope'];
     function navbar($state, authenticationService) {
         return {
             restrict: "E",
@@ -22,13 +22,15 @@ function navbarDirective(angular, app) {
                 scope.username = sessionStorage.getItem('username') || "";
             }, true);
         }
-        function controller() {
+        function controller($rootScope) {
             var self = this; // jshint:ignore
 
             function logout() {
+                $rootScope.showSpinner = true;
                 authenticationService.logout()
                     .then(function success() {
                         $state.go('home.login', { reload: true });
+                            $rootScope.showSpinner = true;
                     },
                     function error(error) {
 
