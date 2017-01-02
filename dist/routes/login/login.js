@@ -32,6 +32,7 @@ function loginController(angular, app) {
                     self.loginForm.username.$invalid = true;
                     self.loginForm.password.$invalid = true;
                     self.loginForm.$invalid = true;
+                    $rootScope.showSpinner = false;
                 }
             });
         }

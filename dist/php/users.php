@@ -209,7 +209,7 @@ function login($data){
 	$res = MysqliDB::getInstance()->query("SELECT id,name,lastname,company_name, warehouse_name, isAdmin FROM users WHERE email='" . $username . "' AND password='" . $password . "' AND deleted='0'");
 	
 	$rows = mysqli_num_rows($res);
-	
+
 	if ($rows == 1){
 		$rss = $res->fetch_array(MYSQLI_ASSOC);
 		

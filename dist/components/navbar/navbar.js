@@ -30,7 +30,7 @@ function navbarDirective(angular, app) {
                 authenticationService.logout()
                     .then(function success() {
                         $state.go('home.login', { reload: true });
-                            $rootScope.showSpinner = true;
+                            $rootScope.showSpinner = false;
                     },
                     function error(error) {
 
