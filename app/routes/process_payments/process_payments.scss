@@ -1,168 +1,186 @@
 @import '../../styles/base';
-
-.modal-dialog{
-	width:90%;
-	margin-top:100px;
-		.btn-hbr-blue{
-			@include hbr-btn-blue(150px,50px,$hbr-green);
-		}
-	.modal-body{
-		.input-group-addon{
-			background-color:$hbr-green;
-			color:$hbr-blue;
-			border-color: $hbr-blue;
-			font-family: $museoSans-500;
-			min-width: 45px;
-		}
-		.form-control{
-			outline: none;
-			border-color: $hbr-blue;
-			box-shadow: none;
-		}
-
-		a{
-			outline: none;
-			box-shadow:none;
-			text-shadow: none;
-			text-decoration: none;
-			cursor:pointer;
-		}
-		.product-action{
-			a{
-				padding:0px 10px;
-			}
-		}
-		input{
-			width:100%;
-		}
-		ul{
-			list-style: none;
-			li{
-				strong{
-					font-family: $museoSans-500;
-				}
-			}
-		}
-		.table {			
-			border: 0.1px solid $hbr-blue;
-		}
-		.table-bordered > thead > tr > th,
-		.table-bordered > tbody > tr > th,
-		.table-bordered > tfoot > tr > th,
-		.table-bordered > thead > tr > td,
-		.table-bordered > tbody > tr > td,
-		.table-bordered > tfoot > tr > td {
-			border: 0.1px solid $hbr-blue;
-			text-align: center;
-		}
-		.rounded{
-			padding-top:2%;
-			thead{
-				margin-top:5%;
-				tr{
-					font-family: $museoSans-500;
-					background:$hbr-green;
-					color:$hbr-blue;
-					text-align: center;
-				}
-			}
-			tbody{
-				tr{
-					td{
-						text-align: center;
-						vertical-align: middle;
-						span{
-							i{
-								cursor: pointer;
-								vertical-align: middle;
-								margin:0 5px;
-								font-size: 15px;
-								&.fa.fa-file-pdf-o{
-									color:#DA251C;
-								}
-								&.fa.fa-edit{
-									color:green;
-								}
-								&.fa.fa-close{
-									color:red;
-								}
-							}
-						}
-					}
-				}			
-			}
-		}
-	}
+.modal-dialog {
+    width: 90%;
+    margin-top: 100px;
+    .btn-hbr-blue {
+        @include hbr-btn-blue(150px, 50px, $hbr-green);
+    }
+    .modal-body {
+        .input-group-addon {
+            background-color: $hbr-green;
+            color: $hbr-blue;
+            border-color: $hbr-blue;
+            font-family: $museoSans-500;
+            min-width: 45px;
+        }
+        .form-control {
+            outline: none;
+            border-color: $hbr-blue;
+            box-shadow: none;
+        }
+        h3 {
+            color: $hbr-blue;
+            margin-top: 0;
+        }
+        hr {
+            background-color: $hbr-blue;
+            height: 1px;
+            border: 0;
+            margin-bottom: 50px;
+        }
+        a {
+            outline: none;
+            box-shadow: none;
+            text-shadow: none;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .product-action {
+            a {
+                padding: 0px 10px;
+            }
+        }
+        input {
+            width: 100%;
+        }
+        ul {
+            list-style: none;
+            li {
+                strong {
+                    font-family: $museoSans-500;
+                }
+            }
+        }
+        .table {
+            border: 0.1px solid $hbr-blue;
+        }
+        .table-bordered>tbody> {
+            .row-danger {
+                background-color: rgba(255, 0, 0, 0.7);
+                font-weight: bold;
+            }
+            .row-warning {
+                background-color: rgba(241, 241, 18, 0.6);
+                font-weight: bold;
+            }
+        }
+        .table-bordered>thead>tr>th,
+        .table-bordered>tbody>tr>th,
+        .table-bordered>tfoot>tr>th,
+        .table-bordered>thead>tr>td,
+        .table-bordered>tbody>tr>td,
+        .table-bordered>tfoot>tr>td {
+            border: 0.1px solid $hbr-blue;
+            text-align: center;
+        }
+        .rounded {
+            padding-top: 2%;
+            thead {
+                margin-top: 5%;
+                tr {
+                    font-family: $museoSans-500;
+                    background: $hbr-green;
+                    color: $hbr-blue;
+                    text-align: center;
+                }
+            }
+            tbody {
+                tr {
+                    td {
+                        text-align: center;
+                        vertical-align: middle;
+                        span {
+                            i {
+                                cursor: pointer;
+                                vertical-align: middle;
+                                margin: 0 5px;
+                                font-size: 15px;
+                                &.fa.fa-file-pdf-o {
+                                    color: #DA251C;
+                                }
+                                &.fa.fa-edit {
+                                    color: green;
+                                }
+                                &.fa.fa-close {
+                                    color: red;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
-.process_payments{
-	.payed{
-		color:green;
-	}
-	.unpayed{
-		color:red;
-	}
-	.content{
-		margin:0;
-		width:98%; 
-		margin-left:2%;
-		margin-bottom: 10%;
-	}
-	h3{
-		color:$hbr-blue;
-		margin-top: 0;
-	}
-	hr { 
-		background-color: $hbr-blue; 
-		height: 1px;
-		border: 0; 
-		margin-bottom: 50px;
-	}
-	.table {
-		border: 0.1px solid $hbr-blue;
-	}
-	.table-bordered > thead > tr > th,
-	.table-bordered > tbody > tr > th,
-	.table-bordered > tfoot > tr > th,
-	.table-bordered > thead > tr > td,
-	.table-bordered > tbody > tr > td,
-	.table-bordered > tfoot > tr > td {
-		border: 0.1px solid $hbr-blue;
-		text-align: center;
-	}
-	.rounded{
-		margin-top:2%;
-		thead{
-			tr{
-				font-family: $museoSans-500;
-				background:$hbr-green;
-				color:$hbr-blue;
-				text-align: center;
-			}
-		}
-		tbody{
-			tr{
-				td{
-					text-align: center;
-					vertical-align: middle;
-					span{
-						i{
-							cursor: pointer;
-							vertical-align: middle;
-							margin:0 5px;
-							font-size: 15px;
-							&.fa.fa-file-pdf-o{
-								color:#DA251C;
-							}
-							&.fa.fa-edit{
-								color:green;
-							}
-							&.fa.fa-close{
-								color:red;
-							}
-						}
-					}
-				}
-			}			
-		}
-	}
+
+.process_payments {
+    .payed {
+        color: green;
+    }
+    .unpayed {
+        color: red;
+    }
+    .content {
+        margin: 0;
+        width: 100%;
+        margin-bottom: 10%;
+    }
+    h3 {
+        color: $hbr-blue;
+        margin-top: 0;
+    }
+    hr {
+        background-color: $hbr-blue;
+        height: 1px;
+        border: 0;
+        margin-bottom: 50px;
+    }
+    .table {
+        border: 0.1px solid $hbr-blue;
+    }
+    .table-bordered>thead>tr>th,
+    .table-bordered>tbody>tr>th,
+    .table-bordered>tfoot>tr>th,
+    .table-bordered>thead>tr>td,
+    .table-bordered>tbody>tr>td,
+    .table-bordered>tfoot>tr>td {
+        border: 0.1px solid $hbr-blue;
+        text-align: center;
+    }
+    .rounded {
+        margin-top: 2%;
+        thead {
+            tr {
+                font-family: $museoSans-500;
+                background: $hbr-green;
+                color: $hbr-blue;
+                text-align: center;
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    text-align: center;
+                    vertical-align: middle;
+                    span {
+                        i {
+                            cursor: pointer;
+                            vertical-align: middle;
+                            margin: 0 5px;
+                            font-size: 15px;
+                            &.fa.fa-file-pdf-o {
+                                color: #DA251C;
+                            }
+                            &.fa.fa-edit {
+                                color: green;
+                            }
+                            &.fa.fa-close {
+                                color: red;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

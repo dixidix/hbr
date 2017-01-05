@@ -20,7 +20,7 @@ function warehouseController(angular, app) {
 
         function add(size) {
             var modalInstance = $uibModal.open({
-                templateUrl: './hbr-selfie/dist/routes/warehouse/modals/addcategory.template.html',
+                templateUrl: './hbr-selfie/dist/routes/warehouse/modals/addwarehouse.template.html',
                 controller: 'modalAddWarehouseCtrl',
                 controllerAs: 'modalAddWarehouse',
                 size: size
@@ -34,7 +34,7 @@ function warehouseController(angular, app) {
                 controllerAs: 'modalEditWarehouse',
                 size: size,
                 resolve: {
-                    warehouse: function () {
+                    warehouse: function() {
                         return warehouse;
                     }
                 }
@@ -48,7 +48,7 @@ function warehouseController(angular, app) {
                 controllerAs: 'modalDeleteWarehouse',
                 size: size,
                 resolve: {
-                    warehouse: function () {
+                    warehouse: function() {
                         return warehouse;
                     }
                 }
@@ -72,7 +72,7 @@ function warehouseController(angular, app) {
                 params: {
                     action: 'getAll'
                 }
-            }).then(function (response) {
+            }).then(function(response) {
                 self.warehouses = response.data.warehouses;
             });
             self.newWarehouse = newWarehouse;
@@ -92,10 +92,10 @@ function warehouseController(angular, app) {
 
         function addWarehouse() {
             warehouseService.add_warehouse(self.warehouse)
-                .then(function (response) {
+                .then(function(response) {
                     if (!response.data.errors) {
                         $uibModalInstance.dismiss('cancel');
-                        $state.go('dashboard.warehouse', {}, {reload: true});
+                        $state.go('dashboard.warehouse', {}, { reload: true });
                     } else {
                         if (response.data.errors.existingEmail) {
                             self.existingEmail = response.data.errors.existingEmail;
@@ -134,6 +134,7 @@ function warehouseController(angular, app) {
                     }
                 });
         };
+
         function init() {
             self.warehouse = {};
 
@@ -150,15 +151,17 @@ function warehouseController(angular, app) {
         function cancel() {
             $uibModalInstance.dismiss('cancel');
         };
+
         function editWarehouse() {
             warehouseService.editWarehouse(self.warehouse)
-                .then(function (response) {
+                .then(function(response) {
                     if (!response.data.errors) {
                         $uibModalInstance.dismiss('cancel');
-                        $state.go('dashboard.warehouse', {}, {reload: true});
+                        $state.go('dashboard.warehouse', {}, { reload: true });
                     }
                 });
         };
+
         function init() {
             self.warehouse = warehouse;
             self.previousEmail = warehouse.email;
@@ -175,15 +178,17 @@ function warehouseController(angular, app) {
         function cancel() {
             $uibModalInstance.dismiss('cancel');
         };
+
         function deleteWarehouse() {
             warehouseService.deleteWarehouse(self.warehouse)
-                .then(function (response) {
+                .then(function(response) {
                     if (!response.data.errors) {
                         $uibModalInstance.dismiss('cancel');
-                        $state.go('dashboard.warehouse', {}, {reload: true});
+                        $state.go('dashboard.warehouse', {}, { reload: true });
                     }
                 });
         };
+
         function init() {
             self.warehouse = warehouse;
             self.cancel = cancel;

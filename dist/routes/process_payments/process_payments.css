@@ -168,6 +168,14 @@ html {
     outline: none;
     border-color: #19156a;
     box-shadow: none; }
+  .modal-dialog .modal-body h3 {
+    color: #19156a;
+    margin-top: 0; }
+  .modal-dialog .modal-body hr {
+    background-color: #19156a;
+    height: 1px;
+    border: 0;
+    margin-bottom: 50px; }
   .modal-dialog .modal-body a {
     outline: none;
     box-shadow: none;
@@ -184,6 +192,12 @@ html {
       font-family: "museoSans-500", Arial; }
   .modal-dialog .modal-body .table {
     border: 0.1px solid #19156a; }
+  .modal-dialog .modal-body .table-bordered > tbody > .row-danger {
+    background-color: rgba(255, 0, 0, 0.7);
+    font-weight: bold; }
+  .modal-dialog .modal-body .table-bordered > tbody > .row-warning {
+    background-color: rgba(241, 241, 18, 0.6);
+    font-weight: bold; }
   .modal-dialog .modal-body .table-bordered > thead > tr > th,
   .modal-dialog .modal-body .table-bordered > tbody > tr > th,
   .modal-dialog .modal-body .table-bordered > tfoot > tr > th,
@@ -224,8 +238,7 @@ html {
 
 .process_payments .content {
   margin: 0;
-  width: 98%;
-  margin-left: 2%;
+  width: 100%;
   margin-bottom: 10%; }
 
 .process_payments h3 {
