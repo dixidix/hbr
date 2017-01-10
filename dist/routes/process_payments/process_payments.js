@@ -258,7 +258,6 @@ function processPaymentsController(angular, app) {
 
         function cancel() {
             $uibModalInstance.dismiss('cancel');
-            $state.go('dashboard.process_payments', { reload: true });
         };
 
         function new_guide() {
@@ -323,6 +322,10 @@ function processPaymentsController(angular, app) {
             });
         }
 
+        function activateInput(index, product) {
+            self.activeEditing[index] = true;
+        }
+
         function init() {
             self.cancel = cancel;
             self.venta = venta;
@@ -333,6 +336,8 @@ function processPaymentsController(angular, app) {
             self.removeProduct = removeProduct;
             self.guideBatch = [];
             self.hideTable = false;
+            self.activeEditing = false;
+            self.activateInput = activateInput;
         }
 
         init();

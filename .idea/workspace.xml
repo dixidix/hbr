@@ -2,20 +2,49 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f2604792-26f5-4e47-8c83-2a77ae5112a9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/navbar/navbar.js" afterPath="$PROJECT_DIR$/app/components/navbar/navbar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.js" afterPath="$PROJECT_DIR$/app/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/php/users.php" afterPath="$PROJECT_DIR$/app/php/users.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/dashboard/dashboard.js" afterPath="$PROJECT_DIR$/app/routes/dashboard/dashboard.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/dashboard/dashboard.scss" afterPath="$PROJECT_DIR$/app/routes/dashboard/dashboard.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/dashboard/dashboard.template.html" afterPath="$PROJECT_DIR$/app/routes/dashboard/dashboard.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/login/login.js" afterPath="$PROJECT_DIR$/app/routes/login/login.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/process_payments/process_payments.js" afterPath="$PROJECT_DIR$/app/routes/process_payments/process_payments.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/process_payments/process_payments.scss" afterPath="$PROJECT_DIR$/app/routes/process_payments/process_payments.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/process_payments/process_payments.template.html" afterPath="$PROJECT_DIR$/app/routes/process_payments/process_payments.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/warehouse/warehouse.js" afterPath="$PROJECT_DIR$/app/routes/warehouse/warehouse.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/shopping/shopping.js" afterPath="$PROJECT_DIR$/app/routes/shopping/shopping.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/shopping/shopping.scss" afterPath="$PROJECT_DIR$/app/routes/shopping/shopping.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/shopping/shopping.template.html" afterPath="$PROJECT_DIR$/app/routes/shopping/shopping.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/styles/base.scss" afterPath="$PROJECT_DIR$/app/styles/base.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/app.bundle.min.js" afterPath="$PROJECT_DIR$/dist/app.bundle.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/components/navbar/navbar.js" afterPath="$PROJECT_DIR$/dist/components/navbar/navbar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/app.js" afterPath="$PROJECT_DIR$/dist/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/components/navbar/navbar.css" afterPath="$PROJECT_DIR$/dist/components/navbar/navbar.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/php/users.php" afterPath="$PROJECT_DIR$/dist/php/users.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/categories/categories.css" afterPath="$PROJECT_DIR$/dist/routes/categories/categories.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/categories/categories.js" afterPath="$PROJECT_DIR$/dist/routes/categories/categories.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/checkout/checkout.css" afterPath="$PROJECT_DIR$/dist/routes/checkout/checkout.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/comming_soon/comming_soon.css" afterPath="$PROJECT_DIR$/dist/routes/comming_soon/comming_soon.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/dashboard/dashboard.css" afterPath="$PROJECT_DIR$/dist/routes/dashboard/dashboard.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/dashboard/dashboard.js" afterPath="$PROJECT_DIR$/dist/routes/dashboard/dashboard.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/dashboard/dashboard.template.html" afterPath="$PROJECT_DIR$/dist/routes/dashboard/dashboard.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/error/error.css" afterPath="$PROJECT_DIR$/dist/routes/error/error.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/home/home.css" afterPath="$PROJECT_DIR$/dist/routes/home/home.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/login/login.css" afterPath="$PROJECT_DIR$/dist/routes/login/login.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/login/login.js" afterPath="$PROJECT_DIR$/dist/routes/login/login.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/process_payments/process_payments.css" afterPath="$PROJECT_DIR$/dist/routes/process_payments/process_payments.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/process_payments/process_payments.js" afterPath="$PROJECT_DIR$/dist/routes/process_payments/process_payments.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/process_payments/process_payments.template.html" afterPath="$PROJECT_DIR$/dist/routes/process_payments/process_payments.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/warehouse/warehouse.js" afterPath="$PROJECT_DIR$/dist/routes/warehouse/warehouse.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gulpfile.js" afterPath="$PROJECT_DIR$/gulpfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/products/products.css" afterPath="$PROJECT_DIR$/dist/routes/products/products.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/profile/profile.css" afterPath="$PROJECT_DIR$/dist/routes/profile/profile.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/register/register.css" afterPath="$PROJECT_DIR$/dist/routes/register/register.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/shopping/shopping.css" afterPath="$PROJECT_DIR$/dist/routes/shopping/shopping.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/shopping/shopping.js" afterPath="$PROJECT_DIR$/dist/routes/shopping/shopping.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/shopping/shopping.template.html" afterPath="$PROJECT_DIR$/dist/routes/shopping/shopping.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/shopping_list/shopping_list.css" afterPath="$PROJECT_DIR$/dist/routes/shopping_list/shopping_list.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/success/success.css" afterPath="$PROJECT_DIR$/dist/routes/success/success.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/users/users.css" afterPath="$PROJECT_DIR$/dist/routes/users/users.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/warehouse/warehouse.css" afterPath="$PROJECT_DIR$/dist/routes/warehouse/warehouse.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/styles/base.css" afterPath="$PROJECT_DIR$/dist/styles/base.css" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -39,8 +68,8 @@
       <file leaf-file-name="process_payments.template.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/routes/process_payments/process_payments.template.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="233" column="0" lean-forward="false" selection-start-line="233" selection-start-column="0" selection-end-line="233" selection-end-column="0" />
+            <state relative-caret-position="598">
+              <caret line="234" column="0" lean-forward="false" selection-start-line="234" selection-start-column="0" selection-end-line="234" selection-end-column="0" />
               <folding>
                 <element signature="n#style#0;n#input#0;n#label#0;n#div#0;n#div#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
@@ -61,8 +90,8 @@
       <file leaf-file-name="process_payments.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes/process_payments/process_payments.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2507">
-              <caret line="109" column="0" lean-forward="false" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
+            <state relative-caret-position="3266">
+              <caret line="142" column="0" lean-forward="false" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -265,7 +294,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -334,6 +362,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -473,6 +502,7 @@
       <workItem from="1483371676115" duration="28000" />
       <workItem from="1483377696205" duration="596000" />
       <workItem from="1483387425696" duration="597000" />
+      <workItem from="1483801507154" duration="599000" />
     </task>
     <task id="LOCAL-00001" summary="asd">
       <created>1481237044712</created>
@@ -485,7 +515,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="135103000" />
+    <option name="totallyTimeSpent" value="135702000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -885,16 +915,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/process_payments/process_payments.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2507">
-          <caret line="109" column="0" lean-forward="false" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
+        <state relative-caret-position="3266">
+          <caret line="142" column="0" lean-forward="false" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/process_payments/process_payments.template.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="233" column="0" lean-forward="false" selection-start-line="233" selection-start-column="0" selection-end-line="233" selection-end-column="0" />
+        <state relative-caret-position="598">
+          <caret line="234" column="0" lean-forward="false" selection-start-line="234" selection-start-column="0" selection-end-line="234" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#input#0;n#label#0;n#div#0;n#div#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>

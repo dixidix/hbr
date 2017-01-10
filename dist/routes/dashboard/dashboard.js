@@ -5,17 +5,20 @@ function dashboardController(angular, app) {
 
     app.controller('dashboardCtrl', dashboardCtrl);
 
-    dashboardCtrl.$inject = ['$http','$state'];
+    dashboardCtrl.$inject = ['$http', '$state'];
 
     function dashboardCtrl($http, $state) {
         var self = this; //jshint ignore:line
-        function collapse_sidebar(){
+        function collapse_sidebar() {
             self.collapse = !self.collapse;
         }
+
         function init() {
             self.collapse = false;
             self.collapse_sidebar = collapse_sidebar;
-            self.isAdmin  = sessionStorage.getItem('isAdmin') || 0;
+            self.isAdmin = sessionStorage.getItem('isAdmin') || 0;
+            self.clientType = sessionStorage.getItem('clientType') || 0;
+            console.log(self.clientType);
         }
         init();
     }

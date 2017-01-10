@@ -21,37 +21,37 @@ form {
 @font-face {
   font-family: 'museoSans-100';
   font-weight: 100;
-  src: url("./../styles/fonts/MuseoSans-100.otf"); }
+  src: url("./fonts/MuseoSans-100.otf"); }
 
 @font-face {
   font-family: 'museoSans-300';
   font-weight: 300;
-  src: url("./../styles/fonts/MuseoSans300.otf"); }
+  src: url("./fonts/MuseoSans300.otf"); }
 
 @font-face {
   font-family: 'museoSans-500';
   font-weight: 500;
-  src: url("./../styles/fonts/MuseoSans500.otf"); }
+  src: url("./fonts/MuseoSans500.otf"); }
 
 @font-face {
   font-family: 'RobotoRegular';
   font-weight: 400;
   font-style: normal;
-  src: url("./../styles/fonts/Roboto-Regular.ttf"); }
+  src: url("./fonts/Roboto-Regular.ttf"); }
 
 @font-face {
   font-family: 'RobotoLight';
   font-weight: 300;
   font-style: normal;
-  src: url("./../styles/fonts/Roboto-Light.ttf"); }
+  src: url("./fonts/Roboto-Light.ttf"); }
 
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url("./../styles/fonts/MaterialIcons-Regular.eot");
+  src: url("./fonts/MaterialIcons-Regular.eot");
   /* For IE6-8 */
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url("./../styles/fonts/MaterialIcons-Regular.woff2") format("woff2"), url("./../styles/fonts/MaterialIcons-Regular.woff") format("woff"), url("./../styles/fonts/MaterialIcons-Regular.ttf") format("truetype"); }
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url("./fonts/MaterialIcons-Regular.woff2") format("woff2"), url("./fonts/MaterialIcons-Regular.woff") format("woff"), url("./fonts/MaterialIcons-Regular.ttf") format("truetype"); }
 
 /*Colours*/
 /*Variables*/
@@ -108,6 +108,9 @@ html {
         font-size: 16px;
         font-family: "museoSans-500", Arial;
         font-weight: bold; }
+    html body .no-padding {
+      padding-left: 0;
+      padding-right: 0; }
     html body .loadingSpinner {
       position: fixed;
       z-index: 9999999999;
@@ -158,6 +161,19 @@ html {
     font-size: 16px;
     font-family: "museoSans-500", Arial;
     font-weight: bold; }
+  .modal-dialog .modal-body input::-webkit-outer-spin-button,
+  .modal-dialog .modal-body input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0;
+    /* <-- Apparently some margin are still there even though it's hidden */ }
+  .modal-dialog .modal-body .controls {
+    float: right; }
+    .modal-dialog .modal-body .controls button {
+      margin-left: 10px; }
+    .modal-dialog .modal-body .controls i {
+      font-size: 18px;
+      vertical-align: middle; }
   .modal-dialog .modal-body .input-group-addon {
     background-color: #b4ec13;
     color: #19156a;
@@ -214,21 +230,24 @@ html {
         font-family: "museoSans-500", Arial;
         background: #b4ec13;
         color: #19156a;
-        text-align: center; }
+        text-align: center;
+        font-size: 12px; }
     .modal-dialog .modal-body .rounded tbody tr td {
       text-align: center;
       vertical-align: middle; }
-      .modal-dialog .modal-body .rounded tbody tr td span i {
-        cursor: pointer;
-        vertical-align: middle;
-        margin: 0 5px;
-        font-size: 15px; }
-        .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-file-pdf-o {
-          color: #DA251C; }
-        .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-edit {
-          color: green; }
-        .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-close {
-          color: red; }
+      .modal-dialog .modal-body .rounded tbody tr td span {
+        font-size: 12px; }
+        .modal-dialog .modal-body .rounded tbody tr td span i {
+          cursor: pointer;
+          vertical-align: middle;
+          margin: 0 5px;
+          font-size: 12px; }
+          .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-file-pdf-o {
+            color: #DA251C; }
+          .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-edit {
+            color: green; }
+          .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-close {
+            color: red; }
 
 .process_payments .payed {
   color: green; }
@@ -269,18 +288,21 @@ html {
     font-family: "museoSans-500", Arial;
     background: #b4ec13;
     color: #19156a;
-    text-align: center; }
+    text-align: center;
+    font-size: 12px; }
   .process_payments .rounded tbody tr td {
     text-align: center;
     vertical-align: middle; }
-    .process_payments .rounded tbody tr td span i {
-      cursor: pointer;
-      vertical-align: middle;
-      margin: 0 5px;
-      font-size: 15px; }
-      .process_payments .rounded tbody tr td span i.fa.fa-file-pdf-o {
-        color: #DA251C; }
-      .process_payments .rounded tbody tr td span i.fa.fa-edit {
-        color: green; }
-      .process_payments .rounded tbody tr td span i.fa.fa-close {
-        color: red; }
+    .process_payments .rounded tbody tr td span {
+      font-size: 12px; }
+      .process_payments .rounded tbody tr td span i {
+        cursor: pointer;
+        vertical-align: middle;
+        margin: 0 5px;
+        font-size: 12px; }
+        .process_payments .rounded tbody tr td span i.fa.fa-file-pdf-o {
+          color: #DA251C; }
+        .process_payments .rounded tbody tr td span i.fa.fa-edit {
+          color: green; }
+        .process_payments .rounded tbody tr td span i.fa.fa-close {
+          color: red; }

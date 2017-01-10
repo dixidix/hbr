@@ -13,7 +13,7 @@
                     <i class="fa fa-eye"></i>
                 </li>
             </a>
-            <div ng-if="dashboard.isAdmin == 0">
+            <div ng-if="dashboard.isAdmin == 0 && dashboard.clientType !== '2'">
                 <a href="" ui-sref="dashboard.shopping" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Agregar Compra">
                     <li><i class="fa fa-shopping-cart"></i></li>
                 </a>
@@ -27,12 +27,20 @@
                     <li><i class="fa fa-list-alt"></i><span> Ver Compras </span></li>
                 </a>
             </div>
-            <div ng-if="dashboard.isAdmin == 1">
-                <a href="" ui-sref="dashboard.process_payments" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Procesar Pagos">
-                    <li><i class="fa fa-usd"></i></li>
+            <div ng-if="dashboard.clientType == 2">
+                <a href="" ui-sref="dashboard.process_payments" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Administrar Lotes">
+                    <li><i class="fa fa-dropbox"></i></li>
                 </a>
                 <a href="" ui-sref="dashboard.process_payments" ng-if="!dashboard.collapse">
-                    <li><i class="fa fa-usd"></i><span> Procesar Pagos </span></li>
+                    <li><i class="fa fa-dropbox"></i><span>Administrar Lotes </span></li>
+                </a>
+            </div>
+            <div ng-if="dashboard.isAdmin == 1">
+                <a href="" ui-sref="dashboard.process_payments" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Administrar Lotes">
+                    <li><i class="fa fa-dropbox"></i></li>
+                </a>
+                <a href="" ui-sref="dashboard.process_payments" ng-if="!dashboard.collapse">
+                    <li><i class="fa fa-dropbox"></i><span>Administrar Lotes </span></li>
                 </a>
                 <a href="" ui-sref="dashboard.categories" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Cargar Categor&iacute;as">
                     <li><i class="fa fa-book"></i></li>
@@ -44,7 +52,7 @@
                     <li><i class="fa fa-users"></i></li>
                 </a>
                 <a href="" ui-sref="dashboard.users" ng-if="!dashboard.collapse">
-                <li><i class="fa fa-users"></i><span> Particulares </span></li>
+                    <li><i class="fa fa-users"></i><span> Particulares </span></li>
                 </a>
                 <a href="" ui-sref="dashboard.business" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Admin. Empresas">
                     <li><i class="fa fa-building"></i></li>
@@ -64,7 +72,7 @@
     <section ng-class="dashboard.collapse ? 'dashboard__content--collapsed':'dashboard__content'">
         <div ui-view>
             <div class="container-img">
-                <img  src="http://tucourier.com.ar/wp-content/uploads/2014/11/logo_home_2-1.png">
+                <img src="http://tucourier.com.ar/wp-content/uploads/2014/11/logo_home_2-1.png">
             </div>
         </div>
     </section>

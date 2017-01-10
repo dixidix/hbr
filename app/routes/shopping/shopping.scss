@@ -1,191 +1,244 @@
 @import '../../styles/base';
-
-
-.shopping{
-	input[type=number]::-webkit-inner-spin-button,
-	input[type=number]::-webkit-outer-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
-	}
-	h3{
-		color:$hbr-blue;
-		margin-top: 0;
-	}
-	hr { 
-		background-color: $hbr-blue; 
-		height: 1px;
-		border: 0; 
-		margin-bottom: 50px;
-	}
-	.content{
-		margin:0;
-		width:98%; 
-		margin-left:2%;
-		margin-bottom: 10%;
-	}
-	.table {
-		border: 0.1px solid $hbr-blue;
-	}
-	.table-bordered > thead > tr > th,
-	.table-bordered > tbody > tr > th,
-	.table-bordered > tfoot > tr > th,
-	.table-bordered > thead > tr > td,
-	.table-bordered > tbody > tr > td,
-	.table-bordered > tfoot > tr > td {
-		border: 0.1px solid $hbr-blue;
-		text-align: center;
-	}
-
-	.input-group-addon{
-		background-color:$hbr-green;
-		color:$hbr-blue;
-		border-color: $hbr-blue;
-		font-family: $museoSans-500;	
-		min-width: 45px;
-	}
-	.btn-hbr-blue{
-		margin:25px 0px;
-	}
-	.form-control{
-		outline: none;
-		border-color: $hbr-blue;
-		box-shadow: none;
-	}
-
-	@-webkit-keyframes bounce {
-		0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);}
-		40% {-webkit-transform: translateY(-30px);}
-		60% {-webkit-transform: translateY(-15px);}
-	} 
-	@keyframes bounce {
-		0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-		40% {transform: translateY(-30px);}
-		60% {transform: translateY(-15px);}
-	} 
-/*
+.shopping {
+    form {
+        width: 100%;
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    h3 {
+        color: $hbr-blue;
+        margin-top: 0;
+    }
+    hr {
+        background-color: $hbr-blue;
+        height: 1px;
+        border: 0;
+        margin-bottom: 50px;
+    }
+    .content {
+        margin: 0;
+        width: 98%;
+        margin-left: 2%;
+        margin-bottom: 10%;
+    }
+    .table {
+        border: 0.1px solid $hbr-blue;
+    }
+    .table-bordered>thead>tr>th,
+    .table-bordered>tbody>tr>th,
+    .table-bordered>tfoot>tr>th,
+    .table-bordered>thead>tr>td,
+    .table-bordered>tbody>tr>td,
+    .table-bordered>tfoot>tr>td {
+        border: 0.1px solid $hbr-blue;
+        text-align: center;
+    }
+    .input-group-addon {
+        background-color: $hbr-green;
+        color: $hbr-blue;
+        border-color: $hbr-blue;
+        font-family: $museoSans-500;
+        min-width: 45px;
+    }
+    .btn-hbr-blue {
+        margin: 25px 0px;
+    }
+    .form-control {
+        outline: none;
+        border-color: $hbr-blue;
+        box-shadow: none;
+    }
+    @-webkit-keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+            -webkit-transform: translateY(0);
+        }
+        40% {
+            -webkit-transform: translateY(-30px);
+        }
+        60% {
+            -webkit-transform: translateY(-15px);
+        }
+    }
+    @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-30px);
+        }
+        60% {
+            transform: translateY(-15px);
+        }
+    }
+    /*
  * Adding the animation to our element
  */
- .badge{
- 	background-color:$hbr-green;
- 	color:$hbr-blue;
- 	font-weight: bold;
-  	-webkit-animation-name: bounce;
- 	animation-name: bounce;
- }
- &__data{
- 	.well-lg{
- 		margin: 15px;
- 		padding: 15px;
- 		border-color:$hbr-green;
- 	}
- }
- &__purchase{
- 	input[type="file"]::-webkit-file-upload-button{
- 		&, &:active,&:focus, &:active:focus, &:hover{
- 			background-color: $hbr-green;
- 			border: 1px solid $hbr-blue;
- 			color:$hbr-blue;
- 			width:200px;
- 			height:40px;
- 			outline: 0;
- 			padding: 0.4em 1em;
- 			font-family: $roboto;
- 		}
- 		&:hover{
- 			background-color: lighten($hbr-green,5%);
- 			cursor: pointer;
- 		}
- 	}
- 	.btn-hbr-blue{
- 		@include hbr-btn-blue(auto,50px,$hbr-green);
- 	}
- }
-
- &__purchase-list{
- 	.well-lg{
- 		width:100%;
- 		border-color:$hbr-green;
- 		strong{
- 			font-family: $museoSans-500;
- 		}
- 	}
- 	ul{
- 		list-style: none;
- 		padding:0;
- 		margin:0;
- 		width:50%;
- 		li{
- 			width:100%;
- 			margin:15px 0px;
- 		}
- 	}
- 	.rounded{
-
- 		thead{
-
- 			tr{
- 				font-family: $museoSans-500;
- 				background:$hbr-green;
- 				color:$hbr-blue;
- 				text-align: center;
-				font-size:12px;
-
- 			}
- 		}
- 		tbody{
-			font-size: 12px;
-
- 			tr{
-
- 				td{
- 					text-align: center;
- 					vertical-align: middle;
- 					span{
- 						i{
- 							cursor: pointer;
- 							vertical-align: middle;
- 							margin:0 5px;
- 							font-size: 15px;
- 							&.fa.fa-file-pdf-o{
- 								color:#DA251C;
- 							}
- 							&.fa.fa-edit{
- 								color:green;
- 							}
- 							&.fa.fa-close{
- 								color:red;
- 							}
- 						}
- 					}
- 				}
- 			}
- 		}
- 	}
- 	.btn-hbr-blue{
- 		margin-left:10px;
- 		@include hbr-btn-blue(auto,50px,$hbr-green);
- 	}
- }
-
- a{
- 	cursor: pointer;
- 	color:$hbr-blue;
- 	font-size: 20px;
- 	width: 100%;
- 	text-decoration: none;
- 	i{
- 		font-size: 12px;
- 		margin-right: 10px;
- 	}
- }
- hr { 
- 	background-color: $hbr-blue; 
- 	height: 1px;
- 	border: 0; 
- }
- form{
- 	width:100%;
- 	height: 400px;
- 	padding:5% 0%;
- }
+    .badge {
+        background-color: $hbr-green;
+        color: $hbr-blue;
+        font-weight: bold;
+        -webkit-animation-name: bounce;
+        animation-name: bounce;
+    }
+    &__data {
+        .well-lg {
+            margin: 15px;
+            padding: 15px;
+            border-color: $hbr-green;
+        }
+    }
+    &__purchase {
+        .product-table {
+            padding: 20px 0px;
+            text-align: center;
+            thead {
+                color: $hbr-green;
+                text-shadow: 1px 1px $hbr-blue;
+                font-size: 16px;
+                td:last-child {
+                    text-align: right;
+                }
+            }
+            tbody {
+                td:last-child {
+                    text-align: right;
+                }
+            }
+            h5 {}
+            h4 {
+                text-align: left;
+            }
+            h5 {
+                margin-top: 20px;
+                text-align: right;
+                font-size: 15px;
+                font-weight: bold;
+            }
+        }
+        .form-padding {
+            padding-bottom: 25px;
+        }
+        .btn-hbr-green {
+            @include hbr-btn-green(120px, 40px, $hbr-blue);
+            border: 1px solid $hbr-blue;
+            font-size: 13px;
+            padding: 10px 30px;
+            margin-top: 15px;
+        }
+        input[type="file"]::-webkit-file-upload-button {
+            &,
+            &:active,
+            &:focus,
+            &:active:focus,
+            &:hover {
+                background-color: $hbr-green;
+                border: 1px solid $hbr-blue;
+                color: $hbr-blue;
+                width: 200px;
+                height: 40px;
+                outline: 0;
+                padding: 0.4em 1em;
+                font-family: $roboto;
+            }
+            &:hover {
+                background-color: lighten($hbr-green, 5%);
+                cursor: pointer;
+            }
+        }
+        .btn-hbr-blue {
+            @include hbr-btn-blue(auto, 50px, $hbr-green);
+        }
+    }
+    &__purchase-list {
+        .well-lg {
+            width: 100%;
+            border-color: $hbr-green;
+            strong {
+                font-family: $museoSans-500;
+            }
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 50%;
+            li {
+                width: 100%;
+                margin: 15px 0px;
+            }
+        }
+        .rounded {
+            thead {
+                tr {
+                    font-family: $museoSans-500;
+                    background: $hbr-green;
+                    color: $hbr-blue;
+                    text-align: center;
+                    font-size: 12px;
+                }
+            }
+            tbody {
+                font-size: 12px;
+                tr {
+                    td {
+                        text-align: center;
+                        vertical-align: middle;
+                        span {
+                            i {
+                                cursor: pointer;
+                                vertical-align: middle;
+                                margin: 0 5px;
+                                font-size: 15px;
+                                &.fa.fa-file-pdf-o {
+                                    color: #DA251C;
+                                }
+                                &.fa.fa-edit {
+                                    color: green;
+                                }
+                                &.fa.fa-close {
+                                    color: red;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .btn-hbr-blue {
+            margin-left: 10px;
+            @include hbr-btn-blue(auto, 50px, $hbr-green);
+        }
+    }
+    a {
+        cursor: pointer;
+        color: $hbr-blue;
+        font-size: 20px;
+        width: 100%;
+        text-decoration: none;
+        i {
+            font-size: 12px;
+            margin-right: 10px;
+        }
+    }
+    hr {
+        background-color: $hbr-blue;
+        height: 1px;
+        border: 0;
+    }
+    form {
+        width: 100%;
+        height: 400px;
+        padding: 5% 0%;
+    }
 }

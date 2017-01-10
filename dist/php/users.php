@@ -206,7 +206,7 @@ function login($data){
 	$username = stripslashes($username);
 	$password = md5(stripslashes($password));
 	
-	$res = MysqliDB::getInstance()->query("SELECT id,name,lastname,company_name, warehouse_name, isAdmin FROM users WHERE email='" . $username . "' AND password='" . $password . "' AND deleted='0'");
+	$res = MysqliDB::getInstance()->query("SELECT id,name,lastname,company_name, warehouse_name, isAdmin, client_type FROM users WHERE email='" . $username . "' AND password='" . $password . "' AND deleted='0'");
 	
 	$rows = mysqli_num_rows($res);
 
@@ -222,6 +222,9 @@ function login($data){
 		}
 		if(!empty($rss['warehouse_name'])){
 			$resolve_data['name'] = $rss['warehouse_name'];
+		}
+				if(!empty($rss['client_type'])){
+			$resolve_data['client_type'] = $rss['client_type'];
 		}
 		$resolve_data['lastname'] = $rss['lastname'];
 		$resolve_data['isAdmin'] = $rss['isAdmin'];
