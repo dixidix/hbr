@@ -15,7 +15,7 @@
     <tbody>
         <tr ng-repeat="bill in shopping.lote.bills track by $index">
             <td><span>{{ bill.number }}</span></td>
-            <td><span>{{ bill.tracking }}</span></td>
+            <td><span>{{ bill.tracking_number }}</span></td>
             <td><span>{{ bill.prestador }}</span></td>
             <td><span>{{bill.establishment }}</span></td>
             <td>
@@ -25,8 +25,8 @@
                             <td class="col-xs-3"><span> Categor&iacute;a </span></td>
                             <td class="col-xs-3"><span> Producto </span></td>
                             <td class="col-xs-3"><span> Cant. </span></td>
-                            <td class="col-xs-3"><span> Precio unit. </span></td>
-                            <td class="col-xs-3"><span> Peso unit. </span></td>
+                            <td class="col-xs-3"><span> Precio U. </span></td>
+                            <td class="col-xs-3"><span> Peso U. </span></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,7 +40,7 @@
                     </tbody>
                 </table>
             </td>
-            <td><span>{{ bill.total_quantity }}</span></td>
+            <td><span>{{ bill.quantity }}</span></td>
             <td><span>{{ bill.total_weight }}</span></td>
             <td><span>{{ bill.total_price }}</span></td>
             <td><span><i class="fa fa-file"></i></span><span><i class="fa fa-close"></i></span></td>

@@ -1,34 +1,49 @@
 <table class="table table-bordered table-striped table-curved rounded">
     <thead>
         <tr>
-            <td><span>Categor&iacute;a</span></td>
-            <td><span>Producto</span></td>
-            <td><span>Cantidad</span></td>
-            <td><span>Precio Ind. </span></td>
-            <td><span>Precio Total</span></td>
-            <td><span>Establecimiento</span></td>
-            <td><span>Peso Ind.</span></td>
-            <td><span>Peso Total</span></td>
-            <td><span>N&uacute;m. Factura</span></td>
+            <td><span>N° Factura</span></td>
+            <td><span>Tracking</span></td>
             <td><span>Prestador Postal</span></td>
-            <td><span>N&uacute;m Tracking</span></td>
+            <td><span>Tienda de compra</span></td>
+            <td><span>Productos</span></td>
+            <td><span>Cant. Productos</span></td>
+            <td><span>Peso Total</span></td>
+            <td><span>Precio Total</span></td>
             <td><span>Acciones</span></td>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="product in shopping.purchase.products track by $index">
-            <td><span>{{ product.category.name }}</span></td>
-            <td><span>{{ product.name }}</span></td>
-            <td><span>{{ product.quantity }}</span></td>
-            <td><span>{{ product.price / product.quantity }}</span></td>
-            <td><span>{{ product.price }}</span></td>
-            <td><span>{{ product.establishment }}</span></td>
-            <td><span>{{ product.weight / product.quantity }}</span></td>
-            <td><span>{{ product.weight }}</span></td>
-            <td><span>{{ product.bill_number }}</span></td>
-            <td><span>{{ product.postal }}</span></td>
-            <td><span>{{ product.tracking_number }}</span></td>
-            <td><span><i class="fa fa-edit"></i></span><span><i class="fa fa-close"></i></span></td>
+        <tr ng-repeat="bill in shopping.lote.bills track by $index">
+            <td><span>{{ bill.number }}</span></td>
+            <td><span>{{ bill.tracking_number }}</span></td>
+            <td><span>{{ bill.prestador }}</span></td>
+            <td><span>{{bill.establishment }}</span></td>
+            <td>
+                <table class="col-xs-12" ng-if="bill.products.length">
+                    <thead>
+                        <tr style="background-color:transparent;">
+                            <td class="col-xs-3"><span> Categor&iacute;a </span></td>
+                            <td class="col-xs-3"><span> Producto </span></td>
+                            <td class="col-xs-3"><span> Cant. </span></td>
+                            <td class="col-xs-3"><span> Precio U. </span></td>
+                            <td class="col-xs-3"><span> Peso U. </span></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="product in bill.products track by $index">
+                            <td>{{ product.category.name }}</td>
+                            <td>{{ product.name }} </td>
+                            <td>{{ product.quantity }} Kg.</td>
+                            <td>{{ product.price | currency }}</td>
+                            <td>{{ product.weight }} KG.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td><span>{{ bill.quantity }}</span></td>
+            <td><span>{{ bill.total_weight }}</span></td>
+            <td><span>{{ bill.total_price }}</span></td>
+            <td><span><i class="fa fa-file"></i></span><span><i class="fa fa-close"></i></span></td>
 
         </tr>
     </tbody>

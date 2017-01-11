@@ -12,12 +12,12 @@ function shoppingController(angular, app) {
         var self = this; //jshint ignore:line
         function get_userdata() {
             $http.get('./hbr-selfie/dist/php/users.php', {
-                    params: {
-                        sskey: sessionStorage.getItem('sskey'),
-                        action: "getUserBySskey"
-                    }
-                })
-                .then(function(response) {
+                params: {
+                    sskey: sessionStorage.getItem('sskey'),
+                    action: "getUserBySskey"
+                }
+            })
+                .then(function (response) {
                     self.lote.user = response.data;
                 });
         }
@@ -88,65 +88,81 @@ function shoppingController(angular, app) {
         function get_categories() {
             categoryService
                 .get_categories()
-                .success(function(data) {
+                .success(function (data) {
                     self.categories = data.categories;
                 })
-                .error(function(error) {
+                .error(function (error) {
                     console.log(error);
                 });
         }
 
         function add_product() {
-            if (Object.keys(self.aux_product).length) {
-                self.bill.products.push(self.aux_product);
-                self.bill.total_price = parseFloat(parseFloat(self.bill.total_price) + parseFloat(self.aux_product.price) * parseInt(self.aux_product.quantity)).toFixed(2);
-                self.bill.total_weight = parseFloat(parseFloat(self.bill.total_weight) + parseFloat(self.aux_product.weight) * parseInt(self.aux_product.quantity)).toFixed(2);
-                self.bill.quantity = parseFloat(parseFloat(self.bill.quantity) + parseFloat(self.aux_product.quantity)).toFixed(2);
-                self.aux_product = {};
-                self.shoppingForm_purchase.$valid = true;
-                self.shoppingForm_purchase.$setUntouched();
-                self.shoppingForm_purchase.$setPristine();
-                self.shoppingForm_purchase.$submitted = false;
+            if (self.bill.establishment.length && self.bill.number.length && self.bill.tracking_number.length && self.bill.prestador.length) {
+                self.bill_error = "";
+                self.shoppingForm_purchase.name.$invalid = false;
+                if (Object.keys(self.aux_product).length) {
+                    self.product_error = "";
+                    self.aux_product.total_weight = (parseFloat(self.aux_product.weight) * parseInt(self.aux_product.quantity)).toFixed(2);
+                    self.aux_product.total_price = (parseFloat(self.aux_product.price) * parseInt(self.aux_product.quantity)).toFixed(2);
+                    self.bill.products.push(self.aux_product);
+                    self.bill.total_price = (parseFloat(parseFloat(self.bill.total_price) + parseFloat(self.aux_product.price) * parseInt(self.aux_product.quantity)).toFixed(2)) || 0.00;
+                    self.bill.total_weight = (parseFloat(parseFloat(self.bill.total_weight) + (parseFloat(self.aux_product.weight) * parseInt(self.aux_product.quantity))).toFixed(2)) || 0.00;
+                    self.bill.quantity = (parseFloat(parseFloat(self.bill.quantity) + parseFloat(self.aux_product.quantity)).toFixed(2)) || 0;
+                    self.aux_product = {};
+                    self.shoppingForm_purchase.$valid = true;
+                    self.shoppingForm_purchase.$setUntouched();
+                    self.shoppingForm_purchase.$setPristine();
+                    self.shoppingForm_purchase.$submitted = false;
+
+                } else {
+                    self.product_error = "Debe completar la información de producto para continuar";
+                }
             } else {
-                self.shoppingForm_purchase.$valid = false;
-                self.shoppingForm_purchase.$setDirty();
+                self.bill_error = "Debe completar la información de factura para continuar";
                 self.shoppingForm_purchase.$submitted = true;
             }
         }
 
         function add_bill() {
+            if (self.bill.establishment.length && self.bill.number.length && self.bill.tracking_number.length && self.bill.prestador.length) {
+                self.bill_error = "";
+                self.lote.total_price = parseFloat(parseFloat(self.lote.total_price) + parseFloat(self.bill.total_price)).toFixed(2);
+                self.lote.total_weight = parseFloat(parseFloat(self.lote.total_weight) + parseFloat(self.bill.total_weight)).toFixed(2);
+                self.lote.total_quantity = parseInt(parseInt(self.lote.total_quantity) + parseInt(self.bill.quantity));
 
-            self.lote.total_price = parseFloat(parseFloat(self.lote.total) + parseFloat(self.bill.total_price)).toFixed(2);
-            self.lote.total_weight = parseFloat(parseFloat(self.lote.total_weight) + parseFloat(self.bill.total_weight)).toFixed(2);
-            self.lote.total_quantity = parseFloat(parseFloat(self.lote.total_quantity) + parseFloat(self.bill.quantity)).toFixed(2);
+                self.lote.bills.push(self.bill);
+                $('#bill_file').val("");
 
-            self.lote.bills.push(self.bill);
-            $('#bill_file').val("");
-            self.bill = {
-                products: [],
-                number: '',
-                tracking: '',
-                prestador: '',
-                establishment: '',
-                bill_file: {},
-                total_price: 0
-            };
+                self.bill = {
+                    products: [],
+                    number: '',
+                    tracking: '',
+                    prestador: '',
+                    establishment: '',
+                    bill_file: {},
+                    total_price: 0
+                };
 
-            self.aux_product = {};
+                self.aux_product = {};
 
-            console.log(self.lote);
+                console.log(self.lote);
 
-            self.shoppingForm_purchase.$valid = true;
-            self.shoppingForm_purchase.$submitted = false;
-            self.shoppingForm_purchase.$setPristine();
-            self.shoppingForm_purchase.$setUntouched();
+                self.shoppingForm_purchase.$valid = true;
+                self.shoppingForm_purchase.$submitted = false;
+                self.shoppingForm_purchase.$setPristine();
+                self.shoppingForm_purchase.$setUntouched();
+                
+            } else {
+                self.bill_error = "Debe completar la información de factura para continuar";
+                self.shoppingForm_purchase.$submitted = true;
+            }
         }
 
         function init() {
             get_categories();
+
             self.lote = {
                 user: {},
-                data: {},
                 bills: [],
                 total_weight: 0,
                 total_price: 0.00,
@@ -161,6 +177,7 @@ function shoppingController(angular, app) {
             self.add_product = add_product;
             self.spinner = false;
             self.aux_product = {};
+
             self.bill = {
                 products: [],
                 number: '',
@@ -172,6 +189,7 @@ function shoppingController(angular, app) {
                 total_weight: 0.00,
                 quantity: 0
             };
+
             get_userdata();
 
         }

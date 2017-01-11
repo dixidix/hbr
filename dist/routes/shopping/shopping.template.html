@@ -30,8 +30,8 @@
         <!-- LISTA DE COMPRAS -->
         <a ng-click="shopping.collapse_list = !shopping.collapse_list">
             <i ng-class="shopping.collapse_list ? 'fa fa-chevron-right' : 'fa fa-chevron-down'"></i> Lista de compras
-            <span class="badge" ng-if="shopping.purchase.products.length > 0">
-                {{ shopping.purchase.products.length }}
+            <span class="badge" ng-if="shopping.lote.bills.length > 0">
+                {{ shopping.lote.bills.length }}
             </span>
         </a>
         <hr>
