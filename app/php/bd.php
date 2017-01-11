@@ -11,7 +11,7 @@ class MysqliDB{
 	protected $host='localhost';
 	protected $user='root';
 	protected $passwd='';
-	protected $db='hbr';
+	protected $db='feedback_tucourier';
 	protected $_mysqli;
 	public static function getInstance() { //singleton pattern
 		if(!self::$_instance) {

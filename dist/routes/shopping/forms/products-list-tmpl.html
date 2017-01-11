@@ -25,8 +25,8 @@
                             <td class="col-xs-3"><span> Categor&iacute;a </span></td>
                             <td class="col-xs-3"><span> Producto </span></td>
                             <td class="col-xs-3"><span> Cant. </span></td>
-                            <td class="col-xs-3"><span> Precio U. </span></td>
-                            <td class="col-xs-3"><span> Peso U. </span></td>
+                            <td class="col-xs-3"><span> Precio </span></td>
+                            <td class="col-xs-3"><span> Peso </span></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,18 +59,16 @@
     <ul>
         <li>
             <strong>Peso Total:</strong>
-            <span class="pull-right">{{ shopping.purchase.peso_total }} Kg.</span>
+            <span class="pull-right">{{ shopping.lote.total_weight }} Kg.</span>
         </li>
 
         <li>
             <strong>Cantidad de productos:</strong>
-            <span class="pull-right"> {{ shopping.purchase.total_quantity }}</span>
+            <span class="pull-right"> {{ shopping.lote.total_quantity }}</span>
         </li>
-
-
         <br>
         <hr>
-        <li><strong>Total Factura:</strong><span class="pull-right"> U$D {{ shopping.purchase.total }}</span>
+        <li><strong>Total Factura:</strong><span class="pull-right"> U$D {{ shopping.lote.total_price }}</span>
         </li>
     </ul>
 </div>

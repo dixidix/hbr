@@ -22,68 +22,47 @@ function shoppingController(angular, app) {
                 });
         }
 
-        // function finish() {
-        //     self.spinner = true;
-        //     angular.forEach(self.purchase.products, function(k, v) {
-        //         k.category = parseInt(k.category.category_id);
-        //     });
-        //     $http.post('./hbr-selfie/dist/php/shopping.php', {
-        //             peso_excedente: self.purchase.peso_excedente,
-        //             parcial_price: self.purchase.parcial_price,
-        //             peso_total: self.purchase.peso_total,
-        //             tasas: self.purchase.tasas,
-        //             total: self.purchase.total,
-        //             total_quantity: self.purchase.total_quantity,
-        //             transporte: self.purchase.transporte,
-        //             userId: self.purchase.user.id,
-        //             method: "POST"
-        //         })
-        //         .then(function success(response) {
-        //             if (response.data.success) {
+        function finish() {
+            self.spinner = true;
+            angular.forEach(self.lote.bills, function (k, v) {
+                console.log(k, v);
+                angular.forEach(k.products, function (key, val) {
+                    console.log(key, val);
+                    key.category = parseInt(key.category.category_id);
+                });
+            });
+            console.log(self.lote);
+            localStorage.setItem("mock", JSON.stringify(self.lote));
+            // $http.post('./hbr-selfie/dist/php/shopping.php', {
+            //         peso_excedente: self.purchase.peso_excedente,
+            //         parcial_price: self.purchase.parcial_price,
+            //         peso_total: self.purchase.peso_total,
+            //         tasas: self.purchase.tasas,
+            //         total: self.purchase.total,
+            //         total_quantity: self.purchase.total_quantity,
+            //         transporte: self.purchase.transporte,
+            //         userId: self.purchase.user.id,
+            //         method: "POST"
+            //     })
+            //     .then(function success(response) {
+            //         if (response.data.success) {
 
-        //                 uploadService.uploadProducts(self.purchase.products, response.data.ventaId, (new Date).getTime());
-        //                 // .then(function uploaded(response){
-        //                 $http.post('./hbr-selfie/dist/php/solicitud_venta.php', {
-        //                     lote: response.data.lote,
-        //                     date: response.data.date,
-        //                     email: response.data.email,
-        //                     name: response.data.name + " " + response.data.lastname
-        //                 }).then(function success(response) {
-        //                     $state.go('dashboard.shopping_list', { reload: true });
-        //                     self.spinner = false;
-        //                 });
-        //             }
-        //         });
-        // }
+            //             uploadService.uploadProducts(self.purchase.products, response.data.ventaId, (new Date).getTime());
+            //             // .then(function uploaded(response){
+            //             $http.post('./hbr-selfie/dist/php/solicitud_venta.php', {
+            //                 lote: response.data.lote,
+            //                 date: response.data.date,
+            //                 email: response.data.email,
+            //                 name: response.data.name + " " + response.data.lastname
+            //             }).then(function success(response) {
+            //                 $state.go('dashboard.shopping_list', { reload: true });
+            //                 self.spinner = false;
+            //             });
+            //         }
+            //     });
+        }
 
-        // function add_purchase() {
-        //     if (self.purchase.data.bill) {
-        //         self.purchase.data.price = self.purchase.data.quantity * self.purchase.data.price;
-        //         if (self.purchase.data.weight > 0 && self.purchase.data.weight !== null && self.purchase.data.weight !== undefined) {
-        //             self.purchase.data.weight = (self.purchase.data.quantity * self.purchase.data.weight);
-        //         } else {
-        //             self.purchase.data.weight = 0;
-        //         }
-        //         self.purchase.products.push(self.purchase.data);
-        //         self.purchase.parcial_price = self.purchase.parcial_price + self.purchase.data.price;
-        //         self.purchase.total_quantity = parseInt(self.purchase.total_quantity) + parseInt(self.purchase.data.quantity);
-        //         self.purchase.peso_total = self.purchase.peso_total + self.purchase.data.weight;
-        //         self.purchase.total = 0;
-        //         self.purchase.total = self.purchase.parcial_price;
-        //         $('#bill').val("");
-        //         $('#products').val("");
-        //         $('#categories').val("");
-        //         self.purchase.data = {};
-        //         self.product_description = "";
-        //         self.shoppingForm_purchase.$valid = true;
-        //         self.shoppingForm_purchase.$setPristine();
-        //         self.shoppingForm_purchase.$submitted = false;
-        //     } else {
-        //         self.shoppingForm_purchase.$valid = false;
-        //         self.shoppingForm_purchase.$setPristine();
-        //         self.shoppingForm_purchase.$submitted = false;
-        //     }
-        // }
+
 
         function get_categories() {
             categoryService
@@ -95,6 +74,8 @@ function shoppingController(angular, app) {
                     console.log(error);
                 });
         }
+
+
 
         function add_product() {
             if (self.bill.establishment.length && self.bill.number.length && self.bill.tracking_number.length && self.bill.prestador.length) {
@@ -113,6 +94,7 @@ function shoppingController(angular, app) {
                     self.shoppingForm_purchase.$setUntouched();
                     self.shoppingForm_purchase.$setPristine();
                     self.shoppingForm_purchase.$submitted = false;
+                    console.log(self.bill);
 
                 } else {
                     self.product_error = "Debe completar la información de producto para continuar";
@@ -121,6 +103,17 @@ function shoppingController(angular, app) {
                 self.bill_error = "Debe completar la información de factura para continuar";
                 self.shoppingForm_purchase.$submitted = true;
             }
+        }
+        function removeProduct(product, index) {
+            self.bill.products.splice(index, 1);
+            self.bill.total_price = 0;
+            self.bill.total_weight = 0;
+            self.bill.quantity = 0;
+            angular.forEach(self.bill.products, function (item, index) {
+                self.bill.total_price = parseFloat(parseFloat(self.bill.total_price) + (parseFloat(item.price) * parseInt(item.quantity))).toFixed(2) || 0.00;
+                self.bill.total_weight = (parseFloat(parseFloat(self.bill.total_weight) + (parseFloat(item.weight) * parseInt(item.quantity))).toFixed(2)) || 0.00;
+                self.bill.quantity = (parseFloat(parseFloat(self.bill.quantity) + parseFloat(item.quantity)).toFixed(2)) || 0;
+            });
         }
 
         function add_bill() {
@@ -136,11 +129,13 @@ function shoppingController(angular, app) {
                 self.bill = {
                     products: [],
                     number: '',
-                    tracking: '',
+                    tracking_number: '',
                     prestador: '',
                     establishment: '',
                     bill_file: {},
-                    total_price: 0
+                    total_price: 0.00,
+                    total_weight: 0.00,
+                    quantity: 0
                 };
 
                 self.aux_product = {};
@@ -151,7 +146,9 @@ function shoppingController(angular, app) {
                 self.shoppingForm_purchase.$submitted = false;
                 self.shoppingForm_purchase.$setPristine();
                 self.shoppingForm_purchase.$setUntouched();
-                
+                $('html, body').animate({
+                    scrollTop: $("#product-info").offset().top
+                }, 2000);
             } else {
                 self.bill_error = "Debe completar la información de factura para continuar";
                 self.shoppingForm_purchase.$submitted = true;
@@ -169,6 +166,11 @@ function shoppingController(angular, app) {
                 total_quantity: 0
             };
 
+            //MOCK data
+            self.lote = JSON.parse(localStorage.getItem('mock'));
+            console.log(self.lote);
+            self.lote.user = self.lote.user;
+            //
             self.get_categories = get_categories;
             self.collapse_personal = true;
             self.collapse_purchase = true;
@@ -177,7 +179,8 @@ function shoppingController(angular, app) {
             self.add_product = add_product;
             self.spinner = false;
             self.aux_product = {};
-
+            self.removeProduct = removeProduct;
+            self.finish = finish;
             self.bill = {
                 products: [],
                 number: '',
