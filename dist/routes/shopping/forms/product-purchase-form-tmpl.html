@@ -22,11 +22,11 @@
         </div>
 
         <!-- PRESTADOR POSTAL -->
-        <div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_purchase.name.$invalid && shopping.shoppingForm_purchase.$submitted}">
+        <div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_purchase.postal.$invalid && shopping.shoppingForm_purchase.$submitted}">
             <label class="control-label" for="postal">Prestador Postal (*)</label><br>
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1"><i class="fa fa-truck"></i></span>
-                <input id="postal" class="form-control" type="text" name="postal" ng-model="shopping.bill.prestador" placeholder="Nombre del prestador postal"
+                <input id="postal" class="form-control" type="text" name="postal" ng-model="shopping.bill.provider" placeholder="Nombre del prestador postal"
                     autocomplete="off" required>
             </div>
         </div>

@@ -129,19 +129,16 @@ function addPurchase($data){
 	$resolve_data = array();
 	$purchase = array();
 
-	$peso_excedente = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['peso_excedente']));
 	$parcial_price = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['parcial_price']));
-	$peso_total = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['peso_total']));
-	$tasas = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['tasas']));
+	$peso_total = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['peso_total']));	
 	$total = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['total']));
 	$total_quantity = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['total_quantity']));
-	$transporte = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['transporte']));
 	$uid = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['userId']));
 	// $products = $data['products'];
 
 	if (empty($errors)){
 		$timestamp = round(microtime(true) * 1000);
-		MysqliDB::getInstance()->query("INSERT INTO `ventas`(`uid`, `peso_excedente`, `parcial_price`, `peso_total`, `tasas`, `total`, `total_quantity`, `transporte`) VALUES ('".$uid."',".$peso_excedente.",".$parcial_price.",".$peso_total.",".$tasas.",".$total.",".$total_quantity.",".$transporte.")");
+		MysqliDB::getInstance()->query("INSERT INTO `ventas`(`uid`, `parcial_price`, `peso_total`, `total`, `total_quantity`) VALUES ('".$uid."',".$parcial_price.",".$peso_total.",".$total.",".$total_quantity.")");
 
 		$res = MysqliDB::getInstance()->query("SELECT MAX(id) as id FROM `ventas`");		
 		$rows = mysqli_num_rows($res);
