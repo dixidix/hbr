@@ -5,7 +5,7 @@ require 'bd.php';
 $errors = array();
 $resolve_data = array();
 
-$bill_id = (int) MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['billId']));
+$bill_id = (int) MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['bill_id']));
 $category_id = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['category']));	
 $name = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['name']));
 $price = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['price']));
@@ -16,14 +16,16 @@ $weight = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_stri
 $userId = (int) MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['userId']));
 
 
-if (empty($errors)){
-    $timestamp = round(microtime(true) * 1000);
-
-    echo 
+if (empty($errors)){    
     MysqliDB::getInstance()->query("INSERT INTO `products`( `bill_id`, `category_id`, `name`, `price`, `quantity`, `totalprice`, `totalweight`, `weight`, `userId`) VALUES (".$bill_id.",".$category_id.",'".$name."',".$price.",".$quantity.",".$totalprice.",".$totalweight.",".$weight.",".$userId.")");
 
 MysqliDB::getInstance()->close();
 $resolve_data['success'] = true;
+MysqliDB::getInstance()->close();
 echo json_encode($resolve_data);
-
+} else {
+    $resolve_data['errors'] = $errors;
+    MysqliDB::getInstance()->close();
+    echo json_encode($resolve_data);
+}
 ?>

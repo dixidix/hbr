@@ -5,9 +5,9 @@ function shoppingController(angular, app) {
 
     app.controller('shoppingCtrl', shoppingCtrl);
 
-    shoppingCtrl.$inject = ['categoryService', 'productService', '$http', '$state', 'uploadService', '$timeout', '$filter'];
+    shoppingCtrl.$inject = ['categoryService', 'productService', '$http', '$state', 'uploadService', '$timeout', '$filter', '$q'];
 
-    function shoppingCtrl(categoryService, productService, $http, $state, uploadService, $timeout, $filter) {
+    function shoppingCtrl(categoryService, productService, $http, $state, uploadService, $timeout, $filter, $q) {
         'use strict';
         var self = this; //jshint ignore:line
         function get_userdata() {
@@ -23,31 +23,41 @@ function shoppingController(angular, app) {
         }
 
         function finish() {
+            var requests = [];
             self.spinner = true;
             angular.forEach(self.lote.bills, function (k, v) {
                 angular.forEach(k.products, function (key, val) {
                     key.category = parseInt(key.category.category_id);
                 });
             });
-
             console.log(self.lote);
-            localStorage.setItem("mock", JSON.stringify(self.lote));
-
-            $http.post('./hbr-selfie/dist/php/shopping.php', {
-                peso_excedente: self.lote.peso_excedente,
-                parcial_price: self.lote.total_price,
-                peso_total: self.lote.total_weight,
-                total: self.lote.total_price,
-                total_quantity: self.lote.total_quantity,
-                userId: self.lote.user.id,
-                method: "POST"
-            })
+            $http
+                .post('./hbr-selfie/dist/php/shopping.php', {
+                    peso_excedente: self.lote.peso_excedente,
+                    parcial_price: self.lote.total_price,
+                    peso_total: self.lote.total_weight,
+                    total: self.lote.total_price,
+                    total_quantity: self.lote.total_quantity,
+                    userId: self.lote.user.id,
+                    method: "POST"
+                })
                 .then(function success(response) {
                     if (response.data.success) {
+                        var billId = [];
+                        angular.forEach(self.lote.bills, function (bill) {
+                            var deferred = $q.defer();
+                            requests.push(deferred.promise);
+                            uploadService.uploadBills(bill, response.data.ventaId, self.lote.user.id, (new Date).getTime())
+                                .then(function success(response) {
+                                    deferred.resolve(response.bill_id);
+                                });
+                        });
+                        $q.all(requests).then(function (response) {
+                            console.log(respoonse);
+                        });
 
-                        uploadService.uploadBills(self.lote.bills, response.data.ventaId, self.lote.user.id, (new Date).getTime());
                         self.spinner = false;
-                        
+
                         // $http.post('./hbr-selfie/dist/php/solicitud_venta.php', {
                         //     lote: response.data.lote,
                         //     date: response.data.date,
@@ -165,14 +175,6 @@ function shoppingController(angular, app) {
                 total_quantity: 0
             };
 
-            //MOCK data
-            if(JSON.parse(localStorage.getItem('mock'))){
-                self.lote = JSON.parse(localStorage.getItem('mock'));
-                console.log(self.lote);
-                self.lote.user = self.lote.user;
-                self.spinner = false;
-            }
-            //
             self.get_categories = get_categories;
             self.collapse_personal = true;
             self.collapse_purchase = true;

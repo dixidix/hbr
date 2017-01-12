@@ -41,9 +41,6 @@ if(!file_exists("../files/".$timestamp."/")){
 }
 
 if (empty($errors)){
-    $timestamp = round(microtime(true) * 1000);
-
-    echo 
     MysqliDB::getInstance()->query("INSERT INTO `bills`(`ventaId`, `establishment`, `number`, `provider`, `quantity`, `timestamp`, `totalprice`, `totalweight`, `trackingnumber`, `userId`, `bill_file_name`, `bill_file_path`) VALUES (".$ventaId.",'".$establishment."','".$number."','".$provider."',".$quantity.",'".$timestamp."',".$totalprice.",".$totalweight.",'".$trackingnumber."',".$userId.",'".$file_name_bill."','".$path_bill."')");
 
     $res = MysqliDB::getInstance()->query("SELECT MAX(bill_id) as id FROM `bills`");		
@@ -54,12 +51,12 @@ if (empty($errors)){
         $resolve_data['bill_id'] = $rss['id'];
 
     }
+	$resolve_data['success'] = true;	
+	MysqliDB::getInstance()->close();
+	echo json_encode($resolve_data);
 } else {
     $resolve_data['errors'] = $errors;
+	MysqliDB::getInstance()->close();
     echo json_encode($resolve_data);
 }
-
-MysqliDB::getInstance()->close();
-$resolve_data['success'] = true;
-echo json_encode($resolve_data);
 ?>

@@ -21,63 +21,53 @@ function uploadService(angular, app) {
 			return deferred.promise;
 		}
 
-		this.uploadBills = function (bills, ventaId, userId, timestamp) {
+		this.uploadBills = function (bill, ventaId, userId, timestamp) {
 			var deferred = $q.defer();
-			angular.forEach(bills, function (bill) {
-				bill.ventaId = ventaId;
-				bill.timestamp = timestamp;
-				bill.userId = userId;
-				var formData = new FormData();
-				var products = [];
-				angular.forEach(bill, function (key, value) {
-					if (value !== "products") {
-						formData.append(value, key);
-					} else {
-						products = key;
-					}
-				});
 
-				$http
-					.post('./hbr-selfie/dist/php/add_bill.php', formData, {
-						transformRequest: angular.identity,
-						headers: { 'Content-Type': undefined }
-					})
-					.success(function (response) {
-						uploadProducts(response.bill_id, userId);
-					})
-					.error(function (error) {
-						console.log("back from service:", error);
-					});
-
-
-				 function uploadProducts (billId, userId) {
-
-					var deferred = $q.defer();
-					angular.forEach(products, function (product) {
-						product.billId = billId;
-						product.userId = userId;
-						var formDataProd = new FormData();
-						angular.forEach(product, function (key, value) {
-							console.log(key,value);
-							formDataProd.append(value, key);
-						});
-
-						$http
-							.post('./hbr-selfie/dist/php/add_bill_product.php', formDataProd, {
-								transformRequest: angular.identity,
-								headers: { 'Content-Type': undefined }
-							})
-							.success(function (response) {
-								console.log("back from service:", response);
-							})
-							.error(function (error) {
-								console.log("back from service:", error);
-							});
-					});
-				};
+			bill.ventaId = ventaId;
+			bill.timestamp = timestamp;
+			bill.userId = userId;
+			var formData = new FormData();
+			var products = [];
+			angular.forEach(bill, function (key, value) {
+				if (value !== "products") {
+					formData.append(value, key);
+				} else {
+					products = key;
+				}
 			});
-			return deferred.promise;
+
+			return $http.post('./hbr-selfie/dist/php/add_bill.php', formData, {
+					transformRequest: angular.identity,
+					headers: { 'Content-Type': undefined }
+				});			
+
 		}
+		//  function uploadProducts (bill_id, userId) {
+
+		// 	var deferred = $q.defer();
+		// 	angular.forEach(products, function (product) {
+		// 		product.bill_id = bill_id;
+		// 		product.userId = userId;
+		// 		var formDataProd = new FormData();
+		// 		angular.forEach(product, function (key, value) {
+		// 			formDataProd.append(value, key);
+		// 		});
+
+		// 		$http
+		// 			.post('./hbr-selfie/dist/php/add_bill_product.php', formDataProd, {
+		// 				transformRequest: angular.identity,
+		// 				headers: { 'Content-Type': undefined }
+		// 			})
+		// 			.success(function (response) {
+		// 				// console.log("back from service:", response);
+		// 			})
+		// 			.error(function (error) {
+		// 				console.log("back from service:", error);
+		// 			});
+		// 	});
+		// };
+		
 	}
 }
 module.exports = uploadService;
