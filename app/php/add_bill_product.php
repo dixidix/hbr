@@ -18,14 +18,13 @@ $userId = (int) MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escap
 
 if (empty($errors)){    
     MysqliDB::getInstance()->query("INSERT INTO `products`( `bill_id`, `category_id`, `name`, `price`, `quantity`, `totalprice`, `totalweight`, `weight`, `userId`) VALUES (".$bill_id.",".$category_id.",'".$name."',".$price.",".$quantity.",".$totalprice.",".$totalweight.",".$weight.",".$userId.")");
+    MysqliDB::getInstance()->close();
 
-MysqliDB::getInstance()->close();
 $resolve_data['success'] = true;
-MysqliDB::getInstance()->close();
 echo json_encode($resolve_data);
+
 } else {
     $resolve_data['errors'] = $errors;
-    MysqliDB::getInstance()->close();
     echo json_encode($resolve_data);
 }
 ?>

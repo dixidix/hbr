@@ -43,30 +43,21 @@ function uploadService(angular, app) {
 				});			
 
 		}
-		//  function uploadProducts (bill_id, userId) {
 
-		// 	var deferred = $q.defer();
-		// 	angular.forEach(products, function (product) {
-		// 		product.bill_id = bill_id;
-		// 		product.userId = userId;
-		// 		var formDataProd = new FormData();
-		// 		angular.forEach(product, function (key, value) {
-		// 			formDataProd.append(value, key);
-		// 		});
+		 this.uploadProducts = function (product) {
 
-		// 		$http
-		// 			.post('./hbr-selfie/dist/php/add_bill_product.php', formDataProd, {
-		// 				transformRequest: angular.identity,
-		// 				headers: { 'Content-Type': undefined }
-		// 			})
-		// 			.success(function (response) {
-		// 				// console.log("back from service:", response);
-		// 			})
-		// 			.error(function (error) {
-		// 				console.log("back from service:", error);
-		// 			});
-		// 	});
-		// };
+			var deferred = $q.defer();
+
+				var formDataProd = new FormData();
+				angular.forEach(product, function (key, value) {
+					formDataProd.append(value, key);
+				});
+
+				return $http.post('./hbr-selfie/dist/php/add_bill_product.php', formDataProd, {
+						transformRequest: angular.identity,
+						headers: { 'Content-Type': undefined }
+					});
+		};
 		
 	}
 }

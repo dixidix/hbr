@@ -30,7 +30,7 @@ function shoppingController(angular, app) {
                     key.category = parseInt(key.category.category_id);
                 });
             });
-            console.log(self.lote);
+
             $http
                 .post('./hbr-selfie/dist/php/shopping.php', {
                     peso_excedente: self.lote.peso_excedente,
@@ -49,29 +49,28 @@ function shoppingController(angular, app) {
                             requests.push(deferred.promise);
                             uploadService.uploadBills(bill, response.data.ventaId, self.lote.user.id, (new Date).getTime())
                                 .then(function success(response) {
-                                    deferred.resolve(response.bill_id);
+                                    angular.forEach(bill.products, function (product) {
+                                        product.bill_id = response.data.bill_id;
+                                        product.userId = self.lote.user.id;
+                                        uploadService.uploadProducts(product);
+                                    });
+                                    deferred.resolve();
                                 });
                         });
-                        $q.all(requests).then(function (response) {
-                            console.log(respoonse);
+                        $q.all(requests).then(function () {
+                            $http.post('./hbr-selfie/dist/php/solicitud_venta.php', {
+                                lote: response.data.lote,
+                                date: response.data.date,
+                                email: response.data.email,
+                                name: response.data.name + " " + response.data.lastname
+                            }).then(function success(response) {
+                                $state.go('dashboard.shopping_list', { reload: true });
+                                self.spinner = false;
+                            });
                         });
-
-                        self.spinner = false;
-
-                        // $http.post('./hbr-selfie/dist/php/solicitud_venta.php', {
-                        //     lote: response.data.lote,
-                        //     date: response.data.date,
-                        //     email: response.data.email,
-                        //     name: response.data.name + " " + response.data.lastname
-                        // }).then(function success(response) {
-                        //     $state.go('dashboard.shopping_list', { reload: true });
-                        //     self.spinner = false;
-                        // });
                     }
                 });
         }
-
-
 
         function get_categories() {
             categoryService
@@ -83,8 +82,6 @@ function shoppingController(angular, app) {
                     console.log(error);
                 });
         }
-
-
 
         function add_product() {
             if (self.bill.establishment.length && self.bill.number.length && self.bill.tracking_number.length && self.bill.provider.length) {
@@ -157,7 +154,7 @@ function shoppingController(angular, app) {
                 self.shoppingForm_purchase.$setUntouched();
                 $('html, body').animate({
                     scrollTop: $("#product-info").offset().top
-                }, 2000);
+                }, 100);
             } else {
                 self.bill_error = "Debe completar la información de factura para continuar";
                 self.shoppingForm_purchase.$submitted = true;
