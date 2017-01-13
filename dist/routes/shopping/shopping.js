@@ -50,6 +50,7 @@ function shoppingController(angular, app) {
                             uploadService.uploadBills(bill, response.data.ventaId, self.lote.user.id, (new Date).getTime())
                                 .then(function success(response) {
                                     angular.forEach(bill.products, function (product) {
+                                        console.log(response);
                                         product.bill_id = response.data.bill_id;
                                         product.userId = self.lote.user.id;
                                         uploadService.uploadProducts(product);

@@ -1,3 +1,10 @@
+<div class="row" ng-if="!shopping.lote.bills.length">
+    <div class="empty-list">
+        <h3>No se han registrado compras asociadas a&uacute;n.</h3>       
+    </div>
+</div>
+
+<div ng-if="shopping.lote.bills.length">
 <table class="table table-bordered table-striped table-curved rounded">
     <thead>
         <tr>
@@ -22,31 +29,31 @@
                 <table class="col-xs-12" ng-if="bill.products.length">
                     <thead>
                         <tr style="background-color:transparent;">
-                            <td class="col-xs-3"><span> Categor&iacute;a </span></td>
-                            <td class="col-xs-3"><span> Producto </span></td>
-                            <td class="col-xs-3"><span> Cant. </span></td>
-                            <td class="col-xs-3"><span> Precio </span></td>
-                            <td class="col-xs-3"><span> Peso </span></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="product in bill.products track by $index">
-                            <td>{{ product.category.name }}</td>
-                            <td>{{ product.name }} </td>
-                            <td>{{ product.quantity }} </td>
-                            <td>{{ product.price | currency }}</td>
-                            <td>{{ product.weight }} KG.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-            <td><span>{{ bill.quantity }}</span></td>
-            <td><span>{{ bill.total_weight }} KG. </span></td>
-            <td><span>{{ bill.total_price }}</span></td>
-            <td><span><i class="fa fa-file"></i></span><span><i class="fa fa-close"></i></span></td>
+<td class="col-xs-3"><span> Categor&iacute;a </span></td>
+<td class="col-xs-3"><span> Producto </span></td>
+<td class="col-xs-3"><span> Cant. </span></td>
+<td class="col-xs-3"><span> Precio </span></td>
+<td class="col-xs-3"><span> Peso </span></td>
+</tr>
+</thead>
+<tbody>
+    <tr ng-repeat="product in bill.products track by $index">
+        <td>{{ product.category.name }}</td>
+        <td>{{ product.name }} </td>
+        <td>{{ product.quantity }} </td>
+        <td>{{ product.price | currency }}</td>
+        <td>{{ product.weight }} KG.</td>
+    </tr>
+</tbody>
+</table>
+</td>
+<td><span>{{ bill.quantity }}</span></td>
+<td><span>{{ bill.total_weight }} KG. </span></td>
+<td><span>{{ bill.total_price }}</span></td>
+<td><span><i class="fa fa-file"></i></span><span><i class="fa fa-close"></i></span></td>
 
-        </tr>
-    </tbody>
+</tr>
+</tbody>
 </table>
 <div class="well well-lg" ng-if="shopping.excedente_peso">
     <ul>
@@ -75,3 +82,4 @@
 <button class="btn btn-hbr-blue pull-right">Cancelar compra</button>
 <button class="btn btn-hbr-blue pull-right" ng-click="shopping.finish()">Enviar</button>
 </ul>
+</div>

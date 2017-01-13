@@ -29,8 +29,8 @@
 				<tr  ng-repeat="venta in shoppingList.ventas track by $index">
 					<td><span>{{ venta.id }}</span></td>
 					<td><span>{{ venta.timestamp}}</span></td>
-					<td ng-if="venta.peso_excedente !== '0'"><span>{{ venta.peso_excedente }}</span></td>
-					<td ng-if="venta.peso_excedente == '0'"><span class="unpayed"> Procesando Info.</span></td>
+					<td ng-if="venta.guide_amount !== '0'"><span>{{ venta.guide_amount }}</span></td>
+					<td ng-if="venta.guide_amount == '0'"><span class="unpayed"> Procesando Info.</span></td>
 					<td><span>U$D {{ venta.parcial_price }}</span></td>
 					<td><span>{{ venta.peso_total }} Kg.</span></td>
 					<td><span>{{ venta.total_quantity }}</span></td>

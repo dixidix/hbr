@@ -38,7 +38,7 @@ function shoppingListController(angular, app) {
           openModal('md', items);
         }
         function init() {
-          $http.get('./hbr-selfie/dist/php/shopping.php', { params: { action: "getAll" } })
+          $http.get('./hbr-selfie/dist/php/get_batch.php', { params: { action: "getAll" } })
           .then(function(response){
               response.data.ventas.timestamp = new Date(response.data.ventas.timestamp);
             self.ventas = response.data.ventas;
