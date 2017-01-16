@@ -130,7 +130,7 @@ function addPurchase($data){
 	$purchase = array();
 
 	$parcial_price = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['parcial_price']));
-	$peso_total = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['peso_total']));	
+	$total_weight = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['total_weight']));	
 	$total = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['total']));
 	$total_quantity = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['total_quantity']));
 	$uid = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['userId']));
@@ -138,7 +138,8 @@ function addPurchase($data){
 
 	if (empty($errors)){
 		$timestamp = round(microtime(true) * 1000);
-		MysqliDB::getInstance()->query("INSERT INTO `ventas`(`uid`, `parcial_price`, `total_weight`, `total`, `total_quantity`) VALUES ('".$uid."',".$parcial_price.",".$peso_total.",".$total.",".$total_quantity.")");
+		echo $timestamp;
+		MysqliDB::getInstance()->query("INSERT INTO `ventas`(`uid`, `parcial_price`, `total`, `total_quantity`, `timestamp`,  `totalweight`, `guide_amount`) VALUES ('".$uid."',".$parcial_price.",".$total.",".$total_quantity.",".$timestamp.",".$total_weight.", '0')");
 
 		$res = MysqliDB::getInstance()->query("SELECT MAX(id) as id FROM `ventas`");		
 		$rows = mysqli_num_rows($res);

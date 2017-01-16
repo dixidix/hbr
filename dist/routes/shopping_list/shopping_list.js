@@ -57,9 +57,10 @@ function shoppingListController(angular, app) {
           $uibModalInstance.dismiss('cancel');
         };
         function init(){
-          self.products = items;
+          self.bills = items;
           self.venta = venta[0];
           self.cancel = cancel;
+          console.log(self.bills);
         }
         init();
       }

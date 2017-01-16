@@ -1,0 +1,277 @@
+<script type="text/ng-template" id="processPayment.modal.html">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="modaProcess.cancel()">&times;</button>
+			<h3 ng-if="!modaProcess.venta.paymentGatewayUrl" class="modal-title" id="modal-title">Procesar venta</h3>
+			<h3 ng-if="modaProcess.venta.paymentGatewayUrl" class="modal-title" id="modal-title">Consultar venta</h3>
+		</div>
+		<div class="modal-body" id="modal-body">
+			<div class="well well-lg">
+				<span class="help-block">
+		<h4><i class="fa fa-users"></i> Informaci&oacute;n de usuario: </h4>
+		<ul>
+		<div class="row">
+		
+		<div class="col-xs-6">
+		<li><strong>Nombre: </strong> <span>{{modaProcess.user.name }} {{modaProcess.user.lastname }}</span></li>
+				<li><strong>Direcci&oacute;n: </strong> <span>{{modaProcess.user.address }}, {{ modaProcess.user.localidad }}</span></li>
+				<li><strong>C&oacute;digo Postal: </strong> <span>{{modaProcess.user.postalcode }}</span></li>
+			</div>
+			<div class="col-xs-6">
+				<li><strong>email: </strong> <span>{{modaProcess.user.email }}</span></li>
+				<li ng-if="modaProcess.user.tel > 0"><strong>tel: </strong> <span>{{modaProcess.user.tel }}</span></li>
+				<li ng-if="modaProcess.user.codeType == 2"><strong>N° Cuil: </strong> <span>{{modaProcess.user.idCode }}</span></li>
+				<li ng-if="modaProcess.user.codeType == 1"><strong>N° Cuit: </strong> <span>{{modaProcess.user.idCode }}</span></li>
+			</div>
+		</div>
+		</ul>
+		</span>
+		</div>
+		<table class="table table-bordered table-striped table-curved rounded">
+		<h4>Productos en el lote</h4>
+		<thead>
+		<tr>
+			<td><span>Tipo de producto</span></td>
+			<td><span>producto</span></td>
+			<td><span>Cantidad</span></td>
+			<td><span>Precio Ind. </span></td>
+			<td><span>Precio Total</span></td>
+			<td><span>Establecimiento</span></td>
+			<td><span>Peso Ind.</span></td>
+			<td><span>Peso Total</span></td>
+			<td><span>N&uacute;m. Factura</span></td>
+			<td><span>Prestador Postal</span></td>
+			<td><span>N&uacute;m Tracking</span></td>
+			<td><span>Factura</span></td>
+			<td><span>Acciones</span></td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat="product in modaProcess.products track by $index">
+			<td><span>{{ product.category_name }}</span></td>
+			<td><span>{{ product.product_name }}</span></td>
+			<td><span>{{ product.quantity }}</span></td>
+			<td><span>{{ product.partial_price  }}</span></td>
+			<td><span>{{ product.partial_price * product.quantity }}</span></td>
+			<td><span>{{ product.establishment }}</span></td>
+			<td><span>{{ product.partial_weight }}</span></td>
+			<td><span>{{ product.partial_weight * product.quantity}}</span></td>
+			<td><span>{{ product.bill_number }}</span></td>
+			<td><span>{{ product.postal }}</span></td>
+			<td><span>{{ product.tracking_number }}</span></td>
+			<td><span><i class="fa fa-file-pdf-o"></i></span></td>
+			<td>
+				<button ng-click="modaProcess.processProduct(product)" class="btn btn-default"> Procesar
+						</button>
+			</td>
+		</tr>
+		</tbody>
+		</table>
+		
+		<!--PRECIOS PRODUCTO -->
+		
+		<form class="well well-lg" ng-if="modaProcess.showProductInfo">
+		<h3><i class="fa fa-shopping-cart"></i> {{modaProcess.currentProduct.category}} - {{ modaProcess.currentProduct.product_name }}</h3>
+		<hr>
+		<div class="row">
+		<div class="form-group col-xs-12 col-sm-3">
+			<label class="control-label" for="fob">FOB (U$D)</label><br>
+			<input id="fob" class="form-control" type="text" name="fob" ng-model="modaProcess.currentProduct.price" ng-blur="modaProcess.calcProduct()" autocomplete="off" required>
+		</div>
+		<div class="form-group col-xs-12 col-sm-3">
+			<label class="control-label" for="flete">Flete (U$D) 2,80 U$D x KG</label><br>
+			<input id="flete" class="form-control" type="text" name="flete" ng-model="modaProcess.currentProduct.flete" ng-blur="modaProcess.calcProduct()" autocomplete="off" required>
+		</div>
+		<div class="form-group col-xs-12 col-sm-3">
+			<label class="control-label" for="seguro">Seguro (U$D)</label><br>
+			<input id="seguro" class="form-control" type="text" name="seguro" ng-model="modaProcess.currentProduct.seguro" ng-blur="modaProcess.calcProduct()" autocomplete="off" required>
+		</div>
+		<div class="form-group col-xs-12 col-sm-3">
+			<label class="control-label" for="cif">CIF (U$D)</label><br>
+			<input id="cif" class="form-control" type="text" name="cif" disabled ng-model="modaProcess.currentProduct.cif" autocomplete="off" required>
+		</div>
+		</div>
+		<div class="row">
+		<div class="form-group col-xs-12 col-sm-2">
+			<label class="control-label" for="derecho_percent">Derecho (%)</label><br>
+			<input id="derecho_percent" class="form-control" type="text" name="derecho_percent" ng-model="modaProcess.currentProduct.derecho_percent" ng-blur="modaProcess.calcRights()" autocomplete="off" required>
+		</div>
+		<div class="form-group col-xs-12 col-sm-2">
+			<label class="control-label" for="derecho">Derecho (U$D)</label><br>
+			<input id="derecho" class="form-control" type="text" name="derecho" disabled ng-model="modaProcess.currentProduct.derecho" ng-blur="modaProcess.calcRights()" autocomplete="off" required>
+		</div>
+		<div class="form-group col-xs-12 col-sm-2">
+			<label class="control-label" for="estadistica_percent">Estad&iacute;stica (%)</label><br>
+			<input id="estadistica_percent" class="form-control" type="text" name="estadistica_percent" ng-model="modaProcess.currentProduct.estadistica_percent" ng-blur="modaProcess.calcRights()" autocomplete="off" required>
+		</div>
+		<div class="form-group col-xs-12 col-sm-2">
+			<label class="control-label" for="estadistica">Estad&iacute;stica (U$D)</label><br>
+			<input id="estadistica" class="form-control" type="text" name="estadistica" ng-model="modaProcess.currentProduct.estadistica" ng-blur="modaProcess.calcRights()" disabled autocomplete="off" required>
+		</div>
+		<div class="form-group col-xs-12 col-sm-2">
+			<label class="control-label" for="total_derechos">Total Derechos (U$D)</label><br>
+			<input id="total_derechos" class="form-control" type="text" name="total_derechos" ng-model="modaProcess.currentProduct.total_derechos" ng-blur="modaProcess.calcRights()" disabled autocomplete="off" required>
+		</div>
+		<div class="form-group col-xs-12 col-sm-2">
+			<label class="control-label" for="documentacion">Manejo Doc. BUE (U$D)</label><br>
+			<input id="documentacion" class="form-control" type="text" name="documentacion" ng-model="modaProcess.currentProduct.documentacion" ng-blur="modaProcess.calcBaseIva()" autocomplete="off" required>
+		</div>
+		</div>
+		<div class="row">
+		<div class="form-group col-xs-12 col-sm-2">
+			<label class="control-label" for="base_iva">Base IVA (U$D)</label><br>
+			<input id="base_iva" class="form-control" type="text" name="base_iva" disabled ng-model="modaProcess.currentProduct.base_iva" autocomplete="off" required>
+		</div>
+		<div class="form-group col-xs-12 col-sm-2">
+			<label class="control-label" for="iva_percent">IVA (%)</label><br>
+			<input id="iva_percent" class="form-control" type="text" name="iva_porcentaje" ng-model="modaProcess.currentProduct.iva_percent" ng-blur="modaProcess.calcBaseIva()" autocomplete="off" required>
+		</div>
+		<div class="form-group col-xs-12 col-sm-2">
+			<label class="control-label" for="iva">IVA (U$D)</label><br>
+			<input id="iva" class="form-control" type="text" name="iva" ng-model="modaProcess.currentProduct.iva" ng-blur="modaProcess.calcBaseIva()" disabled autocomplete="off" required>
+		</div>
+		<div class="form-group col-xs-12 col-sm-2">
+			<label class="control-label" for="iva_adic_percent">IVA Adic.(%)</label><br>
+			<input id="iva_adic_percent" class="form-control" type="text" name="iva_adic_percent" ng-model="modaProcess.currentProduct.iva_adic_percent" ng-blur="modaProcess.calcBaseIva()" autocomplete="off" required>
+		</div>
+		<div class="form-group col-xs-12 col-sm-2">
+			<label class="control-label" for="iva_adic">IVA Adic.(U$D)</label><br>
+			<input id="iva_adic" class="form-control" type="text" name="iva_adic" ng-model="modaProcess.currentProduct.iva_adic" ng-blur="modaProcess.calcBaseIva()" disabled autocomplete="off" required>
+		</div>
+		<div class="form-group col-xs-12 col-sm-2">
+			<label class="control-label" for="total_iva">Total IVA</label><br>
+			<input id="total_iva" class="form-control" type="text" name="total_iva" ng-model="modaProcess.currentProduct.total_iva" disabled autocomplete="off" required>
+		</div>
+		</div>
+		<div class="row">
+		<div class="col-xs-12">
+			<div class="pull-left">
+				<h4 style="color:red;font-weight:bold;">Total Impuestos {{ modaProcess.currentProduct.product_name }}: U$D {{modaProcess.currentProduct.total }}.-</h4>
+			</div>
+			<div class="pull-right product-action">
+				<a href="" class="text-primary"> <i class="fa fa-save fa-2x"></i> </a>
+				<a href="" ng-click="modaProcess.showProductInfo = false" class="text-danger"> <i class="fa fa-close fa-2x"></i> </a>
+			</div>
+		</div>
+		</div>
+		</form>
+		
+		<!--PRECIOS WAREHOUSE -->
+		
+		
+		<form class="well well-lg">
+		<div class="pull-right" data-toggle="collapse" data-target="#collapse-warehouse"><i style="cursor:pointer;" class="fa" ng-class="modaProcess.collapsedWarehouse ? 'fa-plus':'fa-minus'" ng-click="modaProcess.collapsedWarehouse = !modaProcess.collapsedWarehouse"></i></div>
+		<h3><i class="fa fa-building"></i> Warehouse</h3>
+		<div class="collapse" id="collapse-warehouse">
+		<hr>
+		<div class="row">
+			<div class="form-group col-xs-12 col-sm-3">
+				<label class="control-label" for="wh_entry">KG Total (KG)</label><br>
+				<input id="wh_entry" class="form-control" type="text" name="wh_entry" ng-model="modaProcess.venta.peso_total" autocomplete="off" disabled>
+			</div>
+			<div class="form-group col-xs-12 col-sm-3">
+				<label class="control-label" for="wh_entry"> Total Compra (U$D)</label><br>
+				<input id="wh_entry" class="form-control" type="text" name="wh_entry" ng-model="modaProcess.venta.parcial_price" autocomplete="off" disabled>
+			</div>
+			<div class="form-group col-xs-12 col-sm-3">
+				<label class="control-label" for="wh_entry">Ingreso a Warehouse (U$D)</label><br>
+				<input id="wh_entry" class="form-control" type="text" name="wh_entry" ng-blur="modaProcess.calcWarehouse()" ng-model="modaProcess.batch.wh_entry" autocomplete="off" required>
+			</div>
+			<div class="form-group col-xs-12 col-sm-3">
+				<label class="control-label" for="adic_kg">KG Adic. (U$D) </label><br>
+				<input id="adic_kg" class="form-control" type="text" name="adic_kg" ng-blur="modaProcess.calcWarehouse()" ng-model="modaProcess.batch.adic_kg" autocomplete="off" required>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-xs-12 col-sm-3">
+				<label class="control-label" for="adic_charges">Cargos Adic. (U$D)</label><br>
+				<input id="adic_charges" class="form-control" type="text" name="adic_charges" ng-blur="modaProcess.calcWarehouse()" ng-model="modaProcess.batch.adic_charges" ng-blur="modaProcess.calcWarehouse()" autocomplete="off" required>
+			</div>
+			<div class="form-group col-xs-12 col-sm-3">
+				<label class="control-label" for="batch_amount">Cant. Lotes (Unidad)</label><br>
+				<input id="batch_amount" class="form-control" type="text" name="batch_amount" ng-model="modaProcess.batch.batch_amount" autocomplete="off" required>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="pull-left">
+					<h4>Total:U$D {{modaProcess.totalWarehouse }}.-</h4>
+				</div>
+				<div class="pull-right product-action">
+					<a href="" class="text-primary"> <i class="fa fa-save fa-2x"></i> </a>
+					<a href="" ng-click="modaProcess.showProductInfo = false" class="text-danger"> <i data-toggle="collapse" data-target="#collapse-warehouse" class="fa fa-close fa-2x"></i> </a>
+				</div>
+			</div>
+		</div>
+		</div>
+		</form>
+		
+		<!-- PRECIOS FLETE  -->
+		<form class="well well-lg">
+		<div class="pull-right" data-toggle="collapse" data-target="#collapse-flete"><i class="fa" style="cursor:pointer;" ng-class="modaProcess.collapsedFlete ? 'fa-plus':'fa-minus'" ng-click="modaProcess.collapsedFlete = !modaProcess.collapsedFlete"></i></div>
+		<h3><i class="fa fa-truck"></i> Flete BUE</h3>
+		<div class="collapse" id="collapse-flete">
+		<hr>
+		<div class="row">
+			<div class="form-group col-xs-12 col-sm-3">
+				<label class="control-label" for="fob">Peso Total (KG.)</label><br>
+				<input id="fob" class="form-control" type="text" name="fob" ng-model="modaProcess.venta.peso_total" autocomplete="off" disabled>
+			</div>
+			<div class="form-group col-xs-12 col-sm-3">
+				<label class="control-label" for="fob">Flete Internacional (x Unidad) (U$D)</label><br>
+				<input id="fob" class="form-control" type="text" name="fob" ng-model="modaProcess.batch.flete_internacional" ng-blur="modaProcess.calcFlete()" autocomplete="off" required>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="pull-left">
+					<h4>Total:U$D {{modaProcess.totalFlete }}.-</h4>
+				</div>
+				<div class="pull-right product-action">
+					<a href="" class="text-primary"> <i class="fa fa-save fa-2x"></i> </a>
+					<a href="" ng-click="modaProcess.showProductInfo = false" class="text-danger"> <i class="fa fa-close fa-2x" data-toggle="collapse" data-target="#collapse-flete"></i> </a>
+				</div>
+			</div>
+		</div>
+		</div>
+		</form>
+		
+		<!-- TOTAL BOTON -->
+		<div class="row">
+		<div class="col-xs-12">
+		<div class="pull-left">
+			<h4 style="color:red;font-weight:bold;">Total bot&oacute;n pago:U$D {{modaProcess.totalButton }}.-</h4>
+			<h4 style="color:red;font-weight:bold;">Total Impuestos:U$D {{modaProcess.totalBatchTaxes }}.-</h4>
+		</div>
+		</div>
+		</div>
+		
+		<div ng-if="modaProcess.venta.paymentGatewayUrl">
+		<strong>Url de pago: </strong> <span>{{modaProcess.venta.paymentGatewayUrl }}</span>
+		</div>
+		<form ng-if="!modaProcess.venta.paymentGatewayUrl">
+		<div class="form-group">
+		<label class="label-group"> URL de pago exitoso | <a ng-click="modaProcess.generateToken()"><i
+							class="fa fa-link"></i> Generar url de pago exitoso </a> </label>
+		<input class="form-control" type="url" ng-model="modaProcess.successUrl" name="success" placeholder="Url de pago exitoso" required autocomplete="off">
+		
+		</div>
+		<div class="form-group">
+		<label class="label-group"> URL de pago | <a href="https://portal.todopago.com.ar/app/#login"
+																 target="_blank"><i class="fa fa-credit-card"></i> ir a
+						todo pago </a> </label>
+		<input class="form-control" type="url" ng-model="modaProcess.paymentGatewayUrl" name="url" placeholder="Url de bot&oacute;n de pago" required autocomplete="off">
+		
+		</div>
+		</form>
+		</div>
+		
+		<div class="modal-footer">
+		<button ng-if="!modaProcess.venta.paymentGatewayUrl" class="btn btn-hbr-blue" ng-click="modaProcess.send()">
+				Guardar
+			</button>
+		<button class="btn btn-hbr-blue" ng-click="modaProcess.cancel()">Cerrar</button>
+		</div>
+		
+		<!-- MODAL DE GUIAS  -->
+		
+	</script>

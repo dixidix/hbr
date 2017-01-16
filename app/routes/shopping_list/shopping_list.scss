@@ -1,151 +1,150 @@
 @import '../../styles/base';
-
-.modal-dialog{
-	width:90%;
-	margin-top:100px;
-		.btn-hbr-blue{
-			@include hbr-btn-blue(150px,50px,$hbr-green);
-		}
-	.modal-body{
-		.overflow-table_container {
-			overflow-x:scroll;
-		}
-		.overflow-table{
-			width:200%;
-			max-width:200%;
-		}
-		.table {
-			border: 0.1px solid $hbr-blue;
-
-		}
-		.table-bordered > thead > tr > th,
-		.table-bordered > tbody > tr > th,
-		.table-bordered > tfoot > tr > th,
-		.table-bordered > thead > tr > td,
-		.table-bordered > tbody > tr > td,
-		.table-bordered > tfoot > tr > td {
-			border: 0.1px solid $hbr-blue;
-			text-align: center;
-		}
-		.rounded{
-
-			thead{
-				tr{
-					font-family: $museoSans-500;
-					background:$hbr-green;
-					color:$hbr-blue;
-					text-align: center;
-				}
-			}
-			tbody{
-				font-size: 12px;
-
-				tr{
-					td{
-						text-align: center;
-						vertical-align: middle;
-
-						span{
-							i{
-								cursor: pointer;
-								vertical-align: middle;
-								margin:0 5px;
-								font-size: 12px;
-								&.fa.fa-file-pdf-o{
-									color:#DA251C;
-								}
-								&.fa.fa-edit{
-									color:green;
-								}
-								&.fa.fa-close{
-									color:red;
-								}
-							}
-						}
-					}
-				}			
-			}
-		}
-	}
-}
-.shoppingList{
-
-	.payed{
-		color:green;
-	}
-	.unpayed{
-		color:red;
-	}
-	.content{
-		margin:0;
-		width:100%;
-		margin-left:0;
-		margin-bottom: 10%;
-	}
-	h3{
-		color:$hbr-blue;
-		margin-top: 0;
-	}
-	hr { 
-		background-color: $hbr-blue; 
-		height: 1px;
-		border: 0; 
-		margin-bottom: 50px;
-	}
-	.table {
-		border: 0.1px solid $hbr-blue;
-	}
-	.table-bordered > thead > tr > th,
-	.table-bordered > tbody > tr > th,
-	.table-bordered > tfoot > tr > th,
-	.table-bordered > thead > tr > td,
-	.table-bordered > tbody > tr > td,
-	.table-bordered > tfoot > tr > td {
-		border: 0.1px solid $hbr-blue;
-		text-align: center;
-	}
-	.rounded{
-		margin-top:5%;
-		thead{
-			tr{
-				font-family: $museoSans-500;
-				background:$hbr-green;
-				color:$hbr-blue;
-				text-align: center;
-				font-size:10px;
-				td.large-row {
-					min-width: 100px;
-				}
-			}
-		}
-		tbody{
+.modal-dialog {
+    width: 90%;
+    margin-top: 100px;
+    .btn-hbr-blue {
+        @include hbr-btn-blue(150px, 50px, $hbr-green);
+    }
+    .modal-body {
+        .overflow-table_container {
+            overflow-x: scroll;
+        }
+        .overflow-table {
+            width: 200%;
+            max-width: 200%;
+        }
+        .table {
+            border: 0.1px solid $hbr-blue;
+        }
+        .table-bordered>thead>tr>th,
+        .table-bordered>tbody>tr>th,
+        .table-bordered>tfoot>tr>th,
+        .table-bordered>thead>tr>td,
+        .table-bordered>tbody>tr>td,
+        .table-bordered>tfoot>tr>td {
+            border: 0.1px solid $hbr-blue;
+            text-align: center;
 			font-size: 12px;
-			tr{
-				td{
-					text-align: center;
-					vertical-align: middle;
-					.btn {
-						font-size:11px;
-					}
-					span{
-						i{
-							cursor: pointer;
-							vertical-align: middle;
-							margin:0 5px;
-							font-size: 12px;
-							&.fa.fa-file-pdf-o{
-								color:#DA251C;
-							}
-							&.fa.fa-edit{
-								color:green;
-							}
-							&.fa.fa-close{
-								color:red;
-							}
-						}
-					}
-				}
-			}			
-		}
-	}
+        }
+        .rounded {
+            thead {
+                tr {
+                    font-family: $museoSans-500;
+                    background: $hbr-green;
+                    color: $hbr-blue;
+                    text-align: center;
+					font-size: 12px;
+                }
+            }
+            tbody {
+                font-size: 12px;
+                tr {
+                    td {
+                        text-align: center;
+                        vertical-align: middle;
+                        font-size: 12px;
+                        span {
+                            font-size: 12px;
+                            i {
+                                cursor: pointer;
+                                vertical-align: middle;
+                                margin: 0 5px;
+                                font-size: 12px;
+                                &.fa.fa-file-pdf-o {
+                                    color: #DA251C;
+                                }
+                                &.fa.fa-edit {
+                                    color: green;
+                                }
+                                &.fa.fa-close {
+                                    color: red;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.shoppingList {
+    .payed {
+        color: green;
+    }
+    .unpayed {
+        color: red;
+    }
+    .content {
+        margin: 0;
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 10%;
+    }
+    h3 {
+        color: $hbr-blue;
+        margin-top: 0;
+    }
+    hr {
+        background-color: $hbr-blue;
+        height: 1px;
+        border: 0;
+        margin-bottom: 50px;
+    }
+    .table {
+        border: 0.1px solid $hbr-blue;
+    }
+    .table-bordered>thead>tr>th,
+    .table-bordered>tbody>tr>th,
+    .table-bordered>tfoot>tr>th,
+    .table-bordered>thead>tr>td,
+    .table-bordered>tbody>tr>td,
+    .table-bordered>tfoot>tr>td {
+        border: 0.1px solid $hbr-blue;
+        text-align: center;
+    }
+    .rounded {
+        margin-top: 5%;
+        thead {
+            tr {
+                font-family: $museoSans-500;
+                background: $hbr-green;
+                color: $hbr-blue;
+                text-align: center;
+                font-size: 10px;
+                td.large-row {
+                    min-width: 100px;
+                }
+            }
+        }
+        tbody {
+            font-size: 12px;
+            tr {
+                td {
+                    text-align: center;
+                    vertical-align: middle;
+                    .btn {
+                        font-size: 11px;
+                    }
+                    span {
+                        i {
+                            cursor: pointer;
+                            vertical-align: middle;
+                            margin: 0 5px;
+                            font-size: 12px;
+                            &.fa.fa-file-pdf-o {
+                                color: #DA251C;
+                            }
+                            &.fa.fa-edit {
+                                color: green;
+                            }
+                            &.fa.fa-close {
+                                color: red;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

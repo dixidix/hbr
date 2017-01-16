@@ -35,7 +35,7 @@ function shoppingController(angular, app) {
                 .post('./hbr-selfie/dist/php/shopping.php', {
                     peso_excedente: self.lote.peso_excedente,
                     parcial_price: self.lote.total_price,
-                    peso_total: self.lote.total_weight,
+                    total_weight: self.lote.total_weight,
                     total: self.lote.total_price,
                     total_quantity: self.lote.total_quantity,
                     userId: self.lote.user.id,

@@ -7,15 +7,15 @@ function processPaymentsController(angular, app) {
     processPaymentsCtrl.$inject = ['$http', '$filter', '$state', '$scope', '$uibModal'];
 
     app.controller('modaProcessCtrl', modaProcessCtrl);
-    modaProcessCtrl.$inject = ['$scope', '$state', '$filter', '$uibModalInstance', '$uibModal', '$sce', '$compile', '$rootScope', 'venta', 'products', '$http'];
+    modaProcessCtrl.$inject = ['$scope', '$state', '$filter', '$uibModalInstance', '$uibModal', '$sce', '$compile', '$rootScope', 'venta', 'bills', '$http'];
 
     app.controller('makeGuidesModalCtrl', makeGuidesModalCtrl);
-    makeGuidesModalCtrl.$inject = ['$scope', '$state', '$filter', '$uibModalInstance', '$uibModal', '$sce', '$compile', '$rootScope', 'venta', 'products', '$http'];
+    makeGuidesModalCtrl.$inject = ['$scope', '$state', '$filter', '$uibModalInstance', '$uibModal', '$sce', '$compile', '$rootScope', 'venta', 'bills', '$http'];
 
     function processPaymentsCtrl($http, $filter, $state, $scope, $uibModal) {
         var self = this; //jshint ignore:line
 
-        function processPaymentModal(size, venta, products) {
+        function processPaymentModal(size, venta, bills) {
             var modalInstance = $uibModal.open({
                 templateUrl: 'processPayment.html',
                 backdrop: 'static',
@@ -27,15 +27,15 @@ function processPaymentsController(angular, app) {
                     venta: function() {
                         return venta;
                     },
-                    products: function() {
-                        return products;
+                    bills: function() {
+                        return bills;
                     },
                 }
             });
         }
 
 
-        function makeGuidesModal(size, venta, products) {
+        function makeGuidesModal(size, venta, bills) {
             var modalInstance = $uibModal.open({
                 templateUrl: 'makeGuides.html',
                 backdrop: 'static',
@@ -47,24 +47,25 @@ function processPaymentsController(angular, app) {
                     venta: function() {
                         return venta;
                     },
-                    products: function() {
-                        return products;
+                    bills: function() {
+                        return bills;
                     },
                 }
             });
         }
 
-        function processPayment(venta, products) {
-            processPaymentModal('md', venta, products);
+        function processPayment(venta, bills) {
+            processPaymentModal('md', venta, bills);
         }
 
-        function setGuides(venta, products) {
-            makeGuidesModal('md', venta, products);
+        function setGuides(venta, bills) {
+            makeGuidesModal('md', venta, bills);
         }
 
         function init() {
-            $http.get('./hbr-selfie/dist/php/shopping.php', { params: { action: "getAll" } })
+            $http.get('./hbr-selfie/dist/php/get_batch.php', { params: { action: "getAll" } })
                 .then(function(response) {
+                    console.log(response.data.ventas);
                     angular.forEach(response.data.ventas, function(value, key) {
                         response.data.ventas[key].parcial_price = parseFloat(value.parcial_price).toFixed(2);
                         response.data.ventas[key].total = parseFloat(value.total).toFixed(2);
@@ -84,7 +85,7 @@ function processPaymentsController(angular, app) {
         init();
     }
 
-    function modaProcessCtrl($scope, $state, $filter, $uibModalInstance, $uibModal, $sce, $compile, $rootScope, venta, products, $http) {
+    function modaProcessCtrl($scope, $state, $filter, $uibModalInstance, $uibModal, $sce, $compile, $rootScope, venta, bills, $http) {
         var self = this;
 
         function cancel() {
@@ -216,7 +217,7 @@ function processPaymentsController(angular, app) {
 
         function init() {
             self.venta = venta;
-            self.products = products;
+            self.bills = bills;
             self.batch = {};
             self.venta.peso_total = parseFloat(self.venta.peso_total).toFixed(2);
             self.venta.parcial_price = parseFloat(self.venta.parcial_price).toFixed(2);
@@ -253,13 +254,16 @@ function processPaymentsController(angular, app) {
         init();
     }
 
-    function makeGuidesModalCtrl($scope, $state, $filter, $uibModalInstance, $uibModal, $sce, $compile, $rootScope, venta, products, $http) {
+    function makeGuidesModalCtrl($scope, $state, $filter, $uibModalInstance, $uibModal, $sce, $compile, $rootScope, venta, bills, $http) {
         var self = this;
 
         function cancel() {
             $uibModalInstance.dismiss('cancel');
         };
 
+        function selectBill (bill) {
+            self.selectedBill = bill;
+        }
         function new_guide() {
             self.guideNumber++;
             self.guideBatch.push({ number: self.guideNumber, products: [], quantity: '', guide_weight: '', guide_price: '' });
@@ -330,7 +334,7 @@ function processPaymentsController(angular, app) {
             self.cancel = cancel;
             self.venta = venta;
             self.guideNumber = 0;
-            self.products = products;
+            self.bills = bills;
             self.new_guide = new_guide;
             self.addToGuide = addToGuide;
             self.removeProduct = removeProduct;
@@ -338,6 +342,8 @@ function processPaymentsController(angular, app) {
             self.hideTable = false;
             self.activeEditing = false;
             self.activateInput = activateInput;
+            self.selectedBill = {};
+            self.selectBill = selectBill;
         }
 
         init();

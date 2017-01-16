@@ -38,7 +38,7 @@
 					<td><span> U$D {{ 250 }} </span></td>
 					<td><span>U$D {{ venta.total }}</span></td>
 					<td>
-						<button ng-click="shoppingList.moreInfo(venta.products)" class="btn btn-default"> VER MAS </button> 
+						<button ng-click="shoppingList.moreInfo(venta.bills)" class="btn btn-default"> VER MAS </button> 
 					</td>
 					<td ng-if="!venta.paymentGatewayUrl || venta.state == '1'" ng-class="venta.state == 1 ? 'payed' : 'unpayed' "><span ng-bind="venta.state == 0 ? 'Pendiente de aprobaci&oacute;n' : 'Pagado'"></span></td>	
 					<td ng-if="venta.paymentGatewayUrl && venta.state == '0'">
@@ -50,112 +50,5 @@
 <!-- 		<uib-pagination next-text="Siguiente" previous-text="Anterior" total-items="3" data-num-pages="1"
 	ng-model="1" class="pagination-sm" items-per-page="3" boundary-link-numbers="true"></uib-pagination> -->
 </div>
-<script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title" id="modal-title">Art&iacute;culos</h3>
-        </div>
-        <div class="modal-body" id="modal-body">
-			<div class="overflow-table_container">
-			<table class="table overflow-table table-bordered table-striped table-curved rounded">
-				<thead>
-					<tr>
-						<td><span>Categor&iacute;a</span></td>
-						<td><span>Producto</span></td>
-						<td><span>Cantidad</span></td>
-						<td><span>FOB Parcial</span></td>
-						<td><span>FOB Total</span></td>
-						<td><span>Peso Parcial </span></td>
-						<td><span>Peso Total </span></td>
-						<td><span>Flete</span></td>
-						<td><span>Seguro</span></td>
-						<td><span>CIF</span></td>
-						<td><span>Derechos</span></td>
-						<td><span>Estad&iacute;stica</span></td>
-						<td><span>Total Derechos</span></td>
-						<td><span>Manejo Doc. BUE</span></td>
-						<td><span>Base IVA</span></td>
-						<td><span>IVA</span></td>
-						<td><span>IVA Adic.</span></td>
-						<td><span>Total IVA</span></td>
-						<td><span>Establecimiento</span></td>
-						<td><span>N&uacute;m. Factura</span></td>
-						<td><span>Prestador Postal</span></td>
-						<td><span>N&uacute;m Tracking</span></td>
-						<td><span>Factura</span></td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="product in seeMore.products track by $index">
-						<td><span>{{ product.category_name }}</span></td>
-						<td><span>{{ product.product_name }}</span></td>
-						<td><span>{{ product.quantity }}</span></td>
-						<td><span>U$D {{ product.price / product.quantity }}</span></td>
-						<td><span>U$D {{ product.price }}</span></td>
-						<td><span>{{ product.weight / product.quantity }} Kg.</span></td>
-						<td><span>{{ product.weight }} Kg.</span></td>
-						<td><span>U$D {{ product.price }}</span></td>
-						<td><span>U$D {{ product.price }}</span></td>
-						<td><span>U$D {{ product.price }}</span></td>
-						<td><span>U$D {{ product.price }}</span></td>
-						<td><span>U$D {{ product.price }}</span></td>
-						<td><span>U$D {{ product.price }}</span></td>
-						<td><span>U$D {{ product.price }}</span></td>
-						<td><span>U$D {{ product.price }}</span></td>
-						<td><span>U$D {{ product.price }}</span></td>
-						<td><span>U$D {{ product.price }}</span></td>
-						<td><span>U$D {{ product.price }}</span></td>
-						<td><span>{{ product.establishment }}</span></td>
-						<td><span>{{ product.bill_number }}</span></td>
-						<td><span>{{ product.postal }}</span></td>
-						<td><span>{{ product.tracking_number }}</span></td>
-						<td><span><a target="_blank" href="http://tucourier.com.ar/hbr-selfie{{ product.bill_file }}" downlod><i class="fa fa-file-pdf-o"></i></a></span></td>
-					</tr>
-				</tbody>
-			</table>
-			</div>
-			<h4>Cargos Warehouse</h4>
-			<span>Peso M&iacute;nimo a cobrar 5 Kg.</span>
-			<table class="table table-bordered table-striped table-curved rounded">
-				<thead>
-				<tr>
-					<td><span>Peso Total </span></td>
-					<td><span>Ingreso al Warehouse</span></td>
-					<td><span>Kg Adicional</span></td>
-					<td><span>Cargos adicionales</span></td>
-					<td><span>Total</span></td>
-				</tr>
-				</thead>
-				<tbody>
-				<tr>
-					<td><span>{{ seeMore.venta.peso_total }} Kg.</span></td>
-					<td><span> U$D {{seeMore.wh_entry_fare }} </span></td>
-					<td><span> U$D {{ seeMore.aditional_weight }} </span></td>
-					<td><span> U$D {{ seeMore.aditional_charges }} </span></td>
-					<td><span> U$D {{seeMore.total_warehouse_price }} </span></td>
-				</tr>
-				</tbody>
-			</table>
-			<h4>Cargos Flete a BUE</h4>
-			<table class="table table-bordered table-striped table-curved rounded">
-				<thead>
-				<tr>
-					<td><span>Cant. Productos</span></td>
-					<td><span>Valor x Unidad</span></td>
-					<td><span>Total</span></td>
-				</tr>
-				</thead>
-				<tbody>
-				<tr>
-					<td><span>{{ seeMore.venta.total_quantity }}</span></td>
-					<td><span> U$D {{ seeMore.shipment_value }}</span></td>
-					<td><span> U$D {{ seeMore.total_shipment }}</span></td>
-				</tr>
-				</tbody>
-			</table>
-			<h4>Total: U$D {{ seeMore.total_sale }} </h4>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-hbr-blue" ng-click="seeMore.cancel()">Cerrar</button>
-        </div>
-    </script>
+<div ng-include  src="'hbr-selfie/dist/routes/shopping_list/moreinfo/moreinfo.template.html'"></div>
 </div>

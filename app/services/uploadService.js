@@ -35,7 +35,7 @@ function uploadService(angular, app) {
 				} else {
 					products = key;
 				}
-			});
+			});	
 
 			return $http.post('./hbr-selfie/dist/php/add_bill.php', formData, {
 					transformRequest: angular.identity,

@@ -27,7 +27,7 @@ $res = MysqliDB::getInstance()->query("SELECT * from ventas WHERE deleted = 0");
 		$outp .= '{"id":"'  . $rs["id"] . '",';
 		$outp .= '"uid":"'  . $rs["uid"] . '",';
         $outp .= '"parcial_price":"'  . (float) $rs["parcial_price"] . '",';
-		$outp .= '"total_weight":"'  . $rs["total_weight"] . '",';
+		$outp .= '"total_weight":"'  . $rs["totalweight"] . '",';
 		$outp .= '"total": '  . $rs["total"] . ',';
 		$outp .= '"total_quantity":"'  . $rs["total_quantity"] . '",';
 		$outp .= '"state":"'  . $rs["state"] . '",';
@@ -47,7 +47,6 @@ $res = MysqliDB::getInstance()->query("SELECT * from ventas WHERE deleted = 0");
 			$outpm .= '"total_price":"'  . $rss["totalprice"] . '",';
 			$outpm .= '"total_weight":"'  . $rss["totalweight"] . '",';
 			$outpm .= '"tracking_number":"'  . $rss["trackingnumber"] . '",';
-
 			$uname2 =  MysqliDB::getInstance()->query("SELECT * FROM products INNER JOIN categories ON products.category_id = categories.category_id where products.bill_id =" . $rss["bill_id"]." and products.deleted = 0");
 			while($rsss = $uname2->fetch_array(MYSQLI_ASSOC)) {
 				if ($outpmn != "") {$outpmn .= ",";}
@@ -71,28 +70,6 @@ $res = MysqliDB::getInstance()->query("SELECT * from ventas WHERE deleted = 0");
 		}
 
 		$outp .='"bills":['.$outpm.'],';
-		//$uname = MysqliDB::getInstance()->query("SELECT * FROM producto INNER JOIN categories ON producto.category_id = categories.category_id where producto.venta_id =" . $rs["id"]);
-		// while($rss = $uname->fetch_array(MYSQLI_ASSOC)) {
-		// 	if ($outpm != "") {$outpm .= ",";}
-		// 	$outpm .= '{"id":'   . $rss["product_id"].',';
-		// 	$outpm .= '"category_id":"'  . $rss["category_id"] . '",';
-		// 	$outpm .= '"category_name":"'  . $rss["category_name"] . '",';
-		// 	$outpm .= '"product_name":"'  . $rss["product_name"] . '",';
-		// 	$outpm .= '"description":"'  . $rss["product_desc"] . '",';
-		// 	$outpm .= '"quantity":'  . $rss["quantity"] . ',';
-		// 	$outpm .= '"partial_price":'  . $rss["partial_price"] . ',';
-		// 	$outpm .= '"price":'  . $rss["price"] . ',';
-		// 	$outpm .= '"partial_weight":'  . $rss["partial_weight"] . ',';
-		// 	$outpm .= '"weight":'  . $rss["weight"] . ',';
-		// 	$outpm .= '"establishment":"'  . $rss["establishment"] . '",';
-		// 	$outpm .= '"postal":"'  . $rss["postal"] . '",';
-		// 	$outpm .= '"bill_number":"'  . $rss["bill_number"] . '",';
-		// 	$outpm .= '"bill_name":"'  . $rss["bill_name"] . '",';
-		// 	$outpm .= '"bill_file":"'  . $rss["bill_file"] . '",';
-		// 	$outpm .= '"tracking_number":"'   . $rss["tracking_number"].'"}';
-		// }
-
-		// $outp .='"products":['.$outpm.'],';
 		$outp .= '"timestamp":"'   . $rs["timestamp"]  . '"}';
 	}
 	$outp ='{"ventas":['.$outp.']}';

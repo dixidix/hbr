@@ -175,28 +175,33 @@ html {
   .modal-dialog .modal-body .table-bordered > tbody > tr > td,
   .modal-dialog .modal-body .table-bordered > tfoot > tr > td {
     border: 0.1px solid #19156a;
-    text-align: center; }
+    text-align: center;
+    font-size: 12px; }
   .modal-dialog .modal-body .rounded thead tr {
     font-family: "museoSans-500", Arial;
     background: #b4ec13;
     color: #19156a;
-    text-align: center; }
+    text-align: center;
+    font-size: 12px; }
   .modal-dialog .modal-body .rounded tbody {
     font-size: 12px; }
     .modal-dialog .modal-body .rounded tbody tr td {
       text-align: center;
-      vertical-align: middle; }
-      .modal-dialog .modal-body .rounded tbody tr td span i {
-        cursor: pointer;
-        vertical-align: middle;
-        margin: 0 5px;
+      vertical-align: middle;
+      font-size: 12px; }
+      .modal-dialog .modal-body .rounded tbody tr td span {
         font-size: 12px; }
-        .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-file-pdf-o {
-          color: #DA251C; }
-        .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-edit {
-          color: green; }
-        .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-close {
-          color: red; }
+        .modal-dialog .modal-body .rounded tbody tr td span i {
+          cursor: pointer;
+          vertical-align: middle;
+          margin: 0 5px;
+          font-size: 12px; }
+          .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-file-pdf-o {
+            color: #DA251C; }
+          .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-edit {
+            color: green; }
+          .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-close {
+            color: red; }
 
 .shoppingList .payed {
   color: green; }
