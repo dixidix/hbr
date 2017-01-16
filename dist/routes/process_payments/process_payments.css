@@ -206,6 +206,8 @@ html {
     list-style: none; }
     .modal-dialog .modal-body ul li strong {
       font-family: "museoSans-500", Arial; }
+  .modal-dialog .modal-body h3.table-title {
+    margin: 15px 0px; }
   .modal-dialog .modal-body .table {
     border: 0.1px solid #19156a; }
   .modal-dialog .modal-body .table-bordered > tbody > .row-danger {
@@ -248,6 +250,9 @@ html {
             color: green; }
           .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-close {
             color: red; }
+          .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-folder-open, .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-folder {
+            color: black;
+            margin-left: 15px; }
 
 .process_payments .payed {
   color: green; }

@@ -68,8 +68,14 @@
                 }
             }
         }
+
+        h3.table-title {
+            margin:15px 0px;
+        }
+        
         .table {
             border: 0.1px solid $hbr-blue;
+
         }
         .table-bordered>tbody> {
             .row-danger {
@@ -122,6 +128,11 @@
                                 }
                                 &.fa.fa-close {
                                     color: red;
+                                }
+                                &.fa.fa-folder-open,
+                                &.fa.fa-folder {
+                                   color:black;
+                                   margin-left:15px;                         
                                 }
                             }
                         }
