@@ -283,6 +283,7 @@ function processPaymentsController(angular, app) {
 										product.exist = true;
 										guideProd.quantity = parseInt(guideProd.quantity) + parseInt(amount); 
 										product.quantity =  parseInt(product.quantity) - parseInt(amount);
+										return;
 								}
 							});
 				angular.forEach(bill.products, function (value) {
@@ -290,9 +291,8 @@ function processPaymentsController(angular, app) {
 						if (value.quantity > 0) {
 							if (guide.number === guideNumber) {
 								product.guide_amount = amount;
-								value.quantity = parseInt(value.quantity) - parseInt(amount);
-								console.log(product);
 								guide.products.push(product);
+								value.quantity = parseInt(value.quantity) - parseInt(amount);
 								guide.total_quantity = parseInt(guide.total_quantity || 0) + parseInt(amount || 0);
 								guide.guide_total_weight = (parseFloat(guide.guide_total_weight || 0) + parseFloat(parseFloat(product.weight || 0) * amount));
 								guide.guide_total_price = (parseFloat(guide.guide_total_price || 0) + parseFloat(parseFloat(product.price || 0) * amount));
