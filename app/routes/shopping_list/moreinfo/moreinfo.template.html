@@ -1,6 +1,6 @@
 <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="modaProcess.cancel()">&times;</button>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="seeMore.cancel()">&times;</button>
             <h3 class="modal-title" id="modal-title">Art&iacute;culos</h3>
         </div>
         <div class="modal-body" id="modal-body">
@@ -50,7 +50,7 @@
                             <td><span>{{ bill.quantity }}</span></td>
                             <td><span>{{ bill.total_weight }} KG. </span></td>
                             <td><span>{{ bill.total_price }}</span></td>
-                            <td><span><a  target="_self" href="http://localhost/hbr-selfie/{{ bill.bill_file_path }}"  download="{{ bill.bill_file_name }}"><i class="fa fa-file-pdf-o"></i></a></span></td>
+                            <td><span><a  target="_self" href="http://tucourier.com.ar/hbr-selfie/{{ bill.bill_file_path }}"  download="{{ bill.bill_file_name }}"><i class="fa fa-file-pdf-o"></i></a></span></td>
                         </tr>
                     </tbody>
                 </table>

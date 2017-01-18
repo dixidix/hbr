@@ -21,6 +21,7 @@ function navbarDirective(angular, app) {
             }, function(newVal, oldVal) {
                 scope.isLogged = sessionStorage.getItem('sskey') || false;
                 scope.username = sessionStorage.getItem('username') || "";
+                scope.isAdmin = JSON.parse(sessionStorage.getItem('isAdmin'));
             }, true);
         }
 

@@ -2,17 +2,32 @@
     <link rel="stylesheet" type="text/css" href="./hbr-selfie/dist/routes/dashboard/dashboard.css">
     <aside ng-class="dashboard.collapse ? 'dashboard__sidebar--collapsed':'dashboard__sidebar'">
         <ul>
-            <a href="" ng-if="!dashboard.collapse" data-ng-click="dashboard.collapse_sidebar()">
-                <li>
-                    <i class="fa fa-eye-slash"></i>
-                    <span>Ocultar Menu</span>
-                </li>
-            </a>
-            <a href="" ng-if="dashboard.collapse" data-ng-click="dashboard.collapse_sidebar()" tooltip-placement="right" uib-tooltip="Mostrar Menu">
-                <li>
-                    <i class="fa fa-eye"></i>
-                </li>
-            </a>
+            <div ng-if="dashboard.isAdmin == 0">
+                <a href="" ng-if="!dashboard.collapse" data-ng-click="dashboard.collapse_sidebar()">
+                    <li>
+                        <i class="fa fa-eye-slash"></i>
+                        <span>Ocultar Menu</span>
+                    </li>
+                </a>
+                <a href="" ng-if="dashboard.collapse" data-ng-click="dashboard.collapse_sidebar()" tooltip-placement="right" uib-tooltip="Mostrar Menu">
+                    <li>
+                        <i class="fa fa-eye"></i>
+                    </li>
+                </a>
+            </div>
+            <div ng-if="dashboard.isAdmin == 1">
+                <a href="" ng-if="!dashboard.collapse" data-ng-click="dashboard.collapse_sidebar()">
+                    <li>
+                        <i class="fa fa-eye-slash"></i>
+                        <span>Hide Menu</span>
+                    </li>
+                </a>
+                <a href="" ng-if="dashboard.collapse" data-ng-click="dashboard.collapse_sidebar()" tooltip-placement="right" uib-tooltip="Show Menu">
+                    <li>
+                        <i class="fa fa-eye"></i>
+                    </li>
+                </a>
+            </div>
             <div ng-if="dashboard.isAdmin == 0 && dashboard.clientType !== '2'">
                 <a href="" ui-sref="dashboard.shopping" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Agregar Compra">
                     <li><i class="fa fa-shopping-cart"></i></li>
@@ -28,39 +43,45 @@
                 </a>
             </div>
             <div ng-if="dashboard.clientType == 2">
-                <a href="" ui-sref="dashboard.process_payments" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Administrar Lotes">
+                <a href="" ui-sref="dashboard.process_payments" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Lots">
                     <li><i class="fa fa-dropbox"></i></li>
                 </a>
                 <a href="" ui-sref="dashboard.process_payments" ng-if="!dashboard.collapse">
-                    <li><i class="fa fa-dropbox"></i><span>Administrar Lotes </span></li>
+                    <li><i class="fa fa-dropbox"></i><span>Lots </span></li>
                 </a>
             </div>
             <div ng-if="dashboard.isAdmin == 1">
-                <a href="" ui-sref="dashboard.process_payments" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Administrar Lotes">
+                <a href="" ui-sref="dashboard.process_payments" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Lots">
                     <li><i class="fa fa-dropbox"></i></li>
                 </a>
                 <a href="" ui-sref="dashboard.process_payments" ng-if="!dashboard.collapse">
-                    <li><i class="fa fa-dropbox"></i><span>Administrar Lotes </span></li>
+                    <li><i class="fa fa-dropbox"></i><span>Lots </span></li>
                 </a>
-                <a href="" ui-sref="dashboard.categories" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Cargar Categor&iacute;as">
+                <a href="" ui-sref="dashboard.manage_awb" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="AirWay Bill">
+                    <li><i class="fa fa-plane"></i></li>
+                </a>
+                <a href="" ui-sref="dashboard.manage_awb" ng-if="!dashboard.collapse">
+                    <li><i class="fa fa-plane"></i><span>AirWay Bill </span></li>
+                </a>
+                <a href="" ui-sref="dashboard.categories" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Add Categories">
                     <li><i class="fa fa-book"></i></li>
                 </a>
                 <a href="" ui-sref="dashboard.categories" ng-if="!dashboard.collapse">
-                    <li><i class="fa fa-book"></i><span> Categor&iacute;as </span></li>
+                    <li><i class="fa fa-book"></i><span> Categories </span></li>
                 </a>
-                <a href="" ui-sref="dashboard.users" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Admin. Particulares">
+                <a href="" ui-sref="dashboard.users" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Manage Users">
                     <li><i class="fa fa-users"></i></li>
                 </a>
                 <a href="" ui-sref="dashboard.users" ng-if="!dashboard.collapse">
-                    <li><i class="fa fa-users"></i><span> Particulares </span></li>
+                    <li><i class="fa fa-users"></i><span> Manage Users </span></li>
                 </a>
-                <a href="" ui-sref="dashboard.business" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Admin. Empresas">
+                <a href="" ui-sref="dashboard.business" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Manage Business">
                     <li><i class="fa fa-building"></i></li>
                 </a>
                 <a href="" ui-sref="dashboard.business" ng-if="!dashboard.collapse">
-                    <li><i class="fa fa-building"></i><span> Empresas </span></li>
+                    <li><i class="fa fa-building"></i><span> Manage Business </span></li>
                 </a>
-                <a href="" ui-sref="dashboard.warehouse" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Admin. Warehouse">
+                <a href="" ui-sref="dashboard.warehouse" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Manage Warehouse">
                     <li><i class="fa fa-home"></i></li>
                 </a>
                 <a href="" ui-sref="dashboard.warehouse" ng-if="!dashboard.collapse">

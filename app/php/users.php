@@ -223,11 +223,9 @@ function login($data){
 		if(!empty($rss['warehouse_name'])){
 			$resolve_data['name'] = $rss['warehouse_name'];
 		}
-				if(!empty($rss['client_type'])){
-			$resolve_data['client_type'] = $rss['client_type'];
-		}
 		$resolve_data['lastname'] = $rss['lastname'];
 		$resolve_data['isAdmin'] = $rss['isAdmin'];
+		$resolve_data['client_type'] = $rss['client_type'];
 		
 		MysqliDB::getInstance()->query("UPDATE `users` SET `sskey`='".$sskey."' WHERE `id`='$id'");
 		$resolve_data['sskey'] = $sskey;

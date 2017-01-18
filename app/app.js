@@ -68,6 +68,7 @@
     require('./services/forms/products.js')(angular, app);
     require('./services/forms/users.js')(angular, app);
     require('./services/forms/categories.js')(angular, app);
+    require('./services/forms/airway.js')(angular, app);
     require('./services/uploadService.js')(angular, app);
 
     require('./components/navbar/navbar.js')(angular, app);

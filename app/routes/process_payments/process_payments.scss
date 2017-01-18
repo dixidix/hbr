@@ -14,7 +14,14 @@
             /* <-- Apparently some margin are still there even though it's hidden */
         }
         .controls {
-            float: right;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+            label {
+                white-space: nowrap;
+                margin-right:10px;
+            }
             button {
                 margin-left: 10px;
             }
@@ -72,7 +79,9 @@
         h3.table-title {
             margin:15px 0px;
         }
-        
+        .product-table{
+            padding-top:30px;
+        }
         .table {
             border: 0.1px solid $hbr-blue;
 

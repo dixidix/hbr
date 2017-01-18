@@ -11,17 +11,21 @@
             <li>Registrarme</li>
         </a>
         <a href="" ng-if="isLogged" ng-click="navbar.logout()">
-            <li>Salir</li>
+            <li ng-if="isAdmin == 0">Salir</li>
+            <li ng-if="isAdmin == 1">Log out</li>
         </a>
-        <a href="" ng-if="isLogged" ui-sref="dashboard.profile" ng-if="dashboard.collapse" tooltip-placement="bottom" uib-tooltip="Ver Perfil">
+        <a href="" ng-if="isLogged && isAdmin == 0" ui-sref="dashboard.profile" ng-if="dashboard.collapse" tooltip-placement="bottom" uib-tooltip="Ver Perfil">
             <li> {{ username }} </li>
         </a>
-
+        <a href="" ng-if="isLogged && isAdmin == 1" ui-sref="dashboard.profile" ng-if="dashboard.collapse" tooltip-placement="bottom" uib-tooltip="Profile">
+            <li> {{ username }} </li>
+        </a>
         <a ng-if="!isLogged" href="http://tucourier.com.ar/#home">
             <li>Home</li>
         </a>
         <a ng-if="isLogged" href="" ui-sref="dashboard">
-            <li>Inicio</li>
+            <li ng-if="isAdmin == 0">Inicio</li>
+            <li ng-if="isAdmin == 1">Home</li>
         </a>
     </ul>
 </div>

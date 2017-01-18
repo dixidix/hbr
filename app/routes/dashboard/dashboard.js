@@ -16,9 +16,9 @@ function dashboardController(angular, app) {
         function init() {
             self.collapse = false;
             self.collapse_sidebar = collapse_sidebar;
-            self.isAdmin = sessionStorage.getItem('isAdmin') || 0;
-            self.clientType = sessionStorage.getItem('clientType') || 0;
-            console.log(self.clientType);
+            self.isAdmin = JSON.parse(sessionStorage.getItem('isAdmin'));
+            self.clientType = JSON.parse(sessionStorage.getItem('clientType'));
+            console.log(self.isAdmin, self.clientType);
         }
         init();
     }

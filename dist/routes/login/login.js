@@ -15,6 +15,7 @@ function loginController(angular, app) {
             authenticationService.login(self.user)
                 .then(function(response) {
                     if (!response.data.errors) {
+                        console.log(response.data);
                         sessionStorage.setItem("sskey", response.data.sskey);
                         sessionStorage.setItem("isAdmin", response.data.isAdmin);
                         sessionStorage.setItem("clientType", response.data.client_type);

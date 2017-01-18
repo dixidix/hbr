@@ -168,7 +168,13 @@ html {
     margin: 0;
     /* <-- Apparently some margin are still there even though it's hidden */ }
   .modal-dialog .modal-body .controls {
-    float: right; }
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end; }
+    .modal-dialog .modal-body .controls label {
+      white-space: nowrap;
+      margin-right: 10px; }
     .modal-dialog .modal-body .controls button {
       margin-left: 10px; }
     .modal-dialog .modal-body .controls i {
@@ -208,6 +214,8 @@ html {
       font-family: "museoSans-500", Arial; }
   .modal-dialog .modal-body h3.table-title {
     margin: 15px 0px; }
+  .modal-dialog .modal-body .product-table {
+    padding-top: 30px; }
   .modal-dialog .modal-body .table {
     border: 0.1px solid #19156a; }
   .modal-dialog .modal-body .table-bordered > tbody > .row-danger {

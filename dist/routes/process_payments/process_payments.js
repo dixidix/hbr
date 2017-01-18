@@ -10,7 +10,7 @@ function processPaymentsController(angular, app) {
 	modaProcessCtrl.$inject = ['$scope', '$state', '$filter', '$uibModalInstance', '$uibModal', '$sce', '$compile', '$rootScope', 'venta', 'bills', '$http'];
 
 	app.controller('makeGuidesModalCtrl', makeGuidesModalCtrl);
-	makeGuidesModalCtrl.$inject = ['$scope', '$state', '$filter', '$uibModalInstance', '$uibModal', '$sce', '$compile', '$rootScope', 'venta', 'bills', '$http'];
+	makeGuidesModalCtrl.$inject = ['$scope', '$state', '$filter', '$uibModalInstance', '$uibModal', '$sce', '$compile', '$rootScope', 'venta', 'bills', '$http', 'airwayService'];
 
 	function processPaymentsCtrl($http, $filter, $state, $scope, $uibModal) {
 		var self = this; //jshint ignore:line
@@ -65,7 +65,6 @@ function processPaymentsController(angular, app) {
 		function init() {
 			$http.get('./hbr-selfie/dist/php/get_batch.php', { params: { action: "getAll" } })
 				.then(function (response) {
-					console.log(response.data.ventas);
 					angular.forEach(response.data.ventas, function (value, key) {
 						response.data.ventas[key].parcial_price = parseFloat(value.parcial_price).toFixed(2);
 						response.data.ventas[key].total = parseFloat(value.total).toFixed(2);
@@ -254,7 +253,7 @@ function processPaymentsController(angular, app) {
 		init();
 	}
 
-	function makeGuidesModalCtrl($scope, $state, $filter, $uibModalInstance, $uibModal, $sce, $compile, $rootScope, venta, bills, $http) {
+	function makeGuidesModalCtrl($scope, $state, $filter, $uibModalInstance, $uibModal, $sce, $compile, $rootScope, venta, bills, $http, airwayService) {
 		var self = this;
 
 		function cancel() {
@@ -267,39 +266,44 @@ function processPaymentsController(angular, app) {
 				bill.isOpen = false;
 			});
 
-			bill.isOpen = true;			
+			bill.isOpen = true;
 			self.selectedBill = bill;
 
 		}
 		function new_guide() {
 			self.guideNumber++;
-			self.guideBatch.push({ number: self.guideNumber, products: [], quantity: '', guide_weight: '', guide_price: '' });
+			self.guideBatch.push({ number: self.guideNumber, products: [], quantity: '', weight: '', price: '' });
 		}
 
-		function addToGuide(product,bill, guideNumber, amount) {
+		function addToGuide(product, bill, guideNumber, amount) {
+			self.venta.remaining_quantity = parseInt(parseInt(self.venta.remaining_quantity) - parseInt(amount));
 			angular.forEach(self.guideBatch, function (guide) {
-							angular.forEach(guide.products, function(guideProd){
-								if(guideProd.product_id === product.product_id){
-										product.exist = true;
-										guideProd.quantity = parseInt(guideProd.quantity) + parseInt(amount); 
-										product.quantity =  parseInt(product.quantity) - parseInt(amount);
-										return;
-								}
-							});
 				angular.forEach(bill.products, function (value) {
-					if (value.product_id == product.product_id && !product.exist) {
+					if (value.product_id == product.product_id) {
 						if (value.quantity > 0) {
 							if (guide.number === guideNumber) {
-								product.guide_amount = amount;
-								guide.products.push(product);
-								value.quantity = parseInt(value.quantity) - parseInt(amount);
-								guide.total_quantity = parseInt(guide.total_quantity || 0) + parseInt(amount || 0);
-								guide.guide_total_weight = (parseFloat(guide.guide_total_weight || 0) + parseFloat(parseFloat(product.weight || 0) * amount));
-								guide.guide_total_price = (parseFloat(guide.guide_total_price || 0) + parseFloat(parseFloat(product.price || 0) * amount));
-								if (guide.guide_total_weight > 40 || guide.guide_total_price > 900) {
+								var tmp_prod = angular.copy(value);
+
+								//check if product is already on the list								
+								tmp_prod.exist = $filter('filter')(guide.products, { product_id: tmp_prod.product_id })[0] !== undefined ? true : false;
+
+								if (!tmp_prod.exist) {
+									tmp_prod.quantity = parseInt(amount);
+									guide.products.push(tmp_prod);
+									value.quantity = parseInt(value.quantity) - parseInt(amount);
+								} else {
+									var filteredProduct = $filter('filter')(guide.products, { product_id: tmp_prod.product_id })[0];
+									filteredProduct.quantity = parseInt(parseInt(filteredProduct.quantity) + parseInt(amount));
+									value.quantity = parseInt(value.quantity) - parseInt(amount);
+								}
+								guide.quantity = parseInt(guide.quantity || 0) + parseInt(amount || 0);
+								guide.weight = parseFloat(parseFloat(guide.weight || 0) + parseFloat(parseFloat(product.real_weight || product.weight || 0) * amount)).toFixed(2);
+								guide.price = parseFloat(parseFloat(guide.price || 0) + parseFloat(parseFloat(product.price || 0) * amount)).toFixed(2);
+
+								if (guide.weight > 40 || guide.price > 900) {
 									$('#guide_list_' + guideNumber).addClass('row-warning');
 									self.danger_msg = "";
-									if (guide.guide_total_weight > 50 || guide.guide_total_weight == 50 || guide.guide_total_price > 1000 || guide.guide_total_price == 1000) {
+									if (guide.weight > 50 || guide.weight == 50 || guide.price > 1000 || guide.price == 1000) {
 										$('#guide_list_' + guideNumber).removeClass('row-warning');
 										$('#guide_list_' + guideNumber).addClass('row-danger');
 										self.danger_msg = "Has Excedido el limite de 50 Kg o U$D 1,000.00";
@@ -313,36 +317,87 @@ function processPaymentsController(angular, app) {
 						}
 					}
 				});
-				if (bill.products.length == 0) {
-					self.hideTable = true;
-				} else {
-					self.hideTable = false;
-				}
 			});
+			if (bill.products.length == 0) {
+				self.hideTable = true;
+			} else {
+				self.hideTable = false;
+			}
 			self.selectedGuide = null;
 			self.selectedQuantity = null;
-			console.log(self.guideBatch);
 		}
 
 		function removeProduct(product, guide) {
-			angular.forEach(self.products, function (value) {
-				console.log(value.id, product.id);
-				if (value.id == product.id) {
-					value.quantity = parseInt(value.quantity) + parseInt(product.guide_amount);
-				}
+			angular.forEach(self.bills, function (bill) {
+				angular.forEach(bill.products, function (value) {
+					if (value.product_id == product.product_id) {
+						value.quantity = parseInt(parseInt(value.quantity) + parseInt(product.quantity));
+					}
+				});
 			});
 			angular.forEach(guide.products, function (value, index) {
-				if (value.id == product.id) {
+				if (value.product_id == product.product_id) {
 					guide.products.splice(index, 1);
-					guide.total_quantity = parseInt(guide.total_quantity) - parseInt(product.guide_amount);
-					guide.guide_total_weight = parseFloat(guide.guide_total_weight) - (parseFloat(product.partial_weight) * product.guide_amount);
-					guide.guide_total_price = parseFloat(guide.guide_total_price) - (parseFloat(product.partial_price) * product.guide_amount);
+					guide.quantity = parseInt(guide.quantity) - parseInt(product.quantity);
+					guide.weight = parseFloat(parseFloat(guide.weight) - (parseFloat(product.real_weight) * product.quantity)).toFixed(2);
+					guide.price = parseFloat(parseFloat(guide.price) - (parseFloat(product.price) * product.quantity)).toFixed(2);
+				}
+			});
+			if (guide.weight > 40 || guide.price > 900) {
+				$('#guide_list_' + guideNumber).addClass('row-warning');
+				self.danger_msg = "";
+				if (guide.weight > 50 || guide.weight == 50 || guide.price > 1000 || guide.price == 1000) {
+					$('#guide_list_' + guideNumber).removeClass('row-warning');
+					$('#guide_list_' + guideNumber).addClass('row-danger');
+					self.danger_msg = "Has Excedido el limite de 50 Kg o U$D 1,000.00";
+				}
+			} else {
+				self.danger_msg = "";
+				$('#guide_list_' + guideNumber).removeClass('row-warning');
+				$('#guide_list_' + guideNumber).removeClass('row-danger');
+			}
+
+		}
+
+		function setRealWeight(product, index) {
+			self.activeEditing = !self.activeEditing;
+			$scope.realWeight = angular.copy(product.real_weight || product.weight || 0);
+			$scope.RealWeightProduct = product;
+		}
+
+		function saveRealWeight(weight) {
+			self.activeEditing = false;
+			angular.forEach(self.bills, function (bill) {
+				var product = $filter('filter')(bill.products, { product_id: $scope.RealWeightProduct.product_id })[0];
+				if (product !== undefined) {
+					product.real_weight = weight;
 				}
 			});
 		}
 
-		function activateInput(index, product) {
-			self.activeEditing[index] = true;
+
+		function save() {
+			if (self.venta.remaining_quantity === 0) {
+				self.guideBatch.finished = true;
+			}
+
+			angular.forEach(self.guideBatch, function (awb) {
+				airwayService.save(awb)
+					.success(function (response) {
+						console.log(response, "added awb");
+						airwayService.addProductToAwb(awb.products, response.airwayId)
+							.success(function (response) {
+								console.log("added Product");
+								console.log(response);
+							})
+							.error(function (err) {
+								console.log(err);
+							});
+					})
+					.error(function (err) {
+						console.log(err);
+					});
+			});
 		}
 
 		function init() {
@@ -352,16 +407,23 @@ function processPaymentsController(angular, app) {
 			self.bills = bills;
 			angular.forEach(self.bills, function (bill) {
 				bill.isOpen = false;
+				angular.forEach(bill.products, function (product) {
+					product.real_weight = angular.copy(product.weight);
+				});
 			});
+
 			self.new_guide = new_guide;
 			self.addToGuide = addToGuide;
 			self.removeProduct = removeProduct;
 			self.guideBatch = [];
 			self.hideTable = false;
 			self.activeEditing = false;
-			self.activateInput = activateInput;
 			self.selectedBill = {};
 			self.selectBill = selectBill;
+			self.setRealWeight = setRealWeight;
+			self.saveRealWeight = saveRealWeight;
+			self.save = save;
+			self.venta.remaining_quantity = angular.copy(self.venta.total_quantity);
 		}
 
 		init();

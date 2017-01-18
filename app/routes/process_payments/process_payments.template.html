@@ -1,11 +1,11 @@
 <div class="process_payments container-fluid" ng-cloak>
 	<link rel="stylesheet" type="text/css" href="./hbr-selfie/dist/routes/process_payments/process_payments.css">
-	<h3><i class="fa fa-usd"></i> Procesar pagos</h3>
+	<h3><i class="fa fa-dropbox"></i>Manage Lots</h3>
 	<hr>
 	<div class="col-xs-12 content" ng-if="!processPayments.ventas.length">
 		<div class="row">
 			<div class="empty-list">
-				<h3>No se han registrado compras asociadas a&uacute;n.</h3>
+				<h3>No purchases have been registered yet.</h3>
 			</div>
 		</div>
 	</div>
@@ -13,44 +13,43 @@
 		<table class="table table-bordered table-striped table-curved rounded">
 			<div class="col-xs-6 form-inline" style="margin-bottom:10px;float:right;padding-right:0;">
 				<div class="form-group pull-right">
-					<label for="loteseach">Buscar N° Lote
-					<input style="margin-left:5px;" id="loteseach" type="search" ng-model="searchLote" name="lote" placeholder="buscar lote" class="form-control">
+					<label for="loteseach">Search By Lot Number
+					<input style="margin-left:5px;" id="loteseach" type="search" ng-model="searchLote" name="lote" placeholder="Search Lot" class="form-control">
 					</label>
 				</div>
 			</div>
 			<form style="vertical-align: middle;">
 				<div class="col-xs-5" style="margin-top: 5px;">
 					<label class="radio-inline">
-					<input ng-value="" checked="checked" ng-model="selectedFilter" type="radio" name="optradio">Ver
-					todos
+					<input ng-value="" checked="checked" ng-model="selectedFilter" type="radio" name="optradio">All
 					</label>
 					<label class="radio-inline">
-					<input ng-value="1" ng-model="selectedFilter" type="radio" name="optradio">Filtrar pagados
+					<input ng-value="1" ng-model="selectedFilter" type="radio" name="optradio">Paid
 					</label>
 					<label class="radio-inline">
-					<input ng-value="0" ng-model="selectedFilter" type="radio" name="optradio">Filtrar sin pagar
+					<input ng-value="0" ng-model="selectedFilter" type="radio" name="optradio">Unpaid
 					</label>
 				</div>
 			</form>
 			<thead>
 				<tr>
-					<td><span>Lote #</span></td>
-					<td><span>Fecha de solicitud</span></td>
-					<td><span>Precio Parcial</span></td>
-					<td><span>Peso Total</span></td>
-					<td><span>Cantidad total</span></td>
-					<td><span>Cant. Guias</span></td>
+					<td><span>Lot #</span></td>
+					<td><span>Request Date</span></td>
+					<td><span>Price</span></td>
+					<td><span>Total Weight</span></td>
+					<td><span>Products remaining </span></td>
+					<td><span>Amount of ABW</span></td>
 					<td><span>Total Warehouse</span></td>
-					<td><span>Total Flete</span></td>
-					<td><span>Total a pagar</span></td>
-					<td><span>Total Impuestos <br> (a pagar a contraentrega)</span></td>
-					<td><span>Acciones</span></td>
+					<td><span>Total Freight</span></td>
+					<td><span>Total</span></td>
+					<td><span>Total Taxes <br> (to pay upon delivery)</span></td>
+					<td><span>Actions</span></td>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="venta in processPayments.ventas |filter: { state: selectedFilter,  id: searchLote }  track by $index">
 					<td><span>{{ venta.id }}</span></td>
-					<td><span>{{ venta.timestamp | date:'MM/dd/yyyy'}}</span></td>
+					<td><span>{{ venta.timestamp * 1000 | date:'yyyy-MM-dd HH:mm:ss'}}</span></td>
 					<td><span>${{ venta.parcial_price }}</span></td>
 					<td><span>{{ venta.total_weight }}</span></td>
 					<td><span>{{ venta.total_quantity }}</span></td>
@@ -73,8 +72,8 @@
 					</td>
 					<td ng-if="venta.paymentGatewayUrl" ng-class="venta.state == 1 ? 'payed' : 'unpayed' "><span ng-bind="venta.state == 0 ? 'Pendiente de pago' : 'Pagado'"></span></td>
 					<td ng-if="!venta.paymentGatewayUrl">
-						<button ng-if="venta.state == 1" ng-click="processPayments.processPayment(venta, venta.bills)" class="btn btn-default">Procesar</button>
-						<button ng-if="venta.state == 0" ng-click="processPayments.setGuides(venta, venta.bills)" class="btn btn-default">Armar Guias</button>
+						<button ng-if="venta.state == 1" ng-click="processPayments.processPayment(venta, venta.bills)" class="btn btn-default">Process Lot</button>
+						<button ng-if="venta.state == 0" ng-click="processPayments.setGuides(venta, venta.bills)" class="btn btn-default">Make ABW</button>
 					</td>
 				</tr>
 			</tbody>

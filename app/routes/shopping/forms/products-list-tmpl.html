@@ -1,60 +1,59 @@
 <div class="row" ng-if="!shopping.lote.bills.length">
     <div class="empty-list">
-        <h3>No se han registrado compras asociadas a&uacute;n.</h3>       
+        <h3>No se han registrado compras asociadas a&uacute;n.</h3>
     </div>
 </div>
 
 <div ng-if="shopping.lote.bills.length">
-<table class="table table-bordered table-striped table-curved rounded">
-    <thead>
-        <tr>
-            <td><span>N° Factura</span></td>
-            <td><span>Tracking</span></td>
-            <td><span>Prestador Postal</span></td>
-            <td><span>Tienda de compra</span></td>
-            <td><span>Productos</span></td>
-            <td><span>Cant. Productos</span></td>
-            <td><span>Peso Total</span></td>
-            <td><span>Precio Total</span></td>
-            <td><span>Acciones</span></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="bill in shopping.lote.bills track by $index">
-            <td><span>{{ bill.number }}</span></td>
-            <td><span>{{ bill.tracking_number }}</span></td>
-            <td><span>{{ bill.provider }}</span></td>
-            <td><span>{{bill.establishment }}</span></td>
-            <td>
-                <table class="col-xs-12" ng-if="bill.products.length">
-                    <thead>
-                        <tr style="background-color:transparent;">
-<td class="col-xs-3"><span> Categor&iacute;a </span></td>
-<td class="col-xs-3"><span> Producto </span></td>
-<td class="col-xs-3"><span> Cant. </span></td>
-<td class="col-xs-3"><span> Precio </span></td>
-<td class="col-xs-3"><span> Peso </span></td>
-</tr>
-</thead>
-<tbody>
-    <tr ng-repeat="product in bill.products track by $index">
-        <td>{{ product.category.name }}</td>
-        <td>{{ product.name }} </td>
-        <td>{{ product.quantity }} </td>
-        <td>{{ product.price | currency }}</td>
-        <td>{{ product.weight }} KG.</td>
-    </tr>
-</tbody>
-</table>
-</td>
-<td><span>{{ bill.quantity }}</span></td>
-<td><span>{{ bill.total_weight }} KG. </span></td>
-<td><span>{{ bill.total_price }}</span></td>
-<td><span><i class="fa fa-file"></i></span><span><i class="fa fa-close"></i></span></td>
-
-</tr>
-</tbody>
-</table>
+    <table class="table table-bordered table-striped table-curved rounded">
+        <thead>
+            <tr>
+                <td><span>N° Factura</span></td>
+                <td><span>Tracking</span></td>
+                <td><span>Prestador Postal</span></td>
+                <td><span>Tienda de compra</span></td>
+                <td><span>Productos</span></td>
+                <td><span>Cant. Productos</span></td>
+                <td><span>Peso Total</span></td>
+                <td><span>Precio Total</span></td>
+                <td><span>Acciones</span></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="bill in shopping.lote.bills track by $index">
+                <td><span>{{ bill.number }}</span></td>
+                <td><span>{{ bill.tracking_number }}</span></td>
+                <td><span>{{ bill.provider }}</span></td>
+                <td><span>{{bill.establishment }}</span></td>
+                <td>
+                    <table class="col-xs-12" ng-if="bill.products.length">
+                        <thead>
+                            <tr style="background-color:transparent;">
+                                <td class="col-xs-3"><span> Categor&iacute;a </span></td>
+                                <td class="col-xs-3"><span> Producto </span></td>
+                                <td class="col-xs-3"><span> Cant. </span></td>
+                                <td class="col-xs-3"><span> Precio </span></td>
+                                <td class="col-xs-3"><span> Peso </span></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="product in bill.products track by $index">
+                                <td>{{ product.category.name }}</td>
+                                <td>{{ product.name }} </td>
+                                <td>{{ product.quantity }} </td>
+                                <td>{{ product.price | currency }}</td>
+                                <td>{{ product.weight }} KG.</td>
+                            </tr>       
+                        </tbody>
+                    </table>
+                </td>
+                <td><span>{{ bill.quantity }}</span></td>
+                <td><span>{{ bill.total_weight }} KG. </span></td>
+                <td><span>{{ bill.total_price }}</span></td>
+                <td><span><i class="fa fa-close" ng-click="shopping.lote.bills.splice($index, 1);"></i></span></td>
+            </tr>
+        </tbody>
+    </table>
 <div class="well well-lg" ng-if="shopping.excedente_peso">
     <ul>
         <li>
