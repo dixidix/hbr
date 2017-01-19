@@ -14,7 +14,7 @@ foreach($_POST as $key=>$value) {
 }
 
 if (empty($errors)){
-    MysqliDB::getInstance()->query("INSERT INTO `airway_bill_product`(`airwayId`, `category_id`, `name`, `price`, `quantity`, `total_price`, `real_weight`, `total_weight`, `userId`) VALUES (".$airwayId.",".$category_id.",'".$name."',".$price.",".$quantity.",".$total_price.",".$real_weight.",".$total_weight.",".$userId.")");
+    MysqliDB::getInstance()->query("UPDATE `bills` SET `quantity`= ".$quantity.",`totalprice`=".$total_price.",`totalweight`=".$total_weight." WHERE `bill_id`= ".$bill_id."");
 
 	$resolve_data['success'] = true;	
 	MysqliDB::getInstance()->close();

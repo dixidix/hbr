@@ -10,7 +10,7 @@ function processPaymentsController(angular, app) {
 	modaProcessCtrl.$inject = ['$scope', '$state', '$filter', '$uibModalInstance', '$uibModal', '$sce', '$compile', '$rootScope', 'venta', 'bills', '$http'];
 
 	app.controller('makeGuidesModalCtrl', makeGuidesModalCtrl);
-	makeGuidesModalCtrl.$inject = ['$scope', '$state', '$filter', '$uibModalInstance', '$uibModal', '$sce', '$compile', '$rootScope', 'venta', 'bills', '$http', 'airwayService'];
+	makeGuidesModalCtrl.$inject = ['$scope', '$state', '$filter', '$uibModalInstance', '$uibModal', '$sce', '$compile', '$rootScope', 'venta', 'bills', '$http', 'airwayService', '$q'];
 
 	function processPaymentsCtrl($http, $filter, $state, $scope, $uibModal) {
 		var self = this; //jshint ignore:line
@@ -119,7 +119,6 @@ function processPaymentsController(angular, app) {
 		};
 
 		function processProduct(product) {
-			console.log(product);
 			self.currentProduct = {};
 			self.currentProduct.id = product.id;
 			self.currentProduct.category = product.category_name;
@@ -253,7 +252,7 @@ function processPaymentsController(angular, app) {
 		init();
 	}
 
-	function makeGuidesModalCtrl($scope, $state, $filter, $uibModalInstance, $uibModal, $sce, $compile, $rootScope, venta, bills, $http, airwayService) {
+	function makeGuidesModalCtrl($scope, $state, $filter, $uibModalInstance, $uibModal, $sce, $compile, $rootScope, venta, bills, $http, airwayService, $q) {
 		var self = this;
 
 		function cancel() {
@@ -299,7 +298,7 @@ function processPaymentsController(angular, app) {
 								guide.quantity = parseInt(guide.quantity || 0) + parseInt(amount || 0);
 								guide.weight = parseFloat(parseFloat(guide.weight || 0) + parseFloat(parseFloat(product.real_weight || product.weight || 0) * amount)).toFixed(2);
 								guide.price = parseFloat(parseFloat(guide.price || 0) + parseFloat(parseFloat(product.price || 0) * amount)).toFixed(2);
-
+								guide.ventaId = self.venta.id;
 								if (guide.weight > 40 || guide.price > 900) {
 									$('#guide_list_' + guideNumber).addClass('row-warning');
 									self.danger_msg = "";
@@ -377,26 +376,58 @@ function processPaymentsController(angular, app) {
 
 
 		function save() {
+			var requests = [];
 			if (self.venta.remaining_quantity === 0) {
 				self.guideBatch.finished = true;
 			}
+			var sequence = $q.defer();
+			sequence.resolve();
+			sequence = sequence.promise;
 
 			angular.forEach(self.guideBatch, function (awb) {
-				airwayService.save(awb)
-					.success(function (response) {
-						console.log(response, "added awb");
-						airwayService.addProductToAwb(awb.products, response.airwayId)
-							.success(function (response) {
-								console.log("added Product");
-								console.log(response);
-							})
-							.error(function (err) {
-								console.log(err);
-							});
-					})
-					.error(function (err) {
-						console.log(err);
+				sequence = sequence.then(function () {
+					return airwayService.save(awb).success(function (response) {
+						angular.forEach(awb.products, function (product) {
+							product.airwayId = response.airwayId;
+							airwayService.addProductToAwb(product)
+						});
 					});
+				});
+			});
+			updateVenta();
+		}
+
+		function updateVenta() {
+
+
+
+			var sequence = $q.defer();
+			sequence.resolve();
+			sequence = sequence.promise;
+			var ventaQuantity = 0;
+			angular.forEach(self.venta.bills, function (bill) {
+				var billQuantity = 0, billPrice = 0.00, billWeight = 0.00;				
+				angular.forEach(bill.products, function (product) {
+					product.total_price = parseFloat(parseFloat(product.price) * parseInt(product.quantity)).toFixed(2);
+					product.total_weight = parseFloat(parseFloat(product.real_weight) * parseInt(product.quantity)).toFixed(2);
+
+					billQuantity = parseInt(parseInt(billQuantity) + parseInt(product.quantity));
+					billPrice = parseFloat(parseFloat(billPrice) + parseFloat(product.total_price)).toFixed(2);
+					billWeight = parseFloat(parseInt(billWeight) + parseFloat(product.total_weight)).toFixed(2);
+
+				});
+				bill.quantity     = billQuantity;
+				bill.total_price  = billPrice;
+				bill.total_weight = billWeight;
+
+				sequence = sequence.then(function () {
+					return airwayService.updateBill(bill).success(function (response) {
+						angular.forEach(bill.products, function (product) {
+							airwayService.updateProduct(product);
+						});
+					});
+				});
+				var ventaQuantity = parseInt(parseInt(ventaQuantity) + parseInt(bill.quantity));
 			});
 		}
 

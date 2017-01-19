@@ -14,7 +14,7 @@ foreach($_POST as $key=>$value) {
 }
 
 if (empty($errors)){
-    MysqliDB::getInstance()->query("INSERT INTO `airway_bill`(`number`, `quantity`, `weight`, `price`) VALUES (".$number.", ".$quantity.", ".$weight.", ".$price.")");
+    MysqliDB::getInstance()->query("INSERT INTO `airway_bill`(`ventaId`,`number`, `quantity`, `weight`, `price`) VALUES (".$ventaId.",".$number.", ".$quantity.", ".$weight.", ".$price.")");
 
     $res = MysqliDB::getInstance()->query("SELECT MAX(airwayId) as id FROM `airway_bill`");		
     $rows = mysqli_num_rows($res);
