@@ -417,11 +417,12 @@ function processPaymentsController(angular, app) {
 					});
 				});
 
-				var ventaQuantity = parseInt(parseInt(ventaQuantity) + parseInt(bill.remaining_quantity));
+				ventaQuantity = parseInt(parseInt(ventaQuantity) + parseInt(bill.remaining_quantity));
 			});
 			self.venta.total_remaining_quantity = ventaQuantity;
 			airwayService.updateVenta(self.venta).success(function (response) {
-				
+				$uibModalInstance.dismiss('cancel');
+				$state.go('dashboard.process_payments', {}, { reload: true });
 			});
 		}
 
@@ -436,7 +437,13 @@ function processPaymentsController(angular, app) {
 					product.real_weight = angular.copy(product.weight);
 				});
 			});
-
+			airwayService.get_airwayBills(self.venta.id)
+				.success(function (response) {
+					self.guideBatch = response.guideBatch;
+				})
+				.error(function (err) {
+					console.log(err);
+				});
 			self.new_guide = new_guide;
 			self.addToGuide = addToGuide;
 			self.removeProduct = removeProduct;

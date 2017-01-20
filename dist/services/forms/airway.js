@@ -6,6 +6,11 @@ function airwayService(angular, app) {
 
     function airwayService($http) {
 
+        this.get_airwayBills = function (ventaId) {            
+             return $http.get('./hbr-selfie/dist/php/get_airwaybills.php', 
+             {params: {  action: 'getByPurchaseId', ventaId: ventaId }});
+        };
+
         this.save = function (awb) {
             var formData = new FormData();
             var products = [];
@@ -58,7 +63,7 @@ function airwayService(angular, app) {
 
         this.updateVenta = function (venta) {
             var formData = new FormData();
-            angular.forEach(product, function (key, value) {
+            angular.forEach(venta, function (key, value) {
                 formData.append(value, key);
             });
             return $http.post('./hbr-selfie/dist/php/update_venta.php', formData, {
