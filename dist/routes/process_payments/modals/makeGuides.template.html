@@ -7,7 +7,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<h3 class="pull-left">Lot</h3>
-					<h3 class="pull-right">Products in Lot: {{ guides.venta.remaining_quantity }} </h3>
+					<h3 class="pull-right">Products in Lot: {{ guides.venta.total_remaining_quantity }} </h3>
 					<table class="table overflow-table table-bordered table-striped table-curved rounded">
 					<thead>
 						<tr>
@@ -16,6 +16,7 @@
 							<td><span>Postal Provider</span></td>
 							<td><span>Store</span></td>                            
 							<td><span>Product Quantity</span></td>
+							<td><span>Remaining Quantity</span></td>
 							<td><span>Total Weight</span></td>
 							<td><span>Total Price</span></td>
 							<td><span>Bill File</span></td>
@@ -28,6 +29,7 @@
 							<td><span>{{ bill.provider }}</span></td>
 							<td><span>{{bill.establishment }}</span></td>
 							<td><span>{{ bill.quantity }}</span></td>
+							<td><span>{{ bill.remaining_quantity }}</span></td>
 							<td><span>{{ bill.total_weight }} KG. </span></td>
 							<td><span>{{ bill.total_price }}</span></td>
 							<td><span><a  target="_self" href="http://tucourier.com.ar/hbr-selfie{{ bill.bill_file_path }}"  download="{{ bill.bill_file_name }}"><i class="fa fa-file-pdf-o"></i></a></span></td>
@@ -50,7 +52,8 @@
 						<tr>
 							<td><span> Category </span></td>
 							<td><span> Product </span></td>
-							<td><span> Amount </span></td>
+							<td><span> Quantity </span></td>
+							<td><span> Remaining  Quantity</span></td>
 							<td><span> Price </span></td>
 							<td><span> Weight </span></td>
 							<td><span> Real Weight</span></td>
@@ -62,6 +65,7 @@
 							<td>{{ product.category_name }}</td>
 							<td>{{ product.name }} </td>
 							<td>{{ product.quantity }} </td>
+							<td>{{ product.remaining_quantity }} </td>
 							<td>{{ product.price | currency }}</td>
 							<td>{{ product.weight }} KG.</td>
 							<td><a href="" ng-click="guides.setRealWeight(product, $index)">{{ product.real_weight }} KG. <i class="fa fa-edit"></i></a></td>

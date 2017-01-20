@@ -55,6 +55,17 @@ function airwayService(angular, app) {
                 headers: { 'Content-Type': undefined }
             });
         };
+
+        this.updateVenta = function (venta) {
+            var formData = new FormData();
+            angular.forEach(product, function (key, value) {
+                formData.append(value, key);
+            });
+            return $http.post('./hbr-selfie/dist/php/update_venta.php', formData, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            });
+        }
     }
 }
 module.exports = airwayService;

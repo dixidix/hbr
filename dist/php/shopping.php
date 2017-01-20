@@ -92,6 +92,7 @@ function getAll(){
 		$outp .= '"tasas":"'  . $rs["tasas"] . '",';
 		$outp .= '"total": '  . $rs["total"] . ',';
 		$outp .= '"total_quantity":"'  . $rs["total_quantity"] . '",';
+		$outp .= '"total_remaining_quantity":"'  . $rs["total_remaining_quantity"] . '",';
 		$outp .= '"transporte":"'  . $rs["transporte"] . '",';
 		$outp .= '"state":"'  . $rs["state"] . '",';
 		$outp .= '"paymentGatewayUrl":"'  . $rs["paymentGatewayUrl"] . '",';

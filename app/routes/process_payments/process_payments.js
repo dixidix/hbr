@@ -275,7 +275,7 @@ function processPaymentsController(angular, app) {
 		}
 
 		function addToGuide(product, bill, guideNumber, amount) {
-			self.venta.remaining_quantity = parseInt(parseInt(self.venta.remaining_quantity) - parseInt(amount));
+			self.venta.total_remaining_quantity = parseInt(parseInt(self.venta.total_remaining_quantity) - parseInt(amount));
 			angular.forEach(self.guideBatch, function (guide) {
 				angular.forEach(bill.products, function (value) {
 					if (value.product_id == product.product_id) {
@@ -289,7 +289,7 @@ function processPaymentsController(angular, app) {
 								if (!tmp_prod.exist) {
 									tmp_prod.quantity = parseInt(amount);
 									guide.products.push(tmp_prod);
-									value.quantity = parseInt(value.quantity) - parseInt(amount);
+									value.remaining_quantity = parseInt(value.remaining_quantity) - parseInt(amount);
 								} else {
 									var filteredProduct = $filter('filter')(guide.products, { product_id: tmp_prod.product_id })[0];
 									filteredProduct.quantity = parseInt(parseInt(filteredProduct.quantity) + parseInt(amount));
@@ -398,28 +398,17 @@ function processPaymentsController(angular, app) {
 		}
 
 		function updateVenta() {
-
-
-
 			var sequence = $q.defer();
 			sequence.resolve();
 			sequence = sequence.promise;
 			var ventaQuantity = 0;
 			angular.forEach(self.venta.bills, function (bill) {
-				var billQuantity = 0, billPrice = 0.00, billWeight = 0.00;				
+				var billQuantity = 0;
 				angular.forEach(bill.products, function (product) {
-					product.total_price = parseFloat(parseFloat(product.price) * parseInt(product.quantity)).toFixed(2);
-					product.total_weight = parseFloat(parseFloat(product.real_weight) * parseInt(product.quantity)).toFixed(2);
-
-					billQuantity = parseInt(parseInt(billQuantity) + parseInt(product.quantity));
-					billPrice = parseFloat(parseFloat(billPrice) + parseFloat(product.total_price)).toFixed(2);
-					billWeight = parseFloat(parseInt(billWeight) + parseFloat(product.total_weight)).toFixed(2);
-
+					billQuantity = parseInt(parseInt(billQuantity) + parseInt(product.remaining_quantity));
 				});
-				bill.quantity     = billQuantity;
-				bill.total_price  = billPrice;
-				bill.total_weight = billWeight;
 
+				bill.remaining_quantity = billQuantity;
 				sequence = sequence.then(function () {
 					return airwayService.updateBill(bill).success(function (response) {
 						angular.forEach(bill.products, function (product) {
@@ -427,8 +416,10 @@ function processPaymentsController(angular, app) {
 						});
 					});
 				});
-				var ventaQuantity = parseInt(parseInt(ventaQuantity) + parseInt(bill.quantity));
+
+				var ventaQuantity = parseInt(parseInt(ventaQuantity) + parseInt(bill.remaining_quantity));
 			});
+			self.venta.total_remaining_quantity = ventaQuantity;
 			airwayService.updateVenta(self.venta).success(function (response) {
 				
 			});
@@ -457,7 +448,7 @@ function processPaymentsController(angular, app) {
 			self.setRealWeight = setRealWeight;
 			self.saveRealWeight = saveRealWeight;
 			self.save = save;
-			self.venta.remaining_quantity = angular.copy(self.venta.total_quantity);
+			self.venta.total_remaining_quantity = angular.copy(self.venta.total_remaining_quantity);
 		}
 
 		init();

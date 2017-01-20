@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-01-2017 a las 04:11:35
+-- Tiempo de generación: 20-01-2017 a las 03:50:49
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -44,7 +44,10 @@ CREATE TABLE `airway_bill` (
 INSERT INTO `airway_bill` (`airwayId`, `ventaId`, `number`, `quantity`, `weight`, `price`, `deleted`, `state`) VALUES
 (1, 1, 1, 5, 1, 34.95, 0, 0),
 (2, 1, 1, 5, 1, 34.95, 0, 0),
-(3, 1, 1, 5, 1, 34.95, 0, 0);
+(3, 1, 1, 5, 1, 34.95, 0, 0),
+(4, 1, 1, 5, 1, 34.95, 0, 0),
+(5, 1, 1, 8, 1.6, 55.92, 0, 0),
+(6, 1, 1, 8, 1.6, 55.92, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -70,9 +73,12 @@ CREATE TABLE `airway_bill_product` (
 --
 
 INSERT INTO `airway_bill_product` (`awb_productId`, `airwayId`, `category_id`, `name`, `price`, `quantity`, `total_price`, `real_weight`, `total_weight`, `userId`) VALUES
-(1, 1, 1, 'Remera', 6.99, 5, 69.9, 0.2, 2, 1),
-(2, 2, 1, 'Remera', 6.99, 5, 69.9, 0.2, 2, 1),
-(3, 3, 1, 'Remera', 6.99, 5, 69.9, 0.2, 2, 1);
+(1, 1, 1, 'Remera', 6.99, 5, 34.95, 0.2, 1, 1),
+(2, 2, 1, 'Remera', 6.99, 5, 34.95, 0.2, 1, 1),
+(3, 3, 1, 'Remera', 6.99, 5, 34.95, 0.2, 1, 1),
+(4, 4, 1, 'Remera', 6.99, 5, 34.95, 0.2, 1, 1),
+(5, 5, 1, 'Remera', 6.99, 8, 34.95, 0.2, 1, 1),
+(6, 6, 1, 'Remera', 6.99, 8, 34.95, 0.2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -87,6 +93,7 @@ CREATE TABLE `bills` (
   `number` varchar(150) NOT NULL,
   `provider` varchar(150) NOT NULL,
   `quantity` int(10) NOT NULL,
+  `remaining_quantity` int(11) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `totalprice` double NOT NULL,
   `totalweight` double NOT NULL,
@@ -101,9 +108,9 @@ CREATE TABLE `bills` (
 -- Volcado de datos para la tabla `bills`
 --
 
-INSERT INTO `bills` (`bill_id`, `ventaId`, `establishment`, `number`, `provider`, `quantity`, `timestamp`, `totalprice`, `totalweight`, `trackingnumber`, `deleted`, `userId`, `bill_file_name`, `bill_file_path`) VALUES
-(1, 1, 'Apple Store', '0001', 'DHL', 3, '2017-01-19 03:02:26', 4001.98, 2, '0001', 0, 1, 'QATEST.pdf', '/dist/files/1484523667594/9f3d091dddbb30a0127936643ea2591a570574e9ea758e1d1bbbb0c3f0dda570.pdf'),
-(2, 1, 'H&M', '0002', 'DHL', 13, '2017-01-19 03:05:51', 139.95, 2.5, '0002', 0, 1, 'QATEST.pdf', '/dist/files/1484523667595/2595ca3d467b0ae1e8d4beae212e600c46d18c8a97fda3c832d20579f2292c21.pdf');
+INSERT INTO `bills` (`bill_id`, `ventaId`, `establishment`, `number`, `provider`, `quantity`, `remaining_quantity`, `timestamp`, `totalprice`, `totalweight`, `trackingnumber`, `deleted`, `userId`, `bill_file_name`, `bill_file_path`) VALUES
+(1, 1, 'Apple Store', '0001', 'DHL', 3, 3, '2017-01-20 02:31:35', 4001.98, 2, '0001', 0, 1, 'QATEST.pdf', '/dist/files/1484523667594/9f3d091dddbb30a0127936643ea2591a570574e9ea758e1d1bbbb0c3f0dda570.pdf'),
+(2, 1, 'H&M', '0002', 'DHL', 13, 5, '2017-01-20 02:50:01', 139.95, 2.5, '0002', 0, 1, 'QATEST.pdf', '/dist/files/1484523667595/2595ca3d467b0ae1e8d4beae212e600c46d18c8a97fda3c832d20579f2292c21.pdf');
 
 -- --------------------------------------------------------
 
@@ -139,6 +146,7 @@ CREATE TABLE `products` (
   `name` varchar(150) NOT NULL,
   `price` float NOT NULL,
   `quantity` int(100) NOT NULL,
+  `remaining_quantity` int(11) NOT NULL,
   `totalprice` float NOT NULL,
   `totalweight` float NOT NULL,
   `weight` float NOT NULL,
@@ -150,11 +158,11 @@ CREATE TABLE `products` (
 -- Volcado de datos para la tabla `products`
 --
 
-INSERT INTO `products` (`product_id`, `bill_id`, `category_id`, `name`, `price`, `quantity`, `totalprice`, `totalweight`, `weight`, `userId`, `deleted`) VALUES
-(1, 1, 2, 'Macbook Pro', 2500, 1, 2500, 1.2, 1.2, 1, 0),
-(2, 1, 2, 'Iphone 6 plus', 750.99, 2, 1501.98, 1, 0.5, 1, 0),
-(3, 2, 1, 'Remera', 6.99, 10, 34.95, 1, 0.2, 1, 0),
-(4, 2, 1, 'Jean', 35, 3, 105, 1.5, 0.5, 1, 0);
+INSERT INTO `products` (`product_id`, `bill_id`, `category_id`, `name`, `price`, `quantity`, `remaining_quantity`, `totalprice`, `totalweight`, `weight`, `userId`, `deleted`) VALUES
+(1, 1, 2, 'Macbook Pro', 2500, 1, 1, 2500, 1.2, 1.2, 1, 0),
+(2, 1, 2, 'Iphone 6 plus', 750.99, 2, 2, 1501.98, 1, 0.5, 1, 0),
+(3, 2, 1, 'Remera', 6.99, 10, 2, 34.95, 1, 0.2, 1, 0),
+(4, 2, 1, 'Jean', 35, 3, 3, 105, 1.5, 0.5, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -193,7 +201,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `lastname`, `company_name`, `company_real_name`, `warehouse_name`, `tel`, `cel`, `email`, `password`, `sskey`, `codeType`, `idCode`, `deleted`, `address`, `localidad`, `postalcode`, `registerToken`, `registertimestamp`, `isAdmin`, `isPremium`, `client_type`) VALUES
 (1, 'Nicolass', 'Sigal', NULL, NULL, NULL, '12345', 12345, 'nico', '410ec15153a6dff0bed851467309bcbd', '5b651ede4e29b55994f8dd05bde76c71', 1, '00000001', 0, 'tabanera 33853', 'mendozaa', '55000', '0d75211910d3131a7d2472c4c41cead1', 1475968389, 0, 1, 0),
-(2, 'Santiago', 'Lloret', NULL, NULL, NULL, '1234', 0, 'santi', '21232f297a57a5a743894a0e4a801fc3', 'cbdce7e9db7bc4c17409fe40519a6735', 1, '12345678', 0, 'tabanera 3385', 'mendoza', '5500', '308192ed9a7cf69af0c004179844ace7', 1475968761, 1, 0, 0),
+(2, 'Santiago', 'Lloret', NULL, NULL, NULL, '1234', 0, 'santi', '21232f297a57a5a743894a0e4a801fc3', 'c8c1ee4d7c79011dc9fd88267746e2f7', 1, '12345678', 0, 'tabanera 3385', 'mendoza', '5500', '308192ed9a7cf69af0c004179844ace7', 1475968761, 1, 0, 0),
 (3, 'Roberto', 'Gomez', NULL, NULL, NULL, '4998877', 153997755, 'dix.inferno@gmail.com', '21232f297a57a5a743894a0e4a801fc3', NULL, 2, '7895761231', 0, 'cadetes chilenos 173', 'mendoza', '5500', 'c417aee12cc67a34d94aabdfd93377b4', 1477164242, 0, 0, 0),
 (7, '', '', 'pepe', 'pepe s.a.', NULL, '1231231', 12312312, 'pepe@pepetransf.com.ar', '21232f297a57a5a743894a0e4a801fc3', NULL, 1, '12312312312', 0, 'asdds 123123', 'mendoza', '5500', '4574ae68157b6fd29a41000e75343e16', 1480195796, 0, 0, 1),
 (8, 'part', 'part', '', '', NULL, '123123', 123123123, 'part@part.com', 'c30cc3ceb47f9c2a6217e6b731d27293', NULL, 2, '123123123123123', 0, 'part 1231', 'part', '5500', 'aa586af0a185a06981497e4a186aff9d', 1480196869, 0, 0, 0),
@@ -216,6 +224,7 @@ CREATE TABLE `ventas` (
   `parcial_price` float NOT NULL,
   `total` double NOT NULL,
   `total_quantity` int(10) NOT NULL,
+  `total_remaining_quantity` int(11) NOT NULL,
   `timestamp` varchar(150) NOT NULL,
   `deleted` int(1) NOT NULL DEFAULT '0',
   `paymentGatewayUrl` varchar(150) NOT NULL,
@@ -229,8 +238,8 @@ CREATE TABLE `ventas` (
 -- Volcado de datos para la tabla `ventas`
 --
 
-INSERT INTO `ventas` (`id`, `uid`, `parcial_price`, `total`, `total_quantity`, `timestamp`, `deleted`, `paymentGatewayUrl`, `state`, `token`, `totalweight`, `guide_amount`) VALUES
-(1, 1, 4176.88, 4176.88, 16, '1484677259 ', 0, '', 0, NULL, 5.7, 0);
+INSERT INTO `ventas` (`id`, `uid`, `parcial_price`, `total`, `total_quantity`, `total_remaining_quantity`, `timestamp`, `deleted`, `paymentGatewayUrl`, `state`, `token`, `totalweight`, `guide_amount`) VALUES
+(1, 1, 4176.88, 4176.88, 16, 16, '1484677259 ', 0, '', 0, NULL, 5.7, 0);
 
 --
 -- Índices para tablas volcadas
@@ -286,12 +295,12 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `airway_bill`
 --
 ALTER TABLE `airway_bill`
-  MODIFY `airwayId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `airwayId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `airway_bill_product`
 --
 ALTER TABLE `airway_bill_product`
-  MODIFY `awb_productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `awb_productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `bills`
 --

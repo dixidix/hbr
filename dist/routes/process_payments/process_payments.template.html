@@ -37,6 +37,7 @@
 					<td><span>Request Date</span></td>
 					<td><span>Price</span></td>
 					<td><span>Total Weight</span></td>
+					<td><span>Products quantity </span></td>
 					<td><span>Products remaining </span></td>
 					<td><span>Amount of ABW</span></td>
 					<td><span>Total Warehouse</span></td>
@@ -53,6 +54,7 @@
 					<td><span>${{ venta.parcial_price }}</span></td>
 					<td><span>{{ venta.total_weight }}</span></td>
 					<td><span>{{ venta.total_quantity }}</span></td>
+					<td><span>{{ venta.total_remaining_quantity }}</span></td>
 					<td><span>{{venta.guide_amount}}</span></td>
 					<td>
 						<span ng-if="venta.totalWarehouse > 0">{{ venta.totalWarehouse | currency}}</span>
