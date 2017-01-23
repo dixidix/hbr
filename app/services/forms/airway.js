@@ -6,9 +6,9 @@ function airwayService(angular, app) {
 
     function airwayService($http) {
 
-        this.get_airwayBills = function (ventaId) {            
+        this.get_airwayBills = function (ventaId, state) {            
              return $http.get('./hbr-selfie/dist/php/get_airwaybills.php', 
-             {params: {  action: 'getByPurchaseId', ventaId: ventaId }});
+             {params: {  action: 'getByPurchaseId', ventaId: ventaId, state: state }});
         };
 
         this.save = function (awb) {

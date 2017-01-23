@@ -281,6 +281,7 @@ function processPaymentsController(angular, app) {
 		function addToGuide(product, bill, guideNumber, amount) {
 
 			self.venta.total_remaining_quantity = parseInt(parseInt(self.venta.total_remaining_quantity) - parseInt(amount));
+			var ExceedAmount = 0;
 			angular.forEach(self.guideBatch, function (guide) {
 				angular.forEach(bill.products, function (value) {
 					if (value.product_id == product.product_id) {
@@ -310,12 +311,13 @@ function processPaymentsController(angular, app) {
 									$('#guide_list_' + guideNumber).addClass('row-warning');
 									self.danger_msg = "";
 									if (guide.weight > 50 || guide.weight == 50 || guide.price > 1000 || guide.price == 1000) {
+										if(guide.state == 0){
 										$('#guide_list_' + guideNumber).removeClass('row-warning');
 										$('#guide_list_' + guideNumber).addClass('row-danger');
-										self.danger_msg = "Has Excedido el limite de 50 Kg o U$D 1,000.00";
+										ExceedAmount = ++ExceedAmount;
+										}
 									}
 								} else {
-									self.danger_msg = "";
 									$('#guide_list_' + guideNumber).removeClass('row-warning');
 									$('#guide_list_' + guideNumber).removeClass('row-danger');
 								}
@@ -324,6 +326,7 @@ function processPaymentsController(angular, app) {
 					}
 				});
 			});
+			self.danger_msg = ExceedAmount > 0 ? "Has Excedido el limite de 50 Kg o U$D 1,000.00" : "";
 			if (bill.products.length == 0) {
 				self.hideTable = true;
 			} else {
@@ -354,28 +357,30 @@ function processPaymentsController(angular, app) {
 					guide.quantity = parseInt(parseInt(guide.quantity) - parseInt(product.quantity));
 					guide.weight = parseFloat(parseFloat(guide.weight) - (parseFloat(product.real_weight) * product.quantity)).toFixed(2);
 					guide.price = parseFloat(parseFloat(guide.price) - (parseFloat(product.price) * product.quantity)).toFixed(2);
-					if(!self.deleted){
-					$http.post('./hbr-selfie/dist/php/delete_product_guide.php', { id: product.awb_productId })
-						.then(function (){
-							airwayService.save(guide);
-						});
+					if (!self.deleted) {
+						$http.post('./hbr-selfie/dist/php/delete_product_guide.php', { id: product.awb_productId })
+							.then(function () {
+								airwayService.save(guide);
+							});
 					}
 				}
 			});
+			var ExceedAmount = 0;
 			if (guide.weight > 40 || guide.price > 900) {
 				$('#guide_list_' + guide.number).addClass('row-warning');
 				self.danger_msg = "";
 				if (guide.weight > 50 || guide.weight == 50 || guide.price > 1000 || guide.price == 1000) {
+					if(guide.state == 0){
 					$('#guide_list_' + guide.number).removeClass('row-warning');
 					$('#guide_list_' + guide.number).addClass('row-danger');
-					self.danger_msg = "Has Excedido el limite de 50 Kg o U$D 1,000.00";
+					ExceedAmount = ++ExceedAmount;
+					}
 				}
 			} else {
-				self.danger_msg = "";
 				$('#guide_list_' + guide.number).removeClass('row-warning');
 				$('#guide_list_' + guide.number).removeClass('row-danger');
 			}
-
+			self.danger_msg = ExceedAmount > 0 ? "Has Excedido el limite de 50 Kg o U$D 1,000.00" : "";
 		}
 
 		function setRealWeight(product, index) {
@@ -393,30 +398,30 @@ function processPaymentsController(angular, app) {
 			var ventaTotalWeight = 0.00;
 			angular.forEach(self.bills, function (bill) {
 				bill.total_weight = 0.00;
-				 product = $filter('filter')(bill.products, { product_id: $scope.RealWeightProduct.product_id })[0];
+				product = $filter('filter')(bill.products, { product_id: $scope.RealWeightProduct.product_id })[0];
 				if (product !== undefined) {
 					product.real_weight = weight;
 					product.total_weight = parseFloat(parseFloat(product.real_weight) * parseInt(product.quantity));
-					angular.forEach(self.guideBatch, function(guide){
+					angular.forEach(self.guideBatch, function (guide) {
 						guideProduct = $filter('filter')(guide.products, { product_id: product.product_id })[0];
-					if(guideProduct){
-						guideProduct.real_weight = parseFloat(product.real_weight).toFixed(2);
-						guideProduct.total_weight = parseFloat(parseFloat(guideProduct.real_weight) * parseInt(guideProduct.quantity));
+						if (guideProduct) {
+							guideProduct.real_weight = parseFloat(product.real_weight).toFixed(2);
+							guideProduct.total_weight = parseFloat(parseFloat(guideProduct.real_weight) * parseInt(guideProduct.quantity));
 
-						airwayService.addProductToAwb(guideProduct);
-					}	
-					});			
+							airwayService.addProductToAwb(guideProduct);
+						}
+					});
 				}
 
-					angular.forEach(bill.products, function(product){
-						bill.total_weight = parseFloat(parseFloat(bill.total_weight) + parseFloat(product.total_weight));
-					});
+				angular.forEach(bill.products, function (product) {
+					bill.total_weight = parseFloat(parseFloat(bill.total_weight) + parseFloat(product.total_weight));
+				});
 				airwayService.updateBill(bill);
 
 				ventaTotalWeight = parseFloat(parseFloat(ventaTotalWeight) + parseFloat(bill.total_weight));
 			});
-			if(product){
-			airwayService.updateProduct(product);			
+			if (product) {
+				airwayService.updateProduct(product);
 			}
 			self.venta.total_weight = ventaTotalWeight;
 			airwayService.updateVenta(self.venta);
@@ -428,32 +433,46 @@ function processPaymentsController(angular, app) {
 			var sequence = $q.defer();
 			sequence.resolve();
 			sequence = sequence.promise;
+			self.guideBatch.splice($index, 1);
 			angular.forEach(guide.products, function (product) {
-				
+
 				sequence = sequence.then(function () {
 					$http.post('./hbr-selfie/dist/php/delete_product_guide.php', { id: product.awb_productId })
-					.then(function (){
-						self.deleted = true;
-						removeProduct(product, guide);
-					});
+						.then(function () {
+							self.deleted = true;
+							removeProduct(product, guide);
+						});
 				});
 			});
-			
-			$http
-				.post('./hbr-selfie/dist/php/delete_guide.php', { id: guide.airwayId })
-				.then(function () {
-					self.guideBatch.splice($index, 1);
-				})
-				
-				var sequence2 = $q.defer();
-				sequence2.resolve();
-				sequence2 = sequence2.promise;
-				angular.forEach(self.guideBatch, function(guide){
-					guide.number = guideNumber++;
-					sequence2 = sequence2.then(function () {
-						return airwayService.updateGuide(guide);
-					});
+
+			$http.post('./hbr-selfie/dist/php/delete_guide.php', { id: guide.airwayId });
+
+			var sequence2 = $q.defer();
+			sequence2.resolve();
+			sequence2 = sequence2.promise;
+			var ExceedAmount = 0;
+			angular.forEach(self.guideBatch, function (guide) {
+				guide.number = ++guideNumber;
+				sequence2 = sequence2.then(function () {
+					return airwayService.updateGuide(guide);
 				});
+
+				if (guide.weight > 40 || guide.price > 900) {
+					$('#guide_list_' + guide.number).addClass('row-warning');
+					self.danger_msg = "";
+					if (guide.weight > 50 || guide.weight == 50 || guide.price > 1000 || guide.price == 1000) {
+						if(guide.state == 0){
+						$('#guide_list_' + guide.number).removeClass('row-warning');
+						$('#guide_list_' + guide.number).addClass('row-danger');
+						ExceedAmount = ++ExceedAmount;
+						}
+					}
+				} else {
+					$('#guide_list_' + guide.number).removeClass('row-warning');
+					$('#guide_list_' + guide.number).removeClass('row-danger');
+				}
+			});
+			self.danger_msg = ExceedAmount > 0 ? "Has Excedido el limite de 50 Kg o U$D 1,000.00" : "";
 		}
 
 		function save() {
@@ -467,14 +486,16 @@ function processPaymentsController(angular, app) {
 			sequence = sequence.promise;
 
 			angular.forEach(self.guideBatch, function (awb) {
-				sequence = sequence.then(function () {
-					return airwayService.save(awb).success(function (response) {
-						angular.forEach(awb.products, function (product) {
-							product.airwayId = response.airwayId;
-							airwayService.addProductToAwb(product)
+				if (awb.products.length > 0) {
+					sequence = sequence.then(function () {
+						return airwayService.save(awb).success(function (response) {
+							angular.forEach(awb.products, function (product) {
+								product.airwayId = response.airwayId;
+								airwayService.addProductToAwb(product)
+							});
 						});
 					});
-				});
+				}
 			});
 			updateVenta();
 		}
@@ -510,6 +531,11 @@ function processPaymentsController(angular, app) {
 			});
 		}
 
+		function finishGuide(guide, index) {
+			guide.state = 1;
+			airwayService.updateGuide(guide);
+		}
+
 		function init() {
 			self.cancel = cancel;
 			self.venta = venta;
@@ -532,25 +558,35 @@ function processPaymentsController(angular, app) {
 			self.save = save;
 			self.venta.total_remaining_quantity = angular.copy(self.venta.total_remaining_quantity);
 			self.deleteGuide = deleteGuide;
-			airwayService.get_airwayBills(self.venta.id)
+			self.danger_msg = "";
+			self.finishGuide = finishGuide;
+			airwayService.get_airwayBills(self.venta.id, null)
 				.success(function (response) {
 					self.guideBatch = response.guideBatch;
 
+					var ExceedAmount = 0;
 					angular.forEach(self.guideBatch, function (guide) {
-						if (parseFloat(guide.weight) > 40 || parseFloat(guide.price) > 900) {
-							$('#guide_list_' + parseInt(guide.number)).addClass('row-warning');
+						if (guide.weight > 40 || guide.price > 900) {
+							$('#guide_list_' + guide.number).addClass('row-warning');
 							self.danger_msg = "";
-							if (parseFloat(guide.weight) > 50 || parseFloat(guide.weight) == 50 || parseFloat(guide.price) > 1000 || parseFloat(guide.price) == 1000) {
-								self.danger_msg = "Has Excedido el limite de 50 Kg o U$D 1,000.00";
+							if (guide.weight > 50 || guide.weight == 50 || guide.price > 1000 || guide.price == 1000) {
+								if(guide.state == 0){
+								$('#guide_list_' + guide.number).removeClass('row-warning');
+								$('#guide_list_' + guide.number).addClass('row-danger');
+								ExceedAmount = ++ExceedAmount;
+								}
 							}
 						} else {
-							self.danger_msg = "";
+							$('#guide_list_' + guide.number).removeClass('row-warning');
+							$('#guide_list_' + guide.number).removeClass('row-danger');
 						}
 					});
+					self.danger_msg = ExceedAmount > 0 ? "Has Excedido el limite de 50 Kg o U$D 1,000.00" : "";
 				})
 				.error(function (err) {
 					console.log(err);
 				});
+
 		}
 
 		init();

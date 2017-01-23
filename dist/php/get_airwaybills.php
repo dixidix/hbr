@@ -6,7 +6,7 @@ $action = $_GET['action'];
 switch ($action) {
     case 'getAll': getAll();
         break;
-    case 'getByPurchaseId': getByPurchaseId($_GET['ventaId']);
+    case 'getByPurchaseId': getByPurchaseId();
         break;
     case 'getByUserId': getByUserId();
         break;
@@ -14,9 +14,15 @@ switch ($action) {
         break;
 }
 
-function getByPurchaseId($ventaId){
+function getByPurchaseId(){
+if(!empty($_GET['state'])){
+	$res = MysqliDB::getInstance()->query("SELECT * from airway_bill WHERE state = ".$_GET['state']." AND deleted = 0");
+} else {
+	if(!empty($_GET['ventaId'])){	
+	$res = MysqliDB::getInstance()->query("SELECT * from airway_bill WHERE ventaId = ".$_GET['ventaId']." AND deleted = 0");
+	}
+}
 
-$res = MysqliDB::getInstance()->query("SELECT * from airway_bill WHERE ventaId = ".$ventaId." AND deleted = 0");
 	$outp="";
 	while($rs = $res->fetch_array(MYSQLI_ASSOC)) {
 		$outpm ="";

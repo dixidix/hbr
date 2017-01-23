@@ -109,6 +109,15 @@
 				background-color: rgba(241, 241, 18, 0.6);
 				font-weight: bold;
 			}
+			.row-finished{
+				background-color: #7a8699;
+				cursor:not-allowed;
+				pointer-events: none;
+				color:#2e2e2e;
+				i,a{
+					color:#2e2e2e;
+				}
+			}
 		}
 		.table-bordered>thead>tr>th,
 		.table-bordered>tbody>tr>th,
