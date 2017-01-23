@@ -9,6 +9,7 @@ $establishment = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_esca
 $number = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['number']));
 $provider = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['provider']));
 $quantity = (int) MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['quantity']));
+$remaining_quantity = (int) MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['quantity']));
 $timestamp = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['timestamp']));
 $totalprice = (float) MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['total_price']));
 $totalweight = (float) MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['total_weight']));
@@ -41,7 +42,7 @@ if(!file_exists("../files/".$timestamp."/")){
 }
 
 if (empty($errors)){
-    MysqliDB::getInstance()->query("INSERT INTO `bills`(`ventaId`, `establishment`, `number`, `provider`, `quantity`, `timestamp`, `totalprice`, `totalweight`, `trackingnumber`, `userId`, `bill_file_name`, `bill_file_path`) VALUES (".$ventaId.",'".$establishment."','".$number."','".$provider."',".$quantity.",'".$timestamp."',".$totalprice.",".$totalweight.",'".$trackingnumber."',".$userId.",'".$file_name_bill."','".$path_bill."')");
+    MysqliDB::getInstance()->query("INSERT INTO `bills`(`ventaId`, `establishment`, `number`, `provider`, `quantity`,`remaining_quantity`, `timestamp`, `totalprice`, `totalweight`, `trackingnumber`, `userId`, `bill_file_name`, `bill_file_path`) VALUES (".$ventaId.",'".$establishment."','".$number."','".$provider."',".$quantity.",".$remaining_quantity.",'".$timestamp."',".$totalprice.",".$totalweight.",'".$trackingnumber."',".$userId.",'".$file_name_bill."','".$path_bill."')");
 
     $res = MysqliDB::getInstance()->query("SELECT MAX(bill_id) as id FROM `bills`");		
     $rows = mysqli_num_rows($res);

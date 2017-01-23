@@ -62,6 +62,7 @@ $res = MysqliDB::getInstance()->query("SELECT * from ventas WHERE deleted = 0");
 				$outpmn .= '"total_price":"'  . $rsss["totalprice"] . '",';
 				$outpmn .= '"total_weight":"'  . $rsss["totalweight"] . '",';
 				$outpmn .= '"weight":"'  . $rsss["weight"] . '",';
+				$outpmn .= '"real_weight":"'  . $rsss["real_weight"] . '",';
 				$outpmn .= '"userId":"'   . $rsss["userId"].'"}';
 			}
 

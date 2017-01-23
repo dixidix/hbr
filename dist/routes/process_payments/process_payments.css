@@ -218,10 +218,19 @@ html {
     padding-top: 30px; }
   .modal-dialog .modal-body .table {
     border: 0.1px solid #19156a; }
-  .modal-dialog .modal-body .table-bordered > tbody > .row-danger {
+    .modal-dialog .modal-body .table .empty_product {
+      cursor: not-allowed !important;
+      background-color: #eee; }
+      .modal-dialog .modal-body .table .empty_product a {
+        cursor: not-allowed; }
+      .modal-dialog .modal-body .table .empty_product .remaining-products {
+        color: red !important; }
+    .modal-dialog .modal-body .table .empty_bill .remaining-products {
+      color: red !important; }
+  .modal-dialog .modal-body .table-bordered > tbody .row-danger {
     background-color: rgba(255, 0, 0, 0.7);
     font-weight: bold; }
-  .modal-dialog .modal-body .table-bordered > tbody > .row-warning {
+  .modal-dialog .modal-body .table-bordered > tbody .row-warning {
     background-color: rgba(241, 241, 18, 0.6);
     font-weight: bold; }
   .modal-dialog .modal-body .table-bordered > thead > tr > th,

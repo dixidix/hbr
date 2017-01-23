@@ -28,6 +28,23 @@ function airwayService(angular, app) {
             });
         };
 
+        this.updateGuide = function (guide) {
+            var formData = new FormData();
+            var products = [];
+            angular.forEach(guide, function (key, value) {
+                if (value !== "products") {
+                    formData.append(value, key);
+                } else {
+                    products = key;
+                }
+            });
+
+            return $http.post('./hbr-selfie/dist/php/update_guides.php', formData, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            });
+        };
+
         this.addProductToAwb = function (product) {
             var formData = new FormData();
             angular.forEach(product, function (key, value) {

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-01-2017 a las 00:48:46
+-- Tiempo de generación: 23-01-2017 a las 00:51:17
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -26,26 +26,31 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `airway_bill`
 --
 
-CREATE TABLE `airway_bill` (
-  `airwayId` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `airway_bill` (
+  `airwayId` int(11) NOT NULL AUTO_INCREMENT,
   `ventaId` int(11) NOT NULL,
   `number` int(150) NOT NULL,
   `quantity` int(150) NOT NULL,
   `weight` float DEFAULT NULL,
   `price` float DEFAULT NULL,
   `deleted` int(11) NOT NULL DEFAULT '0',
-  `state` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `state` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`airwayId`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
+--
+-- Truncar tablas antes de insertar `airway_bill`
+--
+
+TRUNCATE TABLE `airway_bill`;
 --
 -- Volcado de datos para la tabla `airway_bill`
 --
 
 INSERT INTO `airway_bill` (`airwayId`, `ventaId`, `number`, `quantity`, `weight`, `price`, `deleted`, `state`) VALUES
-(1, 1, 1, 5, 2.3, 2555.97, 1, 0),
-(2, 1, 0, 5, 1.6, 806.96, 1, 0),
-(3, 1, 1, 6, 1.8, 813.95, 0, 0),
-(4, 1, 3, 5, 2.3, 2555.97, 1, 0);
+(1, 1, 1, 5, 2.3, 2555.97, 0, 0),
+(2, 1, 2, 5, 1.6, 806.96, 0, 0),
+(3, 1, 3, 6, 1.8, 813.95, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -53,8 +58,8 @@ INSERT INTO `airway_bill` (`airwayId`, `ventaId`, `number`, `quantity`, `weight`
 -- Estructura de tabla para la tabla `airway_bill_product`
 --
 
-CREATE TABLE `airway_bill_product` (
-  `awb_productId` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `airway_bill_product` (
+  `awb_productId` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `airwayId` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
@@ -65,26 +70,29 @@ CREATE TABLE `airway_bill_product` (
   `real_weight` float NOT NULL,
   `total_weight` float NOT NULL,
   `userId` int(11) NOT NULL,
-  `deleted` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `deleted` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`awb_productId`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
+--
+-- Truncar tablas antes de insertar `airway_bill_product`
+--
+
+TRUNCATE TABLE `airway_bill_product`;
 --
 -- Volcado de datos para la tabla `airway_bill_product`
 --
 
 INSERT INTO `airway_bill_product` (`awb_productId`, `product_id`, `airwayId`, `category_id`, `name`, `price`, `quantity`, `total_price`, `real_weight`, `total_weight`, `userId`, `deleted`) VALUES
-(1, 1, 1, 2, 'Macbook Pro', 2500, 1, 2500, 1.2, 1.2, 1, 1),
-(2, 3, 1, 1, 'Remera', 6.99, 3, 34.95, 0.2, 1, 1, 1),
-(3, 4, 1, 1, 'Jean', 35, 1, 105, 0.5, 1.5, 1, 1),
-(4, 2, 2, 2, 'Iphone 6 plus', 750.99, 1, 1501.98, 0.5, 1, 1, 1),
-(5, 3, 2, 1, 'Remera', 6.99, 3, 34.95, 1.5, 4.5, 1, 1),
-(6, 4, 2, 1, 'Jean', 35, 1, 105, 0.5, 1.5, 1, 1),
+(1, 1, 1, 2, 'Macbook Pro', 2500, 1, 2500, 1.2, 1.2, 1, 0),
+(2, 3, 1, 1, 'Remera', 6.99, 3, 34.95, 0.2, 1, 1, 0),
+(3, 4, 1, 1, 'Jean', 35, 1, 105, 0.5, 1.5, 1, 0),
+(4, 2, 2, 2, 'Iphone 6 plus', 750.99, 1, 1501.98, 0.5, 1, 1, 0),
+(5, 3, 2, 1, 'Remera', 6.99, 3, 34.95, 0.2, 1, 1, 0),
+(6, 4, 2, 1, 'Jean', 35, 1, 105, 0.5, 1.5, 1, 0),
 (7, 2, 3, 2, 'Iphone 6 plus', 750.99, 1, 1501.98, 0.5, 1, 1, 0),
-(8, 3, 3, 1, 'Remera', 6.99, 4, 34.95, 1.5, 6, 1, 0),
-(9, 4, 3, 1, 'Jean', 35, 1, 105, 0.5, 1.5, 1, 0),
-(10, 1, 4, 2, 'Macbook Pro', 2500, 1, 2500, 1.2, 1.2, 1, 1),
-(11, 3, 4, 1, 'Remera', 6.99, 3, 34.95, 0.2, 1, 1, 1),
-(12, 4, 4, 1, 'Jean', 35, 1, 105, 0.5, 1.5, 1, 1);
+(8, 3, 3, 1, 'Remera', 6.99, 4, 34.95, 0.2, 1, 1, 0),
+(9, 4, 3, 1, 'Jean', 35, 1, 105, 0.5, 1.5, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -92,8 +100,8 @@ INSERT INTO `airway_bill_product` (`awb_productId`, `product_id`, `airwayId`, `c
 -- Estructura de tabla para la tabla `bills`
 --
 
-CREATE TABLE `bills` (
-  `bill_id` int(100) NOT NULL,
+CREATE TABLE IF NOT EXISTS `bills` (
+  `bill_id` int(100) NOT NULL AUTO_INCREMENT,
   `ventaId` int(11) NOT NULL,
   `establishment` varchar(150) NOT NULL,
   `number` varchar(150) NOT NULL,
@@ -107,16 +115,22 @@ CREATE TABLE `bills` (
   `deleted` int(1) NOT NULL DEFAULT '0',
   `userId` int(150) NOT NULL,
   `bill_file_name` varchar(150) NOT NULL,
-  `bill_file_path` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `bill_file_path` varchar(150) NOT NULL,
+  PRIMARY KEY (`bill_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
+--
+-- Truncar tablas antes de insertar `bills`
+--
+
+TRUNCATE TABLE `bills`;
 --
 -- Volcado de datos para la tabla `bills`
 --
 
 INSERT INTO `bills` (`bill_id`, `ventaId`, `establishment`, `number`, `provider`, `quantity`, `remaining_quantity`, `timestamp`, `totalprice`, `totalweight`, `trackingnumber`, `deleted`, `userId`, `bill_file_name`, `bill_file_path`) VALUES
-(1, 1, 'Apple Store', '0001', 'DHL', 3, 2, '2017-01-22 23:46:55', 4001.98, 2.2, '0001', 0, 1, 'QATEST.pdf', '/dist/files/1484523667594/9f3d091dddbb30a0127936643ea2591a570574e9ea758e1d1bbbb0c3f0dda570.pdf'),
-(2, 1, 'H&M', '0002', 'DHL', 13, 8, '2017-01-22 23:46:55', 139.95, 16.5, '0002', 0, 1, 'QATEST.pdf', '/dist/files/1484523667595/2595ca3d467b0ae1e8d4beae212e600c46d18c8a97fda3c832d20579f2292c21.pdf');
+(1, 1, 'Apple Store', '0001', 'DHL', 3, 0, '2017-01-22 20:59:54', 4001.98, 2, '0001', 0, 1, 'QATEST.pdf', '/dist/files/1484523667594/9f3d091dddbb30a0127936643ea2591a570574e9ea758e1d1bbbb0c3f0dda570.pdf'),
+(2, 1, 'H&M', '0002', 'DHL', 13, 0, '2017-01-22 20:59:54', 139.95, 2.5, '0002', 0, 1, 'QATEST.pdf', '/dist/files/1484523667595/2595ca3d467b0ae1e8d4beae212e600c46d18c8a97fda3c832d20579f2292c21.pdf');
 
 -- --------------------------------------------------------
 
@@ -124,12 +138,18 @@ INSERT INTO `bills` (`bill_id`, `ventaId`, `establishment`, `number`, `provider`
 -- Estructura de tabla para la tabla `categories`
 --
 
-CREATE TABLE `categories` (
-  `category_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `categories` (
+  `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(150) NOT NULL,
-  `deleted` int(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `deleted` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
+--
+-- Truncar tablas antes de insertar `categories`
+--
+
+TRUNCATE TABLE `categories`;
 --
 -- Volcado de datos para la tabla `categories`
 --
@@ -145,8 +165,8 @@ INSERT INTO `categories` (`category_id`, `category_name`, `deleted`) VALUES
 -- Estructura de tabla para la tabla `products`
 --
 
-CREATE TABLE `products` (
-  `product_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `products` (
+  `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `bill_id` int(100) NOT NULL,
   `category_id` int(100) NOT NULL,
   `name` varchar(150) NOT NULL,
@@ -158,18 +178,24 @@ CREATE TABLE `products` (
   `weight` float NOT NULL,
   `real_weight` float NOT NULL,
   `userId` int(11) NOT NULL,
-  `deleted` int(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `deleted` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
+--
+-- Truncar tablas antes de insertar `products`
+--
+
+TRUNCATE TABLE `products`;
 --
 -- Volcado de datos para la tabla `products`
 --
 
 INSERT INTO `products` (`product_id`, `bill_id`, `category_id`, `name`, `price`, `quantity`, `remaining_quantity`, `totalprice`, `totalweight`, `weight`, `real_weight`, `userId`, `deleted`) VALUES
-(1, 1, 2, 'Macbook Pro', 2500, 1, 1, 2500, 1.2, 1.2, 1.2, 1, 0),
-(2, 1, 2, 'Iphone 6 plus', 750.99, 2, 1, 1501.98, 1, 0.5, 0.5, 1, 0),
-(3, 2, 1, 'Remera', 6.99, 10, 6, 34.95, 1, 0.2, 1.5, 1, 0),
-(4, 2, 1, 'Jean', 35, 3, 2, 105, 1.5, 0.5, 0.5, 1, 0);
+(1, 1, 2, 'Macbook Pro', 2500, 1, 0, 2500, 1.2, 1.2, 1.2, 1, 0),
+(2, 1, 2, 'Iphone 6 plus', 750.99, 2, 0, 1501.98, 1, 0.5, 0.5, 1, 0),
+(3, 2, 1, 'Remera', 6.99, 10, 0, 34.95, 1, 0.2, 0.2, 1, 0),
+(4, 2, 1, 'Jean', 35, 3, 0, 105, 1.5, 0.5, 0.5, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -177,8 +203,8 @@ INSERT INTO `products` (`product_id`, `bill_id`, `category_id`, `name`, `price`,
 -- Estructura de tabla para la tabla `users`
 --
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(65) NOT NULL,
   `lastname` varchar(65) NOT NULL,
   `company_name` varchar(150) DEFAULT NULL,
@@ -199,9 +225,15 @@ CREATE TABLE `users` (
   `registertimestamp` bigint(20) NOT NULL,
   `isAdmin` int(1) NOT NULL DEFAULT '0',
   `isPremium` int(1) DEFAULT '0',
-  `client_type` int(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `client_type` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
+--
+-- Truncar tablas antes de insertar `users`
+--
+
+TRUNCATE TABLE `users`;
 --
 -- Volcado de datos para la tabla `users`
 --
@@ -225,8 +257,8 @@ INSERT INTO `users` (`id`, `name`, `lastname`, `company_name`, `company_real_nam
 -- Estructura de tabla para la tabla `ventas`
 --
 
-CREATE TABLE `ventas` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `ventas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL,
   `parcial_price` float NOT NULL,
   `total` double NOT NULL,
@@ -238,101 +270,22 @@ CREATE TABLE `ventas` (
   `state` int(11) NOT NULL DEFAULT '0',
   `token` varchar(150) DEFAULT NULL,
   `totalweight` double DEFAULT NULL,
-  `guide_amount` int(11) DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `guide_amount` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
+--
+-- Truncar tablas antes de insertar `ventas`
+--
+
+TRUNCATE TABLE `ventas`;
 --
 -- Volcado de datos para la tabla `ventas`
 --
 
 INSERT INTO `ventas` (`id`, `uid`, `parcial_price`, `total`, `total_quantity`, `total_remaining_quantity`, `timestamp`, `deleted`, `paymentGatewayUrl`, `state`, `token`, `totalweight`, `guide_amount`) VALUES
-(1, 1, 4176.88, 4176.88, 16, 10, '1484677259 ', 0, '', 0, NULL, 18.7, 1);
+(1, 1, 4176.88, 4176.88, 16, 0, '1484677259 ', 0, '', 0, NULL, 5.7, 3);
 
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `airway_bill`
---
-ALTER TABLE `airway_bill`
-  ADD PRIMARY KEY (`airwayId`);
-
---
--- Indices de la tabla `airway_bill_product`
---
-ALTER TABLE `airway_bill_product`
-  ADD PRIMARY KEY (`awb_productId`);
-
---
--- Indices de la tabla `bills`
---
-ALTER TABLE `bills`
-  ADD PRIMARY KEY (`bill_id`);
-
---
--- Indices de la tabla `categories`
---
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`category_id`);
-
---
--- Indices de la tabla `products`
---
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`product_id`);
-
---
--- Indices de la tabla `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `ventas`
---
-ALTER TABLE `ventas`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `airway_bill`
---
-ALTER TABLE `airway_bill`
-  MODIFY `airwayId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT de la tabla `airway_bill_product`
---
-ALTER TABLE `airway_bill_product`
-  MODIFY `awb_productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT de la tabla `bills`
---
-ALTER TABLE `bills`
-  MODIFY `bill_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT de la tabla `categories`
---
-ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT de la tabla `products`
---
-ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT de la tabla `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
---
--- AUTO_INCREMENT de la tabla `ventas`
---
-ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

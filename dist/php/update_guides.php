@@ -14,7 +14,7 @@ foreach($_POST as $key=>$value) {
 }
 
 if (empty($errors)){
-    MysqliDB::getInstance()->query("UPDATE `products` SET `remaining_quantity`=".(int)$remaining_quantity.", `real_weight`=".(float)$real_weight."  WHERE `product_id`= ".$product_id."");
+    MysqliDB::getInstance()->query("UPDATE `airway_bill` SET `quantity`=".(int)$quantity.",`number`=".(int)$number.",`weight`=".(float)$weight.",`price`=".(float)$price." WHERE `airwayId` = ".$airwayId." AND deleted = 0");
 
 	$resolve_data['success'] = true;	
 	MysqliDB::getInstance()->close();

@@ -70,7 +70,6 @@ function processPaymentsController(angular, app) {
 						response.data.ventas[key].total = parseFloat(value.total).toFixed(2);
 						response.data.ventas[key].peso_total = parseFloat(value.peso_total).toFixed(2);
 						response.data.ventas[key].totalWarehouse = "0";
-						response.data.ventas[key].guide_amount = "2";
 						response.data.ventas[key].totalFlete = "0";
 						response.data.ventas[key].totalImpuestos = "0";
 					});
@@ -270,11 +269,17 @@ function processPaymentsController(angular, app) {
 
 		}
 		function new_guide() {
-			self.guideNumber++;
-			self.guideBatch.push({ number: self.guideNumber, products: [], quantity: '', weight: '', price: '' });
+			if (!self.guideBatch.length) {
+				self.guideNumber++;
+				self.guideBatch.push({ number: self.guideNumber, products: [], quantity: '', weight: '', price: '' });
+			} else {
+				self.guideNumber = parseInt(self.guideBatch.length) + 1;
+				self.guideBatch.push({ number: self.guideNumber, products: [], quantity: '', weight: '', price: '' });
+			}
 		}
 
 		function addToGuide(product, bill, guideNumber, amount) {
+
 			self.venta.total_remaining_quantity = parseInt(parseInt(self.venta.total_remaining_quantity) - parseInt(amount));
 			angular.forEach(self.guideBatch, function (guide) {
 				angular.forEach(bill.products, function (value) {
@@ -290,10 +295,12 @@ function processPaymentsController(angular, app) {
 									tmp_prod.quantity = parseInt(amount);
 									guide.products.push(tmp_prod);
 									value.remaining_quantity = parseInt(value.remaining_quantity) - parseInt(amount);
+									bill.remaining_quantity = parseInt(bill.remaining_quantity) - parseInt(amount);
 								} else {
 									var filteredProduct = $filter('filter')(guide.products, { product_id: tmp_prod.product_id })[0];
 									filteredProduct.quantity = parseInt(parseInt(filteredProduct.quantity) + parseInt(amount));
-									value.quantity = parseInt(value.quantity) - parseInt(amount);
+									value.remaining_quantity = parseInt(value.remaining_quantity) - parseInt(amount);
+									bill.remaining_quantity = parseInt(bill.remaining_quantity) - parseInt(amount);
 								}
 								guide.quantity = parseInt(guide.quantity || 0) + parseInt(amount || 0);
 								guide.weight = parseFloat(parseFloat(guide.weight || 0) + parseFloat(parseFloat(product.real_weight || product.weight || 0) * amount)).toFixed(2);
@@ -330,52 +337,127 @@ function processPaymentsController(angular, app) {
 			angular.forEach(self.bills, function (bill) {
 				angular.forEach(bill.products, function (value) {
 					if (value.product_id == product.product_id) {
-						value.quantity = parseInt(parseInt(value.quantity) + parseInt(product.quantity));
+						value.remaining_quantity = parseInt(parseInt(value.remaining_quantity) + parseInt(product.quantity));
+						bill.remaining_quantity = parseInt(parseInt(bill.remaining_quantity) + parseInt(product.quantity));
+						self.venta.total_remaining_quantity = parseInt(parseInt(self.venta.total_remaining_quantity) + parseInt(product.quantity));
+						self.venta.guide_amount = self.guideBatch.length;
+						airwayService.updateProduct(value);
+						airwayService.updateBill(bill);
+						airwayService.updateVenta(self.venta);
 					}
 				});
 			});
 			angular.forEach(guide.products, function (value, index) {
 				if (value.product_id == product.product_id) {
+
 					guide.products.splice(index, 1);
-					guide.quantity = parseInt(guide.quantity) - parseInt(product.quantity);
+					guide.quantity = parseInt(parseInt(guide.quantity) - parseInt(product.quantity));
 					guide.weight = parseFloat(parseFloat(guide.weight) - (parseFloat(product.real_weight) * product.quantity)).toFixed(2);
 					guide.price = parseFloat(parseFloat(guide.price) - (parseFloat(product.price) * product.quantity)).toFixed(2);
+					if(!self.deleted){
+					$http.post('./hbr-selfie/dist/php/delete_product_guide.php', { id: product.awb_productId })
+						.then(function (){
+							airwayService.save(guide);
+						});
+					}
 				}
 			});
 			if (guide.weight > 40 || guide.price > 900) {
-				$('#guide_list_' + guideNumber).addClass('row-warning');
+				$('#guide_list_' + guide.number).addClass('row-warning');
 				self.danger_msg = "";
 				if (guide.weight > 50 || guide.weight == 50 || guide.price > 1000 || guide.price == 1000) {
-					$('#guide_list_' + guideNumber).removeClass('row-warning');
-					$('#guide_list_' + guideNumber).addClass('row-danger');
+					$('#guide_list_' + guide.number).removeClass('row-warning');
+					$('#guide_list_' + guide.number).addClass('row-danger');
 					self.danger_msg = "Has Excedido el limite de 50 Kg o U$D 1,000.00";
 				}
 			} else {
 				self.danger_msg = "";
-				$('#guide_list_' + guideNumber).removeClass('row-warning');
-				$('#guide_list_' + guideNumber).removeClass('row-danger');
+				$('#guide_list_' + guide.number).removeClass('row-warning');
+				$('#guide_list_' + guide.number).removeClass('row-danger');
 			}
 
 		}
 
 		function setRealWeight(product, index) {
-			self.activeEditing = !self.activeEditing;
-			$scope.realWeight = angular.copy(product.real_weight || product.weight || 0);
-			$scope.RealWeightProduct = product;
+			if (product.remaining_quantity > 0) {
+				self.activeEditing = !self.activeEditing;
+				$scope.realWeight = angular.copy(product.real_weight || product.weight || 0);
+				$scope.RealWeightProduct = product;
+			}
 		}
 
 		function saveRealWeight(weight) {
 			self.activeEditing = false;
+			var product = "";
+			var guideProduct = "";
+			var ventaTotalWeight = 0.00;
 			angular.forEach(self.bills, function (bill) {
-				var product = $filter('filter')(bill.products, { product_id: $scope.RealWeightProduct.product_id })[0];
+				bill.total_weight = 0.00;
+				 product = $filter('filter')(bill.products, { product_id: $scope.RealWeightProduct.product_id })[0];
 				if (product !== undefined) {
 					product.real_weight = weight;
+					product.total_weight = parseFloat(parseFloat(product.real_weight) * parseInt(product.quantity));
+					angular.forEach(self.guideBatch, function(guide){
+						guideProduct = $filter('filter')(guide.products, { product_id: product.product_id })[0];
+					if(guideProduct){
+						guideProduct.real_weight = parseFloat(product.real_weight).toFixed(2);
+						guideProduct.total_weight = parseFloat(parseFloat(guideProduct.real_weight) * parseInt(guideProduct.quantity));
+
+						airwayService.addProductToAwb(guideProduct);
+					}	
+					});			
 				}
+
+					angular.forEach(bill.products, function(product){
+						bill.total_weight = parseFloat(parseFloat(bill.total_weight) + parseFloat(product.total_weight));
+					});
+				airwayService.updateBill(bill);
+
+				ventaTotalWeight = parseFloat(parseFloat(ventaTotalWeight) + parseFloat(bill.total_weight));
 			});
+			if(product){
+			airwayService.updateProduct(product);			
+			}
+			self.venta.total_weight = ventaTotalWeight;
+			airwayService.updateVenta(self.venta);
+
 		}
 
+		function deleteGuide(guide, $index) {
+			var guideNumber = 0;
+			var sequence = $q.defer();
+			sequence.resolve();
+			sequence = sequence.promise;
+			angular.forEach(guide.products, function (product) {
+				
+				sequence = sequence.then(function () {
+					$http.post('./hbr-selfie/dist/php/delete_product_guide.php', { id: product.awb_productId })
+					.then(function (){
+						self.deleted = true;
+						removeProduct(product, guide);
+					});
+				});
+			});
+			
+			$http
+				.post('./hbr-selfie/dist/php/delete_guide.php', { id: guide.airwayId })
+				.then(function () {
+					self.guideBatch.splice($index, 1);
+				})
+				
+				var sequence2 = $q.defer();
+				sequence2.resolve();
+				sequence2 = sequence2.promise;
+				angular.forEach(self.guideBatch, function(guide){
+					guide.number = guideNumber++;
+					sequence2 = sequence2.then(function () {
+						return airwayService.updateGuide(guide);
+					});
+				});
+		}
 
 		function save() {
+
 			var requests = [];
 			if (self.venta.remaining_quantity === 0) {
 				self.guideBatch.finished = true;
@@ -420,9 +502,11 @@ function processPaymentsController(angular, app) {
 				ventaQuantity = parseInt(parseInt(ventaQuantity) + parseInt(bill.remaining_quantity));
 			});
 			self.venta.total_remaining_quantity = ventaQuantity;
+			console.log(self.venta.total_remaining_quantity);
+			self.venta.guide_amount = self.guideBatch.length;
 			airwayService.updateVenta(self.venta).success(function (response) {
 				$uibModalInstance.dismiss('cancel');
-				$state.go('dashboard.process_payments', {}, { reload: true });
+				$state.go('dashboard.process_payments', { reload: true });
 			});
 		}
 
@@ -433,17 +517,8 @@ function processPaymentsController(angular, app) {
 			self.bills = bills;
 			angular.forEach(self.bills, function (bill) {
 				bill.isOpen = false;
-				angular.forEach(bill.products, function (product) {
-					product.real_weight = angular.copy(product.weight);
-				});
 			});
-			airwayService.get_airwayBills(self.venta.id)
-				.success(function (response) {
-					self.guideBatch = response.guideBatch;
-				})
-				.error(function (err) {
-					console.log(err);
-				});
+			self.deleted = false;
 			self.new_guide = new_guide;
 			self.addToGuide = addToGuide;
 			self.removeProduct = removeProduct;
@@ -456,6 +531,26 @@ function processPaymentsController(angular, app) {
 			self.saveRealWeight = saveRealWeight;
 			self.save = save;
 			self.venta.total_remaining_quantity = angular.copy(self.venta.total_remaining_quantity);
+			self.deleteGuide = deleteGuide;
+			airwayService.get_airwayBills(self.venta.id)
+				.success(function (response) {
+					self.guideBatch = response.guideBatch;
+
+					angular.forEach(self.guideBatch, function (guide) {
+						if (parseFloat(guide.weight) > 40 || parseFloat(guide.price) > 900) {
+							$('#guide_list_' + parseInt(guide.number)).addClass('row-warning');
+							self.danger_msg = "";
+							if (parseFloat(guide.weight) > 50 || parseFloat(guide.weight) == 50 || parseFloat(guide.price) > 1000 || parseFloat(guide.price) == 1000) {
+								self.danger_msg = "Has Excedido el limite de 50 Kg o U$D 1,000.00";
+							}
+						} else {
+							self.danger_msg = "";
+						}
+					});
+				})
+				.error(function (err) {
+					console.log(err);
+				});
 		}
 
 		init();

@@ -26,11 +26,12 @@ $res = MysqliDB::getInstance()->query("SELECT * from airway_bill WHERE ventaId =
 		$outp .= '"ventaId":"'  . $rs["ventaId"] . '",';
         $outp .= '"number":"'  . (float) $rs["number"] . '",';
 
-        $uname = MysqliDB::getInstance()->query("SELECT * FROM airway_bill_product INNER JOIN categories ON airway_bill_product.category_id = categories.category_id where  airwayId =" . $rs["airwayId"]);
+        $uname = MysqliDB::getInstance()->query("SELECT * FROM airway_bill_product INNER JOIN categories ON airway_bill_product.category_id = categories.category_id where  airway_bill_product.airwayId =".$rs["airwayId"]." AND airway_bill_product.deleted = 0");
 		while($rss = $uname->fetch_array(MYSQLI_ASSOC)) {
 			$outpmn = "";
 			if ($outpm != "") {$outpm .= ",";}
 			$outpm .= '{"awb_productId":"'   . $rss["awb_productId"].'",';
+			$outpm .= '"product_id":"'  . $rss["product_id"] . '",';
 			$outpm .= '"airwayId":"'  . $rss["airwayId"] . '",';
 			$outpm .= '"category_id":"'  . $rss["category_id"] . '",';
 			$outpm .= '"category_name":"'  . $rss["category_name"] . '",';

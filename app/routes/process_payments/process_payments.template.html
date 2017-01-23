@@ -39,7 +39,7 @@
 					<td><span>Total Weight</span></td>
 					<td><span>Products quantity </span></td>
 					<td><span>Products remaining </span></td>
-					<td><span>Amount of ABW</span></td>
+					<td><span>Amount of AWB</span></td>
 					<td><span>Total Warehouse</span></td>
 					<td><span>Total Freight</span></td>
 					<td><span>Total</span></td>
@@ -75,7 +75,7 @@
 					<td ng-if="venta.paymentGatewayUrl" ng-class="venta.state == 1 ? 'payed' : 'unpayed' "><span ng-bind="venta.state == 0 ? 'Pendiente de pago' : 'Pagado'"></span></td>
 					<td ng-if="!venta.paymentGatewayUrl">
 						<button ng-if="venta.state == 1" ng-click="processPayments.processPayment(venta, venta.bills)" class="btn btn-default">Process Lot</button>
-						<button ng-if="venta.state == 0" ng-click="processPayments.setGuides(venta, venta.bills)" class="btn btn-default">Make ABW</button>
+						<button ng-if="venta.state == 0" ng-click="processPayments.setGuides(venta, venta.bills)" class="btn btn-default">Make AWB</button>
 					</td>
 				</tr>
 			</tbody>

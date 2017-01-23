@@ -23,13 +23,13 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="bill in guides.bills track by $index">
+						<tr ng-repeat="bill in guides.bills track by $index" ng-class="bill.remaining_quantity > 0 ? 'has-bill':'empty_bill'">
 							<td><a ng-click="guides.selectBill(bill)"> {{ bill.number }} <i ng-class="bill.isOpen ? 'fa fa-folder-open': 'fa fa-folder'"></i></a></td>
 							<td><span>{{ bill.tracking_number }}</span></td>
 							<td><span>{{ bill.provider }}</span></td>
 							<td><span>{{bill.establishment }}</span></td>
 							<td><span>{{ bill.quantity }}</span></td>
-							<td><span>{{ bill.remaining_quantity }}</span></td>
+							<td class="remaining-products"><span>{{ bill.remaining_quantity }}</span></td>
 							<td><span>{{ bill.total_weight }} KG. </span></td>
 							<td><span>{{ bill.total_price }}</span></td>
 							<td><span><a  target="_self" href="http://tucourier.com.ar/hbr-selfie{{ bill.bill_file_path }}"  download="{{ bill.bill_file_name }}"><i class="fa fa-file-pdf-o"></i></a></span></td>
@@ -61,26 +61,27 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="product in guides.selectedBill.products track by $index">
+						<tr ng-repeat="product in guides.selectedBill.products track by $index"
+						ng-class="product.remaining_quantity > 0 ? 'has-product':'empty_product'">
 							<td>{{ product.category_name }}</td>
 							<td>{{ product.name }} </td>
 							<td>{{ product.quantity }} </td>
-							<td>{{ product.remaining_quantity }} </td>
+							<td class="remaining-products">{{ product.remaining_quantity }} </td>
 							<td>{{ product.price | currency }}</td>
 							<td>{{ product.weight }} KG.</td>
-							<td><a href="" ng-click="guides.setRealWeight(product, $index)">{{ product.real_weight }} KG. <i class="fa fa-edit"></i></a></td>
+							<td><a href=""   ng-click="guides.setRealWeight(product, $index)" ng-disabled="product.remaining_quantity == 0">{{ product.real_weight }} KG. <i class="fa fa-edit"></i></a></td>
 							<td>
 									<div ng-if="product.quantity > 0">
 										<div class="col-xs-3">
-											<input type="number" ng-model="guides.selectedQuantity[$index]" placeholder="Quantity" class="form-control" min="1" max="{{ product.quantity }}">
+											<input type="number" ng-model="guides.selectedQuantity[$index]" placeholder="Quantity" class="form-control" min="1" max="{{ product.remaining_quantity }}" ng-disabled="product.remaining_quantity == 0">
 										</div>
 										<div class="col-xs-6 no padding">
-											<select class="form-control selectedGuide" ng-options="guide.number for guide in guides.guideBatch track by guide.number" name="guide" id="guide" ng-model="guides.selectedGuide[$index]">
+											<select class="form-control selectedGuide" ng-options="guide.number for guide in guides.guideBatch track by guide.number" name="guide" id="guide" ng-model="guides.selectedGuide[$index]" ng-disabled="product.remaining_quantity == 0">
 												<option value="" disabled="disabled">-- AWB Number --</option>
 											 </select>
 										</div>
 										<div class="col-xs-3">
-											<button ng-disabled="guides.selectedQuantity[$index] == null || guides.selectedGuide[$index] == null" ng-click="guides.addToGuide(product, guides.selectedBill, guides.selectedGuide[$index].number, guides.selectedQuantity[$index] )" class="btn btn-default">Add to AWB</button>
+											<button ng-disabled="guides.selectedQuantity[$index] == null || guides.selectedGuide[$index] == null || product.remaining_quantity == 0" ng-click="guides.addToGuide(product, guides.selectedBill, guides.selectedGuide[$index].number, guides.selectedQuantity[$index] )" class="btn btn-default">Add to AWB</button>
 										</div>
 									</div>
 								</td>
@@ -107,10 +108,12 @@
 								<td><span>Product</span></td>
 								<td><span>Total Weight</span></td>
 								<td><span>Total Price</span></td>
+								<td><span>Remove Guide</span></td>
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="guide in guides.guideBatch track by $index" id="guide_list_{{guide.number}}">
+							<tr ng-repeat="guide in guides.guideBatch track by $index" id="guide_list_{{guide.number}}"
+							ng-class="guide.price >= 1000 || guide.weight >= 50 ? 'row-danger': guide.price > 900 || guide.weight > 40 ? 'row-warning':''">
 								<td><span>{{ guide.number }}</span></td>
 								<td><span>{{ guide.quantity }}</span></td>
 								<td>
@@ -141,6 +144,11 @@
 								</td>
 								<td><span>{{ guide.weight }} Kg.</span></td>
 								<td><span>{{ guide.price  | currency }}</span></td>
+								<td>
+									<a href="" style="color:red" ng-click="guides.deleteGuide(guide, $index)">
+										<i class=" fa fa-close" ></i>
+									</a>
+								</td>
 							</tr>
 						</tbody>
 					</table>
