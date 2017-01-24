@@ -532,8 +532,30 @@ function processPaymentsController(angular, app) {
 		}
 
 		function finishGuide(guide, index) {
-			guide.state = 1;
-			airwayService.updateGuide(guide);
+			self.tempFinishGuide = guide;
+			self.tempFinishGuideIndex = index;
+			confirm();
+		}
+
+		function confirm() {		
+			self.confirmModal = $uibModal.open({
+				templateUrl: 'confirm-modal.html',
+				backdrop: 'static',
+				keyboard: false,
+				scope: $scope,
+				size: 'sm'
+			});
+			$scope.tempFinishGuide = self.tempFinishGuide;
+		}
+
+		$scope.confirmAccept = function(){
+			self.tempFinishGuide.state = 1;
+			airwayService.updateGuide(self.tempFinishGuide);
+			self.confirmModal.dismiss('cancel');
+		}
+
+		$scope.confirmCancel = function(){
+			self.confirmModal.dismiss('cancel');
 		}
 
 		function init() {
@@ -541,6 +563,7 @@ function processPaymentsController(angular, app) {
 			self.venta = venta;
 			self.guideNumber = 0;
 			self.bills = bills;
+			self.confirmModal = null;
 			angular.forEach(self.bills, function (bill) {
 				bill.isOpen = false;
 			});
@@ -560,6 +583,8 @@ function processPaymentsController(angular, app) {
 			self.deleteGuide = deleteGuide;
 			self.danger_msg = "";
 			self.finishGuide = finishGuide;
+			self.tempFinishGuide = {};
+			self.tempFinishGuideIndex = 0;
 			airwayService.get_airwayBills(self.venta.id, null)
 				.success(function (response) {
 					self.guideBatch = response.guideBatch;

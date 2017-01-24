@@ -13,6 +13,8 @@
 					<table class="table table-bordered table-striped table-curved rounded">
 						<thead>
 							<tr>
+								<td><span>Purchase Id</span></td>
+								<td><span>User</span></td>
 								<td><span>AWB Number</span></td>
 								<td><span>Product Quantity</span></td>
 								<td><span>Total Weight</span></td>
@@ -22,6 +24,8 @@
 						</thead>
 						<tbody>
 							<tr ng-repeat="guide in airway.guides track by $index" id="guide_list_{{guide.number}}">
+								<td><span>{{ guide.ventaId }}</span></td>
+								<td><span>{{ guide.user[0].name }} {{ guide.user[0].lastname }}</span></td>
 								<td><span>{{ guide.number }}</span></td>
 								<td><span>{{ guide.quantity }}</span></td>
 								<td><span>{{ guide.weight }} Kg.</span></td>
