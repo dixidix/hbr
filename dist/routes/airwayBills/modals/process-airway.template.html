@@ -1,0 +1,83 @@
+<script type="text/ng-template" id="process-airway.html">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="airwaybill.cancel()">&times;</button>
+        <h3 class="modal-title" id="modal-title">Process Airway Bill</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+
+        <!--PRODUCT LIST -->
+
+        <table class="table overflow-table table-bordered table-striped product-table table-curved rounded" ng-if="airwaybill.awb.products.length">
+            <div class="col-xs-9">
+                <h3 class="table-title" ng-if="airwaybill.awb.products.length">Products</h3>
+            </div>
+            <thead>
+                <tr>
+                    <td><span> Category </span></td>
+                    <td><span> Product </span></td>
+                    <td><span> Quantity </span></td>
+                    <td><span> Price </span></td>
+                    <td><span> Weight</span></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="product in airwaybill.awb.products track by $index">
+                    <td>{{ product.category_name }}</td>
+                    <td>{{ product.name }} </td>
+                    <td>{{ product.quantity }} </td>
+                    <td>{{ product.price | currency }}</td>
+                    <td>{{ product.real_weight }} KG.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+        <div ng-include src="'hbr-selfie/dist/routes/airwayBills/modals/warehouse-form.template.html'"></div>
+        <div ng-include src="'hbr-selfie/dist/routes/airwayBills/modals/flete-form.template.html'"></div>
+
+        <!-- TOTAL BOTON -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="pull-left">
+                    <h4 style="color:red;font-weight:bold;">Payment Button: U$D {{airwaybill.totalButton }}.-</h4>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="airwaybill.awb.paymentGatewayUrl && airwaybill.awb.state == 2">
+            <strong>Url de pago: </strong> <span>{{airwaybill.awb.paymentGatewayUrl }}</span>
+        </div>
+        <form ng-if="!airwaybill.awb.paymentGatewayUrl || airwaybill.awb.state !== 2">
+            <div class="form-group">
+                <label class="label-group"> Estimated Arrival Date</label>
+                <input class="form-control" type="date" ng-model="airwaybill.batch.arrivalDate" name="success" placeholder="Arrival Date" required autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label class="label-group"> Airway Bill Tracking Number</label>
+                <input class="form-control" type="text" ng-model="airwaybill.batch.hbr_tracking" name="hbr_tracking" placeholder="Tracking Number" required autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label class="label-group"> Postal Provider	</label>
+                <input class="form-control" type="text" ng-model="airwaybill.batch.hbr_postal_provider" name="hbr_postal_provider" placeholder="Postal Provider" required autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label class="label-group"> successful payment URL | <a ng-click="airwaybill.generateToken()"><i
+							class="fa fa-link"></i> Create successful payment URL</a> </label>
+                <input class="form-control" type="url" ng-model="airwaybill.batch.successUrl" name="success" placeholder="successful payment URL" required autocomplete="off">
+
+            </div>
+            <div class="form-group">
+                <label class="label-group">Payment URL | <a href="https://portal.todopago.com.ar/app/#login" target="_blank"><i class="fa fa-credit-card"></i>Navigate to
+						todo pago </a> </label>
+                <input class="form-control" type="url" ng-model="airwaybill.batch.paymentGatewayUrl" name="url" placeholder="Payment URL" required autocomplete="off">
+
+            </div>
+        </form>
+    </div>
+    </div>
+    <div class="modal-footer " id="modal-footer">
+        <button style="width:250px;" class="btn btn-hbr-blue" ng-click="airwaybill.finishAwb()" ng-if="airwaybill.awb.state == '1'">Send Payment Method</button>
+        <button style="width:250px;" class="btn btn-hbr-blue" ng-click="airwaybill.finishAwb()" ng-if="airwaybill.awb.state == '2'">Set as payed And Finish</button>
+        <button class="btn btn-hbr-blue" ng-click="airwaybill.cancel()">Close</button>
+    </div>
+</script>

@@ -1,40 +1,43 @@
 <div class="process_payments container-fluid" ng-cloak>
-	<link rel="stylesheet" type="text/css" href="./hbr-selfie/dist/routes/process_payments/process_payments.css">
-	<h3><i class="fa fa-plane"></i>Manage Airway Bills</h3>
-	<hr>
-	<div class="col-xs-12 content" ng-if="!airway.guides.length">
-		<div class="row">
-			<div class="empty-list">
-				<h3>No Airway Bills have been made yet.</h3>
-			</div>
-		</div>
-	</div>
-	<div class="col-xs-12 content" ng-if="airway.guides.length">
-					<table class="table table-bordered table-striped table-curved rounded">
-						<thead>
-							<tr>
-								<td><span>Purchase Id</span></td>
-								<td><span>User</span></td>
-								<td><span>AWB Number</span></td>
-								<td><span>Product Quantity</span></td>
-								<td><span>Total Weight</span></td>
-								<td><span>Total Price</span></td>
-								<td><span>Action</span></td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="guide in airway.guides track by $index" id="guide_list_{{guide.number}}">
-								<td><span>{{ guide.ventaId }}</span></td>
-								<td><span>{{ guide.user[0].name }} {{ guide.user[0].lastname }}</span></td>
-								<td><span>{{ guide.number }}</span></td>
-								<td><span>{{ guide.quantity }}</span></td>
-								<td><span>{{ guide.weight }} Kg.</span></td>
-								<td><span>{{ guide.price  | currency }}</span></td>
-								<td>
-										<button class="btn btn-default">action</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-	</div>
+    <link rel="stylesheet" type="text/css" href="./hbr-selfie/dist/routes/process_payments/process_payments.css">
+    <h3><i class="fa fa-plane"></i>Manage Airway Bills</h3>
+    <hr>
+    <div class="col-xs-12 content" ng-if="!airway.guides.length">
+        <div class="row">
+            <div class="empty-list">
+                <h3>No Airway Bills have been made yet.</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 content" ng-if="airway.guides.length">
+        <table class="table table-bordered table-striped table-curved rounded">
+            <thead>
+                <tr>
+                    <td><span>Purchase Id</span></td>
+                    <td><span>User</span></td>
+                    <td><span>HBR Number</span></td>
+                    <td><span>AWB Number</span></td>
+                    <td><span>Product Quantity</span></td>
+                    <td><span>Total Weight</span></td>
+                    <td><span>Total Price</span></td>
+                    <td><span>Action</span></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="guide in airway.guides track by $index" id="guide_list_{{guide.number}}">
+                    <td><span>{{ guide.ventaId }}</span></td>
+                    <td><span>{{ guide.user[0].name }} {{ guide.user[0].lastname }}</span></td>
+                    <td><span>{{ guide.airwayId }}</span></td>
+                    <td><span>{{ guide.number }}</span></td>
+                    <td><span>{{ guide.quantity }}</span></td>
+                    <td><span>{{ guide.weight }} Kg.</span></td>
+                    <td><span>{{ guide.price  | currency }}</span></td>
+                    <td>
+                        <button class="btn btn-default" ng-click="airway.processAirwayBill(guide, guide.products)"><i class="fa fa-gear"></i> Process</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
+<div ng-include src="'hbr-selfie/dist/routes/airwayBills/modals/process-airway.template.html'"></div>

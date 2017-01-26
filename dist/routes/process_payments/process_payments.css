@@ -204,8 +204,8 @@ html {
     text-shadow: none;
     text-decoration: none;
     cursor: pointer; }
-  .modal-dialog .modal-body .product-action a {
-    padding: 0px 10px; }
+  .modal-dialog .modal-body .product-action i {
+    padding: 0px 30px; }
   .modal-dialog .modal-body input {
     width: 100%; }
   .modal-dialog .modal-body ul {
@@ -238,7 +238,8 @@ html {
     cursor: not-allowed;
     pointer-events: none;
     color: #2e2e2e; }
-    .modal-dialog .modal-body .table-bordered > tbody .row-finished i, .modal-dialog .modal-body .table-bordered > tbody .row-finished a {
+    .modal-dialog .modal-body .table-bordered > tbody .row-finished i,
+    .modal-dialog .modal-body .table-bordered > tbody .row-finished a {
       color: #2e2e2e; }
   .modal-dialog .modal-body .table-bordered > thead > tr > th,
   .modal-dialog .modal-body .table-bordered > tbody > tr > th,

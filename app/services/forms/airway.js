@@ -6,15 +6,18 @@ function airwayService(angular, app) {
 
     function airwayService($http) {
 
-        this.get_airwayBills = function (ventaId, state) {            
-             return $http.get('./hbr-selfie/dist/php/get_airwaybills.php', 
-             {params: {  action: 'getByPurchaseId', ventaId: ventaId, state: state }});
+        this.get_airwayBills = function(ventaId, state) {
+            return $http.get('./hbr-selfie/dist/php/get_airwaybills.php', { params: { action: 'getByPurchaseId', ventaId: ventaId, state: state } });
         };
 
-        this.save = function (awb) {
+        this.get_finished_airwaybills = function() {
+            return $http.get('./hbr-selfie/dist/php/get_finished_awb.php', { params: { state: 1 } });
+        }
+
+        this.save = function(awb) {
             var formData = new FormData();
             var products = [];
-            angular.forEach(awb, function (key, value) {
+            angular.forEach(awb, function(key, value) {
                 if (value !== "products") {
                     formData.append(value, key);
                 } else {
@@ -28,10 +31,11 @@ function airwayService(angular, app) {
             });
         };
 
-        this.updateGuide = function (guide) {
+        this.updateGuide = function(guide) {
+            console.log(guide);
             var formData = new FormData();
             var products = [];
-            angular.forEach(guide, function (key, value) {
+            angular.forEach(guide, function(key, value) {
                 if (value !== "products") {
                     formData.append(value, key);
                 } else {
@@ -45,9 +49,9 @@ function airwayService(angular, app) {
             });
         };
 
-        this.addProductToAwb = function (product) {
+        this.addProductToAwb = function(product) {
             var formData = new FormData();
-            angular.forEach(product, function (key, value) {
+            angular.forEach(product, function(key, value) {
                 formData.append(value, key);
             });
             return $http.post('./hbr-selfie/dist/php/add_product_to_guide.php', formData, {
@@ -56,9 +60,9 @@ function airwayService(angular, app) {
             });
         };
 
-        this.updateBill = function (bill) {
+        this.updateBill = function(bill) {
             var formData = new FormData();
-            angular.forEach(bill, function (key, value) {
+            angular.forEach(bill, function(key, value) {
                 formData.append(value, key);
             });
             return $http.post('./hbr-selfie/dist/php/update_bill.php', formData, {
@@ -67,9 +71,9 @@ function airwayService(angular, app) {
             });
         };
 
-        this.updateProduct = function (product) {
+        this.updateProduct = function(product) {
             var formData = new FormData();
-            angular.forEach(product, function (key, value) {
+            angular.forEach(product, function(key, value) {
                 formData.append(value, key);
             });
             return $http.post('./hbr-selfie/dist/php/update_product.php', formData, {
@@ -78,9 +82,9 @@ function airwayService(angular, app) {
             });
         };
 
-        this.updateVenta = function (venta) {
+        this.updateVenta = function(venta) {
             var formData = new FormData();
-            angular.forEach(venta, function (key, value) {
+            angular.forEach(venta, function(key, value) {
                 formData.append(value, key);
             });
             return $http.post('./hbr-selfie/dist/php/update_venta.php', formData, {
