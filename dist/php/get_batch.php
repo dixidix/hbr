@@ -31,7 +31,7 @@ $res = MysqliDB::getInstance()->query("SELECT * from ventas WHERE deleted = 0");
 		$outp .= '"total": '  . $rs["total"] . ',';
 		$outp .= '"total_quantity":"'  . $rs["total_quantity"] . '",';
 		$outp .= '"total_remaining_quantity":"'  . $rs["total_remaining_quantity"] . '",';
-		$outp .= '"state":"'  . $rs["state"] . '",';
+		$outp .= '"state":"'  . $rs["venta_state"] . '",';
 		$outp .= '"guide_amount":"'  . $rs["guide_amount"] . '",';
 		$uname = MysqliDB::getInstance()->query("SELECT * FROM bills where ventaId =" . $rs["id"]);
 

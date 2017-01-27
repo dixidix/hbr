@@ -121,9 +121,6 @@ function getAll(){
 		$outp .= '"timestamp":"'   . $rs["timestamp"]  . '"}';
 	}
 	$outp ='{"ventas":['.$outp.']}';
-
-	echo($outp);
-
 }
 function addPurchase($data){
 	$errors = array();
@@ -139,7 +136,6 @@ function addPurchase($data){
 
 	if (empty($errors)){
 		$timestamp = round(microtime(true) * 1000);
-		echo $timestamp;
 		MysqliDB::getInstance()->query("INSERT INTO `ventas`(`uid`, `parcial_price`, `total`, `total_quantity`, `timestamp`,  `totalweight`, `guide_amount`) VALUES ('".$uid."',".$parcial_price.",".$total.",".$total_quantity.",".$timestamp.",".$total_weight.", '0')");
 
 		$res = MysqliDB::getInstance()->query("SELECT MAX(id) as id FROM `ventas`");		
