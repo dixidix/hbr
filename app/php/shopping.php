@@ -95,7 +95,7 @@ function getAll(){
 		$outp .= '"total_remaining_quantity":"'  . $rs["total_remaining_quantity"] . '",';
 		$outp .= '"transporte":"'  . $rs["transporte"] . '",';
 		$outp .= '"state":"'  . $rs["state"] . '",';
-		$outp .= '"paymentGatewayUrl":"'  . $rs["paymentGatewayUrl"] . '",';
+		$outp .= '"paymentButton":"'  . $rs["paymentButton"] . '",';
 		$uname = MysqliDB::getInstance()->query("SELECT * FROM producto INNER JOIN categories ON producto.category_id = categories.category_id where producto.venta_id =" . $rs["id"]);
 		while($rss = $uname->fetch_array(MYSQLI_ASSOC)) {
 			if ($outpm != "") {$outpm .= ",";}
@@ -136,7 +136,7 @@ function addPurchase($data){
 
 	if (empty($errors)){
 		$timestamp = round(microtime(true) * 1000);
-		MysqliDB::getInstance()->query("INSERT INTO `ventas`(`uid`, `parcial_price`, `total`, `total_quantity`, `timestamp`,  `totalweight`, `guide_amount`) VALUES ('".$uid."',".$parcial_price.",".$total.",".$total_quantity.",".$timestamp.",".$total_weight.", '0')");
+		MysqliDB::getInstance()->query("INSERT INTO `ventas`(`uid`, `parcial_price`, `total`, `total_quantity`,`total_remaining_quantity`, `timestamp`,  `totalweight`, `guide_amount`) VALUES ('".$uid."',".$parcial_price.",".$total.",".$total_quantity.",".$total_quantity.",".$timestamp.",".$total_weight.", '0')");
 
 		$res = MysqliDB::getInstance()->query("SELECT MAX(id) as id FROM `ventas`");		
 		$rows = mysqli_num_rows($res);

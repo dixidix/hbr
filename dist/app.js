@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    var app = angular.module('baseapp', ['ui.router', 'ngSanitize', 'ui.bootstrap', 'ngAnimate'])
+    var app = angular.module('baseapp', ['ui.router', 'ngSanitize', 'ui.bootstrap', 'ngAnimate', 'uiSwitch'])
         .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
             $urlRouterProvider.otherwise("/hbr-selfie");
             $locationProvider.html5Mode(true);
@@ -22,6 +22,7 @@
                 .state('dashboard.products', { url: "/productos", templateUrl: "./hbr-selfie/dist/routes/products/products.template.html", data: { title: 'Productos', requireAuth: true }, controller: "productCtrl", controllerAs: "products" })
                 .state('dashboard.categories', { url: "/categorias", templateUrl: "./hbr-selfie/dist/routes/categories/categories.template.html", data: { title: 'Categorias', requireAuth: true }, controller: "categoryCtrl", controllerAs: "categories" })
                 .state('dashboard.manage_awb', { url: "/airway-bills", templateUrl: "./hbr-selfie/dist/routes/airwayBills/airwaybills.template.html", data: { title: 'Airway Bills', requireAuth: true }, controller: "airwayCtrl", controllerAs: "airway" })
+                .state('dashboard.airwaybill_list', { url: "/airway/list", templateUrl: "./hbr-selfie/dist/routes/airwaybill_list/airwaybill_list.template.html", data: { title: 'Ver Guias', requireAuth: true }, controller: "airwayListCtrl", controllerAs: "airwayList" })
                 .state('dashboard.process_payments', { url: "/pagos", templateUrl: "./hbr-selfie/dist/routes/process_payments/process_payments.template.html", data: { title: 'Procesar Pagos', requireAuth: true }, controller: "processPaymentsCtrl", controllerAs: "processPayments" });
         }])
         .run(['$rootScope', '$state', '$stateParams', 'authenticationService', function($rootScope, $state, $stateParams, authenticationService) {
@@ -64,6 +65,7 @@
     require('./routes/products/products.js')(angular, app);
     require('./routes/categories/categories.js')(angular, app);
     require('./routes/airwayBills/airwaybills.js')(angular, app);
+    require('./routes/airwaybill_list/airwaybill_list.js')(angular, app);
 
     require('./services/authentication/authentication.js')(angular, app);
     require('./services/forms/warehouse.js')(angular, app);

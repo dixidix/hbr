@@ -14,6 +14,10 @@ function airwayService(angular, app) {
             return $http.get('./hbr-selfie/dist/php/get_finished_awb.php', { params: { state: 1 } });
         }
 
+        this.get_finished_airwaybillsByUserId = function(uid) {
+            return $http.get('./hbr-selfie/dist/php/get_finished_awb_by_user.php', { params: { state: 2, uid: uid} });
+        }
+
         this.save = function(awb) {
             var formData = new FormData();
             var products = [];

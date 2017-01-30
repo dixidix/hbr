@@ -260,12 +260,15 @@ function processPaymentsController(angular, app) {
 
 		function selectBill(bill) {
 
-			angular.forEach(self.bills, function (bill) {
-				bill.isOpen = false;
+			angular.forEach(self.bills, function (bills) {
+				if(bill.bill_id !== bills.bill_id){
+				bills.isOpen = false;
+				}
 			});
 
-			bill.isOpen = true;
-			self.selectedBill = bill;
+			bill.isOpen = !bill.isOpen;
+
+			self.selectedBill = bill.isOpen ? bill : {};
 
 		}
 		function new_guide() {
@@ -308,18 +311,17 @@ function processPaymentsController(angular, app) {
 								guide.price = parseFloat(parseFloat(guide.price || 0) + parseFloat(parseFloat(product.price || 0) * amount)).toFixed(2);
 								guide.ventaId = self.venta.id;
 								if (guide.weight > 40 || guide.price > 900) {
-									$('#guide_list_' + guideNumber).addClass('row-warning');
+									$('#guide_list_' + guide.number).addClass('row-warning');
 									self.danger_msg = "";
-									if (guide.weight > 50 || guide.weight == 50 || guide.price > 1000 || guide.price == 1000) {
-										if(guide.state == 0){
-										$('#guide_list_' + guideNumber).removeClass('row-warning');
-										$('#guide_list_' + guideNumber).addClass('row-danger');
+									if (guide.weight >= 50 || guide.price >= 1000) {
+										$('#guide_list_' + guide.number).removeClass('row-warning');
+										$('#guide_list_' + guide.number).addClass('row-danger');
 										ExceedAmount = ++ExceedAmount;
-										}
+
 									}
 								} else {
-									$('#guide_list_' + guideNumber).removeClass('row-warning');
-									$('#guide_list_' + guideNumber).removeClass('row-danger');
+									$('#guide_list_' + guide.number).removeClass('row-warning');
+									$('#guide_list_' + guide.number).removeClass('row-danger');
 								}
 							}
 						}
@@ -370,10 +372,10 @@ function processPaymentsController(angular, app) {
 				$('#guide_list_' + guide.number).addClass('row-warning');
 				self.danger_msg = "";
 				if (guide.weight > 50 || guide.weight == 50 || guide.price > 1000 || guide.price == 1000) {
-					if(guide.state == 0){
-					$('#guide_list_' + guide.number).removeClass('row-warning');
-					$('#guide_list_' + guide.number).addClass('row-danger');
-					ExceedAmount = ++ExceedAmount;
+					if (guide.state == 0) {
+						$('#guide_list_' + guide.number).removeClass('row-warning');
+						$('#guide_list_' + guide.number).addClass('row-danger');
+						ExceedAmount = ++ExceedAmount;
 					}
 				}
 			} else {
@@ -435,7 +437,6 @@ function processPaymentsController(angular, app) {
 			sequence = sequence.promise;
 			self.guideBatch.splice($index, 1);
 			angular.forEach(guide.products, function (product) {
-
 				sequence = sequence.then(function () {
 					$http.post('./hbr-selfie/dist/php/delete_product_guide.php', { id: product.awb_productId })
 						.then(function () {
@@ -445,33 +446,36 @@ function processPaymentsController(angular, app) {
 				});
 			});
 
-			$http.post('./hbr-selfie/dist/php/delete_guide.php', { id: guide.airwayId });
+			$http.post('./hbr-selfie/dist/php/delete_guide.php', { id: guide.airwayId })
+				.success(function success() {
+					var sequence2 = $q.defer();
+					sequence2.resolve();
+					sequence2 = sequence2.promise;
+					var ExceedAmount = 0;
+					angular.forEach(self.guideBatch, function (batchGuide) {
+						batchGuide.number = ++guideNumber;
+						sequence2 = sequence2
+							.then(function () {
+								return airwayService.updateGuide(batchGuide);
+							})
+							.then(function () {
+								if (batchGuide.weight > 40 || batchGuide.price > 900) {
+									$('#guide_list_' + batchGuide.number).addClass('row-warning');
+									self.danger_msg = "";
+									if (batchGuide.weight >= 50 || batchGuide.price >= 1000) {
+										$('#guide_list_' + batchGuide.number).removeClass('row-warning');
+										$('#guide_list_' + batchGuide.number).addClass('row-danger');
+										ExceedAmount = ++ExceedAmount;
 
-			var sequence2 = $q.defer();
-			sequence2.resolve();
-			sequence2 = sequence2.promise;
-			var ExceedAmount = 0;
-			angular.forEach(self.guideBatch, function (guide) {
-				guide.number = ++guideNumber;
-				sequence2 = sequence2.then(function () {
-					return airwayService.updateGuide(guide);
+									}
+								} else {
+									$('#guide_list_' + batchGuide.number).removeClass('row-warning');
+									$('#guide_list_' + batchGuide.number).removeClass('row-danger');
+								}
+							})
+					});
 				});
 
-				if (guide.weight > 40 || guide.price > 900) {
-					$('#guide_list_' + guide.number).addClass('row-warning');
-					self.danger_msg = "";
-					if (guide.weight > 50 || guide.weight == 50 || guide.price > 1000 || guide.price == 1000) {
-						if(guide.state == 0){
-						$('#guide_list_' + guide.number).removeClass('row-warning');
-						$('#guide_list_' + guide.number).addClass('row-danger');
-						ExceedAmount = ++ExceedAmount;
-						}
-					}
-				} else {
-					$('#guide_list_' + guide.number).removeClass('row-warning');
-					$('#guide_list_' + guide.number).removeClass('row-danger');
-				}
-			});
 			self.danger_msg = ExceedAmount > 0 ? "Has Excedido el limite de 50 Kg o U$D 1,000.00" : "";
 		}
 
@@ -537,7 +541,7 @@ function processPaymentsController(angular, app) {
 			confirm();
 		}
 
-		function confirm() {		
+		function confirm() {
 			self.confirmModal = $uibModal.open({
 				templateUrl: 'confirm-modal.html',
 				backdrop: 'static',
@@ -548,13 +552,13 @@ function processPaymentsController(angular, app) {
 			$scope.tempFinishGuide = self.tempFinishGuide;
 		}
 
-		$scope.confirmAccept = function(){
+		$scope.confirmAccept = function () {
 			self.tempFinishGuide.state = 1;
 			airwayService.updateGuide(self.tempFinishGuide);
 			self.confirmModal.dismiss('cancel');
 		}
 
-		$scope.confirmCancel = function(){
+		$scope.confirmCancel = function () {
 			self.confirmModal.dismiss('cancel');
 		}
 
@@ -595,10 +599,10 @@ function processPaymentsController(angular, app) {
 							$('#guide_list_' + guide.number).addClass('row-warning');
 							self.danger_msg = "";
 							if (guide.weight > 50 || guide.weight == 50 || guide.price > 1000 || guide.price == 1000) {
-								if(guide.state == 0){
-								$('#guide_list_' + guide.number).removeClass('row-warning');
-								$('#guide_list_' + guide.number).addClass('row-danger');
-								ExceedAmount = ++ExceedAmount;
+								if (guide.state == 0) {
+									$('#guide_list_' + guide.number).removeClass('row-warning');
+									$('#guide_list_' + guide.number).addClass('row-danger');
+									ExceedAmount = ++ExceedAmount;
 								}
 							}
 						} else {

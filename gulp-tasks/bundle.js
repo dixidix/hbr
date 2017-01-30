@@ -17,7 +17,8 @@ function bundle(gulp, $) {
             './node_modules/angular-sanitize/angular-sanitize.min.js',
             './node_modules/bootstrap/dist/js/bootstrap.min.js',
             './node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js',
-            './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js'
+            './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
+            './bower_components/angular-ui-switch/angular-ui-switch.min.js'
         ]
     };
 

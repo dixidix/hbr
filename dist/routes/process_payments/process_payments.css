@@ -89,6 +89,10 @@ html {
     padding: 0;
     height: 100%;
     font-family: "museoSans-100", Arial; }
+    html body .col-md-4.col-sm-4.col-xs-12.tipo-boton-class.boton_solo {
+      margin: 0;
+      padding: 0;
+      width: 100%; }
     html body .empty-list {
       margin-top: 50px;
       display: flex;
@@ -150,6 +154,21 @@ html {
 .modal-dialog {
   width: 90%;
   margin-top: 100px; }
+  .modal-dialog .fa-save {
+    margin-right: 15px; }
+  .modal-dialog .switch {
+    width: 42px;
+    height: 20px;
+    background: #19156a;
+    border-color: #19156a; }
+  .modal-dialog .switch small {
+    width: 20px;
+    height: 20px; }
+  .modal-dialog .switch.checked {
+    background: #b4ec13;
+    border-color: #b4ec13; }
+  .modal-dialog .switch.checked small {
+    /* button when enabled */ }
   .modal-dialog .btn-hbr-blue {
     width: 150px;
     height: 50px;
@@ -228,10 +247,10 @@ html {
     .modal-dialog .modal-body .table .empty_bill .remaining-products {
       color: red !important; }
   .modal-dialog .modal-body .table-bordered > tbody .row-danger {
-    background-color: rgba(255, 0, 0, 0.7);
+    background-color: rgba(255, 0, 0, 0.4);
     font-weight: bold; }
   .modal-dialog .modal-body .table-bordered > tbody .row-warning {
-    background-color: rgba(241, 241, 18, 0.6);
+    background-color: rgba(241, 241, 18, 0.4);
     font-weight: bold; }
   .modal-dialog .modal-body .table-bordered > tbody .row-finished {
     background-color: #7a8699;
@@ -311,6 +330,16 @@ html {
 .process_payments .table-bordered > tfoot > tr > td {
   border: 0.1px solid #19156a;
   text-align: center; }
+  .process_payments .table-bordered > thead > tr > th .flex-row,
+  .process_payments .table-bordered > tbody > tr > th .flex-row,
+  .process_payments .table-bordered > tfoot > tr > th .flex-row,
+  .process_payments .table-bordered > thead > tr > td .flex-row,
+  .process_payments .table-bordered > tbody > tr > td .flex-row,
+  .process_payments .table-bordered > tfoot > tr > td .flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; }
 
 .process_payments .rounded {
   margin-top: 2%; }

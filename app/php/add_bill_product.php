@@ -17,7 +17,7 @@ $userId = (int) MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escap
 
 
 if (empty($errors)){    
-    MysqliDB::getInstance()->query("INSERT INTO `products`( `bill_id`, `category_id`, `name`, `price`, `quantity`,`remaining_quantity`, `totalprice`, `totalweight`, `weight`, `userId`) VALUES (".$bill_id.",".$category_id.",'".$name."',".$price.",".$quantity.",".$quantity.",".$totalprice.",".$totalweight.",".$weight.",".$userId.")");
+    MysqliDB::getInstance()->query("INSERT INTO `products`( `bill_id`, `category_id`, `name`, `price`, `quantity`,`remaining_quantity`, `totalprice`, `totalweight`, `weight`, `real_weight`, `userId`) VALUES (".$bill_id.",".$category_id.",'".$name."',".$price.",".$quantity.",".$quantity.",".$totalprice.",".$totalweight.",".$weight.",".$weight.",".$userId.")");
     MysqliDB::getInstance()->close();
 
 $resolve_data['success'] = true;

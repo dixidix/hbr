@@ -41,6 +41,12 @@
                 <a href="" ui-sref="dashboard.shopping_list" ng-if="!dashboard.collapse">
                     <li><i class="fa fa-list-alt"></i><span> Ver Compras </span></li>
                 </a>
+                <a href="" ui-sref="dashboard.airwaybill_list" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Ver Guías">
+                    <li><i class="fa fa-plane"></i></li>
+                </a>
+                <a href="" ui-sref="dashboard.airwaybill_list" ng-if="!dashboard.collapse">
+                    <li><i class="fa fa-plane"></i><span> Ver Guías </span></li>
+                </a>
             </div>
             <div ng-if="dashboard.clientType == 2">
                 <a href="" ui-sref="dashboard.process_payments" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Lots">

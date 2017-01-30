@@ -32,6 +32,12 @@ html {
         padding: 0;
         height: 100%;
         font-family: $museoSans-100;
+        .col-md-4.col-sm-4.col-xs-12.tipo-boton-class.boton_solo{
+            margin:0;
+            padding:0;
+            width:100%;
+        }
+
         .empty-list {
             margin-top: 50px;
             display: flex;

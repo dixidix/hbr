@@ -32,10 +32,20 @@ if(!empty($_GET['state'])){
 		$outp .= '"shipment_international":"'  . (float)$rs["shipment_international"] . '",';
 		$outp .= '"shipment_total":"'  . (float)$rs["shipment_total"] . '",';
 
+		$outp .= '"hbr_postal_provider":"'  . $rs["hbr_postal_provider"] . '",';
+		$outp .= '"hbr_tracking":"'  . $rs["hbr_tracking"] . '",';
+
+		$outp .= '"paymentMethod":"'  . $rs["paymentMethod"] . '",';
+		$outp .= '"transfer_account_number":"'  . $rs["transfer_account_number"] . '",';
+		$outp .= '"transfer_account_holder_name":"'  . $rs["transfer_account_holder_name"] . '",';
+		$outp .= '"transfer_bank_name":"'  . $rs["transfer_bank_name"] . '",';
+		$outp .= '"transfer_bank_address":"'  . $rs["transfer_bank_address"] . '",';
+		$outp .= '"paymentDesc":"'  . $rs["paymentDesc"] . '",';
+
 		$outp .= '"arrivalDate":"'  . $rs["arrivalDate"] . '",';
-		$outp .= '"paymentGatewayUrl":"'  . $rs["paymentGatewayUrl"] . '",';
 		$outp .= '"token":"'  . $rs["token"] . '",';
 		$outp .= '"successUrl":"'  . $rs["successUrl"] . '",';
+		$outp .= '"paymentButton":"'  . $rs["paymentButton"] . '",';
 		$outp .= '"hbr_tracking":"'  . $rs["hbr_tracking"] . '",';
 		$outp .= '"hbr_postal_provider":"'  . $rs["hbr_postal_provider"] . '",';
 

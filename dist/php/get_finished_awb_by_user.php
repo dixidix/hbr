@@ -4,7 +4,7 @@ require 'bd.php';
 
 
 if(!empty($_GET['state'])){
-	$res = MysqliDB::getInstance()->query("SELECT * from airway_bill INNER JOIN ventas ON airway_bill.ventaId = ventas.id  WHERE airway_bill.state != 0 AND  airway_bill.deleted = 0");
+	$res = MysqliDB::getInstance()->query("SELECT * from airway_bill INNER JOIN ventas ON airway_bill.ventaId = ventas.id  WHERE airway_bill.state == 2 AND venta.uid == ".$_GET['uid']." AND  airway_bill.deleted = 0");
 } else {
 	if(!empty($_GET['ventaId'])){	
 	$res = MysqliDB::getInstance()->query("SELECT * from airway_bill WHERE ventaId = ".$_GET['ventaId']." AND deleted = 0");

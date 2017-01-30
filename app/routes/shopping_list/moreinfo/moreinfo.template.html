@@ -54,47 +54,7 @@
                         </tr>
                     </tbody>
                 </table>
-		    </div>
-			<h4>Cargos Warehouse</h4>
-			<span>Peso M&iacute;nimo a cobrar 5 Kg.</span>
-			<table class="table table-bordered table-striped table-curved rounded">
-				<thead>
-				<tr>
-					<td><span>Peso Total </span></td>
-					<td><span>Ingreso al Warehouse</span></td>
-					<td><span>Kg Adicional</span></td>
-					<td><span>Cargos adicionales</span></td>
-					<td><span>Total</span></td>
-				</tr>
-				</thead>
-				<tbody>
-				<tr>
-					<td><span>{{ seeMore.venta.peso_total }} Kg.</span></td>
-					<td><span> U$D {{seeMore.wh_entry_fare }} </span></td>
-					<td><span> U$D {{ seeMore.aditional_weight }} </span></td>
-					<td><span> U$D {{ seeMore.aditional_charges }} </span></td>
-					<td><span> U$D {{seeMore.total_warehouse_price }} </span></td>
-				</tr>
-				</tbody>
-			</table>
-			<h4>Cargos Flete a BUE</h4>
-			<table class="table table-bordered table-striped table-curved rounded">
-				<thead>
-				<tr>
-					<td><span>Cant. Productos</span></td>
-					<td><span>Valor x Unidad</span></td>
-					<td><span>Total</span></td>
-				</tr>
-				</thead>
-				<tbody>
-				<tr>
-					<td><span>{{ seeMore.venta.total_quantity }}</span></td>
-					<td><span> U$D {{ seeMore.shipment_value }}</span></td>
-					<td><span> U$D {{ seeMore.total_shipment }}</span></td>
-				</tr>
-				</tbody>
-			</table>
-			<h4>Total: U$D {{ seeMore.total_sale }} </h4>
+		    </div>			
         </div>
         <div class="modal-footer">
             <button class="btn btn-hbr-blue" ng-click="seeMore.cancel()">Cerrar</button>

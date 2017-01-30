@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-01-2017 a las 00:25:50
+-- Tiempo de generación: 30-01-2017 a las 04:04:36
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -43,21 +43,55 @@ CREATE TABLE `airway_bill` (
   `shipment_total` float DEFAULT '0',
   `arrivalDate` varchar(150) DEFAULT NULL,
   `paymentGatewayUrl` varchar(150) DEFAULT NULL,
+  `paymentButton` text,
   `token` varchar(150) DEFAULT NULL,
-  `successUrl` varchar(150) DEFAULT NULL,
+  `successUrl` text,
   `billing_total` float DEFAULT '0',
   `hbr_postal_provider` varchar(150) DEFAULT NULL,
-  `hbr_tracking` varchar(150) DEFAULT NULL
+  `hbr_tracking` varchar(150) DEFAULT NULL,
+  `paymentMethod` int(11) DEFAULT NULL,
+  `transfer_account_number` varchar(150) DEFAULT NULL,
+  `transfer_account_holder_name` varchar(150) DEFAULT NULL,
+  `transfer_bank_name` varchar(150) DEFAULT NULL,
+  `transfer_bank_address` varchar(150) DEFAULT NULL,
+  `paymentDesc` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `airway_bill`
 --
 
-INSERT INTO `airway_bill` (`airwayId`, `ventaId`, `number`, `quantity`, `weight`, `price`, `deleted`, `state`, `warehouse_enter`, `warehouse_aditional_weight`, `warehouse_aditional_charges`, `warehouse_total`, `shipment_international`, `shipment_total`, `arrivalDate`, `paymentGatewayUrl`, `token`, `successUrl`, `billing_total`, `hbr_postal_provider`, `hbr_tracking`) VALUES
-(1, 1, 1, 5, 2.3, 2555.97, 0, 1, 1, 5, 5, 11, 25, 57.5, '1485907200', 'https://forms.todopago.com.ar/formulario/commands?command=formulario&m=484b0d5b3a25a0dff3daef3b16674051#utm_source=134722&utm_medium=boton_de_pago&utm', 'null', 'http://tucourier.com.ar/hbr-selfie/dashboard/shopping/checkout/success/1e404ef27d28fd8b5ef47ecbed476d45', 68.5, 'null', 'null'),
-(2, 1, 2, 5, 1.6, 806.96, 0, 2, 0, 0, 0, 0, 0, 0, '', '', '', '', 0, '', ''),
-(3, 1, 2, 6, 1.8, 813.95, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', 0, NULL, NULL);
+INSERT INTO `airway_bill` (`airwayId`, `ventaId`, `number`, `quantity`, `weight`, `price`, `deleted`, `state`, `warehouse_enter`, `warehouse_aditional_weight`, `warehouse_aditional_charges`, `warehouse_total`, `shipment_international`, `shipment_total`, `arrivalDate`, `paymentGatewayUrl`, `paymentButton`, `token`, `successUrl`, `billing_total`, `hbr_postal_provider`, `hbr_tracking`, `paymentMethod`, `transfer_account_number`, `transfer_account_holder_name`, `transfer_bank_name`, `transfer_bank_address`, `paymentDesc`) VALUES
+(1, 1, 1, 35, 350, 350, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 1, 1, 30, 300, 4500, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 1, 2, 35, 525, 525, 1, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 1, 2, 5, 50, 750, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 1, 1, 15, 225, 225, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 1, 1, 35, 350, 350, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 1, 2, 15, 150, 850, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 1, 3, 9, 90, 790, 1, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(9, 1, 2, 50, 750, 750, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 1, 3, 15, 150, 2250, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(11, 1, 2, 10, 100, 1500, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(12, 1, 2, 50, 500, 500, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(13, 1, 5, 13, 130, 130, 1, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(14, 1, 1, 10, 100, 100, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(15, 1, 3, 20, 200, 3000, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(16, 1, 2, 13, 130, 130, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(17, 1, 1, 20, 200, 3000, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(18, 1, 2, 15, 150, 2250, 1, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(19, 1, 2, 30, 450, 450, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(20, 1, 1, 50, 500, 500, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(21, 1, 4, 20, 300, 300, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(22, 1, 2, 25, 250, 250, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(23, 1, 1, 65, 775, 4275, 0, 2, 25, 25, 25, 75, 25, 19375, '1487732400', '', NULL, '', '', 19450, 'DHL', '112HASG-112HASG-112HASG', 2, '12345671-12345671-12345671-12345671', 'Santiago Lloret', 'Banco Rio', 'Av. Corrientes 123 Capital Federal sucursal 3', 'Esta todo ok, en cuanto comprobemos el pago enviamos la información de tracking'),
+(24, 1, 2, 10, 100, 1500, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(25, 1, 2, 35, 525, 525, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(26, 1, 4, 15, 225, 225, 1, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(27, 1, 3, 68, 680, 680, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(28, 1, 2, 78, 780, 2180, 0, 2, 25, 25, 25, 75, 25, 19500, '1485831600', '', '<meta charset=\\"utf-8\\">\\r\\n<link href=\\"https://portal.todopago.com.ar/app/css/boton.css\\" rel=\\"stylesheet\\">\\r\\n<div class=\\"boton-todopago-css\\">\\r\\n  <a href=''https://forms.todopago.com.ar/formulario/commands?command=formulario&m=ab5dccd549ac52973c529671505f12f4#utm_source=134722&utm_medium=boton_de_pago&utm_campaign=web''>\\r\\n    <div class=\\"col-md-4 col-sm-4 col-xs-12 tipo-boton-class boton_solo\\" id=\\"htmlBoton\\" style=\\"display: block;\\"> <input type=\\"button\\" id=\\"vistaPreviaBoton\\" class=\\"btn aviso-boton-texto disabled\\" value=\\"Pagar\\" style=\\"border: 1px solid;\\"> </div>\\r\\n  </a>\\r\\n</div>', '', 'http://tucourier.com.ar/hbr-selfie/dashboard/shopping/checkout/success/10c4933a71e44fddcf2a1f3b29dfe7bb', 19575, 'DHL', '123123-123123-123123', 2, '', '', '', '', ''),
+(29, 1, 3, 15, 150, 150, 1, 0, 0, 0, 0, 0, 0, 0, '', '', NULL, '', '', 0, '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(30, 1, 3, 65, 775, 775, 0, 2, 25, 25, 25, 75, 25, 19375, '1485831600', '', '<meta charset=\\"utf-8\\">\\r\\n<link href=\\"https://portal.todopago.com.ar/app/css/boton.css\\" rel=\\"stylesheet\\">\\r\\n<div class=\\"boton-todopago-css\\">\\r\\n  <a href=''https://forms.todopago.com.ar/formulario/commands?command=formulario&m=ab5dccd549ac52973c529671505f12f4#utm_source=134722&utm_medium=boton_de_pago&utm_campaign=web''>\\r\\n    <div class=\\"col-md-4 col-sm-4 col-xs-12 tipo-boton-class boton_solo\\" id=\\"htmlBoton\\" style=\\"display: block;\\"> <input type=\\"button\\" id=\\"vistaPreviaBoton\\" class=\\"btn aviso-boton-texto disabled\\" value=\\"Pagar\\" style=\\"border: 1px solid;\\"> </div>\\r\\n  </a>\\r\\n</div>', '', 'http://tucourier.com.ar/hbr-selfie/dashboard/shopping/checkout/success/e9e981e7a0b514ca60c2217bdfa175a8', 19450, 'DHL', 'AHFA1231-TAJSOA1-1553123-ASXTG', 1, '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -85,15 +119,43 @@ CREATE TABLE `airway_bill_product` (
 --
 
 INSERT INTO `airway_bill_product` (`awb_productId`, `product_id`, `airwayId`, `category_id`, `name`, `price`, `quantity`, `total_price`, `real_weight`, `total_weight`, `userId`, `deleted`) VALUES
-(1, 1, 1, 2, 'Macbook Pro', 2500, 1, 2500, 1.2, 1.2, 1, 0),
-(2, 3, 1, 1, 'Remera', 6.99, 3, 34.95, 0.2, 1, 1, 0),
-(3, 4, 1, 1, 'Jean', 35, 1, 105, 0.5, 1.5, 1, 0),
-(4, 2, 2, 2, 'Iphone 6 plus', 750.99, 1, 1501.98, 0.5, 1, 1, 0),
-(5, 3, 2, 1, 'Remera', 6.99, 3, 34.95, 0.2, 1, 1, 0),
-(6, 4, 2, 1, 'Jean', 35, 1, 105, 0.5, 1.5, 1, 0),
-(7, 2, 3, 2, 'Iphone 6 plus', 750.99, 1, 1501.98, 0.5, 1, 1, 0),
-(8, 3, 3, 1, 'Remera', 6.99, 4, 34.95, 0.2, 1, 1, 0),
-(9, 4, 3, 1, 'Jean', 35, 1, 105, 0.5, 1.5, 1, 0);
+(1, 3, 1, 3, 'dddddddd', 10, 35, 980, 10, 980, 1, 1),
+(2, 1, 2, 2, 'bbbbbbbbbbbbbbb', 150, 30, 5250, 10, 350, 1, 1),
+(3, 2, 3, 1, 'aaaaaaaa', 15, 35, 750, 15, 750, 1, 1),
+(4, 1, 4, 2, 'bbbbbbbbbbbbbbb', 150, 5, 5250, 10, 350, 1, 1),
+(5, 2, 5, 1, 'aaaaaaaa', 15, 15, 750, 15, 750, 1, 1),
+(6, 3, 6, 3, 'dddddddd', 10, 35, 980, 10, 980, 1, 1),
+(7, 4, 7, 1, 'ccccccccc', 10, 10, 250, 10, 250, 1, 1),
+(8, 1, 7, 2, 'bbbbbbbbbbbbbbb', 150, 5, 5250, 10, 350, 1, 1),
+(9, 4, 8, 1, 'ccccccccc', 10, 4, 250, 10, 250, 1, 1),
+(10, 1, 8, 2, 'bbbbbbbbbbbbbbb', 150, 5, 5250, 10, 350, 1, 1),
+(11, 2, 9, 1, 'aaaaaaaa', 15, 50, 750, 15, 750, 1, 1),
+(12, 1, 10, 2, 'bbbbbbbbbbbbbbb', 150, 15, 5250, 10, 350, 1, 1),
+(13, 1, 11, 2, 'bbbbbbbbbbbbbbb', 150, 10, 5250, 10, 350, 1, 1),
+(14, 3, 12, 3, 'dddddddd', 10, 50, 980, 10, 980, 1, 1),
+(15, 3, 13, 3, 'dddddddd', 10, 13, 980, 10, 980, 1, 1),
+(16, 4, 14, 1, 'ccccccccc', 10, 10, 250, 10, 250, 1, 1),
+(17, 1, 15, 2, 'bbbbbbbbbbbbbbb', 150, 20, 5250, 10, 350, 1, 1),
+(18, 3, 16, 3, 'dddddddd', 10, 13, 980, 10, 980, 1, 1),
+(19, 1, 17, 2, 'bbbbbbbbbbbbbbb', 150, 20, 5250, 10, 350, 1, 1),
+(20, 1, 18, 2, 'bbbbbbbbbbbbbbb', 150, 15, 5250, 10, 350, 1, 1),
+(21, 2, 19, 1, 'aaaaaaaa', 15, 30, 750, 15, 750, 1, 1),
+(22, 3, 20, 3, 'dddddddd', 10, 50, 980, 10, 980, 1, 1),
+(23, 2, 21, 1, 'aaaaaaaa', 15, 20, 750, 15, 750, 1, 1),
+(24, 4, 22, 1, 'ccccccccc', 10, 25, 250, 10, 250, 1, 1),
+(25, 1, 23, 2, 'bbbbbbbbbbbbbbb', 150, 25, 5250, 10, 350, 1, 0),
+(26, 1, 24, 2, 'bbbbbbbbbbbbbbb', 150, 10, 5250, 10, 350, 1, 1),
+(27, 2, 25, 1, 'aaaaaaaa', 15, 35, 750, 15, 750, 1, 1),
+(28, 2, 26, 1, 'aaaaaaaa', 15, 15, 750, 15, 750, 1, 1),
+(29, 3, 27, 3, 'dddddddd', 10, 68, 980, 10, 980, 1, 1),
+(30, 3, 28, 3, 'dddddddd', 10, 68, 980, 10, 980, 1, 0),
+(31, 4, 29, 1, 'ccccccccc', 10, 15, 250, 10, 250, 1, 1),
+(32, 4, 30, 1, 'ccccccccc', 10, 10, 250, 10, 250, 1, 0),
+(33, 2, 23, 1, 'aaaaaaaa', 15, 25, 750, 15, 750, 1, 0),
+(34, 4, 23, 1, 'ccccccccc', 10, 15, 250, 10, 250, 1, 0),
+(35, 1, 28, 2, 'bbbbbbbbbbbbbbb', 150, 10, 5250, 10, 350, 1, 0),
+(36, 2, 30, 1, 'aaaaaaaa', 15, 25, 750, 15, 750, 1, 0),
+(37, 3, 30, 3, 'dddddddd', 10, 30, 980, 10, 980, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -124,8 +186,8 @@ CREATE TABLE `bills` (
 --
 
 INSERT INTO `bills` (`bill_id`, `ventaId`, `establishment`, `number`, `provider`, `quantity`, `remaining_quantity`, `timestamp`, `totalprice`, `totalweight`, `trackingnumber`, `deleted`, `userId`, `bill_file_name`, `bill_file_path`) VALUES
-(1, 1, 'Apple Store', '0001', 'DHL', 3, 3, '2017-01-24 21:22:51', 4001.98, 2.5, '0001', 0, 1, 'QATEST.pdf', '/dist/files/1484523667594/9f3d091dddbb30a0127936643ea2591a570574e9ea758e1d1bbbb0c3f0dda570.pdf'),
-(2, 1, 'H&M', '0002', 'DHL', 13, 2, '2017-01-24 21:22:51', 139.95, 2.5, '0002', 0, 1, 'QATEST.pdf', '/dist/files/1484523667595/2595ca3d467b0ae1e8d4beae212e600c46d18c8a97fda3c832d20579f2292c21.pdf');
+(1, 1, 'Factura a', 'Factura a', 'Factura a', 85, 0, '2017-01-28 20:11:08', 6000, 1100, 'Factura a', 0, 1, 'QATEST_(1).pdf', '/dist/files/1485623049017/d00ebcc2183f11a20919cc8d5c8cf038c980b3aa97b9b04706b90e3ee7729ea2.pdf'),
+(2, 1, 'Factura B', 'Factura B', 'Factura B', 123, 0, '2017-01-28 20:11:08', 1230, 1230, 'Factura B', 0, 1, 'QATEST_(1).pdf', '/dist/files/1485623049017/d00ebcc2183f11a20919cc8d5c8cf038c980b3aa97b9b04706b90e3ee7729ea2.pdf');
 
 -- --------------------------------------------------------
 
@@ -175,10 +237,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `bill_id`, `category_id`, `name`, `price`, `quantity`, `remaining_quantity`, `totalprice`, `totalweight`, `weight`, `real_weight`, `userId`, `deleted`) VALUES
-(1, 1, 2, 'Macbook Pro', 2500, 1, 1, 2500, 1.2, 1.2, 1.2, 1, 0),
-(2, 1, 2, 'Iphone 6 plus', 750.99, 2, 2, 1501.98, 1, 0.5, 0.5, 1, 0),
-(3, 2, 1, 'Remera', 6.99, 10, 10, 34.95, 1, 0.2, 0.2, 1, 0),
-(4, 2, 1, 'Jean', 35, 3, 3, 105, 1.5, 0.5, 0.5, 1, 0);
+(1, 1, 2, 'bbbbbbbbbbbbbbb', 150, 35, 0, 5250, 350, 10, 10, 1, 0),
+(2, 1, 1, 'aaaaaaaa', 15, 50, 0, 750, 750, 15, 15, 1, 0),
+(3, 2, 3, 'dddddddd', 10, 98, 0, 980, 980, 10, 10, 1, 0),
+(4, 2, 1, 'ccccccccc', 10, 25, 0, 250, 250, 10, 10, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -216,8 +278,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `lastname`, `company_name`, `company_real_name`, `warehouse_name`, `tel`, `cel`, `email`, `password`, `sskey`, `codeType`, `idCode`, `deleted`, `address`, `localidad`, `postalcode`, `registerToken`, `registertimestamp`, `isAdmin`, `isPremium`, `client_type`) VALUES
-(1, 'Nicolass', 'Sigal', NULL, NULL, NULL, '12345', 12345, 'nico', '410ec15153a6dff0bed851467309bcbd', NULL, 1, '00000001', 0, 'tabanera 33853', 'mendozaa', '55000', '0d75211910d3131a7d2472c4c41cead1', 1475968389, 0, 1, 0),
-(2, 'Santiago', 'Lloret', NULL, NULL, NULL, '1234', 0, 'santi', '21232f297a57a5a743894a0e4a801fc3', NULL, 1, '12345678', 0, 'tabanera 3385', 'mendoza', '5500', '308192ed9a7cf69af0c004179844ace7', 1475968761, 1, 0, 0),
+(1, 'Nicolass', 'Sigal', NULL, NULL, NULL, '12345', 12345, 'nico', '410ec15153a6dff0bed851467309bcbd', '59f2e6dd11f2ad6d9d6eb0ca55cf5b30', 1, '00000001', 0, 'tabanera 33853', 'mendozaa', '55000', '0d75211910d3131a7d2472c4c41cead1', 1475968389, 0, 1, 0),
+(2, 'Santiago', 'Lloret', NULL, NULL, NULL, '1234', 0, 'santi', '21232f297a57a5a743894a0e4a801fc3', 'd039106966dffdf58aec698be2e649e5', 1, '12345678', 0, 'tabanera 3385', 'mendoza', '5500', '308192ed9a7cf69af0c004179844ace7', 1475968761, 1, 0, 0),
 (3, 'Roberto', 'Gomez', NULL, NULL, NULL, '4998877', 153997755, 'dix.inferno@gmail.com', '21232f297a57a5a743894a0e4a801fc3', NULL, 2, '7895761231', 0, 'cadetes chilenos 173', 'mendoza', '5500', 'c417aee12cc67a34d94aabdfd93377b4', 1477164242, 0, 0, 0),
 (7, '', '', 'pepe', 'pepe s.a.', NULL, '1231231', 12312312, 'pepe@pepetransf.com.ar', '21232f297a57a5a743894a0e4a801fc3', NULL, 1, '12312312312', 0, 'asdds 123123', 'mendoza', '5500', '4574ae68157b6fd29a41000e75343e16', 1480195796, 0, 0, 1),
 (8, 'part', 'part', '', '', NULL, '123123', 123123123, 'part@part.com', 'c30cc3ceb47f9c2a6217e6b731d27293', NULL, 2, '123123123123123', 0, 'part 1231', 'part', '5500', 'aa586af0a185a06981497e4a186aff9d', 1480196869, 0, 0, 0),
@@ -253,7 +315,7 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`id`, `uid`, `parcial_price`, `total`, `total_quantity`, `total_remaining_quantity`, `timestamp`, `deleted`, `venta_state`, `totalweight`, `guide_amount`) VALUES
-(1, 1, 4176.88, 4176.88, 16, 5, '1484677259 ', 0, 0, 5, 0);
+(1, 1, 7230, 7230, 208, 0, '1485623049007', 0, 0, 2330, 3);
 
 --
 -- Índices para tablas volcadas
@@ -309,12 +371,12 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `airway_bill`
 --
 ALTER TABLE `airway_bill`
-  MODIFY `airwayId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `airwayId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT de la tabla `airway_bill_product`
 --
 ALTER TABLE `airway_bill_product`
-  MODIFY `awb_productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `awb_productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT de la tabla `bills`
 --

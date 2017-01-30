@@ -81,6 +81,9 @@ function airwayController(angular, app) {
 
         function calcButton(warehouse, flete) {
             self.totalButton = (parseFloat(warehouse) + parseFloat(flete)).toFixed(2);
+            if(parseFloat(warehouse) > 0.00 &&  parseFloat(flete) > 0.00){
+                $scope.noCalculated = false;
+            }
         }
 
         function calcTaxes() {
@@ -115,20 +118,48 @@ function airwayController(angular, app) {
         function finishAwb() {
 
             self.awb.arrivalDate = new Date(self.batch.arrivalDate).getTime() / 1000;
-            self.awb.paymentGatewayUrl = self.batch.paymentGatewayUrl || null;
-            self.awb.token = self.batch.token || null;
-            self.awb.successUrl = self.batch.successUrl || null;
-            self.awb.billing_total = self.totalButton || null;
             self.awb.hbr_tracking = self.batch.hbr_tracking || null;
             self.awb.hbr_postal_provider = self.batch.hbr_postal_provider || null;
-            self.awb.state = 2;
+            if (self.batch.paymentStatus) {
+                self.awb.state = 3;
+                if (self.totalWarehouse > 0 && self.totalFlete > 0) {
+                    airwayService.updateGuide(self.awb).then(function success(response) {
+                        $uibModalInstance.dismiss('cancel');
+                        $state.go($state.current, {}, { reload: true });
+                    });
+                }
+            }
+        }
 
-            if (self.totalWarehouse > 0 && self.totalFlete > 0) {
+        function sendPaymentMethod() {
+            self.batch.transfer_total = parseFloat(self.totalButton).toFixed(2);
+            self.awb.paymentMethod = self.batch.paymentMethod.value;
+            self.awb.transfer_account_number = self.batch.transfer_account_number;
+            self.awb.transfer_account_holder_name = self.batch.transfer_account_holder_name;
+            self.awb.transfer_bank_name = self.batch.transfer_bank_name;
+            self.awb.transfer_bank_address = self.batch.transfer_bank_address;
+            self.awb.paymentDesc = self.batch.paymentDesc;
+            self.awb.billing_total = self.batch.transfer_total;
+            self.awb.state = 2;
+            self.awb.paymentGatewayUrl = self.batch.paymentGatewayUrl || null;
+            self.awb.successUrl = self.batch.successUrl || null;
+            self.awb.paymentButton = self.batch.paymentButton || null;
+
+            if (self.awb.paymentMethod.value && (self.awb.transfer_account_number && self.awb.transfer_account_holder_name && self.awb.transfer_bank_name && self.awb.transfer_bank_address && self.awb.billing_total) || (self.awb.successUrl && self.awb.paymentButton)) {
                 airwayService.updateGuide(self.awb).then(function success(response) {
                     $uibModalInstance.dismiss('cancel');
                     $state.go($state.current, {}, { reload: true });
                 });
             }
+        }
+
+        function updateArrivalDate() {
+            self.awb.arrivalDate = new Date(self.batch.arrivalDate).getTime() / 1000;
+            self.awb.state = 3;
+            airwayService.updateGuide(self.awb).then(function success(response) {
+                $uibModalInstance.dismiss('cancel');
+                $state.go($state.current, {}, { reload: true });
+            });
         }
 
         function init() {
@@ -152,13 +183,18 @@ function airwayController(angular, app) {
             self.batch.adic_kg = parseFloat(self.awb.warehouse_aditional_weight).toFixed(2);
             self.batch.adic_charges = parseFloat(self.awb.warehouse_aditional_charges).toFixed(2);
             self.batch.flete_internacional = parseFloat(self.awb.shipment_international).toFixed(2);
-
+            self.batch.hbr_tracking = self.awb.hbr_tracking;
+            self.batch.hbr_postal_provider = self.awb.hbr_postal_provider;
+            self.updateArrivalDate = updateArrivalDate;
+            self.batch.paymentButton = $sce.trustAsHtml(self.awb.paymentButton);
             self.batch.successUrl = self.awb.successUrl;
-            console.log(self.awb);
-            self.batch.paymentGatewayUrl = self.awb.paymentGatewayUrl;
+            $scope.noCalculated = true;
             var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
-            d.setUTCSeconds(self.awb.arrivalDate);
-            self.batch.arrivalDate = d;
+            if (self.awb.arrivalDate) {
+                d.setUTCSeconds(self.awb.arrivalDate);
+                self.batch.arrivalDate = d;
+            }
+            self.batch.paymentStatus = self.awb.state == 3 ? true : false;
 
             self.calcWarehouse = calcWarehouse;
             self.calcFlete = calcFlete;
@@ -168,6 +204,21 @@ function airwayController(angular, app) {
             self.finishAwb = finishAwb;
             calcButton(self.totalWarehouse, self.totalFlete);
             calcTaxes();
+            self.paymentMethods = [
+                { value: 0, name: '-- Select Payment Method --' },
+                { value: 1, name: 'Todo Pago' },
+                { value: 2, name: 'Bank Transfer' },
+                { value: 3, name: 'Cash' }
+            ];
+            self.sendPaymentMethod = sendPaymentMethod;
+            self.batch.paymentMethod = {}
+
+            self.batch.paymentMethod.value = parseInt(self.awb.paymentMethod) || 0;
+            self.batch.transfer_account_number = self.awb.transfer_account_number;
+            self.batch.transfer_account_holder_name = self.awb.transfer_account_holder_name;
+            self.batch.transfer_bank_name = self.awb.transfer_bank_name;
+            self.batch.transfer_bank_address = self.awb.transfer_bank_address;
+            self.batch.paymentDesc = self.awb.paymentDesc;
         }
         init();
     }

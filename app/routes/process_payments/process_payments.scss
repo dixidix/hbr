@@ -2,6 +2,28 @@
 .modal-dialog {
     width: 90%;
     margin-top: 100px;
+        
+    .fa-save{
+        margin-right:15px;
+    }
+
+    .switch {
+        width: 42px;
+        height: 20px;
+        background: $hbr-blue;
+        border-color: $hbr-blue;
+    }
+    .switch small {
+        width: 20px;
+        height: 20px;
+    }
+    .switch.checked {
+        background: $hbr-green;
+        border-color: $hbr-green;
+    }
+    .switch.checked small {
+        /* button when enabled */
+    }
     .btn-hbr-blue {
         @include hbr-btn-blue(150px, 50px, $hbr-green);
     }
@@ -101,11 +123,11 @@
         }
         .table-bordered>tbody {
             .row-danger {
-                background-color: rgba(255, 0, 0, 0.7);
+                background-color: rgba(255, 0, 0, 0.4);
                 font-weight: bold;
             }
             .row-warning {
-                background-color: rgba(241, 241, 18, 0.6);
+                background-color: rgba(241, 241, 18, 0.4);
                 font-weight: bold;
             }
             .row-finished {
@@ -127,6 +149,7 @@
         .table-bordered>tfoot>tr>td {
             border: 0.1px solid $hbr-blue;
             text-align: center;
+
         }
         .rounded {
             padding-top: 2%;
@@ -208,6 +231,12 @@
     .table-bordered>tfoot>tr>td {
         border: 0.1px solid $hbr-blue;
         text-align: center;
+            .flex-row{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+            }
     }
     .rounded {
         margin-top: 2%;
