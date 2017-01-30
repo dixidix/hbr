@@ -226,6 +226,7 @@ function login($data){
 		$resolve_data['lastname'] = $rss['lastname'];
 		$resolve_data['isAdmin'] = $rss['isAdmin'];
 		$resolve_data['client_type'] = $rss['client_type'];
+		$resolve_data['uid'] = $rss['id'];
 		
 		MysqliDB::getInstance()->query("UPDATE `users` SET `sskey`='".$sskey."' WHERE `id`='$id'");
 		$resolve_data['sskey'] = $sskey;

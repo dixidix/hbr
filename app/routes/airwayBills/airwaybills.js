@@ -81,7 +81,7 @@ function airwayController(angular, app) {
 
         function calcButton(warehouse, flete) {
             self.totalButton = (parseFloat(warehouse) + parseFloat(flete)).toFixed(2);
-            if(parseFloat(warehouse) > 0.00 &&  parseFloat(flete) > 0.00){
+            if (parseFloat(warehouse) > 0.00 && parseFloat(flete) > 0.00) {
                 $scope.noCalculated = false;
             }
         }
@@ -118,6 +118,7 @@ function airwayController(angular, app) {
         function finishAwb() {
 
             self.awb.arrivalDate = new Date(self.batch.arrivalDate).getTime() / 1000;
+            self.awb.leaveDate = new Date(self.batch.leaveDate).getTime() / 1000;
             self.awb.hbr_tracking = self.batch.hbr_tracking || null;
             self.awb.hbr_postal_provider = self.batch.hbr_postal_provider || null;
             if (self.batch.paymentStatus) {
@@ -141,7 +142,6 @@ function airwayController(angular, app) {
             self.awb.paymentDesc = self.batch.paymentDesc;
             self.awb.billing_total = self.batch.transfer_total;
             self.awb.state = 2;
-            self.awb.paymentGatewayUrl = self.batch.paymentGatewayUrl || null;
             self.awb.successUrl = self.batch.successUrl || null;
             self.awb.paymentButton = self.batch.paymentButton || null;
 
@@ -193,6 +193,11 @@ function airwayController(angular, app) {
             if (self.awb.arrivalDate) {
                 d.setUTCSeconds(self.awb.arrivalDate);
                 self.batch.arrivalDate = d;
+            }
+
+            if (self.awb.leaveDate) {
+                d.setUTCSeconds(self.awb.leaveDate);
+                self.batch.leaveDate = d;
             }
             self.batch.paymentStatus = self.awb.state == 3 ? true : false;
 

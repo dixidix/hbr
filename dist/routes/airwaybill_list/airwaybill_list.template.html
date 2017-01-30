@@ -11,6 +11,29 @@
     </div>
     <div class="col-xs-12 content" ng-if="airwayList.guides.length">
         <table class="table table-bordered table-striped table-curved rounded">
+            <div class="row">
+                <div class="col-xs-2">
+                    <label for="">Buscar por Lote</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>
+                        <input type="text" name="search" class="form-control" placeholder="Buscar por lote" ng-model="searchByBatch">
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <label for="">Buscar por Gu&iacute;a</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i  class="fa fa-search"></i></span>
+                        <input type="text" name="search" class="form-control" placeholder="Buscar por gu&iacute;a" ng-model="searchByAwb">
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <label for="">Buscar por Tracking</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i  class="fa fa-search"></i></span>
+                        <input type="text" name="search" class="form-control" placeholder="Buscar por Tracking" ng-model="searchByTracking">
+                    </div>
+                </div>
+            </div>
             <thead>
                 <tr>
                     <td><span>N° Venta</span></td>
@@ -19,27 +42,31 @@
                     <td><span>Peso Total</span></td>
                     <td><span>Prestador</span></td>
                     <td><span>Tracking</span></td>
+                    <td><span>Fecha de Salida Warehouse</span></td>
                     <td><span>Fecha de Arribo Estimada</span></td>
                     <td><span>Total a pagar</span></td>
                     <td><span>Acciones</span></td>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="guide in airwayList.guides track by $index" id="guide_list_{{guide.number}}">
-                    <td><span>{{ guide.ventaId }}</span></td>                   
+                <tr ng-repeat="guide in (airwayList.guides | filter: { ventaId: searchByBatch } | filter: { number: searchByAwb } | filter: { hbr_tracking: searchByTracking }) track by $index" id="guide_list_{{guide.number}}">
+                    <td><span>{{ guide.ventaId }}</span></td>
                     <td><span>{{ guide.number }}</span></td>
                     <td><span>{{ guide.quantity }}</span></td>
                     <td><span>{{ guide.weight }} Kg.</span></td>
                     <td><span>{{ guide.hbr_postal_provider }}</span></td>
                     <td><span>{{ guide.hbr_tracking }}</span></td>
+                    <td><span>{{ guide.leaveDate * 1000 | date:'dd-MM-yyyy'}}</span></td>
                     <td><span>{{ guide.arrivalDate * 1000 | date:'dd-MM-yyyy'}}</span></td>
                     <td><span>{{ guide.billing_total | currency }}</span></td>
-                    <td >
+                    <td>
                         <div class="flex-row">
-                        <div ng-if="guide.state == 2 && guide.paymentMethod == 1" ng-bind-html="guide.paymentButton" rel="payment_button" class="col-xs-5"></div>
-                        <div class="col-xs-7">
-                        <button style="width:100%;" class="btn btn-default" ng-click="airwayList.seeMore(guide, guide.products)"><i class="fa fa-plane"></i> M&aacute;s Info </button>
-                        </div>
+                            <div ng-if="guide.state == 2 && guide.paymentMethod != 1" class="col-xs-5"><span class="text-danger">Pago no registrado </span></div>
+                            <div ng-if="guide.state == 2 && guide.paymentMethod == 1" ng-bind-html="guide.paymentButton" rel="payment_button" class="col-xs-5"></div>
+                            <div ng-if="guide.state == 3" class="col-xs-5"><span class="text-success">Pagado <i class="fa fa-check"></i></span></div>
+                            <div class="col-xs-7">
+                                <button style="width:100%;" class="btn btn-default" ng-click="airwayList.seeMore(guide, guide.products)"><i class="fa fa-plane"></i> M&aacute;s Info </button>
+                            </div>
                         </div>
                     </td>
                 </tr>

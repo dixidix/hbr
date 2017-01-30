@@ -5,12 +5,12 @@ function airwayListController(angular, app) {
 
     app.controller('airwayListCtrl', airwayListCtrl);
 
-    airwayListCtrl.$inject = ['$http', '$state', 'airwayService', '$filter', '$scope', '$uibModal', '$sce', '$compile'];
+    airwayListCtrl.$inject = ['$http', '$state', 'airwayService', '$filter', '$scope', '$uibModal', '$sce', '$compile', '$rootScope', 'authenticationService'];
 
     app.controller('airwayListModalCtrl', airwayListModalCtrl);
     airwayListModalCtrl.$inject = ['$scope', '$state', '$filter', '$uibModalInstance', '$uibModal', '$sce', '$compile', '$rootScope', 'awb', 'products', '$http', 'airwayService', '$q'];
 
-    function airwayListCtrl($http, $state, airwayService, $filter, $scope, $uibModal, $sce, $compile) {
+    function airwayListCtrl($http, $state, airwayService, $filter, $scope, $uibModal, $sce, $compile, $rootScope, authenticationService) {
         var self = this; //jshint ignore:line
 
         function openModal(size, awb, products) {
@@ -37,31 +37,32 @@ function airwayListController(angular, app) {
         }
 
         function init() {
-
-            airwayService.get_finished_airwaybillsByUserId(self.uid)
-            .then(function success(response) {
-                self.guides = response.data.guideBatch;
-                console.log(self.guides);
-                angular.forEach(self.guides, function(guide){
-                    if(guide.paymentButton){
-                        guide.paymentButton = $sce.trustAsHtml(guide.paymentButton);
-                    }
+            authenticationService.checkAuth()
+                .then(function(response) {
+                    self.uid = response.data.uid;
+                    airwayService.get_finished_airwaybillsByUserId(self.uid)
+                        .then(function success(response) {
+                            self.guides = response.data.guideBatch;
+                            angular.forEach(self.guides, function(guide) {
+                                if (guide.paymentButton) {
+                                    guide.paymentButton = $sce.trustAsHtml(guide.paymentButton);
+                                }
+                            });
+                        });
                 });
-            });
-
             self.seeMore = seeMore;
         }
         init();
 
         setTimeout(setLink, 300);
 
-        function setLink(){
+        function setLink() {
             $('[rel="payment_button"]')
                 .find('a')
-                .each(function (index, link) {
-                    $(link).attr('target','_blank');
+                .each(function(index, link) {
+                    $(link).attr('target', '_blank');
                 });
-            }
+        }
     }
 
 
@@ -73,13 +74,13 @@ function airwayListController(angular, app) {
             $uibModalInstance.dismiss('cancel');
         };
 
-       
+
 
         function init() {
             self.cancel = cancel;
             self.awb = awb;
             console.log(self.awb);
-            self.products = products;           
+            self.products = products;
         }
         init();
     }

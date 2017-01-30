@@ -5,7 +5,7 @@ $errors = array();
 $data = array();
 if (!empty($_POST['sskey'])) {
 	$sskey = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['sskey']));
-	$res = MysqliDB::getInstance()->query("SELECT sskey,isAdmin FROM users WHERE sskey='".$sskey."' AND deleted='0'");
+	$res = MysqliDB::getInstance()->query("SELECT sskey,isAdmin, id FROM users WHERE sskey='".$sskey."' AND deleted='0'");
 
 	$rows = mysqli_num_rows($res);
 	
@@ -13,6 +13,7 @@ if (!empty($_POST['sskey'])) {
 		$rss = $res->fetch_array(MYSQLI_ASSOC);
 		$data['isLogged'] = true;
 		$data['isAdmin'] = $rss['isAdmin'];
+		$data['uid'] = $rss['id'];
 		echo json_encode($data);
 
 	}else{

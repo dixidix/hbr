@@ -19,6 +19,7 @@ function loginController(angular, app) {
                         sessionStorage.setItem("sskey", response.data.sskey);
                         sessionStorage.setItem("isAdmin", response.data.isAdmin);
                         sessionStorage.setItem("clientType", response.data.client_type);
+                        sessionStorage.setItem("clientType", response.data.client_type);
                         sessionStorage.username = response.data.name + " " + response.data.lastname;
                         $state.go('dashboard', {}, { reload: true });
                         self.loginForm.username.$invalid = false;

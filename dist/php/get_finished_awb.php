@@ -43,6 +43,7 @@ if(!empty($_GET['state'])){
 		$outp .= '"paymentDesc":"'  . $rs["paymentDesc"] . '",';
 
 		$outp .= '"arrivalDate":"'  . $rs["arrivalDate"] . '",';
+		$outp .= '"leaveDate":"'  . $rs["leaveDate"] . '",';
 		$outp .= '"token":"'  . $rs["token"] . '",';
 		$outp .= '"successUrl":"'  . $rs["successUrl"] . '",';
 		$outp .= '"paymentButton":"'  . $rs["paymentButton"] . '",';
