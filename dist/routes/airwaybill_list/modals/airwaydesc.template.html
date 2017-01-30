@@ -1,84 +1,96 @@
 <script type="text/ng-template" id="airway-desc.html">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="airwaybill_desc.cancel()">&times;</button>
-            <h3 class="modal-title" id="modal-title">Detalle</h3>
-        </div>
-        <div class="modal-body" id="modal-body">
-		    <div class="overflow-table_container">
-                <table class="table overflow-table table-bordered table-striped product-table table-curved rounded" ng-if="airwaybill_desc.awb.products.length">
-                    <div class="col-xs-9">
-                        <h3 class="table-title" ng-if="airwaybill_desc.awb.products.length">Productos</h3>
-                    </div>
-                    <thead>
-                        <tr>
-                            <td><span> Categoria </span></td>
-                            <td><span> Producto </span></td>
-                            <td><span> Cantidad </span></td>
-                            <td><span> Precio </span></td>
-                            <td><span> Peso </span></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="product in airwaybill_desc.awb.products track by $index">
-                            <td>{{ product.category_name }}</td>
-                            <td>{{ product.name }} </td>
-                            <td>{{ product.quantity }} </td>
-                            <td>{{ product.price | currency }}</td>
-                            <td>{{ product.real_weight }} KG.</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="table overflow-table table-bordered table-striped product-table table-curved rounded">
-                    <div class="col-xs-9">
-                        <h3 class="table-title">Warehouse</h3>
-                    </div>
-                    <thead>
-                        <tr>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="airwaybill_desc.cancel()">&times;</button>
+        <h3 class="modal-title" id="modal-title">Detalle</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <div class="overflow-table_container">
+            <table class="table overflow-table table-bordered table-striped product-table table-curved rounded" ng-if="airwaybill_desc.awb.products.length">
+                <div class="col-xs-9">
+                    <h3 class="table-title" ng-if="airwaybill_desc.awb.products.length">Productos</h3>
+                </div>
+                <thead>
+                    <tr>
+                        <td><span> Categoria </span></td>
+                        <td><span> Producto </span></td>
+                        <td><span> Cantidad </span></td>
+                        <td><span> Precio </span></td>
+                        <td><span> Peso </span></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="product in airwaybill_desc.awb.products track by $index">
+                        <td>{{ product.category_name }}</td>
+                        <td>{{ product.name }} </td>
+                        <td>{{ product.quantity }} </td>
+                        <td>{{ product.price | currency }}</td>
+                        <td>{{ product.real_weight }} KG.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table overflow-table table-bordered table-striped product-table table-curved rounded">
+                <div class="col-xs-9">
+                    <h3 class="table-title">Warehouse</h3>
+                </div>
+                <thead>
+                    <tr>
 
-                            <td><span> Peso de la Guia </span></td>
-                            <td><span> Precio Guia </span></td>
-                            <td><span> Entrada a Warehouse </span></td>
-                            <td><span> Precio por Peso Adicional </span></td>
-                            <td><span> Precio por Cargos Adicionales </span></td>
-                            <td><span> Precio Total </span></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{ airwaybill_desc.awb.weight }} Kg.</td>
-                            <td>{{ airwaybill_desc.awb.price | currency }}</td>
-                            <td>{{ airwaybill_desc.awb.warehouse_enter | currency }}</td>
-                            <td>{{ airwaybill_desc.awb.warehouse_aditional_weight | currency }} </td>
-                            <td>{{ airwaybill_desc.awb.warehouse_aditional_charges | currency }} </td>
-                            <td>{{ airwaybill_desc.awb.warehouse_total | currency }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="table overflow-table table-bordered table-striped product-table table-curved rounded">
-                    <div class="col-xs-9">
-                        <h3 class="table-title">Flete BUE</h3>
-                    </div>
-                    <thead>
-                        <tr>
-                            <td><span> Peso Total </span></td>
-                            <td><span> Flete Internacional (Precio x Kg)</span></td>                
-                            <td><span> Precio Total </span></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{ airwaybill_desc.awb.weight }} Kg. </td>
-                            <td>{{ airwaybill_desc.awb.shipment_international | currency }} </td>
-                            <td>{{ airwaybill_desc.awb.shipment_total | currency }} </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <h3>Total a pagar: {{airwaybill_desc.awb.billing_total | currency}}</h3>
-                <label for="">Descripci&oacute;n del pago:</label>
-                <textarea name="" style="height: 100px" class="form-control" cols="15" ng-model="airwaybill_desc.awb.paymentDesc"></textarea>
-             </div>
-        </div>		
-        <div class="modal-footer">
-            <button class="btn btn-hbr-blue" ng-click="airwaybill_desc.cancel()">Cerrar</button>
+                        <td><span> Peso de la Guia </span></td>
+                        <td><span> Precio Guia </span></td>
+                        <td><span> Entrada a Warehouse </span></td>
+                        <td><span> Precio por Peso Adicional </span></td>
+                        <td><span> Precio por Cargos Adicionales </span></td>
+                        <td><span> Precio Total </span></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ airwaybill_desc.awb.weight }} Kg.</td>
+                        <td>{{ airwaybill_desc.awb.price | currency }}</td>
+                        <td>{{ airwaybill_desc.awb.warehouse_enter | currency }}</td>
+                        <td>{{ airwaybill_desc.awb.warehouse_aditional_weight | currency }} </td>
+                        <td>{{ airwaybill_desc.awb.warehouse_aditional_charges | currency }} </td>
+                        <td class="text-danger">{{ airwaybill_desc.awb.warehouse_total | currency }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table overflow-table table-bordered table-striped product-table table-curved rounded">
+                <div class="col-xs-9">
+                    <h3 class="table-title">Flete BUE</h3>
+                </div>
+                <thead>
+                    <tr>
+                        <td><span> Peso Total </span></td>
+                        <td><span> Flete Internacional (Precio x Kg)</span></td>
+                        <td><span> Precio Total </span></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ airwaybill_desc.awb.weight }} Kg. </td>
+                        <td>{{ airwaybill_desc.awb.shipment_international | currency }} </td>
+                        <td class="text-danger">{{ airwaybill_desc.awb.shipment_total | currency }} </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Total a pagar: <span class="text-danger">{{airwaybill_desc.awb.billing_total | currency}}</span></h3>
+            <div ng-if="airwaybill_desc.awb.state == 2 && airwaybill_desc.awb.paymentMethod == 2" class="well well-lg col-xs-12">
+                <h4>Informaci&oacute;n de pago por transferencia bancaria</h4>
+                <ul>
+                    <li><strong>N&uacute;mero de cuenta:</strong> {{airwaybill_desc.awb.transfer_account_number}}</li>
+                    <li><strong>Titular de cuenta:</strong> {{airwaybill_desc.awb.transfer_account_holder_name}}</li>
+                    <li><strong>Banco:</strong> {{airwaybill_desc.awb.transfer_bank_name}}</li>
+                    <li><strong>Direcci&oacute;n:</strong> {{airwaybill_desc.awb.transfer_bank_address}}</li>
+                </ul>
+            </div>
+            <div ng-if="airwaybill_desc.awb.state == 2 && airwaybill_desc.awb.paymentMethod == 3" class="well well-lg col-xs-12">
+                <p>La cancelaci&oacute;n del pago del lote se ha pactado realizar en <strong>Efectivo</strong>. El administrador se contactar&aacute; en breve.</p>
+            </div>
+            <label for="">Descripci&oacute;n del pago:</label>
+            <textarea name="" style="height: 100px" class="form-control" cols="15" ng-model="airwaybill_desc.awb.paymentDesc"></textarea>
         </div>
-    </script>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-hbr-blue" ng-click="airwaybill_desc.cancel()">Cerrar</button>
+    </div>
+</script>

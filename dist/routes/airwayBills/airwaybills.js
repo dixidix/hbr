@@ -144,8 +144,8 @@ function airwayController(angular, app) {
             self.awb.state = 2;
             self.awb.successUrl = self.batch.successUrl || null;
             self.awb.paymentButton = self.batch.paymentButton || null;
-
-            if (self.awb.paymentMethod.value && (self.awb.transfer_account_number && self.awb.transfer_account_holder_name && self.awb.transfer_bank_name && self.awb.transfer_bank_address && self.awb.billing_total) || (self.awb.successUrl && self.awb.paymentButton)) {
+            console.log(self.awb.transfer_account_number && self.awb.transfer_account_holder_name && self.awb.transfer_bank_name && self.awb.transfer_bank_address && self.awb.billing_total);
+            if (self.awb.paymentMethod && (self.awb.transfer_account_number && self.awb.transfer_account_holder_name && self.awb.transfer_bank_name && self.awb.transfer_bank_address && self.awb.billing_total) || (self.awb.successUrl && self.awb.paymentButton)) {
                 airwayService.updateGuide(self.awb).then(function success(response) {
                     $uibModalInstance.dismiss('cancel');
                     $state.go($state.current, {}, { reload: true });
