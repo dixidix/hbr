@@ -348,17 +348,17 @@ html {
     background: #b4ec13;
     color: #19156a;
     text-align: center;
-    font-size: 12px; }
+    font-size: 10px; }
   .process_payments .rounded tbody tr td {
     text-align: center;
     vertical-align: middle; }
     .process_payments .rounded tbody tr td span {
-      font-size: 12px; }
+      font-size: 10px; }
       .process_payments .rounded tbody tr td span i {
         cursor: pointer;
         vertical-align: middle;
         margin: 0 5px;
-        font-size: 12px; }
+        font-size: 10px; }
         .process_payments .rounded tbody tr td span i.fa.fa-file-pdf-o {
           color: #DA251C; }
         .process_payments .rounded tbody tr td span i.fa.fa-edit {

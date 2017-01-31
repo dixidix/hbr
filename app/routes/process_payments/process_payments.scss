@@ -2,11 +2,9 @@
 .modal-dialog {
     width: 90%;
     margin-top: 100px;
-        
-    .fa-save{
-        margin-right:15px;
+    .fa-save {
+        margin-right: 15px;
     }
-
     .switch {
         width: 42px;
         height: 20px;
@@ -149,7 +147,6 @@
         .table-bordered>tfoot>tr>td {
             border: 0.1px solid $hbr-blue;
             text-align: center;
-
         }
         .rounded {
             padding-top: 2%;
@@ -231,12 +228,12 @@
     .table-bordered>tfoot>tr>td {
         border: 0.1px solid $hbr-blue;
         text-align: center;
-            .flex-row{
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-            }
+        .flex-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
     }
     .rounded {
         margin-top: 2%;
@@ -246,7 +243,7 @@
                 background: $hbr-green;
                 color: $hbr-blue;
                 text-align: center;
-                font-size: 12px;
+                font-size: 10px;
             }
         }
         tbody {
@@ -255,12 +252,12 @@
                     text-align: center;
                     vertical-align: middle;
                     span {
-                        font-size: 12px;
+                        font-size: 10px;
                         i {
                             cursor: pointer;
                             vertical-align: middle;
                             margin: 0 5px;
-                            font-size: 12px;
+                            font-size: 10px;
                             &.fa.fa-file-pdf-o {
                                 color: #DA251C;
                             }
