@@ -55,8 +55,8 @@ function editPurchase($data){
 	$v_id = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['id']));
 	$paymentGatewayUrl = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['paymentGatewayUrl']));
 	$token = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['token']));
-	echo "UPDATE `ventas` SET `paymentGatewayUrl`='".$paymentGatewayUrl."',`token`='".$token."' where `id` = '".$v_id."'";
-	MysqliDB::getInstance()->query("UPDATE `ventas` SET `paymentGatewayUrl`='".$paymentGatewayUrl."',`token`='".$token."' where `id` = '".$v_id."'");
+	echo "UPDATE `ventas` SET `token`='".$token."' where `id` = '".$v_id."'";
+	MysqliDB::getInstance()->query("UPDATE `ventas` SET `token`='".$token."' where `id` = '".$v_id."'");
 }
 
 //TRAER UN USUARIO O TODOS
@@ -136,7 +136,7 @@ function addPurchase($data){
 
 	if (empty($errors)){
 		$timestamp = round(microtime(true) * 1000);
-		MysqliDB::getInstance()->query("INSERT INTO `ventas`(`uid`, `parcial_price`, `total`, `total_quantity`,`total_remaining_quantity`, `timestamp`,  `totalweight`, `guide_amount`) VALUES ('".$uid."',".$parcial_price.",".$total.",".$total_quantity.",".$total_quantity.",".$timestamp.",".$total_weight.", '0')");
+		MysqliDB::getInstance()->query("INSERT INTO `ventas`(`uid`, `parcial_price`, `total`, `total_quantity`,`total_remaining_quantity`, `timestamp`,  `totalweight`, `guide_amount`) VALUES ('".$uid."',".(float)$parcial_price.",".(float)$total.",".(float)$total_quantity.",".(int)$total_quantity.",".$timestamp.",".$total_weight.", '0')");
 
 		$res = MysqliDB::getInstance()->query("SELECT MAX(id) as id FROM `ventas`");		
 		$rows = mysqli_num_rows($res);

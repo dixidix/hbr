@@ -68,7 +68,7 @@ function processPaymentsController(angular, app) {
 					angular.forEach(response.data.ventas, function (value, key) {
 						response.data.ventas[key].parcial_price = parseFloat(value.parcial_price).toFixed(2);
 						response.data.ventas[key].total = parseFloat(value.total).toFixed(2);
-						response.data.ventas[key].peso_total = parseFloat(value.peso_total).toFixed(2);
+						response.data.ventas[key].peso_total = parseFloat(value.peso_total).toFixed(2);						
 						response.data.ventas[key].totalWarehouse = "0";
 						response.data.ventas[key].totalFlete = "0";
 						response.data.ventas[key].totalImpuestos = "0";
@@ -310,6 +310,7 @@ function processPaymentsController(angular, app) {
 								guide.weight = parseFloat(parseFloat(guide.weight || 0) + parseFloat(parseFloat(product.real_weight || product.weight || 0) * amount)).toFixed(2);
 								guide.price = parseFloat(parseFloat(guide.price || 0) + parseFloat(parseFloat(product.price || 0) * amount)).toFixed(2);
 								guide.ventaId = self.venta.id;
+								guide.whId = bill.whId;
 								if (guide.weight > 40 || guide.price > 900) {
 									$('#guide_list_' + guide.number).addClass('row-warning');
 									self.danger_msg = "";

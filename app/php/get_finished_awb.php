@@ -19,6 +19,7 @@ if(!empty($_GET['state'])){
 		$outp .= '{"airwayId":"'  . $rs["airwayId"] . '",';
 		$outp .= '"ventaId":"'  . $rs["ventaId"] . '",';
         $outp .= '"number":"'  . (int) $rs["number"] . '",';
+        $outp .= '"whId":"'  . (int) $rs["warehouseId"] . '",';
 		$outp .= '"quantity":"'  . $rs["quantity"] . '",';
 		$outp .= '"weight":"'  .(float) $rs["weight"] . '",';
 		$outp .= '"price":"'  . (float)$rs["price"] . '",';

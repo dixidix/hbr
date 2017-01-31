@@ -31,6 +31,7 @@ if(!empty($_GET['state'])){
 		$outp .= '{"airwayId":"'  . $rs["airwayId"] . '",';
 		$outp .= '"ventaId":"'  . $rs["ventaId"] . '",';
         $outp .= '"number":"'  . (float) $rs["number"] . '",';
+        $outp .= '"whId":"'  . (float) $rs["warehouseId"] . '",';
 
         $uname = MysqliDB::getInstance()->query("SELECT * FROM airway_bill_product INNER JOIN categories ON airway_bill_product.category_id = categories.category_id where  airway_bill_product.airwayId =".$rs["airwayId"]." AND airway_bill_product.deleted = 0");
 		while($rss = $uname->fetch_array(MYSQLI_ASSOC)) {

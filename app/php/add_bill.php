@@ -5,6 +5,7 @@ $errors = array();
 $resolve_data = array();
 
 $ventaId = (int) MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['ventaId']));
+$whId = (int) MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['whId']));
 $establishment = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['establishment']));	
 $number = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['number']));
 $provider = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['provider']));
@@ -42,14 +43,14 @@ if(!file_exists("../files/".$timestamp."/")){
 }
 
 if (empty($errors)){
-    MysqliDB::getInstance()->query("INSERT INTO `bills`(`ventaId`, `establishment`, `number`, `provider`, `quantity`,`remaining_quantity`, `timestamp`, `totalprice`, `totalweight`, `trackingnumber`, `userId`, `bill_file_name`, `bill_file_path`) VALUES (".$ventaId.",'".$establishment."','".$number."','".$provider."',".$quantity.",".$remaining_quantity.",'".$timestamp."',".$totalprice.",".$totalweight.",'".$trackingnumber."',".$userId.",'".$file_name_bill."','".$path_bill."')");
+    MysqliDB::getInstance()->query("INSERT INTO `bills`(`ventaId`,`whId`, `establishment`, `number`, `provider`, `quantity`,`remaining_quantity`, `timestamp`, `totalprice`, `totalweight`, `trackingnumber`, `userId`, `bill_file_name`, `bill_file_path`) VALUES (".$ventaId.",".$whId.",'".$establishment."','".$number."','".$provider."',".$quantity.",".$remaining_quantity.",'".$timestamp."',".$totalprice.",".$totalweight.",'".$trackingnumber."',".$userId.",'".$file_name_bill."','".$path_bill."')");
 
     $res = MysqliDB::getInstance()->query("SELECT MAX(bill_id) as id FROM `bills`");		
     $rows = mysqli_num_rows($res);
 
     if ($rows > 0){
         $rss = $res->fetch_array(MYSQLI_ASSOC);
-        $resolve_data['bill_id'] = $rss['id'];
+        $resolve_data['bill_id'] = $rss['id'];	
 
     }
 	$resolve_data['success'] = true;	

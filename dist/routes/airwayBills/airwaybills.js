@@ -116,23 +116,37 @@ function airwayController(angular, app) {
         }
 
         function finishAwb() {
-
+            $rootScope.showSpinner = true;
             self.awb.arrivalDate = new Date(self.batch.arrivalDate).getTime() / 1000;
             self.awb.leaveDate = new Date(self.batch.leaveDate).getTime() / 1000;
             self.awb.hbr_tracking = self.batch.hbr_tracking || null;
             self.awb.hbr_postal_provider = self.batch.hbr_postal_provider || null;
+                
+
+
             if (self.batch.paymentStatus) {
                 self.awb.state = 3;
                 if (self.totalWarehouse > 0 && self.totalFlete > 0) {
                     airwayService.updateGuide(self.awb).then(function success(response) {
-                        $uibModalInstance.dismiss('cancel');
-                        $state.go($state.current, {}, { reload: true });
+                        $http.post('./hbr-selfie/dist/php/notifications/payment_success.php', {
+                            hbr_tracking: self.awb.hbr_tracking,
+                            ventaId: self.awb.ventaId,
+                            guide_number: self.awb.number,
+                            arrivalDate: self.awb.arrivalDate,
+                            leaveDate: self.awb.leaveDate,
+                            hbr_postal_provider: self.awb.hbr_postal_provider
+                        }).then(function success(response) {
+                            $rootScope.showSpinner = false;
+                            $uibModalInstance.dismiss('cancel');
+                            $state.go($state.current, {}, { reload: true });
+                        });
                     });
                 }
             }
         }
 
         function sendPaymentMethod() {
+            $rootScope.showSpinner = true;
             self.batch.transfer_total = parseFloat(self.totalButton).toFixed(2);
             self.awb.paymentMethod = self.batch.paymentMethod.value;
             self.awb.transfer_account_number = self.batch.transfer_account_number;
@@ -144,27 +158,74 @@ function airwayController(angular, app) {
             self.awb.state = 2;
             self.awb.successUrl = self.batch.successUrl || null;
             self.awb.paymentButton = self.batch.paymentButton || null;
-            console.log(self.awb.transfer_account_number && self.awb.transfer_account_holder_name && self.awb.transfer_bank_name && self.awb.transfer_bank_address && self.awb.billing_total);
             if (self.awb.paymentMethod && (self.awb.transfer_account_number && self.awb.transfer_account_holder_name && self.awb.transfer_bank_name && self.awb.transfer_bank_address && self.awb.billing_total) || (self.awb.successUrl && self.awb.paymentButton)) {
-                airwayService.updateGuide(self.awb).then(function success(response) {
-                    $uibModalInstance.dismiss('cancel');
-                    $state.go($state.current, {}, { reload: true });
-                });
+                airwayService.updateGuide(self.awb)
+                    .then(function success(response) {
+                        $http.post('./hbr-selfie/dist/php/notifications/payment_method.php', {
+                            paymentMethod: self.awb.paymentMethod,
+                            ventaId: self.awb.ventaId,
+                            guide_number: self.awb.number,
+                            paymentButton: String(self.awb.paymentButton),
+                            transfer_account_number: self.awb.transfer_account_number,
+                            transfer_account_holder_name: self.awb.transfer_account_holder_name,
+                            transfer_bank_name: self.awb.transfer_bank_name,
+                            transfer_bank_address: self.awb.transfer_bank_address,
+                            paymentDesc: self.awb.paymentDesc,
+                            name: self.awb.user.name + " " + self.awb.user.lastname,
+                            total: parseFloat(self.totalButton).toFixed(2)
+                        }).then(function success(response) {
+                            $rootScope.showSpinner = false;
+                            $uibModalInstance.dismiss('cancel');
+                            $state.go($state.current, {}, { reload: true });
+                        });
+                    });
+            } else if (self.awb.paymentMethod == 3) {
+                airwayService.updateGuide(self.awb)
+                    .then(function success(response) {
+                        $http.post('./hbr-selfie/dist/php/notifications/payment_method.php', {
+                            paymentMethod: self.awb.paymentMethod,
+                            ventaId: self.awb.ventaId,
+                            guide_number: self.awb.number,
+                            paymentButton: String(self.awb.paymentButton),
+                            transfer_account_number: self.awb.transfer_account_number,
+                            transfer_account_holder_name: self.awb.transfer_account_holder_name,
+                            transfer_bank_name: self.awb.transfer_bank_name,
+                            transfer_bank_address: self.awb.transfer_bank_address,
+                            paymentDesc: self.awb.paymentDesc,
+                            name: self.awb.user.name + " " + self.awb.user.lastname,
+                            total: parseFloat(self.totalButton).toFixed(2)
+                        }).then(function success(response) {
+                            $rootScope.showSpinner = false;
+                            $uibModalInstance.dismiss('cancel');
+                            $state.go($state.current, {}, { reload: true });
+                        });
+                    });
             }
         }
 
         function updateArrivalDate() {
+             $rootScope.showSpinner = true;
             self.awb.arrivalDate = new Date(self.batch.arrivalDate).getTime() / 1000;
+            self.awb.leaveDate = new Date(self.batch.leaveDate).getTime() / 1000;
             self.awb.state = 3;
             airwayService.updateGuide(self.awb).then(function success(response) {
-                $uibModalInstance.dismiss('cancel');
-                $state.go($state.current, {}, { reload: true });
+                        $http.post('./hbr-selfie/dist/php/notifications/update_dates.php', {
+                            ventaId: self.awb.ventaId,
+                            guide_number: self.awb.number,
+                            arrivalDate:self.awb.arrivalDate,
+                            leaveDate:self.awb.leaveDate
+                        }).then(function success(response) {
+                            $rootScope.showSpinner = false;
+                            $uibModalInstance.dismiss('cancel');
+                            $state.go($state.current, {}, { reload: true });
+                        });
             });
         }
 
         function init() {
             console.log(awb);
             self.cancel = cancel;
+            $rootScope.showSpinner = false;
             self.awb = awb;
             self.products = products;
             self.collapsedWarehouse = true;
@@ -191,13 +252,12 @@ function airwayController(angular, app) {
             $scope.noCalculated = true;
             var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
             if (self.awb.arrivalDate) {
-                d.setUTCSeconds(self.awb.arrivalDate);
-                self.batch.arrivalDate = d;
+               
+                self.batch.arrivalDate = new Date(self.awb.arrivalDate * 1000);
             }
 
             if (self.awb.leaveDate) {
-                d.setUTCSeconds(self.awb.leaveDate);
-                self.batch.leaveDate = d;
+                self.batch.leaveDate = new Date(self.awb.leaveDate * 1000);
             }
             self.batch.paymentStatus = self.awb.state == 3 ? true : false;
 

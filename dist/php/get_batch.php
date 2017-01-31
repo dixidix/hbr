@@ -40,6 +40,7 @@ $res = MysqliDB::getInstance()->query("SELECT * from ventas WHERE deleted = 0");
 			if ($outpm != "") {$outpm .= ",";}
 			$outpm .= '{"bill_id":"'   . $rss["bill_id"].'",';
 			$outpm .= '"establishment":"'  . $rss["establishment"] . '",';
+			$outpm .= '"whId":"'  . $rss["whId"] . '",';
 			$outpm .= '"number":"'  . $rss["number"] . '",';
 			$outpm .= '"provider":"'  . $rss["provider"] . '",';
 			$outpm .= '"quantity":"'  . $rss["quantity"] . '",';

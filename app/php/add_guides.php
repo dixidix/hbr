@@ -20,7 +20,7 @@ if (empty($errors)){
 
     if ($rows == 0){
 
-    MysqliDB::getInstance()->query("INSERT INTO `airway_bill`(`ventaId`,`number`, `quantity`, `weight`, `price`) VALUES (".$ventaId.",".$number.", ".$quantity.", ".$weight.", ".$price.")");
+    MysqliDB::getInstance()->query("INSERT INTO `airway_bill`(`ventaId`,`warehouseId`,`number`, `quantity`, `weight`, `price`) VALUES (".$ventaId.",".$whId.",".$number.", ".$quantity.", ".$weight.", ".$price.")");
 
     $res = MysqliDB::getInstance()->query("SELECT MAX(airwayId) as id FROM `airway_bill`");		
     $rows = mysqli_num_rows($res);

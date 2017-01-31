@@ -24,7 +24,7 @@ $date = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string
 $lote = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['lote']));
 $name = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['name']));
 
-date_default_timezone_set('GMT');
+date_default_timezone_set('America/Argentina/Buenos_Aires');
 $date =  date('Y-m-d H:i:s', $date);
 
 $htmlStringToReplace = array('$email','$date','$lote','$name');

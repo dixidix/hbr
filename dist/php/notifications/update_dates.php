@@ -1,6 +1,6 @@
 <?php
-require 'bd.php';
-require './PHPMailer-master/PHPMailerAutoload.php';
+require './../bd.php';
+require './../PHPMailer-master/PHPMailerAutoload.php';
 
 $_POST = json_decode(file_get_contents('php://input'), true);
 $errors = array();
@@ -18,34 +18,41 @@ $mail->Password = 'panchirulo173';                           // SMTP password
 $mail->SMTPSecure="ssl";                          // Enable TLS encryption, `ssl` also accepted
 $mail->Port = 465;                                    // TCP port to connect to
 
-$body = file_get_contents('./emails/solicitud_venta.template.html', FILE_USE_INCLUDE_PATH);
-$email = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['email']));
-$date = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['date']));
-$lote = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['lote']));
-$name = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['name']));
+$ventaId = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['ventaId']));
+$guide_number = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['guide_number']));
+
+$body = file_get_contents('./../emails/update-dates.template.html', FILE_USE_INCLUDE_PATH);    
+
+$arrivalDate =  MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['arrivalDate']));
+$leaveDate =  MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['leaveDate']));
+
 
 date_default_timezone_set('America/Argentina/Buenos_Aires');
-$date =  date('Y-m-d H:i:s', $date);
+$arrivalDateParsed =  date('d-m-Y', $arrivalDate);
+$leaveDateParsed =  date('d-m-Y', $leaveDate);
 
-$htmlStringToReplace = array('$email','$date','$lote','$name');
- $replaceWith   = array("$email","$date",$lote, "$name");
+
+$htmlStringToReplace = array('$ventaId','$guide_number', '$arrivalDate', '$leaveDate');
+$replaceWith   = array("$ventaId","$guide_number", "$arrivalDateParsed", "$leaveDateParsed");
+
 $body = str_replace($htmlStringToReplace, $replaceWith, $body);
 
 $to = "nicolas.sigal@gmail.com";
 $name = "HBR | tu courier";
-$subject = "Solicitud de venta";
+$subject = "Actualización de fechas";
 $mail->CharSet = 'UTF-8';
 $mail->AddReplyTo($to);
 $mail->SetFrom($to, $name);
 $mail->Subject = $subject;
 $mail->AddAddress($to);
 $mail->Body    = $body;
-$mail->AltBody = "Solicitud de venta de: $name . Lote n° $lote";
+$mail->AltBody = "Actualización de fechas: $name . Guía n° $guide_number";
 
 if(!$mail->send()) {
-	echo 'Message could not be sent.';
-	echo 'Mailer Error: ' . $mail->ErrorInfo;
+    echo 'Message could not be sent.';
+    echo 'Mailer Error: ' . $mail->ErrorInfo;
 } else {
-	echo 'Message has been sent';
+    echo 'Message has been sent';
 }
+
 ?>

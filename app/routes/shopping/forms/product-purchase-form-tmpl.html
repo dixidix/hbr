@@ -41,6 +41,18 @@
                     placeholder="N&uacute;mero de tracking" autocomplete="off" required>
             </div>
         </div>
+        <!-- WAREHOUSE -->
+        <div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_purchase.name.$invalid && shopping.shoppingForm_purchase.$submitted}">
+            <label class="control-label" for="warehouses">Warehouse
+                        (*)</label><br>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="fa fa-home"></i></span>
+                <select class="form-control" ng-options="warehouse.name for warehouse in shopping.warehouses track by warehouse.id"
+                    name="warehouses" id="warehouses" ng-model="shopping.bill.whId">
+                    <option value="" disabled="disabled">-- Selecciona un Warehouse --</option>
+                </select>
+            </div>
+        </div>
         <div class="form-group col-xs-4" data-ng-class="{'has-error': shopping.shoppingForm_purchase.bill_file.$invalid && shopping.shoppingForm_purchase.$submitted}">
             <label for="bill_file" class="control-label">Agregar Factura ( PDF ) (*)</label>
             <input type="file" name="bill_file" id="bill_file" required ng-model="shopping.bill.bill_file" uploader-model="shopping.bill.bill_file"
