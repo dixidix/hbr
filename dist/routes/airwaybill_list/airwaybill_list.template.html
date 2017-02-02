@@ -2,7 +2,7 @@
     <link rel="stylesheet" type="text/css" href="./hbr-selfie/dist/routes/process_payments/process_payments.css">
     <h3><i class="fa fa-plane"></i> Ver Gu&iacute;as</h3>
     <hr>
-    <div class="col-xs-12 content" ng-if="!airwayList.guides.length">
+    <div class="col-xs-12 content" ng-if="!airwayList.guides.length && $root.showSpinner == false">
         <div class="row">
             <div class="empty-list">
                 <h3>No se han registrado Gu&iacute;as a&uacute;n.</h3>
@@ -42,6 +42,7 @@
                     <td><span>Peso Total</span></td>
                     <td><span>Prestador</span></td>
                     <td><span>Tracking</span></td>
+                    <td><span>Warehouse</span></td>
                     <td><span>Fecha de Salida</span></td>
                     <td><span>Fecha de Arribo Estimada</span></td>
                     <td><span>Total a pagar</span></td>
@@ -54,10 +55,15 @@
                     <td><span>{{ guide.number }}</span></td>
                     <td><span>{{ guide.quantity }}</span></td>
                     <td><span>{{ guide.weight }} Kg.</span></td>
-                    <td><span>{{ guide.hbr_postal_provider }}</span></td>
-                    <td><span>{{ guide.hbr_tracking }}</span></td>
-                    <td><span>{{ guide.leaveDate * 1000 | date:'dd-MM-yyyy'}}</span></td>
-                    <td><span>{{ guide.arrivalDate * 1000 | date:'dd-MM-yyyy'}}</span></td>
+                    <td ng-if="guide.hbr_postal_provider.length"><span>{{ guide.hbr_postal_provider }}</span></td>
+                    <td ng-if="!guide.hbr_postal_provider.length"><span class="text-danger">Procesando..</span></td>
+                    <td ng-if="guide.hbr_tracking.length"><span>{{ guide.hbr_tracking }}</span></td>
+                    <td ng-if="!guide.hbr_tracking.length"><span class="text-danger">Procesando..</span></td>
+                    <td><span>{{ guide.warehouse[0].name }}</span></td>
+                    <td ng-if="guide.leaveDate.length"><span>{{ guide.leaveDate *1000 | date:'dd-MM-yyyy'}}</span></td>
+                    <td ng-if="!guide.leaveDate.length"><span class="text-danger">Procesando..</span></td>
+                    <td ng-if="guide.arrivalDate.length"><span>{{ guide.arrivalDate  *1000 | date:'dd-MM-yyyy'}}</span></td>
+                    <td ng-if="!guide.arrivalDate.length"><span class="text-danger">Procesando..</span></td>
                     <td><span>{{ guide.billing_total | currency }}</span></td>
                     <td>
                         <div class="flex-row">

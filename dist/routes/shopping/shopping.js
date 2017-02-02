@@ -39,6 +39,7 @@ function shoppingController(angular, app) {
                     total: self.lote.total_price,
                     total_quantity: self.lote.total_quantity,
                     userId: self.lote.user.id,
+                    timestamp: new Date().getTime(),
                     method: "POST"
                 })
                 .success(function(response) {
@@ -48,7 +49,7 @@ function shoppingController(angular, app) {
                         sequence = sequence.promise;
                         angular.forEach(self.lote.bills, function(bill) {
                             sequence = sequence.then(function() {
-                                return uploadService.uploadBills(bill, response.ventaId, self.lote.user.id, (new Date).getTime())
+                                return uploadService.uploadBills(bill, response.ventaId, self.lote.user.id, new Date().getTime())
                                     .success(function(response) {
                                         angular.forEach(bill.products, function(product) {
                                             product.bill_id = response.bill_id;
@@ -109,8 +110,6 @@ function shoppingController(angular, app) {
                     self.shoppingForm_purchase.$setUntouched();
                     self.shoppingForm_purchase.$setPristine();
                     self.shoppingForm_purchase.$submitted = false;
-                    console.log(self.bill);
-
                 } else {
                     self.product_error = "Debe completar la información de producto para continuar";
                 }
@@ -152,7 +151,7 @@ function shoppingController(angular, app) {
                     total_price: 0.00,
                     total_weight: 0.00,
                     quantity: 0,
-                    whId:''
+                    whId: ''
                 };
 
                 self.aux_product = {};

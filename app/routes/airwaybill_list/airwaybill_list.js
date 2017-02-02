@@ -37,17 +37,20 @@ function airwayListController(angular, app) {
         }
 
         function init() {
+            $rootScope.showSpinner = true;
             authenticationService.checkAuth()
                 .then(function(response) {
                     self.uid = response.data.uid;
                     airwayService.get_finished_airwaybillsByUserId(self.uid)
                         .then(function success(response) {
                             self.guides = response.data.guideBatch;
+
                             angular.forEach(self.guides, function(guide) {
                                 if (guide.paymentButton) {
                                     guide.paymentButton = $sce.trustAsHtml(guide.paymentButton);
                                 }
                             });
+                            $rootScope.showSpinner = false;
                         });
                 });
             self.seeMore = seeMore;

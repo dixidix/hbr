@@ -11,6 +11,7 @@
                         <td><span>N° Factura</span></td>
                         <td><span>Productos</span></td>
                         <td><span>Tracking</span></td>
+                        <td><span>Warehouse</span></td>
                         <td><span>Prestador Postal</span></td>
                         <td><span>Tienda de compra</span></td>
                         <td><span>Cant. Productos</span></td>
@@ -45,6 +46,7 @@
                             </table>
                         </td>
                         <td><span>{{ bill.tracking_number }}</span></td>
+                        <td><span>{{ bill.warehouse[0].name }}</span></td>
                         <td><span>{{ bill.provider }}</span></td>
                         <td><span>{{bill.establishment }}</span></td>
                         <td><span>{{ bill.quantity }}</span></td>

@@ -37,10 +37,31 @@ $res = MysqliDB::getInstance()->query("SELECT * from ventas WHERE deleted = 0");
 
 		while($rss = $uname->fetch_array(MYSQLI_ASSOC)) {
 			$outpmn = "";
+			$outpwh = "";
 			if ($outpm != "") {$outpm .= ",";}
 			$outpm .= '{"bill_id":"'   . $rss["bill_id"].'",';
 			$outpm .= '"establishment":"'  . $rss["establishment"] . '",';
 			$outpm .= '"whId":"'  . $rss["whId"] . '",';
+
+			$wh =  MysqliDB::getInstance()->query("SELECT * FROM users where id =" . $rss["whId"] . " and deleted = 0");
+			while($rswh = $wh->fetch_array(MYSQLI_ASSOC)) {
+				if ($outpwh != "") {$outpwh .= ",";}
+				$outpwh .= '{"id":"'  . $rswh["id"] . '",';
+				if(!empty($rswh["warehouse_name"])){
+					$outpwh .= '"name":"'  . $rswh["warehouse_name"] . '",';
+				}
+				$outpwh .= '"tel":"'  . $rswh["tel"] . '",';
+				$outpwh .= '"cel":"'  . $rswh["cel"] . '",';
+				$outpwh .= '"email":"'  . $rswh["email"] . '",';
+				$outpwh .= '"codeType": '  . $rswh["codeType"] . ',';
+				$outpwh .= '"idCode":"'  . $rswh["idCode"] . '",';
+				$outpwh .= '"address":"'  . $rswh["address"] . '",';
+				$outpwh .= '"localidad":"'  . $rswh["localidad"] . '",';
+				$outpwh .= '"postalcode":"'   . $rswh["postalcode"]  . '"}';
+			}
+
+			$outpm .='"warehouse":['.$outpwh.'],';
+		
 			$outpm .= '"number":"'  . $rss["number"] . '",';
 			$outpm .= '"provider":"'  . $rss["provider"] . '",';
 			$outpm .= '"quantity":"'  . $rss["quantity"] . '",';

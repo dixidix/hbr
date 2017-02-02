@@ -12,6 +12,8 @@ if(!empty($_GET['state'])){
 }
 
 	$outp="";
+	$outpwh="";
+	
 	while($rs = $res->fetch_array(MYSQLI_ASSOC)) {
 		$outpm ="";
 		if ($outp != "") {$outp .= ",";}
@@ -20,6 +22,26 @@ if(!empty($_GET['state'])){
 		$outp .= '"ventaId":"'  . $rs["ventaId"] . '",';
         $outp .= '"number":"'  . (int) $rs["number"] . '",';
         $outp .= '"whId":"'  . (int) $rs["warehouseId"] . '",';
+
+		$wh =  MysqliDB::getInstance()->query("SELECT * FROM users where id =" . $rs["warehouseId"] . " and deleted = 0");
+		while($rswh = $wh->fetch_array(MYSQLI_ASSOC)) {
+			if ($outpwh != "") {$outpwh .= ",";}
+			$outpwh .= '{"id":"'  . $rswh["id"] . '",';
+			if(!empty($rswh["warehouse_name"])){
+				$outpwh .= '"name":"'  . $rswh["warehouse_name"] . '",';
+			}
+			$outpwh .= '"tel":"'  . $rswh["tel"] . '",';
+			$outpwh .= '"cel":"'  . $rswh["cel"] . '",';
+			$outpwh .= '"email":"'  . $rswh["email"] . '",';
+			$outpwh .= '"codeType": '  . $rswh["codeType"] . ',';
+			$outpwh .= '"idCode":"'  . $rswh["idCode"] . '",';
+			$outpwh .= '"address":"'  . $rswh["address"] . '",';
+			$outpwh .= '"localidad":"'  . $rswh["localidad"] . '",';
+			$outpwh .= '"postalcode":"'   . $rswh["postalcode"]  . '"}';
+		}
+
+		$outp .='"warehouse":['.$outpwh.'],';
+
 		$outp .= '"quantity":"'  . $rs["quantity"] . '",';
 		$outp .= '"weight":"'  .(float) $rs["weight"] . '",';
 		$outp .= '"price":"'  . (float)$rs["price"] . '",';

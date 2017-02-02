@@ -15,6 +15,7 @@
                             <td><span>Tracking</span></td>
                             <td><span>Postal Provider</span></td>
                             <td><span>Store</span></td>
+                            <td><span>Warehouse</span></td>
                             <td><span>Product Quantity</span></td>
                             <td><span>Remaining Quantity</span></td>
                             <td><span>Total Weight</span></td>
@@ -28,6 +29,7 @@
                             <td><span>{{ bill.tracking_number }}</span></td>
                             <td><span>{{ bill.provider }}</span></td>
                             <td><span>{{bill.establishment }}</span></td>
+                            <td><span>{{bill.warehouse[0].name }}</span></td>
                             <td><span>{{ bill.quantity }}</span></td>
                             <td class="remaining-products"><span>{{ bill.remaining_quantity }}</span></td>
                             <td><span>{{ bill.total_weight }} KG. </span></td>

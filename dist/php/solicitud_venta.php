@@ -25,10 +25,11 @@ $lote = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string
 $name = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['name']));
 
 date_default_timezone_set('America/Argentina/Buenos_Aires');
-$date =  date('Y-m-d H:i:s', $date);
+$dateParsed =  date('Y-m-d H:i:s', $date);
+
 
 $htmlStringToReplace = array('$email','$date','$lote','$name');
- $replaceWith   = array("$email","$date",$lote, "$name");
+ $replaceWith   = array("$email","$dateParsed",$lote, "$name");
 $body = str_replace($htmlStringToReplace, $replaceWith, $body);
 
 $to = "nicolas.sigal@gmail.com";

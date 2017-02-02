@@ -27,7 +27,7 @@
             <tbody>
                 <tr ng-repeat="venta in shoppingList.ventas track by $index">
                     <td><span>{{ venta.id }}</span></td>
-                    <td><span>{{ venta.timestamp * 1000 | date:'yyyy-MM-dd HH:mm:ss'}}</span></td>
+                    <td><span>{{ venta.timestamp | date:'yyyy-MM-dd HH:mm:ss'}}</span></td>
                     <td ng-if="venta.guide_amount !== '0'"><span>{{ venta.guide_amount }}</span></td>
                     <td ng-if="venta.guide_amount == '0'"><span class="unpayed"> Procesando Info.</span></td>
                     <td><span>U$D {{ venta.parcial_price }}</span></td>

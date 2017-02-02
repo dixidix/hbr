@@ -132,10 +132,10 @@ function addPurchase($data){
 	$total = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['total']));
 	$total_quantity = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['total_quantity']));
 	$uid = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['userId']));
+	$timestamp = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['timestamp']));
 	// $products = $data['products'];
 
 	if (empty($errors)){
-		$timestamp = round(microtime(true) * 1000);
 		MysqliDB::getInstance()->query("INSERT INTO `ventas`(`uid`, `parcial_price`, `total`, `total_quantity`,`total_remaining_quantity`, `timestamp`,  `totalweight`, `guide_amount`) VALUES ('".$uid."',".(float)$parcial_price.",".(float)$total.",".(float)$total_quantity.",".(int)$total_quantity.",".$timestamp.",".$total_weight.", '0')");
 
 		$res = MysqliDB::getInstance()->query("SELECT MAX(id) as id FROM `ventas`");		
