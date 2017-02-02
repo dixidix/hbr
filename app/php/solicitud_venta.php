@@ -24,9 +24,12 @@ $date = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string
 $lote = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['lote']));
 $name = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['name']));
 
-date_default_timezone_set('America/Argentina/Buenos_Aires');
-$dateParsed =  date('Y-m-d H:i:s', $date);
+if(!empty($_POST['whEmail'])){
+	$whEmail = $_POST['whEmail'];
+}
 
+date_default_timezone_set('America/Argentina/Buenos_Aires');
+$dateParsed =  date("m/d/Y H:i");
 
 $htmlStringToReplace = array('$email','$date','$lote','$name');
  $replaceWith   = array("$email","$dateParsed",$lote, "$name");
@@ -40,6 +43,14 @@ $mail->AddReplyTo($to);
 $mail->SetFrom($to, $name);
 $mail->Subject = $subject;
 $mail->AddAddress($to);
+
+if(!empty($_POST['whEmail'])){	
+	foreach ($whEmail as &$email) {
+		echo $email;
+    $mail->AddBCC($email);
+}
+}
+
 $mail->Body    = $body;
 $mail->AltBody = "Solicitud de venta de: $name . Lote n° $lote";
 

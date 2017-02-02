@@ -24,6 +24,7 @@ function shoppingController(angular, app) {
 
         function finish() {
             var requests = [];
+            var whEmail = [];
             self.spinner = true;
             angular.forEach(self.lote.bills, function(k, v) {
                 angular.forEach(k.products, function(key, val) {
@@ -48,6 +49,10 @@ function shoppingController(angular, app) {
                         sequence.resolve();
                         sequence = sequence.promise;
                         angular.forEach(self.lote.bills, function(bill) {
+                            console.log(bill);
+                            if (whEmail.indexOf(bill.warehouse.email) == -1) {
+                                whEmail.push(bill.warehouse.email);
+                            }
                             sequence = sequence.then(function() {
                                 return uploadService.uploadBills(bill, response.ventaId, self.lote.user.id, new Date().getTime())
                                     .success(function(response) {
@@ -60,11 +65,13 @@ function shoppingController(angular, app) {
                             });
                         });
                     }
+                    console.log(whEmail);
                     $http.post('./hbr-selfie/dist/php/solicitud_venta.php', {
                         lote: response.lote,
                         date: response.date,
                         email: response.email,
-                        name: response.name + " " + response.lastname
+                        name: response.name + " " + response.lastname,
+                        whEmail: whEmail
                     }).then(function success(response) {
                         $state.go('dashboard.shopping_list', { reload: true });
                         self.spinner = false;
@@ -137,6 +144,7 @@ function shoppingController(angular, app) {
                 self.lote.total_price = parseFloat(parseFloat(self.lote.total_price) + parseFloat(self.bill.total_price)).toFixed(2);
                 self.lote.total_weight = parseFloat(parseFloat(self.lote.total_weight || 0) + parseFloat(self.bill.total_weight || 0)).toFixed(2);
                 self.lote.total_quantity = parseInt(parseInt(self.lote.total_quantity) + parseInt(self.bill.quantity));
+                self.bill.warehouse = self.bill.whId;
                 self.bill.whId = self.bill.whId.id;
                 self.lote.bills.push(self.bill);
                 $('#bill_file').val("");

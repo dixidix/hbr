@@ -35,7 +35,7 @@ function uploadService(angular, app) {
             var formData = new FormData();
             var products = [];
             angular.forEach(bill, function(key, value) {
-                if (value !== "products") {
+                if (value !== "products" && value !== "warehouse") {
                     formData.append(value, key);
                 } else {
                     products = key;
