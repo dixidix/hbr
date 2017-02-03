@@ -41,6 +41,9 @@ function loginController(angular, app) {
                         self.loginForm.$invalid = true;
                         $rootScope.showSpinner = false;
                     }
+                })
+                .error(function(err) {
+                    console.log(err);
                 });
         }
 
