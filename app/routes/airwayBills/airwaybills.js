@@ -121,7 +121,7 @@ function airwayController(angular, app) {
             self.awb.leaveDate = new Date(self.batch.leaveDate).getTime() / 1000;
             self.awb.hbr_tracking = self.batch.hbr_tracking || null;
             self.awb.hbr_postal_provider = self.batch.hbr_postal_provider || null;
-                
+
 
 
             if (self.batch.paymentStatus) {
@@ -134,7 +134,8 @@ function airwayController(angular, app) {
                             guide_number: self.awb.number,
                             arrivalDate: self.awb.arrivalDate,
                             leaveDate: self.awb.leaveDate,
-                            hbr_postal_provider: self.awb.hbr_postal_provider
+                            hbr_postal_provider: self.awb.hbr_postal_provider,
+                            email: self.awb.user.email
                         }).then(function success(response) {
                             $rootScope.showSpinner = false;
                             $uibModalInstance.dismiss('cancel');
@@ -172,7 +173,8 @@ function airwayController(angular, app) {
                             transfer_bank_address: self.awb.transfer_bank_address,
                             paymentDesc: self.awb.paymentDesc,
                             name: self.awb.user.name + " " + self.awb.user.lastname,
-                            total: parseFloat(self.totalButton).toFixed(2)
+                            total: parseFloat(self.totalButton).toFixed(2),
+                            email: self.awb.user.email
                         }).then(function success(response) {
                             $rootScope.showSpinner = false;
                             $uibModalInstance.dismiss('cancel');
@@ -193,7 +195,8 @@ function airwayController(angular, app) {
                             transfer_bank_address: self.awb.transfer_bank_address,
                             paymentDesc: self.awb.paymentDesc,
                             name: self.awb.user.name + " " + self.awb.user.lastname,
-                            total: parseFloat(self.totalButton).toFixed(2)
+                            total: parseFloat(self.totalButton).toFixed(2),
+                            email: self.awb.user.email
                         }).then(function success(response) {
                             $rootScope.showSpinner = false;
                             $uibModalInstance.dismiss('cancel');
@@ -204,21 +207,22 @@ function airwayController(angular, app) {
         }
 
         function updateArrivalDate() {
-             $rootScope.showSpinner = true;
+            $rootScope.showSpinner = true;
             self.awb.arrivalDate = new Date(self.batch.arrivalDate).getTime() / 1000;
             self.awb.leaveDate = new Date(self.batch.leaveDate).getTime() / 1000;
             self.awb.state = 3;
             airwayService.updateGuide(self.awb).then(function success(response) {
-                        $http.post('./hbr-selfie/dist/php/notifications/update_dates.php', {
-                            ventaId: self.awb.ventaId,
-                            guide_number: self.awb.number,
-                            arrivalDate:self.awb.arrivalDate,
-                            leaveDate:self.awb.leaveDate
-                        }).then(function success(response) {
-                            $rootScope.showSpinner = false;
-                            $uibModalInstance.dismiss('cancel');
-                            $state.go($state.current, {}, { reload: true });
-                        });
+                $http.post('./hbr-selfie/dist/php/notifications/update_dates.php', {
+                    ventaId: self.awb.ventaId,
+                    guide_number: self.awb.number,
+                    arrivalDate: self.awb.arrivalDate,
+                    leaveDate: self.awb.leaveDate,
+                    email: self.awb.user.email
+                }).then(function success(response) {
+                    $rootScope.showSpinner = false;
+                    $uibModalInstance.dismiss('cancel');
+                    $state.go($state.current, {}, { reload: true });
+                });
             });
         }
 
@@ -252,7 +256,7 @@ function airwayController(angular, app) {
             $scope.noCalculated = true;
             var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
             if (self.awb.arrivalDate) {
-               
+
                 self.batch.arrivalDate = new Date(self.awb.arrivalDate * 1000);
             }
 

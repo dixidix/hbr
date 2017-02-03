@@ -205,7 +205,7 @@ function login($data){
 	
 	$username = stripslashes($username);
 	$password = md5(stripslashes($password));
-	
+
 	$res = MysqliDB::getInstance()->query("SELECT id,name,lastname,company_name, warehouse_name, isAdmin, client_type FROM users WHERE email='" . $username . "' AND password='" . $password . "' AND deleted='0'");
 	
 	$rows = mysqli_num_rows($res);

@@ -13,15 +13,15 @@ function loginController(angular, app) {
         function login() {
             $rootScope.showSpinner = true;
             authenticationService.login(self.user)
-                .then(function(response) {
-                    if (!response.data.errors) {
+                .success(function(response) {
+                    if (!response.errors) {
                         console.log(response.data);
-                        sessionStorage.setItem("sskey", response.data.sskey);
-                        sessionStorage.setItem("isAdmin", response.data.isAdmin);
-                        sessionStorage.setItem("clientType", response.data.client_type);
-                        sessionStorage.setItem("clientType", response.data.client_type);
-                        sessionStorage.username = response.data.name + " " + response.data.lastname;
-                        $state.go('dashboard', {}, { reload: true });
+                        sessionStorage.setItem("sskey", response.sskey);
+                        sessionStorage.setItem("isAdmin", response.isAdmin);
+                        sessionStorage.setItem("clientType", response.client_type);
+                        sessionStorage.setItem("clientType", response.client_type);
+                        sessionStorage.username = response.name + " " + response.lastname;
+
                         self.loginForm.username.$invalid = false;
                         self.loginForm.username.$valid = true;
                         self.loginForm.password.$invalid = false;
@@ -29,9 +29,13 @@ function loginController(angular, app) {
                         self.loginForm.$invalid = false;
                         self.loginForm.$valid = true;
                         $rootScope.showSpinner = false;
-
+                        setTimeout(function() {
+                            if (sessionStorage.getItem('sskey')) {
+                                $state.go('dashboard', {}, { reload: true });
+                            }
+                        }, 3000);
                     } else {
-                        self.loginError = response.data.errors.loginError;
+                        self.loginError = response.errors.loginError;
                         self.loginForm.username.$invalid = true;
                         self.loginForm.password.$invalid = true;
                         self.loginForm.$invalid = true;

@@ -13,13 +13,14 @@ $mail->SMTPDebug = 2;                               // Enable verbose debug outp
 $mail->isSMTP();                                      // Set mailer to use SMTP
 $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
 $mail->SMTPAuth = true;                               // Enable SMTP authentication
-$mail->Username = 'nicolas.sigal@gmail.com';                 // SMTP username
-$mail->Password = 'panchirulo173';                           // SMTP password
+$mail->Username = 'santiago.lloret@tucourier.com.ar';                 // SMTP username
+$mail->Password = 'Reset2016';                           // SMTP password
 $mail->SMTPSecure="ssl";                          // Enable TLS encryption, `ssl` also accepted
 $mail->Port = 465;                                    // TCP port to connect to
 
 $ventaId = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['ventaId']));
 $guide_number = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['guide_number']));
+$email = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['email']));
 
 $body = file_get_contents('./../emails/payment-success.template.html', FILE_USE_INCLUDE_PATH);    
 
@@ -38,14 +39,14 @@ $replaceWith   = array("$ventaId","$guide_number",$hbr_tracking, "$arrivalDatePa
 
 $body = str_replace($htmlStringToReplace, $replaceWith, $body);
 
-$to = "nicolas.sigal@gmail.com";
+$to = "'santiago.lloret@tucourier.com.ar";
 $name = "HBR | tu courier";
 $subject = "Notificación de pago";
 $mail->CharSet = 'UTF-8';
 $mail->AddReplyTo($to);
 $mail->SetFrom($to, $name);
 $mail->Subject = $subject;
-$mail->AddAddress($to);
+$mail->AddAddress($email);
 $mail->Body    = $body;
 $mail->AltBody = "Notificacion de pago de: $name . Guía n° $guide_number";
 

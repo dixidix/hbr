@@ -2,16 +2,17 @@
 ini_set('default_charset', 'UTF-8');
 class MysqliDB{
 	private static $_instance;
-//--------------DB LOCALHOST---------------
+//--------------DB SERVER---------------
 	// protected $host='localhost';
 	// protected $user='feedback_hbrusr';
 	// protected $passwd='reset2016';
 	// protected $db='feedback_tucourier';
-	//--------------DB SERVER--------------
-	protected $host='localhost';
-	protected $user='root';
-	protected $passwd='';
-	protected $db='feedback_tucourier';
+//--------------DB LOCALHOST--------------
+protected $host='localhost';
+protected $user='root';
+protected $passwd='';
+protected $db='feedback_tucourier';
+//----------------------------------------
 	protected $_mysqli;
 	public static function getInstance() { //singleton pattern
 		if(!self::$_instance) {
