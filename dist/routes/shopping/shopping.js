@@ -45,11 +45,11 @@ function shoppingController(angular, app) {
                 })
                 .success(function(response) {
                     if (response.success) {
+                        self.response = response;
                         var sequence = $q.defer();
                         sequence.resolve();
                         sequence = sequence.promise;
                         angular.forEach(self.lote.bills, function(bill) {
-                            console.log(bill);
                             if (whEmail.indexOf(bill.warehouse.email) == -1) {
                                 whEmail.push(bill.warehouse.email);
                             }
@@ -64,18 +64,21 @@ function shoppingController(angular, app) {
                                     });
                             });
                         });
+                        $q.all(sequence).then(function() {
+                            $http.post('./hbr-selfie/dist/php/solicitud_venta.php', {
+                                lote: self.response.lote,
+                                date: self.response.date,
+                                email: self.response.email,
+                                name: self.response.name + " " + self.response.lastname,
+                                whEmail: whEmail
+                            }).success(function(response) {
+                                setTimeout(function() {
+                                    $state.go('dashboard.shopping', {}, { reload: true });
+                                    self.spinner = false;
+                                }, 2000);
+                            });
+                        });
                     }
-                    console.log(whEmail);
-                    $http.post('./hbr-selfie/dist/php/solicitud_venta.php', {
-                        lote: response.lote,
-                        date: response.date,
-                        email: response.email,
-                        name: response.name + " " + response.lastname,
-                        whEmail: whEmail
-                    }).then(function success(response) {
-                        $state.go('dashboard.shopping_list', { reload: true });
-                        self.spinner = false;
-                    });
                 });
         }
 

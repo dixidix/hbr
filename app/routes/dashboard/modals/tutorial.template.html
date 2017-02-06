@@ -1,0 +1,22 @@
+<div class="warehouse wh-modal container-fluid" ng-cloak>
+	<div class="modal-header">
+		<h3>Bienvenido a Tu Courier MyHBR</h3>
+	</div>
+	<div class="modal-body">
+		<div ng-if="step == 1">
+			<img src="./hbr-selfie/dist/routes/dashboard/modals/step1.png" class="img-responsive" alt="">
+		</div>
+		<div ng-if="step == 2">
+			<img src="./hbr-selfie/dist/routes/dashboard/modals/step2.png" class="img-responsive" alt="">
+		</div>
+		<div ng-if="step == 3">
+			<img src="./hbr-selfie/dist/routes/dashboard/modals/step3.png" class="img-responsive" alt="">
+		</div>
+	</div>
+	<div class="modal-footer">
+        <label for="" class="pull-left"><input type="checkbox" ng-model="tutorial.dontShow"/> No mostrar tutorial de nuevo</label>
+		<button class="btn btn-hbr-blue pull-right" ng-if="step == 3" ng-click="tutorial.cancel()"> <i class="fa fa-close"></i> Cerrar</button>
+		<button class="btn btn-hbr-blue pull-right" ng-if="step != 3" ng-click="tutorial.next()">Siguiente <i class="fa fa-chevron-right"></i></button>	
+	  	<button class="btn btn-hbr-blue pull-right" ng-if="step != 1" ng-click="tutorial.prev()"><i class="fa fa-chevron-left"></i> Anterior </button>				
+	</div>
+</div> 

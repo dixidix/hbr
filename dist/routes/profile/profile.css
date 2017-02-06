@@ -151,9 +151,19 @@ html {
         html body .loadingSpinner .spinner-container i {
           color: #19156a; }
 
+.profile .has-error {
+  color: darkred; }
+
 .profile h3 {
   color: #19156a;
   margin-top: 0; }
+
+.profile .input-group {
+  width: 100%; }
+  .profile .input-group select {
+    width: 25%; }
+  .profile .input-group input {
+    width: 75%; }
 
 .profile hr {
   background-color: #19156a;

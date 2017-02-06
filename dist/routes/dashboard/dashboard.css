@@ -151,6 +151,29 @@ html {
         html body .loadingSpinner .spinner-container i {
           color: #19156a; }
 
+.modal-dialog {
+  width: 60%;
+  margin-top: 100px; }
+  .modal-dialog .btn-hbr-blue {
+    width: 150px;
+    height: 50px;
+    color: #b4ec13;
+    background: #19156a;
+    border: none;
+    border-radius: 3px;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-family: "museoSans-500", Arial;
+    font-weight: bold;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; }
+  .modal-dialog .modal-body {
+    height: 350px;
+    overflow-y: scroll; }
+
 .dashboard {
   margin: 0;
   padding: 0;

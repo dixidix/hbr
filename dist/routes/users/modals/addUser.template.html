@@ -1,0 +1,106 @@
+<script type="text/ng-template" id="adduser.html">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="modalAddUser.cancel()">&times;</button>
+        <h3 class="modal-title" id="modal-title">{{title}}</h3>
+
+    </div>
+    <div class="modal-body" id="modal-body">
+        <form name="modalAddUser.modalAddUserForm"  data-ng-submit="modalAddUser.modalAddUserForm.$valid && !modalAddUser.modalAddUserForm.$pristine && modalAddUser.modalAddUserForm.$submitted && modalAddUser.modalAddUser()">
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-6"  ng-if="!showCompanyForm" data-ng-class="{'has-error': modalAddUser.modalAddUserForm.name.$invalid && modalAddUser.modalAddUserForm.$submitted}">
+                    <label class="control-label" for="name">Name (*)</label><br>
+                    <input id="name" class="form-control" type="text" name="name" ng-model="modalAddUser.user.name" placeholder="Name"  autocomplete="off" required>
+                </div>
+                <div class="form-group col-xs-12 col-sm-6" ng-if="!showCompanyForm" data-ng-class="{'has-error': modalAddUser.modalAddUserForm.lastname.$invalid && modalAddUser.modalAddUserForm.$submitted}">
+                    <label class="control-label" for="lastname">Lastname (*)</label><br>
+                    <input id="lastname"  autocomplete="off" class="form-control" type="text" name="lastname" ng-model="modalAddUser.user.lastname" placeholder="Lastname"
+                           required>
+                </div>
+                <div class="form-group col-xs-12 col-sm-6"  ng-if="showCompanyForm" data-ng-class="{'has-error': modalAddUser.modalAddUserForm.name.$invalid && modalAddUser.modalAddUserForm.$submitted}">
+                    <label class="control-label" for="name">Company Name (*)</label><br>
+                    <input id="name" class="form-control" type="text" name="name" ng-model="modalAddUser.user.company_name" placeholder="Company name"  autocomplete="off" required>
+                </div>
+                <div class="form-group col-xs-12 col-sm-6"  ng-if="showCompanyForm" data-ng-class="{'has-error': modalAddUser.modalAddUserForm.name.$invalid && modalAddUser.modalAddUserForm.$submitted}">
+                    <label class="control-label" for="name">Real Company Name (*)</label><br>
+                    <input id="name" class="form-control" type="text" name="name" ng-model="modalAddUser.user.company_real_name" placeholder="Company real name"  autocomplete="off" required>
+                </div>
+                <div class="form-group" data-ng-class="{'has-error': modalAddUser.telError && modalAddUser.modalAddUserForm.$submitted}">
+                    <div class="col-xs-12 col-md-6">
+                        <label class="control-label" for="tel">Phone</label><br>
+                        <input id="tel"  autocomplete="off" class="form-control" type="text" name="tel" ng-model="modalAddUser.user.tel" placeholder="Phone">
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <label class="control-label" for="cel">Cellphone</label><br>
+                        <input id="cel"  autocomplete="off" class="form-control" type="text" name="cel" ng-model="modalAddUser.user.cel" placeholder="Cellphone">
+                    </div>
+                    <span class="has-error col-xs-12 help-block" ng-if="modalAddUser.telError">
+						<i class="fa fa-times-circle"></i>  {{:: modalAddUser.telError }}
+					</span>
+                </div>
+                <div class="form-group col-xs-12 col-sm-12" data-ng-class="{'has-error': (modalAddUser.modalAddUserForm.codeType.$invalid || modalAddUser.modalAddUserForm.idCode.$invalid) && modalAddUser.modalAddUserForm.$submitted}">
+                    <label class="control-label" for="idCode">Identification Code ( Cuit / Cuil ) (*)</label><br>
+                    <div class="input-group">
+                    <select class="form-control" id="idCodeType" ng-options="obj.id as obj.name for obj in values" name="codeType" ng-model="modalAddUser.user.codeType" required>
+                        <option value="" disabled="disabled">-- Choose ID Code --</option>
+                    </select>
+                    <input id="idCode" class="form-control" type="text" name="idCode" ng-model="modalAddUser.user.idCode" placeholder="Identification Code Cuit/Cuil"
+                           required>
+                           </div>
+                </div>
+                <div class="form-group" data-ng-class="{'has-error': modalAddUser.modalAddUserForm.email.$invalid && modalAddUser.modalAddUserForm.$submitted}">
+                    <div class="col-xs-12">
+                        <label class="control-label" for="email">E-Mail (*)</label><br>
+                        <input id="email"  autocomplete="off" class="form-control" type="email" name="email" ng-model="modalAddUser.user.email" placeholder="E-Mail"
+                               required>
+                    </div>
+                    <span class="has-error col-xs-12 help-block" ng-if="modalAddUser.existingEmail">
+						<i class="fa fa-times-circle"></i>  {{:: modalAddUser.existingEmail}}
+					</span>
+                </div>
+
+                <div class="form-group" data-ng-class="{'has-error': modalAddUser.modalAddUserForm.password.$invalid && modalAddUser.modalAddUserForm.$submitted}">
+                    <div class="col-xs-12 col-md-6">
+                        <div ng-if="!modalAddUser.user.length">
+                            <label  class="control-label" for="pwd">Password (*)</label><br>
+                        </div>
+                        <div ng-if="modalAddUser.user.length">
+                            <label  class="control-label" for="pwd">Change Password (*)</label><br>
+                        </div>
+
+                        <input id="pwd"  autocomplete="off" class="form-control" type="password" name="password" ng-model="modalAddUser.user.password" placeholder="Password"
+                               required>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <label class="control-label" for="pwd2">Repeat Password (*)</label><br>
+                        <input id="pwd2"  autocomplete="off" class="form-control" type="password" name="password2" ng-model="modalAddUser.user.password2" placeholder="Repeat Password"
+                               required>
+                    </div>
+                    <span class="has-error col-xs-12 help-block" ng-if="modalAddUser.passwordError">
+						<i class="fa fa-times-circle"></i>  {{:: modalAddUser.passwordError}}
+					</span>
+                </div>
+                <div class="form-group col-xs-12 col-md-5" data-ng-class="{'has-error': modalAddUser.modalAddUserForm.address.$invalid && modalAddUser.modalAddUserForm.$submitted}">
+                    <label class="control-label" for="address">Delivery Address (*)</label><br>
+                    <input id="address"  autocomplete="off" class="form-control" type="text" name="address" ng-model="modalAddUser.user.address" placeholder="Delivery Address"
+                           required>
+                </div>
+                <div class="form-group col-xs-12 col-md-4" data-ng-class="{'has-error': modalAddUser.modalAddUserForm.localidad.$invalid && modalAddUser.modalAddUserForm.$submitted}">
+                    <label class="control-label" for="localidad">City (*)</label><br>
+                    <input id="localidad"  autocomplete="off" class="form-control" type="text" name="localidad" ng-model="modalAddUser.user.localidad" placeholder="City"
+                           required>
+                </div>
+                <div class="form-group col-xs-12 col-md-3" data-ng-class="{'has-error': modalAddUser.modalAddUserForm.postalCode.$invalid && modalAddUser.modalAddUserForm.$submitted}">
+                    <label class="control-label" for="postalCode">Postal Code (*)</label><br>
+                    <input id="postalCode"  autocomplete="off" class="form-control" type="text" name="postalCode" ng-model="modalAddUser.user.postalCode" placeholder="Postal Code"
+                           required>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-hbr-blue" ng-if="!showCompanyForm" ng-click="modalAddUser.adduser()">Add</button>
+        <button class="btn btn-hbr-blue" ng-if="showCompanyForm" ng-click="modalAddUser.addcompany()">Add</button>
+        <button class="btn btn-hbr-blue" ng-click="modalAddUser.cancel()">Close</button>
+    </div>
+
+</script>

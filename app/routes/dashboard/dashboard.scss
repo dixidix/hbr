@@ -1,4 +1,22 @@
 @import '../../styles/base';
+
+.modal-dialog{
+	width:60%;
+	margin-top:100px;
+	.btn-hbr-blue{
+		@include hbr-btn-blue(150px,50px,$hbr-green);
+        margin-left:10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        
+	}
+	.modal-body{
+        height: 350px;
+        overflow-y: scroll;
+	}
+}
 .dashboard {
     margin: 0;
     padding: 0;

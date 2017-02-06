@@ -17,6 +17,9 @@ $totalweight = (float) MysqliDB::double_scape(MysqliDB::getInstance()->mysql_rea
 $trackingnumber = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['tracking_number']));
 $userId = (int) MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['userId']));
 
+$file_name_bill = "";
+$path_bill = "";
+
 if(!empty($_FILES['bill_file'])){
 	$file_name_bill = $_FILES['bill_file']['name'];
 	$file_name_bill = str_replace(' ', '_', $file_name_bill);
@@ -33,11 +36,11 @@ if(!empty($_FILES['bill_file'])){
 
 if(!file_exists("../files/".$timestamp."/")){
 	mkdir("../files/".$timestamp."/");
-	if(!empty($_FILES['bill'])){
+	if(!empty($_FILES['bill_file'])){
 		move_uploaded_file($file_tmp_bill, "$tmp_path_bill");
 	}
 } else {
-	if(!empty($_FILES['bill'])){
+	if(!empty($_FILES['bill_file'])){
 		move_uploaded_file($file_tmp_bill, "$tmp_path_bill");
 	}
 }

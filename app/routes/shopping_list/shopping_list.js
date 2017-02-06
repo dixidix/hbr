@@ -4,12 +4,12 @@ function shoppingListController(angular, app) {
     'use angular template'; //jshint ignore:line
 
     app.controller('shoppingListCtrl', shoppingListCtrl);
-    shoppingListCtrl.$inject = ['$http', '$filter', '$state', '$scope', '$uibModal'];
+    shoppingListCtrl.$inject = ['$http', '$filter', '$state', '$scope', '$rootScope', '$uibModal', 'authenticationService'];
 
     app.controller('modalMoreInfoCtrl', modalMoreInfoCtrl);
     modalMoreInfoCtrl.$inject = ['$scope', '$state', '$filter', '$uibModalInstance', '$sce', '$compile', '$rootScope', 'items', 'venta', '$http'];
 
-    function shoppingListCtrl($http, $filter, $state, $scope, $uibModal) {
+    function shoppingListCtrl($http, $filter, $state, $scope, $rootScope, $uibModal, authenticationService) {
         var self = this; //jshint ignore:line
 
         function pay(venta) {
@@ -27,10 +27,10 @@ function shoppingListController(angular, app) {
                 controllerAs: 'seeMore',
                 size: size,
                 resolve: {
-                    items: function() {
+                    items: function () {
                         return items;
                     },
-                    venta: function() {
+                    venta: function () {
                         return self.ventas;
                     }
                 }
@@ -42,18 +42,26 @@ function shoppingListController(angular, app) {
         }
 
         function init() {
-            $http.get('./hbr-selfie/dist/php/get_batch.php', { params: { action: "getAll" } })
-                .then(function(response) {
-                    console.log(response);
-                    response.data.ventas.timestamp = new Date(response.data.ventas.timestamp);
-                    self.ventas = response.data.ventas;
+            $rootScope.showSpinner = true;
+            self.ventas = [];
+            authenticationService.checkAuth().success(function (response) {
+                $http.get('./hbr-selfie/dist/php/get_batch.php', { params: { action: "getByUserId", id: response.uid } })
+                    .success(function (response) {
+                        if(response.ventas.length){
+                        angular.forEach(response.ventas, function(venta){
+                            venta.timestamp = new Date(parseInt(venta.timestamp));
+                        });
 
-
-                    self.moreInfo = moreInfo;
-                    self.downloadBill = downloadBill;
-                    self.pay = pay;
-                });
+                        self.ventas = response.ventas;
+                        }
+                        self.moreInfo = moreInfo;
+                        self.downloadBill = downloadBill;
+                        self.pay = pay;
+                        $rootScope.showSpinner = false;
+                    });
+            });
         }
+
         init();
     }
 
@@ -70,6 +78,7 @@ function shoppingListController(angular, app) {
             self.cancel = cancel;
             console.log(self.bills);
         }
+
         init();
     }
 }

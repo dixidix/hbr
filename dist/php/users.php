@@ -23,6 +23,9 @@ switch ($method) {
 		if($data['action'] === "changeRoles"){
 			changePrivileges($data);
 		}
+		if($data['action'] === "tutorialChange"){
+			tutorialChange($data);
+		}
 	}
 	else{
 		print_r($errors);
@@ -76,7 +79,6 @@ function adduser($data){
 
 //EDITAR UN USUARIO
 function editUser($data){
-	echo 'edit one: '.$data['data'];
 	$errors = array();
 	$resolve_data = array();
 	foreach($data as $key=>$value) {		
@@ -108,11 +110,22 @@ function editUser($data){
 			$cel = null;
 		}
 	}
-	if($password !== $password2){
-		$errors['passwordError'] = 'Las contraseñas no coinciden.';
+
+	if(!empty($data['password']) && !empty($data['password2'])){
+		if($password !== $password2){
+			$errors['passwordError'] = 'Las contraseñas no coinciden.';
+		}
+		else {
+			$password = md5(stripslashes($password));
+		}
 	}
-	else {
-		$password = md5(stripslashes($password));
+	if(!empty($oldEmail) && ($oldEmail !== $email)){
+		$res = MysqliDB::getInstance()->query("SELECT * FROM users WHERE email='" . $email . "' AND deleted='0'");
+
+		$rows = mysqli_num_rows($res);
+		if ($rows > 0){
+			$errors['existingEmail'] = 'El E-Mail ingresado ya existe en el sistema.';
+		}
 	}
 	if (empty($errors)){
 		$timestamp = time();
@@ -130,8 +143,12 @@ function editUser($data){
 			$client_type = 1;
 		}
 
-		MysqliDB::getInstance()->query("UPDATE `users` SET `name`='" .$aux_name. "',`lastname`='" .$aux_lastname. "',`tel`='" .$tel. "',`cel`='" .$cel. "',`email`='" .$email. "',`password`='" .$password. "', `codeType`='" .$codeType. "',`idCode`='" .$idCode. "',`address`='" .$address. "',`localidad`='" .$localidad. "',`postalcode`='" .$postalcode. "'  WHERE id='" .$id. "'");
-		
+		if(!empty($data['password']) && !empty($data['password2'])){
+				MysqliDB::getInstance()->query("UPDATE `users` SET `name`='" .$aux_name. "',`lastname`='" .$aux_lastname. "',`tel`='" .$tel. "',`cel`='" .$cel. "',`email`='" .$email. "',`password`='" .$password. "', `codeType`='" .$codeType. "',`idCode`='" .$idCode. "',`address`='" .$address. "',`localidad`='" .$localidad. "',`postalcode`='" .$postalcode. "'  WHERE id='" .$id. "'");
+		} else {
+			MysqliDB::getInstance()->query("UPDATE `users` SET `name`='" .$aux_name. "',`lastname`='" .$aux_lastname. "',`tel`='" .$tel. "',`cel`='" .$cel. "',`email`='" .$email. "', `codeType`='" .$codeType. "',`idCode`='" .$idCode. "',`address`='" .$address. "',`localidad`='" .$localidad. "',`postalcode`='" .$postalcode. "'  WHERE id='" .$id. "'");	
+		}
+
 		MysqliDB::getInstance()->close();
 		echo json_encode($resolve_data);
 	}
@@ -190,6 +207,15 @@ function changePrivileges($data){
 	$role = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['isAdmin']));
 
 	MysqliDB::getInstance()->query("UPDATE `users` SET `isAdmin` = " .$role. " WHERE id='" .$id. "' ");
+	MysqliDB::getInstance()->close();
+	echo json_encode($resolve_data);
+}
+
+function tutorialChange($data){
+	$errors = array();
+	$resolve_data = array();
+	$id = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['id']));
+	MysqliDB::getInstance()->query("UPDATE `users` SET `showTutorial` = 1 WHERE id='" .$id. "' ");
 	MysqliDB::getInstance()->close();
 	echo json_encode($resolve_data);
 }
@@ -283,15 +309,26 @@ function getUserById($data){
 	$resolve_data = array();
 	$uid = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['id']));
 	$res = MysqliDB::getInstance()->query("SELECT * FROM users WHERE id='" . $uid . "' AND deleted='0'");
-
+	
 	$rows = mysqli_num_rows($res);
 	
 	if ($rows == 1){
 		$rss = $res->fetch_array(MYSQLI_ASSOC);
 		
 		$resolve_data['id'] = $rss['id'];
-		$resolve_data['name'] = $rss['name'];
-		$resolve_data['lastname'] = $rss['lastname'];
+		if(!empty($rss["name"])){
+			$resolve_data['name'] = $rss['name'];
+		}
+		if(!empty($rss["lastname"])){
+			$resolve_data['lastname'] = $rss['lastname'];
+		}
+		if(!empty($rss["company_name"])){
+			$resolve_data['company_name'] = $rss['company_name'];
+		}
+		if(!empty($rss["company_real_name"])){
+			$resolve_data['company_real_name'] = $rss['company_real_name'];
+		}
+
 		$resolve_data['tel'] = $rss['tel'];
 		$resolve_data['cel'] = $rss['cel'];
 		$resolve_data['email'] = $rss['email'];
@@ -303,8 +340,9 @@ function getUserById($data){
 		$resolve_data['isPremium'] = $rss['isPremium'];
 
 		echo json_encode($resolve_data);
-	}else{
-		$errors['getUserError'] = 'No se encontro usuario.';
+	}
+	else{
+		$errors['getUserError'] = 'No se encontro usuario relacionado a esa sesion.';
 		$resolve_data['errors'] = $errors;
 		echo json_encode($resolve_data);
 	}
@@ -425,7 +463,6 @@ function register($data){
 		}
 		if($aux_company_name && $aux_company_real_name){
 			$client_type = 1;
-			$password  = $idCode;
 		}
 
 		MysqliDB::getInstance()->query("INSERT INTO `users`( `name`, `lastname`, `company_name`, `company_real_name`,`warehouse_name`, `tel`, `cel`, `email`, `password`, `codeType`, `idCode`,`deleted`, `address`, `localidad`, `postalcode`, `registerToken`, `registertimestamp`, `client_type`)

@@ -14,9 +14,9 @@ $mail->isSMTP();                                      // Set mailer to use SMTP
 $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
 $mail->SMTPAuth = true;                               // Enable SMTP authentication
 $mail->Username = 'santiago.lloret@tucourier.com.ar';                 // SMTP username
-$mail->Password = 'Reset2016';                           // SMTP password
-$mail->SMTPSecure="ssl";                          // Enable TLS encryption, `ssl` also accepted
-$mail->Port = 465;                                    // TCP port to connect to
+$mail->Password = 'reset2016';                           // SMTP password
+$mail->SMTPSecure="tls";                          // Enable TLS encryption, `ssl` also accepted
+$mail->Port = 587;                                    // TCP port to connect to
 
 $body = file_get_contents('./emails/solicitud_venta.template.html', FILE_USE_INCLUDE_PATH);
 $email = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['email']));
@@ -42,13 +42,12 @@ $mail->CharSet = 'UTF-8';
 $mail->AddReplyTo($to);
 $mail->SetFrom($to, $name);
 $mail->Subject = $subject;
-$mail->AddAddress($email);
+$mail->AddAddress($to);
 
 if(!empty($_POST['whEmail'])){	
-	foreach ($whEmail as &$email) {
-		echo $email;
-    $mail->AddBCC($email);
-}
+	foreach ($whEmail as &$email) {				
+   		$mail->AddBCC($email);
+	}
 }
 
 $mail->Body    = $body;

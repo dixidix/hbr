@@ -167,12 +167,37 @@ html {
     font-weight: bold; }
   .modal-dialog .modal-body p {
     font-size: 18px; }
+  .modal-dialog .modal-body .input-group {
+    width: 100%; }
+    .modal-dialog .modal-body .input-group select {
+      width: 25%; }
+    .modal-dialog .modal-body .input-group input {
+      width: 75%; }
 
 .users h3 {
   color: #19156a;
   margin-top: 0; }
   .users h3 i {
     font-size: 24px; }
+
+.users .btn-hbr-blue {
+  width: 120px;
+  height: auto;
+  color: #b4ec13;
+  background: #19156a;
+  border: none;
+  border-radius: 3px;
+  padding: 15px 30px;
+  font-size: 16px;
+  font-family: "museoSans-500", Arial;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-size: 12px;
+  display: flex;
+  padding: 10px 15px !important;
+  flex-direction: row;
+  align-content: center;
+  align-items: center; }
 
 .users hr {
   background-color: #19156a;

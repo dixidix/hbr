@@ -2,10 +2,22 @@
 
 
 .profile{
+	.has-error{
+		color: darkred;
+	}
 	h3{
 		color:$hbr-blue;
 		margin-top: 0;
 	}
+			.input-group{
+			width:100%;
+			select {
+				width:25%;
+			}
+			input {
+				width:75%;
+			}
+		}
 	hr { 
 		background-color: $hbr-blue; 
 		height: 1px;

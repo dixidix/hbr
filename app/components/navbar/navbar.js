@@ -31,13 +31,16 @@ function navbarDirective(angular, app) {
             function logout() {
                 $rootScope.showSpinner = true;
                 authenticationService.logout()
-                    .then(function success() {
-                            $rootScope.showSpinner = false;
-                            $window.location.href = 'http://tucourier.com.ar/hbr-selfie/';
-                        },
-                        function error(error) {
-
-                        });
+                    .success(function() {
+                        $rootScope.showSpinner = false;
+                        setTimeout(function() {
+                            sessionStorage.clear();
+                            $state.go('home.login', {}, { reload: true });
+                        }, 300);
+                    })
+                    .error(function(err) {
+                        console.log(err);
+                    });
 
             }
 

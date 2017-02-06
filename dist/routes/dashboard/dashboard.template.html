@@ -28,7 +28,7 @@
                     </li>
                 </a>
             </div>
-            <div ng-if="dashboard.isAdmin == 0 && dashboard.clientType !== '2'">
+            <div ng-if="dashboard.isAdmin == 0 && dashboard.clientType != '2'">
                 <a href="" ui-sref="dashboard.shopping" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Agregar Compra">
                     <li><i class="fa fa-shopping-cart"></i></li>
                 </a>

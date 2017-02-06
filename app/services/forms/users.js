@@ -6,6 +6,55 @@ function usersService(angular, app) {
 
     function usersService($http, $q) {
 
+        
+        this.tutorialChange = function (uid) {
+            var deffered = $q.defer();
+            
+            return $http.put('./hbr-selfie/dist/php/users.php', {
+                    id: uid,
+                    action: "tutorialChange"
+                });
+        };
+        this.adduser = function (user) {
+            var deffered = $q.defer();
+            return $http.post('./hbr-selfie/dist/php/users.php', {
+                name: user.name,
+                lastname: user.lastname,
+                tel: user.tel,
+                cel: user.cel,
+                codeType: user.codeType.toString(),
+                idCode: user.idCode,
+                email: user.email,
+                address: user.address,
+                localidad: user.localidad,
+                postalCode: user.postalCode,
+                password: user.password,
+                password2: user.password2,
+                method: "POST",
+                action: "register"
+            });
+        };
+
+        this.addcompany = function (company) {
+            var deffered = $q.defer();
+            return $http.post('./hbr-selfie/dist/php/users.php', {
+                company_name: company.company_name,
+                company_real_name: company.company_real_name,
+                tel: company.tel,
+                cel: company.cel,
+                codeType: company.codeType.toString(),
+                idCode: company.idCode,
+                email: company.email,
+                address: company.address,
+                localidad: company.localidad,
+                postalCode: company.postalCode,
+                password: company.password,
+                password2: company.password2,
+                method: "POST",
+                action: "register"
+            });
+        };
+
         this.editusers = function (users) {
 
             var deffered = $q.defer();
@@ -19,6 +68,7 @@ function usersService(angular, app) {
                 codeType: users.codeType,
                 idCode: users.idCode,
                 email: users.email,
+                oldEmail: users.oldEmail,
                 address: users.address,
                 localidad: users.localidad,
                 postalcode: users.postalcode,
@@ -48,6 +98,8 @@ function usersService(angular, app) {
                 action: "changeRoles"
             });
         };
+
+
 
         this.getPremium = function () {
             return $http.get('./hbr-selfie/dist/php/users.php', {

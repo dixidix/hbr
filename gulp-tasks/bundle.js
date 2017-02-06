@@ -13,10 +13,9 @@ function bundle(gulp, $) {
         resources: [
             './node_modules/angular/angular.js',
             './node_modules/angular-ui-router/release/angular-ui-router.min.js',
+            './node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js',
             './node_modules/angular-animate/angular-animate.min.js',
             './node_modules/angular-sanitize/angular-sanitize.min.js',
-            './node_modules/bootstrap/dist/js/bootstrap.min.js',
-            './node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js',
             './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
             './bower_components/angular-ui-switch/angular-ui-switch.min.js'
         ]

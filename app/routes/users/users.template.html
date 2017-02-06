@@ -1,23 +1,28 @@
 <div class="users container-fluid" ng-cloak>
 	<link rel="stylesheet" type="text/css" href="./hbr-selfie/dist/routes/users/users.css">
-	<h3 ng-if="users.client_type == 0"><i class="fa fa-users"></i> Administrar usuarios</h3>
-	<h3 ng-if="users.client_type == 1"><i class="fa fa-building"></i> Administrar Empresas</h3>
+	<div>
+	<h3 class="pull-left" ng-if="users.client_type == 0"><i class="fa fa-users"></i> Manage Users</h3>
+	<button ng-if="users.client_type == 0"  class="btn btn-hbr-blue pull-right" ng-click="users.addUser()"><i class="fa fa-plus"></i>User</button>
+	<h3 class="pull-left" ng-if="users.client_type == 1"><i class="fa fa-building"></i>Manage Companies</h3>
+	<button ng-if="users.client_type == 1" class="btn btn-hbr-blue pull-right" ng-click="users.addCompany()"><i class="fa fa-plus"></i>Company</button>
+</div>
+	<br><br>
 	<hr>
 	<table class="table table-bordered table-striped table-curved rounded">
 		<thead>
 			<tr>
-				<td ng-if="users.client_type == 0"><span>Nombre</span></td>
-				<td ng-if="users.client_type == 0"><span>Apellido</span></td>
-				<td ng-if="users.client_type == 1"><span>Nom. Empresa</span></td>
-				<td ng-if="users.client_type == 1"><span>Raz&oacute;n Social</span></td>
-				<td><span>Tel.</span></td>
-				<td><span>Cel.</span></td>
-				<td><span>Direcci&oacute;n</span></td>
-				<td><span>Localidad</span></td>
-				<td><span>C&oacute;digo postal</span></td>
-				<td><span>Tipo ID</span></td>
-				<td><span>C&oacute;digo de ID</span></td>
-				<td><span>Acciones</span></td>
+				<td ng-if="users.client_type == 0"><span>Name</span></td>
+				<td ng-if="users.client_type == 0"><span>Lastname</span></td>
+				<td ng-if="users.client_type == 1"><span>Company name</span></td>
+				<td ng-if="users.client_type == 1"><span>Company Real name</span></td>
+				<td><span>Phone</span></td>
+				<td><span>Cellphone</span></td>
+				<td><span>Delivery Address</span></td>
+				<td><span>City/Town</span></td>
+				<td><span>Postal Code</span></td>
+				<td><span>ID Type</span></td>
+				<td><span>ID Code</span></td>
+				<td><span>Actions</span></td>
 
 			</tr>
 		</thead>
@@ -38,126 +43,14 @@
 				<td class="actions">
 					<i class="fa fa-edit" tooltip-placement="left" uib-tooltip="Editar" ng-click="users.editUser(user)"></i>
 					<i class="fa fa-close" tooltip-placement="top" uib-tooltip="Eliminar" ng-click="users.removeUser(user)"></i>
-					<i ng-if="user.isAdmin == '1'" class="fa fa-unlock" tooltip-placement="right" uib-tooltip="Quitar Admin" ng-click="users.changePrivileges(user)"></i>
-					<i ng-if="user.isAdmin == '0'" class="fa fa-lock" tooltip-placement="right" uib-tooltip="Hacer Admin" ng-click="users.changePrivileges(user)"></i>
+					<i ng-if="user.isAdmin == '1' && !user.company_name.length" class="fa fa-unlock" tooltip-placement="right" uib-tooltip="Remove Admin" ng-click="users.changePrivileges(user)"></i>
+					<i ng-if="user.isAdmin == '0' && !user.company_name.length" class="fa fa-lock" tooltip-placement="right" uib-tooltip="Make Admin" ng-click="users.changePrivileges(user)"></i>
 				</td>
 			</tr>
 		</tbody>
 	</table>
 </div>
-<script type="text/ng-template" id="edituser.html">
-	<div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="modalEditUser.cancel()">&times;</button>
-		<h3 class="modal-title" id="modal-title">Editar usuario</h3>
+<div ng-include src="'hbr-selfie/dist/routes/users/modals/editUser.template.html'"></div>
+<div ng-include src="'hbr-selfie/dist/routes/users/modals/addUser.template.html'"></div>
+<div ng-include src="'hbr-selfie/dist/routes/users/modals/deleteUser.template.html'"></div>
 
-	</div>
-	<div class="modal-body" id="modal-body">
-		<form name="modalEditUser.modalEditUserForm" novalidate data-ng-submit="modalEditUser.modalEditUserForm.$valid && !modalEditUser.modalEditUserForm.$pristine && modalEditUser.modalEditUserForm.$submitted && modalEditUser.modalEditUser()">
-			<div class="row">
-				<div class="form-group col-xs-12 col-sm-6"  ng-if="modalEditUser.user.name" data-ng-class="{'has-error': modalEditUser.modalEditUserForm.name.$invalid && modalEditUser.modalEditUserForm.$submitted}">
-					<label class="control-label" for="name">Nombre (*)</label><br>
-					<input id="name" class="form-control" type="text" name="name" ng-model="modalEditUser.user.name" placeholder="Nombre"  autocomplete="off" required>
-				</div>
-				<div class="form-group col-xs-12 col-sm-6" ng-if="modalEditUser.user.lastname" data-ng-class="{'has-error': modalEditUser.modalEditUserForm.lastname.$invalid && modalEditUser.modalEditUserForm.$submitted}">
-					<label class="control-label" for="lastname">Apellido (*)</label><br>
-					<input id="lastname"  autocomplete="off" class="form-control" type="text" name="lastname" ng-model="modalEditUser.user.lastname" placeholder="Apellido"
-					required>
-				</div>
-				<div class="form-group col-xs-12 col-sm-6"  ng-if="modalEditUser.user.company_name" data-ng-class="{'has-error': modalEditUser.modalEditUserForm.name.$invalid && modalEditUser.modalEditUserForm.$submitted}">
-					<label class="control-label" for="name">Nombre de la empresa (*)</label><br>
-					<input id="name" class="form-control" type="text" name="name" ng-model="modalEditUser.user.company_name" placeholder="Nombre de la empresa"  autocomplete="off" required>
-				</div>
-				<div class="form-group col-xs-12 col-sm-6"  ng-if="modalEditUser.user.company_real_name" data-ng-class="{'has-error': modalEditUser.modalEditUserForm.name.$invalid && modalEditUser.modalEditUserForm.$submitted}">
-					<label class="control-label" for="name">Raz&oacute;n Social (*)</label><br>
-					<input id="name" class="form-control" type="text" name="name" ng-model="modalEditUser.user.company_real_name" placeholder="Raz&oacute;n Social"  autocomplete="off" required>
-				</div>
-				<div class="form-group" data-ng-class="{'has-error': modalEditUser.telError && modalEditUser.modalEditUserForm.$submitted}">
-					<div class="col-xs-12 col-md-6">
-						<label class="control-label" for="tel">Tel&eacute;fono</label><br>
-						<input id="tel"  autocomplete="off" class="form-control" type="text" name="tel" ng-model="modalEditUser.user.tel" placeholder="Tel&eacute;fono">
-					</div>
-					<div class="col-xs-12 col-md-6">
-						<label class="control-label" for="cel">Celular</label><br>
-						<input id="cel"  autocomplete="off" class="form-control" type="text" name="cel" ng-model="modalEditUser.user.cel" placeholder="Celular">
-					</div>
-					<span class="has-error col-xs-12 help-block" ng-if="modalEditUser.telError">
-						<i class="fa fa-times-circle"></i>  {{:: modalEditUser.telError }}
-					</span>
-				</div>
-				<div class="form-group col-xs-12 col-sm-12" data-ng-class="{'has-error': (modalEditUser.modalEditUserForm.codeType.$invalid || modalEditUser.modalEditUserForm.idCode.$invalid) && modalEditUser.modalEditUserForm.$submitted}">
-					<label class="control-label" for="idCode">C&oacute;digo de identificaci&oacute;n ( Cuit / Cuil ) (*)</label><br>
-					
-					<select class="form-control" id="idCodeType" ng-options="obj.id as obj.name for obj in values" name="codeType" ng-model="modalEditUser.user.codeType" required></select>
-					<input id="idCode" class="form-control" type="text" name="idCode" ng-model="modalEditUser.user.idCode" placeholder="C&oacute;digo de identificaci&oacute;n Cuit/Cuil"
-					required>
-				</div>
-				<div class="form-group" data-ng-class="{'has-error': modalEditUser.modalEditUserForm.email.$invalid && modalEditUser.modalEditUserForm.$submitted}">
-					<div class="col-xs-12">
-						<label class="control-label" for="email">Correo Electr&oacute;nico (*)</label><br>
-						<input id="email"  autocomplete="off" class="form-control" type="email" name="email" ng-model="modalEditUser.user.email" placeholder="Correo electr&oacute;nico"
-						required>
-					</div>
-					<span class="has-error col-xs-12 help-block" ng-if="modalEditUser.existingEmail">
-						<i class="fa fa-times-circle"></i>  {{:: modalEditUser.existingEmail}}
-					</span>
-				</div>
-
-				<div class="form-group" data-ng-class="{'has-error': modalEditUser.modalEditUserForm.password.$invalid && modalEditUser.modalEditUserForm.$submitted}">
-					<div class="col-xs-12 col-md-6">
-						<div ng-if="!modalEditUser.user">
-							<label  class="control-label" for="pwd">Contrase&ntilde;a (*)</label><br>
-						</div>
-						<div ng-if="modalEditUser.user">
-							<label  class="control-label" for="pwd">Cambiar Contrase&ntilde;a (*)</label><br>
-						</div>
-
-						<input id="pwd"  autocomplete="off" class="form-control" type="password" name="password" ng-model="modalEditUser.user.password" placeholder="Contrase&ntilde;a"
-						required>
-					</div>
-					<div class="col-xs-12 col-md-6">
-						<label class="control-label" for="pwd2">Repita la contrase&ntilde;a (*)</label><br>
-						<input id="pwd2"  autocomplete="off" class="form-control" type="password" name="password2" ng-model="modalEditUser.user.password2" placeholder="Contrase&ntilde;a"
-						required>
-					</div>
-					<span class="has-error col-xs-12 help-block" ng-if="modalEditUser.passwordError">
-						<i class="fa fa-times-circle"></i>  {{:: modalEditUser.passwordError}}
-					</span>
-				</div>
-				<div class="form-group col-xs-12 col-md-5" data-ng-class="{'has-error': modalEditUser.modalEditUserForm.address.$invalid && modalEditUser.modalEditUserForm.$submitted}">
-					<label class="control-label" for="address">Direcci&oacute;n de entrega(*)</label><br>
-					<input id="address"  autocomplete="off" class="form-control" type="text" name="address" ng-model="modalEditUser.user.address" placeholder="Direcci&oacute;n"
-					required>
-				</div>
-				<div class="form-group col-xs-12 col-md-4" data-ng-class="{'has-error': modalEditUser.modalEditUserForm.localidad.$invalid && modalEditUser.modalEditUserForm.$submitted}">
-					<label class="control-label" for="localidad">Localidad(*)</label><br>
-					<input id="localidad"  autocomplete="off" class="form-control" type="text" name="localidad" ng-model="modalEditUser.user.localidad" placeholder="Localidad"
-					required>
-				</div>
-				<div class="form-group col-xs-12 col-md-3" data-ng-class="{'has-error': modalEditUser.modalEditUserForm.postalCode.$invalid && modalEditUser.modalEditUserForm.$submitted}">
-					<label class="control-label" for="postalCode">CP (*)</label><br>
-					<input id="postalCode"  autocomplete="off" class="form-control" type="text" name="postalCode" ng-model="modalEditUser.user.postalcode" placeholder="C&oacute;digo postal"
-					required>
-				</div>
-			</div>
-		</form>
-	</div>
-	<div class="modal-footer">
-		<button class="btn btn-hbr-blue" ng-click="modalEditUser.edit()">Editar</button>
-		<button class="btn btn-hbr-blue" ng-click="modalEditUser.cancel()">Cerrar</button>
-	</div>
-
-</script>
-<script type="text/ng-template" id="deleteuser.html">
-	<div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="modalDeleteUser.cancel()">&times;</button>
-		<h3 class="modal-title" id="modal-title">Eliminar usuario</h3>
-		
-	</div>
-	<div class="modal-body" id="modal-body">
-		<p>Esta seguro que desea eliminar a {{modalDeleteUser.user.name}} {{modalDeleteUser.user.lastname}} {{modalDeleteUser.user.company_name}} ?</p>
-	</div>
-	<div class="modal-footer">
-		<button class="btn btn-hbr-blue" ng-click="modalDeleteUser.deleteUser()">Eliminar</button>
-		<button class="btn btn-hbr-blue" ng-click="modalDeleteUser.cancel()">Cerrar</button>
-	</div>
-</script>

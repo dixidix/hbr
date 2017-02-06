@@ -1,87 +1,87 @@
 <div class="process_payments container-fluid" ng-cloak>
-	<link rel="stylesheet" type="text/css" href="./hbr-selfie/dist/routes/process_payments/process_payments.css">
-	<h3><i class="fa fa-dropbox"></i>Manage Lots</h3>
-	<hr>
-	<div class="col-xs-12 content" ng-if="!processPayments.ventas.length">
-		<div class="row">
-			<div class="empty-list">
-				<h3>No purchases have been registered yet.</h3>
-			</div>
-		</div>
-	</div>
-	<div class="col-xs-12 content" ng-if="processPayments.ventas.length">
-		<table class="table table-bordered table-striped table-curved rounded">
-			<div class="col-xs-6 form-inline" style="margin-bottom:10px;float:right;padding-right:0;">
-				<div class="form-group pull-right">
-					<label for="loteseach">Search By Lot Number
+    <link rel="stylesheet" type="text/css" href="./hbr-selfie/dist/routes/process_payments/process_payments.css">
+    <h3><i class="fa fa-dropbox"></i>Manage Lots</h3>
+    <hr>
+    <div class="col-xs-12 content" ng-if="!processPayments.ventas.length && $root.showSpinner == false">
+        <div class="row">
+            <div class="empty-list">
+                <h3>No purchases have been registered yet.</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 content" ng-if="processPayments.ventas.length">
+        <table class="table table-bordered table-striped table-curved rounded">
+            <div class="col-xs-6 form-inline" style="margin-bottom:10px;float:right;padding-right:0;">
+                <div class="form-group pull-right">
+                    <label for="loteseach">Search By Lot Number
 					<input style="margin-left:5px;" id="loteseach" type="search" ng-model="searchLote" name="lote" placeholder="Search Lot" class="form-control">
 					</label>
-				</div>
-			</div>
-			<form style="vertical-align: middle;">
-				<div class="col-xs-5" style="margin-top: 5px;">
-					<label class="radio-inline">
+                </div>
+            </div>
+            <form style="vertical-align: middle;">
+                <div class="col-xs-5" style="margin-top: 5px;">
+                    <label class="radio-inline">
 					<input ng-value="" checked="checked" ng-model="selectedFilter" type="radio" name="optradio">All
 					</label>
-					<label class="radio-inline">
+                    <label class="radio-inline">
 					<input ng-value="1" ng-model="selectedFilter" type="radio" name="optradio">Paid
 					</label>
-					<label class="radio-inline">
+                    <label class="radio-inline">
 					<input ng-value="0" ng-model="selectedFilter" type="radio" name="optradio">Unpaid
 					</label>
-				</div>
-			</form>
-			<thead>
-				<tr>
-					<td><span>Lot #</span></td>
-					<td><span>Request Date</span></td>
-					<td><span>Price</span></td>
-					<td><span>Total Weight</span></td>
-					<td><span>Products quantity </span></td>
-					<td><span>Products remaining </span></td>
-					<td><span>Amount of AWB</span></td>
-					<td><span>Total Warehouse</span></td>
-					<td><span>Total Freight</span></td>
-					<td><span>Total</span></td>
-					<td><span>Total Taxes <br> (to pay upon delivery)</span></td>
-					<td><span>Actions</span></td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="venta in processPayments.ventas |filter: { state: selectedFilter,  id: searchLote }  track by $index">
-					<td><span>{{ venta.id }}</span></td>
-					<td><span>{{ venta.timestamp  | date:'yyyy-MM-dd HH:mm:ss'}}</span></td>
-					<td><span>${{ venta.parcial_price }}</span></td>
-					<td><span>{{ venta.total_weight }}</span></td>
-					<td><span>{{ venta.total_quantity }}</span></td>
-					<td><span>{{ venta.total_remaining_quantity }}</span></td>
-					<td><span>{{venta.guide_amount}}</span></td>
-					<td>
-						<span ng-if="venta.totalWarehouse > 0">{{ venta.totalWarehouse | currency}}</span>
-						<span ng-if="venta.totalWarehouse == 0">No Info.</span>
-					</td>
-					<td>
-						<span ng-if="venta.totalFlete > 0">{{ venta.totalFlete | currency}}</span>
-						<span ng-if="venta.totalFlete == 0">No Info.</span>
-					</td>
-					<td>
-						<span ng-if="venta.total > 0">{{ venta.total | currency}}</span>
-						<span ng-if="venta.total == 0">No Info.</span>
-					</td>
-					<td>
-						<span ng-if="venta.totalImpuestos > 0">{{ venta.totalImpuestos | currency}}</span>
-						<span ng-if="venta.totalImpuestos == 0">No Info.</span>
-					</td>
-					<td ng-if="venta.paymentGatewayUrl" ng-class="venta.state == 1 ? 'payed' : 'unpayed' "><span ng-bind="venta.state == 0 ? 'Pendiente de pago' : 'Pagado'"></span></td>
-					<td ng-if="!venta.paymentGatewayUrl">
-						<button ng-if="venta.state == 1" ng-click="processPayments.processPayment(venta, venta.bills)" class="btn btn-default">Process Lot</button>
-						<button ng-if="venta.state == 0" ng-click="processPayments.setGuides(venta, venta.bills)" class="btn btn-default">Make AWB</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+                </div>
+            </form>
+            <thead>
+                <tr>
+                    <td><span>Lot #</span></td>
+                    <td><span>Request Date</span></td>
+                    <td><span>Price</span></td>
+                    <td><span>Total Weight</span></td>
+                    <td><span>Products quantity </span></td>
+                    <td><span>Products remaining </span></td>
+                    <td><span>Amount of AWB</span></td>
+                    <td><span>Total Warehouse</span></td>
+                    <td><span>Total Freight</span></td>
+                    <td><span>Total</span></td>
+                    <td><span>Total Taxes <br> (to pay upon delivery)</span></td>
+                    <td><span>Actions</span></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="venta in processPayments.ventas |filter: { state: selectedFilter,  id: searchLote }  track by $index">
+                    <td><span>{{ venta.id }}</span></td>
+                    <td><span>{{ venta.timestamp  | date:'yyyy-MM-dd HH:mm:ss'}}</span></td>
+                    <td><span>${{ venta.parcial_price }}</span></td>
+                    <td><span>{{ venta.total_weight }}</span></td>
+                    <td><span>{{ venta.total_quantity }}</span></td>
+                    <td><span>{{ venta.total_remaining_quantity }}</span></td>
+                    <td><span>{{venta.guide_amount}}</span></td>
+                    <td>
+                        <span ng-if="venta.totalWarehouse > 0">{{ venta.totalWarehouse | currency}}</span>
+                        <span ng-if="venta.totalWarehouse == 0">No Info.</span>
+                    </td>
+                    <td>
+                        <span ng-if="venta.totalFlete > 0">{{ venta.totalFlete | currency}}</span>
+                        <span ng-if="venta.totalFlete == 0">No Info.</span>
+                    </td>
+                    <td>
+                        <span ng-if="venta.total > 0">{{ venta.total | currency}}</span>
+                        <span ng-if="venta.total == 0">No Info.</span>
+                    </td>
+                    <td>
+                        <span ng-if="venta.totalImpuestos > 0">{{ venta.totalImpuestos | currency}}</span>
+                        <span ng-if="venta.totalImpuestos == 0">No Info.</span>
+                    </td>
+                    <td ng-if="venta.paymentGatewayUrl" ng-class="venta.state == 1 ? 'payed' : 'unpayed' "><span ng-bind="venta.state == 0 ? 'Pendiente de pago' : 'Pagado'"></span></td>
+                    <td ng-if="!venta.paymentGatewayUrl">
+                        <button ng-if="venta.state == 1" ng-click="processPayments.processPayment(venta, venta.bills)" class="btn btn-default">Process Lot</button>
+                        <button ng-if="venta.state == 0" ng-click="processPayments.setGuides(venta, venta.bills)" class="btn btn-default">Make AWB</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-	<div ng-include src="'hbr-selfie/dist/routes/process_payments/modals/processPayments.template.html'"></div>
-	<div ng-include src="'hbr-selfie/dist/routes/process_payments/modals/makeGuides.template.html'"></div>	
+    <div ng-include src="'hbr-selfie/dist/routes/process_payments/modals/processPayments.template.html'"></div>
+    <div ng-include src="'hbr-selfie/dist/routes/process_payments/modals/makeGuides.template.html'"></div>
 </div>

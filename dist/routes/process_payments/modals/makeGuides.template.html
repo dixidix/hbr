@@ -115,7 +115,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="guide in guides.guideBatch track by $index" id="guide_list_{{guide.number}}" ng-class="guide.state == 1 || guide.state == 2 || guide.state == 3 ? 'row-finished' : guide.price >= 1000 || guide.weight >= 50 ? 'row-danger': guide.price > 900 || guide.weight > 40 ? 'row-warning':''">
-                            <td><span>{{ guide.number }} {{guide.state}}</span></td>
+                            <td><span>{{ guide.number }}</span></td>
                             <td><span>{{ guide.quantity }}</span></td>
                             <td>
                                 <table class="col-xs-12" ng-if="guide.products.length">

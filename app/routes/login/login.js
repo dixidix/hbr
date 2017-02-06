@@ -33,7 +33,7 @@ function loginController(angular, app) {
                             if (sessionStorage.getItem('sskey')) {
                                 $state.go('dashboard', {}, { reload: true });
                             }
-                        }, 3000);
+                        }, 100);
                     } else {
                         self.loginError = response.errors.loginError;
                         self.loginForm.username.$invalid = true;

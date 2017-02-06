@@ -3,20 +3,35 @@
     <h3><i class="fa fa-shopping-cart"></i> Compras</h3>
     <hr>
     <div class="col-xs-12 content">
-        <div class="row" ng-if="!shoppingList.ventas.length">
+        <div class="row" ng-if="!shoppingList.ventas.length && $root.showSpinner == false">
             <div class="empty-list">
                 <h3>No se han registrado compras asociadas a&uacute;n.</h3>
                 <button class="btn btn-hbr-blue" ui-sref="dashboard.shopping"><i class="fa fa-shopping-cart"></i> Agregar Compras</button>
             </div>
         </div>
         <table class="table table-bordered table-striped table-curved rounded" ng-if="shoppingList.ventas.length">
+            <div class="row">
+                <div class="col-xs-3">
+                    <label for="">Buscar por Venta</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>
+                        <input type="text" name="search" class="form-control" placeholder="Buscar por venta" ng-model="searchByPurchase">
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <label for="">Buscar por Fecha</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i  class="fa fa-search"></i></span>
+                        <input type="text" name="search" class="form-control" placeholder="Buscar por Fecha solicitud" ng-model="searchByDate">
+                    </div>
+                </div>
+            </div>
             <thead>
                 <tr>
                     <td><span>#ID Compra</span></td>
                     <td class="large-row"><span>Fecha de solicitud</span></td>
                     <td><span>Cant. Lotes</span></td>
                     <td><span>Precio Art&iacute;culos</span></td>
-                    <td><span>Peso Total </span></td>
                     <td><span>Cantidad Compras</span></td>
                     <td><span>Cantidad sin procesar</span></td>
                     <td><span>Peso Total</span></td>
@@ -25,13 +40,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="venta in shoppingList.ventas track by $index">
+                <tr ng-repeat="venta in (shoppingList.ventas | filter: { id: searchByPurchase } | filter: { timestamp : searchByDate }) track by $index">
                     <td><span>{{ venta.id }}</span></td>
-                    <td><span>{{ venta.timestamp | date:'yyyy-MM-dd HH:mm:ss'}}</span></td>
+                    <td><span>{{ venta.timestamp | date:'dd-MM-yyyy HH:mm'}}</span></td>
                     <td ng-if="venta.guide_amount !== '0'"><span>{{ venta.guide_amount }}</span></td>
                     <td ng-if="venta.guide_amount == '0'"><span class="unpayed"> Procesando Info.</span></td>
                     <td><span>U$D {{ venta.parcial_price }}</span></td>
-                    <td><span>{{ venta.peso_total }} Kg.</span></td>
                     <td><span>{{ venta.total_quantity }}</span></td>
                     <td><span>{{ venta.total_remaining_quantity }}</span></td>
                     <td><span>{{ venta.total_weight }} Kg.</span></td>
@@ -42,8 +56,7 @@
                 </tr>
             </tbody>
         </table>
-        <!-- 		<uib-pagination next-text="Siguiente" previous-text="Anterior" total-items="3" data-num-pages="1"
-	ng-model="1" class="pagination-sm" items-per-page="3" boundary-link-numbers="true"></uib-pagination> -->
+       
     </div>
     <div ng-include src="'hbr-selfie/dist/routes/shopping_list/moreinfo/moreinfo.template.html'"></div>
 </div>

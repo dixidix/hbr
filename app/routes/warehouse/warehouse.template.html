@@ -1,7 +1,7 @@
 <div class="warehouse container-fluid" ng-cloak>
 	<link rel="stylesheet" type="text/css" href="./hbr-selfie/dist/routes/warehouse/warehouse.css">
 	<div>
-		<h3 class="pull-left"><i class="fa fa-home"></i> Administrar Warehouse</h3>
+		<h3 class="pull-left"><i class="fa fa-home"></i>Manage Warehouse</h3>
 		<button class="btn btn-hbr-blue pull-right" ng-click="warehouses.newWarehouse()"><i class="fa fa-plus"></i>Warehouse</button>
 	</div>
 	<br><br>
@@ -10,16 +10,16 @@
 	<table class="table table-bordered table-striped table-curved rounded">
 		<thead>
 			<tr>
-				<td><span>Nombre Warehouse</span></td>
-				<td><span>Tel.</span></td>
-				<td><span>Cel.</span></td>
+				<td><span>Warehouse Name</span></td>
+				<td><span>Phone</span></td>
+				<td><span>Cellphone</span></td>
 				<td><span>E-Mail</span></td>
-				<td><span>Direcci&oacute;n</span></td>
-				<td><span>Localidad</span></td>
-				<td><span>C&oacute;digo postal</span></td>
-				<td><span>Tipo ID</span></td>
-				<td><span>C&oacute;digo de ID</span></td>
-				<td><span>Acciones</span></td>
+				<td><span>Address</span></td>
+				<td><span>City</span></td>
+				<td><span>Postal Code</span></td>
+				<td><span>ID Type</span></td>
+				<td><span>ID Code</span></td>
+				<td><span>Actions</span></td>
 
 			</tr>
 		</thead>
@@ -37,8 +37,8 @@
 				<td><span> {{warehouse.idCode }} </span></td>
 				
 				<td class="actions">
-					<i class="fa fa-edit" tooltip-placement="left" uib-tooltip="Editar" ng-click="warehouses.editWarehouse(warehouse)"></i>
-					<i class="fa fa-close" tooltip-placement="top" uib-tooltip="Eliminar" ng-click="warehouses.removeWarehouse(warehouse)"></i>
+					<i class="fa fa-edit" tooltip-placement="left" uib-tooltip="Edit" ng-click="warehouses.editWarehouse(warehouse)"></i>
+					<i class="fa fa-close" tooltip-placement="top" uib-tooltip="Delete" ng-click="warehouses.removeWarehouse(warehouse)"></i>
 				</td>
 			</tr>
 		</tbody>
