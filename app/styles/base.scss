@@ -37,6 +37,20 @@ html {
             padding:0;
             width:100%;
         }
+        .pagination>.active>a,
+        .pagination>.active>a:focus,
+        .pagination>.active>a:hover, 
+        .pagination>.active>span, 
+        .pagination>.active>span:focus, 
+        .pagination>.active>span:hover{
+            background-color:$hbr-blue;
+            border-color:$hbr-blue;
+            color:$hbr-green;
+        }
+
+        .pagination>li>a, .pagination>li>span{
+            color:$hbr-blue;
+        }
 
         .empty-list {
             margin-top: 50px;

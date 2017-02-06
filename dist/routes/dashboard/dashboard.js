@@ -49,10 +49,12 @@ function dashboardController(angular, app) {
 
     function next () {
         $scope.step = $scope.step + 1;
+        $('.modal-body').scrollTop(0);
     }
     
     function prev () {
         $scope.step = $scope.step - 1;
+        $('.modal-body').scrollTop(0);
     }
 
     function cancel() {

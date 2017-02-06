@@ -68,12 +68,29 @@ function warehouseController(angular, app) {
         }
 
         function init() {
+             $scope.filtered = [];
             $http.get('./hbr-selfie/dist/php/warehouse.php', {
                 params: {
                     action: 'getAll'
                 }
             }).then(function(response) {
                 self.warehouses = response.data.warehouses;
+
+                $scope.totalItems = Object.keys(self.warehouses).length;
+                $scope.currentPage = 1;
+                $scope.itemsPerPage = 5;
+                $scope.maxSize = 5;
+                $scope.setPage = function(pageNo) {
+                    $scope.currentPage = pageNo;
+                };
+                $scope.pageChanged = function() {
+
+                };
+                $scope.$watch('search', function(term) {
+                    var obj = term;
+                    $scope.filtered = $filter('filter')(self.warehouses, obj);
+                    $scope.currentPage = 1;
+                });
             });
             self.newWarehouse = newWarehouse;
             self.editWarehouse = editWarehouse;

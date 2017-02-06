@@ -50,7 +50,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="guide in (airwayList.guides | filter: { ventaId: searchByBatch } | filter: { number: searchByAwb } | filter: { hbr_tracking: searchByTracking }) track by $index" id="guide_list_{{guide.number}}">
+                <tr ng-repeat="guide in filtered = (airwayList.guides | filter: { ventaId: searchByBatch } | filter: { number: searchByAwb } | filter: { hbr_tracking: searchByTracking })  | start: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage | filter : paginate  track by $index" id="guide_list_{{guide.number}}">
                     <td><span>{{ guide.ventaId }}</span></td>
                     <td><span>{{ guide.number }}</span></td>
                     <td><span>{{ guide.quantity }}</span></td>
@@ -78,6 +78,7 @@
                 </tr>
             </tbody>
         </table>
+         <ul uib-pagination first-text="primero" last-text="&uacute;ltimo" next-text="Siguiente" previous-text="Anterior" total-items="filtered.length" ng-model="currentPage" max-size="maxSize" class="pagination-sm pull-right" boundary-links="true" force-ellipses="true"></ul>
     </div>
 </div>
 <div ng-include src="'hbr-selfie/dist/routes/airwaybill_list/modals/airwaydesc.template.html'"></div>

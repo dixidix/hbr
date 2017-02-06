@@ -44,20 +44,37 @@ function shoppingListController(angular, app) {
         function init() {
             $rootScope.showSpinner = true;
             self.ventas = [];
+            $scope.filtered = [];
             authenticationService.checkAuth().success(function (response) {
                 $http.get('./hbr-selfie/dist/php/get_batch.php', { params: { action: "getByUserId", id: response.uid } })
                     .success(function (response) {
-                        if(response.ventas.length){
-                        angular.forEach(response.ventas, function(venta){
-                            venta.timestamp = new Date(parseInt(venta.timestamp));
-                        });
+                        if (response.ventas.length) {
+                            angular.forEach(response.ventas, function (venta) {
+                                venta.timestamp = moment(parseInt(venta.timestamp)).format("DD/MM/YYYY HH:mm");
+                            });
 
-                        self.ventas = response.ventas;
+                            self.ventas = response.ventas;
                         }
                         self.moreInfo = moreInfo;
                         self.downloadBill = downloadBill;
                         self.pay = pay;
                         $rootScope.showSpinner = false;
+
+                        $scope.totalItems = Object.keys(self.ventas).length;
+                        $scope.currentPage = 1;
+                        $scope.itemsPerPage = 5;
+                        $scope.maxSize = 5;
+                        $scope.setPage = function (pageNo) {
+                            $scope.currentPage = pageNo;
+                        };
+                        $scope.pageChanged = function () {
+
+                        };
+                        $scope.$watch('search', function (term) {
+                            var obj = term;
+                            $scope.filtered = $filter('filter')(self.ventas, obj);
+                            $scope.currentPage = 1;
+                        });
                     });
             });
         }

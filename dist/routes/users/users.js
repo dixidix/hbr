@@ -90,6 +90,7 @@ function usersController(angular, app) {
         });
     }
     function init() {
+      $scope.filtered = [];
       self.client_type = $state.params.client_type;
       $http.get('./hbr-selfie/dist/php/users.php', {
         params: {
@@ -97,7 +98,23 @@ function usersController(angular, app) {
           action: 'getAll'
         }
       }).then(function (response) {
-        self.users = response.data.users;
+        self.userlist = response.data.users;
+
+        $scope.totalItems = Object.keys(self.userlist).length;
+            $scope.currentPage = 1;
+            $scope.itemsPerPage = 5;
+            $scope.maxSize = 5;
+            $scope.setPage = function(pageNo) {
+                $scope.currentPage = pageNo;
+            };
+            $scope.pageChanged = function() {
+
+            };
+            $scope.$watch('search', function(term) {
+                var obj = term;
+                $scope.filtered = $filter('filter')(self.userlist, obj);
+                $scope.currentPage = 1;
+            });
       });
 
       self.editUser = editUser;

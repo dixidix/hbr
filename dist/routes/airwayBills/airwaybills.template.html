@@ -10,10 +10,49 @@
         </div>
     </div>
     <div class="col-xs-12 content" ng-if="airway.guides.length">
+                    <h4>Search by:</h4>
+             <div class="row">                 
+                <div class="col-xs-2">
+                    <label for="">Purchase Id</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>
+                        <input type="text" name="search" class="form-control" placeholder="Purchase Id" ng-model="searchByPurchase">
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <label for="">Guide Number</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>
+                        <input type="text" name="search" class="form-control" placeholder="Guide N°" ng-model="searchByGuideN">
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <label for="">HBR Id</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>
+                        <input type="text" name="search" class="form-control" placeholder="HBR Id" ng-model="searchByHbr">
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <label for="">Username</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i  class="fa fa-search"></i></span>
+                        <input type="text" name="search" class="form-control" placeholder="User" ng-model="searchByUser">
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <label for="">Warehouse</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i  class="fa fa-search"></i></span>
+                        <input type="text" name="search" class="form-control" placeholder="Warehouse" ng-model="searchByWarehouse">
+                    </div>
+                </div>
+            </div>
         <table class="table table-bordered table-striped table-curved rounded">
             <thead>
                 <tr>
                     <td><span>Purchase Id</span></td>
+                    <td><span>HBR Id</span></td>
                     <td><span>User</span></td>
                     <td><span>Warehouse</span></td>
                     <td><span>HBR Number</span></td>
@@ -25,10 +64,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="guide in airway.guides track by $index" id="guide_list_{{guide.number}}">
+                <tr ng-repeat="guide in filtered = (airway.guides  | filter: { ventaId: searchByPurchase } | filter: { airwayId: searchByHbr } | filter: { number: searchByGuideN } | filter: { username : searchByUser } | filter: { warehousename : searchByWarehouse })  | start: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage | filter : paginate track by $index" id="guide_list_{{guide.number}}">
                     <td><span>{{ guide.ventaId }}</span></td>
-                    <td><span>{{ guide.user[0].name }} {{ guide.user[0].lastname }}</span></td>
-                    <td><span>{{ guide.warehouse[0].name }}</span></td>
+                    <td><span>{{ guide.airwayId }}</span></td>
+                    <td><span>{{ guide.username }}</span></td>
+                    <td><span>{{ guide.warehousename }}</span></td>
                     <td><span>{{ guide.airwayId }}</span></td>
                     <td><span>{{ guide.number }}</span></td>
                     <td><span>{{ guide.quantity }}</span></td>
@@ -40,6 +80,7 @@
                 </tr>
             </tbody>
         </table>
+         <ul uib-pagination total-items="filtered.length" ng-model="currentPage" max-size="maxSize" class="pagination-sm pull-right" boundary-links="true" force-ellipses="true"></ul>
     </div>
 </div>
 <div ng-include src="'hbr-selfie/dist/routes/airwayBills/modals/process-airway.template.html'"></div>

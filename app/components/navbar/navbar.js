@@ -3,9 +3,9 @@ function navbarDirective(angular, app) {
     'use angular template'; //jshint ignore:line
 
     app.directive('navbar', navbar);
-    navbar.$inject = ['$state', 'authenticationService', '$rootScope', '$window'];
+    navbar.$inject = ['$state', 'authenticationService', '$rootScope', '$window', '$uibModalStack'];
 
-    function navbar($state, authenticationService) {
+    function navbar($state, authenticationService, $uibModalStack) {
         return {
             restrict: "E",
             replace: true,
@@ -16,9 +16,13 @@ function navbarDirective(angular, app) {
         };
 
         function link(scope, element, attrs) {
-            scope.$watch(function() {
+
+            scope.$watch(function () {
                 return sessionStorage.sskey;
-            }, function(newVal, oldVal) {
+            }, function (newVal, oldVal) {
+                authenticationService.checkAuth().success(function (response) {
+                    scope.showTutorial = response.showTutorial;
+                });
                 scope.isLogged = sessionStorage.getItem('sskey') || false;
                 scope.username = sessionStorage.getItem('username') || "";
                 scope.isAdmin = JSON.parse(sessionStorage.getItem('isAdmin'));
@@ -27,18 +31,17 @@ function navbarDirective(angular, app) {
 
         function controller($rootScope, $window) {
             var self = this; // jshint:ignore
-
             function logout() {
                 $rootScope.showSpinner = true;
                 authenticationService.logout()
-                    .success(function() {
+                    .success(function () {
                         $rootScope.showSpinner = false;
-                        setTimeout(function() {
+                        setTimeout(function () {
                             sessionStorage.clear();
-                            $state.go('home.login', {}, { reload: true });
+                            window.location.href = 'http://tucourier.com.ar/hbr-selfie/';
                         }, 300);
                     })
-                    .error(function(err) {
+                    .error(function (err) {
                         console.log(err);
                     });
 

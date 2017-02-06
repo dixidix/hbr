@@ -156,9 +156,26 @@ function categoryController(angular, app) {
         };
 
         function init() {
+            $scope.filtered = [];
             self.category = category;
             self.cancel = cancel;
             self.deletecategory = deletecategory;
+
+                $scope.totalItems = Object.keys(self.category).length;
+                $scope.currentPage = 1;
+                $scope.itemsPerPage = 5;
+                $scope.maxSize = 5;
+                $scope.setPage = function(pageNo) {
+                    $scope.currentPage = pageNo;
+                };
+                $scope.pageChanged = function() {
+
+                };
+                $scope.$watch('search', function(term) {
+                    var obj = term;
+                    $scope.filtered = $filter('filter')(self.category, obj);
+                    $scope.currentPage = 1;
+                });
         }
 
         init();

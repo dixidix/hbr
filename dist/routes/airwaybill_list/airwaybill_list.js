@@ -38,6 +38,7 @@ function airwayListController(angular, app) {
 
         function init() {
             $rootScope.showSpinner = true;
+             $scope.filtered = [];
             authenticationService.checkAuth()
                 .then(function(response) {
                     self.uid = response.data.uid;
@@ -51,6 +52,21 @@ function airwayListController(angular, app) {
                                 }
                             });
                             $rootScope.showSpinner = false;
+                        $scope.totalItems = Object.keys(self.guides).length;
+                        $scope.currentPage = 1;
+                        $scope.itemsPerPage = 5;
+                        $scope.maxSize = 5;
+                        $scope.setPage = function(pageNo) {
+                            $scope.currentPage = pageNo;
+                        };
+                        $scope.pageChanged = function() {
+
+                        };
+                        $scope.$watch('search', function(term) {
+                            var obj = term;
+                            $scope.filtered = $filter('filter')(self.guides, obj);
+                            $scope.currentPage = 1;
+                        });
                         });
                 });
             self.seeMore = seeMore;

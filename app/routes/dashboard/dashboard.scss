@@ -15,6 +15,9 @@
 	.modal-body{
         height: 350px;
         overflow-y: scroll;
+        img {
+            width:100%;
+        }
 	}
 }
 .dashboard {
@@ -196,8 +199,6 @@
         position: relative;
         width: 85%;
         height: 100%;
-        padding: 2% 5% 0% 2%;
-        padding-top: 100px;
         transition: all .1s ease-in-out;
         .container-img {
             width: 100%;

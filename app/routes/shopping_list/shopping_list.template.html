@@ -40,9 +40,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="venta in (shoppingList.ventas | filter: { id: searchByPurchase } | filter: { timestamp : searchByDate }) track by $index">
+                <tr ng-repeat="venta in filtered = (shoppingList.ventas | filter: { id: searchByPurchase } | filter: { timestamp : searchByDate })  | start: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage | filter : paginate track by $index">
                     <td><span>{{ venta.id }}</span></td>
-                    <td><span>{{ venta.timestamp | date:'dd-MM-yyyy HH:mm'}}</span></td>
+                    <td><span>{{ venta.timestamp}}</span></td>
                     <td ng-if="venta.guide_amount !== '0'"><span>{{ venta.guide_amount }}</span></td>
                     <td ng-if="venta.guide_amount == '0'"><span class="unpayed"> Procesando Info.</span></td>
                     <td><span>U$D {{ venta.parcial_price }}</span></td>
@@ -54,9 +54,9 @@
                         <button ng-click="shoppingList.moreInfo(venta.bills)" class="btn btn-default"> VER MAS </button>
                     </td>
                 </tr>
-            </tbody>
+            </tbody>            
         </table>
-       
+        <ul uib-pagination  first-text="primero" last-text="&uacute;ltimo" next-text="Siguiente" previous-text="Anterior" total-items="filtered.length" ng-model="currentPage" max-size="maxSize" class="pagination-sm pull-right" boundary-links="true" force-ellipses="true"></ul>
     </div>
     <div ng-include src="'hbr-selfie/dist/routes/shopping_list/moreinfo/moreinfo.template.html'"></div>
 </div>

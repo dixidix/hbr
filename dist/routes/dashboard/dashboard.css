@@ -93,6 +93,17 @@ html {
       margin: 0;
       padding: 0;
       width: 100%; }
+    html body .pagination > .active > a,
+    html body .pagination > .active > a:focus,
+    html body .pagination > .active > a:hover,
+    html body .pagination > .active > span,
+    html body .pagination > .active > span:focus,
+    html body .pagination > .active > span:hover {
+      background-color: #19156a;
+      border-color: #19156a;
+      color: #b4ec13; }
+    html body .pagination > li > a, html body .pagination > li > span {
+      color: #19156a; }
     html body .empty-list {
       margin-top: 50px;
       display: flex;
@@ -173,6 +184,8 @@ html {
   .modal-dialog .modal-body {
     height: 350px;
     overflow-y: scroll; }
+    .modal-dialog .modal-body img {
+      width: 100%; }
 
 .dashboard {
   margin: 0;
@@ -391,8 +404,6 @@ html {
     position: relative;
     width: 85%;
     height: 100%;
-    padding: 2% 5% 0% 2%;
-    padding-top: 100px;
     transition: all .1s ease-in-out; }
     .dashboard__content .container-img {
       width: 100%;

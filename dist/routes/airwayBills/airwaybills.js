@@ -37,9 +37,33 @@ function airwayController(angular, app) {
         }
 
         function init() {
-
+            $scope.filtered = [];
             airwayService.get_finished_airwaybills().then(function success(response) {
+
+                angular.forEach(response.data.guideBatch, function(guide){
+                    guide.username = guide.user[0].name + " "+ guide.user[0].lastname;
+                    guide.warehousename = guide.warehouse[0].name; 
+                });
+
                 self.guides = response.data.guideBatch;
+
+                
+            
+                $scope.totalItems = Object.keys(self.guides).length;
+                $scope.currentPage = 1;
+                $scope.itemsPerPage = 5;
+                $scope.maxSize = 5;
+                $scope.setPage = function(pageNo) {
+                    $scope.currentPage = pageNo;
+                };
+                $scope.pageChanged = function() {
+
+                };
+                $scope.$watch('search', function(term) {
+                    var obj = term;
+                    $scope.filtered = $filter('filter')(self.guides, obj);
+                    $scope.currentPage = 1;
+                });
             });
 
             self.processAirwayBill = processAirwayBill;

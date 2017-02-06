@@ -8,6 +8,15 @@
 </div>
 	<br><br>
 	<hr>
+	<div class="row">                 
+		<div class="col-xs-6">
+			<label for="">General Search</label>
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>
+				<input type="text" name="search" class="form-control" placeholder="Purchase Id" ng-model="generalSearch">
+			</div>
+		</div>
+</div>
 	<table class="table table-bordered table-striped table-curved rounded">
 		<thead>
 			<tr>
@@ -27,7 +36,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr  ng-repeat="user in users.users   track by $index">
+			<tr  ng-repeat="user in users.userlist  | filter : generalSearch  track by $index">
 				<td ng-if="users.client_type == 0"><span>{{ user.name }}</span></td>
 				<td ng-if="users.client_type == 0"><span>{{ user.lastname }}</span></td>
 				<td ng-if="users.client_type == 1"><span>{{ user.company_name }}</span></td>

@@ -67,6 +67,7 @@ function processPaymentsController(angular, app) {
              self.ventas = [];
              authenticationService.checkAuth().then(function(response) {
                  if(response.data.isAdmin == 1){
+                     $scope.filtered= [];
                     $http.get('./hbr-selfie/dist/php/get_batch.php', { params: { action: "getAll" } })
                         .then(function(response) {
                             angular.forEach(response.data.ventas, function(value, key) {
@@ -80,11 +81,30 @@ function processPaymentsController(angular, app) {
                             });
 
                             self.ventas = response.data.ventas;
+
+
+                            $scope.totalItems = Object.keys(self.ventas).length;
+                            $scope.currentPage = 1;
+                            $scope.itemsPerPage = 5;
+                            $scope.maxSize = 5;
+                            $scope.setPage = function(pageNo) {
+                                $scope.currentPage = pageNo;
+                            };
+                            $scope.pageChanged = function() {
+
+                            };
+                            $scope.$watch('search', function(term) {
+                                var obj = term;
+                                $scope.filtered = $filter('filter')(self.ventas, obj);
+                                $scope.currentPage = 1;
+                            });
+
                             self.processPayment = processPayment;
                             self.setGuides = setGuides;
                         });
                  } else {
                      if(response.data.client_type){
+                          $scope.filtered = [];
                         $http.get('./hbr-selfie/dist/php/get_batch.php', { params: { action: "getByWhId", whId: response.data.uid} })
                         .then(function(response) {
                             angular.forEach(response.data.ventas, function(value, key) {
@@ -101,6 +121,22 @@ function processPaymentsController(angular, app) {
                                 if(venta.bills.length){
                                     self.ventas.push(venta);
                                 }
+                            });
+
+                            $scope.totalItems = Object.keys(self.ventas).length;
+                            $scope.currentPage = 1;
+                            $scope.itemsPerPage = 5;
+                            $scope.maxSize = 5;
+                            $scope.setPage = function(pageNo) {
+                                $scope.currentPage = pageNo;
+                            };
+                            $scope.pageChanged = function() {
+
+                            };
+                            $scope.$watch('search', function(term) {
+                                var obj = term;
+                                $scope.filtered = $filter('filter')(self.ventas, obj);
+                                $scope.currentPage = 1;
                             });
                             self.processPayment = processPayment;
                             self.setGuides = setGuides;
