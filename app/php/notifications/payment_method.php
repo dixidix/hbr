@@ -41,12 +41,13 @@ if(!empty($_POST['paymentMethod']) && $_POST['paymentMethod'] == 2){
     $transfer_account_number = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['transfer_account_number']));
     $transfer_account_holder_name = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['transfer_account_holder_name']));
     $transfer_bank_name = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['transfer_bank_name']));
-    $transfer_bank_address = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['transfer_bank_address']));
+    $transfer_cbu = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['transfer_cbu']));
+    $transfer_cuit = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['transfer_cuit']));
     $paymentDesc = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['paymentDesc']));
 
 
-    $htmlStringToReplace = array('$ventaId','$guide_number','$transfer_account_number','$transfer_account_holder_name','$transfer_bank_name','$transfer_bank_address','$paymentDesc', '$total');
-    $replaceWith   = array("$ventaId","$guide_number","$transfer_account_number","$transfer_account_holder_name","$transfer_bank_name", "$transfer_bank_address","$paymentDesc","$total");
+    $htmlStringToReplace = array('$ventaId','$guide_number','$transfer_account_number','$transfer_account_holder_name','$transfer_bank_name','$transfer_cuit','$transfer_cbu','$paymentDesc', '$total');
+    $replaceWith   = array("$ventaId","$guide_number","$transfer_account_number","$transfer_account_holder_name","$transfer_bank_name", "$transfer_cuit", "$transfer_cbu","$paymentDesc","$total");
 }
 
 

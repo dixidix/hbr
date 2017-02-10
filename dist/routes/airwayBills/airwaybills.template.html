@@ -64,7 +64,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="guide in filtered = (airway.guides  | filter: { ventaId: searchByPurchase } | filter: { airwayId: searchByHbr } | filter: { number: searchByGuideN } | filter: { username : searchByUser } | filter: { warehousename : searchByWarehouse })  | start: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage | filter : paginate track by $index" id="guide_list_{{guide.number}}">
+                <tr ng-repeat="guide in filtered = ( airway.guides  | filter: { ventaId: searchByPurchase } | filter: { airwayId: searchByHbr } | filter: { number: searchByGuideN } | filter: { username : searchByUser } | filter: { warehousename : searchByWarehouse }) | orderBy: '-airwayId'  | start: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage  | filter : paginate track by $index">
+                    
                     <td><span>{{ guide.ventaId }}</span></td>
                     <td><span>{{ guide.airwayId }}</span></td>
                     <td><span>{{ guide.username }}</span></td>
@@ -80,7 +81,7 @@
                 </tr>
             </tbody>
         </table>
-         <ul uib-pagination total-items="filtered.length" ng-model="currentPage" max-size="maxSize" class="pagination-sm pull-right" boundary-links="true" force-ellipses="true"></ul>
+       <ul uib-pagination total-items="filtered.length" ng-model="currentPage" max-size="maxSize" class="pagination-sm pull-right" boundary-links="true" force-ellipses="true"></ul>
     </div>
 </div>
 <div ng-include src="'hbr-selfie/dist/routes/airwayBills/modals/process-airway.template.html'"></div>

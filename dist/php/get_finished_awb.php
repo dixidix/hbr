@@ -5,15 +5,15 @@ require 'bd.php';
 
 if(!empty($_GET['state'])){
 	$res = MysqliDB::getInstance()->query("SELECT * from airway_bill INNER JOIN ventas ON airway_bill.ventaId = ventas.id  WHERE airway_bill.state != 0 AND  airway_bill.deleted = 0");
+	
 } else {
 	if(!empty($_GET['ventaId'])){	
 	$res = MysqliDB::getInstance()->query("SELECT * from airway_bill WHERE ventaId = ".$_GET['ventaId']." AND deleted = 0");
 	}
 }
 
-	$outp="";
-	$outpwh="";
-	while($rs = $res->fetch_array(MYSQLI_ASSOC)) {
+	$outp="";	
+	while($rs = $res->fetch_array(MYSQLI_ASSOC)) {		
 		$outpm ="";
 		if ($outp != "") {$outp .= ",";}
 
@@ -21,8 +21,8 @@ if(!empty($_GET['state'])){
 		$outp .= '"ventaId":"'  . $rs["ventaId"] . '",';
         $outp .= '"number":"'  . (int) $rs["number"] . '",';
         $outp .= '"whId":"'  . (int) $rs["warehouseId"] . '",';
-
-		$wh =  MysqliDB::getInstance()->query("SELECT * FROM users where id =" . $rs["warehouseId"] . " and deleted = 0");
+		$outpwh="";
+		$wh =  MysqliDB::getInstance()->query("SELECT * FROM users where id =" . (int) $rs["warehouseId"] . " and deleted = 0");
 		while($rswh = $wh->fetch_array(MYSQLI_ASSOC)) {
 			if ($outpwh != "") {$outpwh .= ",";}
 			$outpwh .= '{"id":"'  . $rswh["id"] . '",';
@@ -61,7 +61,8 @@ if(!empty($_GET['state'])){
 		$outp .= '"transfer_account_number":"'  . $rs["transfer_account_number"] . '",';
 		$outp .= '"transfer_account_holder_name":"'  . $rs["transfer_account_holder_name"] . '",';
 		$outp .= '"transfer_bank_name":"'  . $rs["transfer_bank_name"] . '",';
-		$outp .= '"transfer_bank_address":"'  . $rs["transfer_bank_address"] . '",';
+		$outp .= '"transfer_cuit":"'  . $rs["transfer_cuit"] . '",';
+		$outp .= '"transfer_cbu":"'  . $rs["transfer_cbu"] . '",';
 		$outp .= '"paymentDesc":"'  . $rs["paymentDesc"] . '",';
 
 		$outp .= '"arrivalDate":"'  . $rs["arrivalDate"] . '",';

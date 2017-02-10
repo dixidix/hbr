@@ -12,7 +12,6 @@ if(!empty($_GET['state'])){
 }
 
 	$outp="";
-	$outpwh="";
 	
 	while($rs = $res->fetch_array(MYSQLI_ASSOC)) {
 		$outpm ="";
@@ -22,7 +21,7 @@ if(!empty($_GET['state'])){
 		$outp .= '"ventaId":"'  . $rs["ventaId"] . '",';
         $outp .= '"number":"'  . (int) $rs["number"] . '",';
         $outp .= '"whId":"'  . (int) $rs["warehouseId"] . '",';
-
+		$outpwh="";
 		$wh =  MysqliDB::getInstance()->query("SELECT * FROM users where id =" . $rs["warehouseId"] . " and deleted = 0");
 		while($rswh = $wh->fetch_array(MYSQLI_ASSOC)) {
 			if ($outpwh != "") {$outpwh .= ",";}
@@ -62,7 +61,8 @@ if(!empty($_GET['state'])){
 		$outp .= '"transfer_account_number":"'  . $rs["transfer_account_number"] . '",';
 		$outp .= '"transfer_account_holder_name":"'  . $rs["transfer_account_holder_name"] . '",';
 		$outp .= '"transfer_bank_name":"'  . $rs["transfer_bank_name"] . '",';
-		$outp .= '"transfer_bank_address":"'  . $rs["transfer_bank_address"] . '",';
+		$outp .= '"transfer_cuit":"'  . $rs["transfer_cuit"] . '",';
+		$outp .= '"transfer_cbu":"'  . $rs["transfer_cbu"] . '",';
 		$outp .= '"paymentDesc":"'  . $rs["paymentDesc"] . '",';
 
 		$outp .= '"arrivalDate":"'  . $rs["arrivalDate"] . '",';

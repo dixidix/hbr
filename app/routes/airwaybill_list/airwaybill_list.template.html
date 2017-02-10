@@ -36,21 +36,22 @@
             </div>
             <thead>
                 <tr>
-                    <td><span>#ID Compra</span></td>
-                    <td><span>N° Gu&iacute;a</span></td>
-                    <td><span>Cantidad de productos</span></td>
+                    <td><span>Compra</span></td>
+                    <td><span>Gu&iacute;a</span></td>
+                    <td><span>Cant. prod.</span></td>
                     <td><span>Peso Total</span></td>
                     <td><span>Prestador</span></td>
                     <td><span>Tracking</span></td>
                     <td><span>Warehouse</span></td>
-                    <td><span>Fecha de Salida</span></td>
-                    <td><span>Fecha de Arribo Estimada</span></td>
-                    <td><span>Total a pagar</span></td>
+                    <td><span>Salida</span></td>
+                    <td><span>Arribo Estimado</span></td>
+                    <td><span>Total</span></td>
+                    <td><span>Estado</span></td>
                     <td><span>Acciones</span></td>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="guide in filtered = (airwayList.guides | filter: { ventaId: searchByBatch } | filter: { number: searchByAwb } | filter: { hbr_tracking: searchByTracking })  | start: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage | filter : paginate  track by $index" id="guide_list_{{guide.number}}">
+                <tr ng-repeat="guide in filtered = (airwayList.guides | filter: { ventaId: searchByBatch } | filter: { number: searchByAwb } | filter: { hbr_tracking: searchByTracking }) | orderBy: '-ventaId'  | start: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage | filter : paginate  track by $index" id="guide_list_{{guide.number}}">
                     <td><span>{{ guide.ventaId }}</span></td>
                     <td><span>{{ guide.number }}</span></td>
                     <td><span>{{ guide.quantity }}</span></td>
@@ -66,13 +67,18 @@
                     <td ng-if="!guide.arrivalDate.length"><span class="text-danger">Procesando..</span></td>
                     <td><span>{{ guide.billing_total | currency }}</span></td>
                     <td>
+                        <span ng-if="guide.state == 2 && guide.paymentMethod != 1" class="text-danger">Pago no registrado</span>
+                        <span ng-if="guide.state == 3" class="text-success">Pagado</span>
+                    </td>
+                    <td>
                         <div class="flex-row">
-                            <div ng-if="guide.state == 2 && guide.paymentMethod != 1" class="col-xs-5"><span style="width:100%;min-width: 150px;" class="text-danger">Pago no registrado </span></div>
                             <div ng-if="guide.state == 2 && guide.paymentMethod == 1" style="width:100%;min-width: 100px;" ng-bind-html="guide.paymentButton" rel="payment_button" class="col-xs-5"></div>
-                            <div ng-if="guide.state == 3" class="col-xs-5"><span style="width:100%;min-width: 150px;" class="text-success">Pagado <i class="fa fa-check"></i></span></div>
-                            <div class="col-xs-7">
-                                <button style="width:100%;min-width: 100px;" class="btn btn-default" ng-click="airwayList.seeMore(guide, guide.products)"><i class="fa fa-plane"></i> M&aacute;s Info </button>
+                            <div>
+                                <button style="margin:0px 5px;" class="btn btn-default" ng-click="airwayList.seeMore(guide, guide.products)"><i class="fa fa-plus"></i> Info </button>
                             </div>
+                           <div ng-if="guide.state == 3">
+                              <a target="_blank" href="http://tucourier.aftership.com/{{ guide.hbr_tracking }}?"><button class="btn btn-default"><i class="fa fa-plane"></i> Track</button></a>
+                           </div>
                         </div>
                     </td>
                 </tr>

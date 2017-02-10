@@ -24,7 +24,7 @@
             <li>Home</li>
         </a>
         <a ui-sref="dashboard" ui-sref-opts="{reload: true}">
-            <li ng-if="showTutorial == 0">Tutorial</li>
+            <li ng-if="isAdmin == 0 && showTutorial == 0">Tutorial</li>
         </a>
         <a ng-if="isLogged" href="" ui-sref="dashboard">
             <li ng-if="isAdmin == 0">Inicio</li>        

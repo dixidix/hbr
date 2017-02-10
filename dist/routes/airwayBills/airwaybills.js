@@ -38,6 +38,7 @@ function airwayController(angular, app) {
 
         function init() {
             $scope.filtered = [];
+            self.guides = [];
             airwayService.get_finished_airwaybills().then(function success(response) {
 
                 angular.forEach(response.data.guideBatch, function(guide){
@@ -45,26 +46,25 @@ function airwayController(angular, app) {
                     guide.warehousename = guide.warehouse[0].name; 
                 });
 
-                self.guides = response.data.guideBatch;
+                self.guides = response.data.guideBatch;   
 
-                
-            
-                $scope.totalItems = Object.keys(self.guides).length;
+                            $scope.totalItems = self.guides.length;
+            $scope.currentPage = 1;
+            $scope.itemsPerPage = 5;
+            $scope.maxSize = 5;
+            $scope.setPage = function(pageNo) {
+                $scope.currentPage = pageNo;
+            };
+            $scope.pageChanged = function() {
+
+            };
+            $scope.$watch('search', function(term) {
+                var obj = term;
+                $scope.filtered = $filter('filter')(self.guides, obj);
                 $scope.currentPage = 1;
-                $scope.itemsPerPage = 5;
-                $scope.maxSize = 5;
-                $scope.setPage = function(pageNo) {
-                    $scope.currentPage = pageNo;
-                };
-                $scope.pageChanged = function() {
-
-                };
-                $scope.$watch('search', function(term) {
-                    var obj = term;
-                    $scope.filtered = $filter('filter')(self.guides, obj);
-                    $scope.currentPage = 1;
-                });
+            });           
             });
+
 
             self.processAirwayBill = processAirwayBill;
         }
@@ -177,13 +177,14 @@ function airwayController(angular, app) {
             self.awb.transfer_account_number = self.batch.transfer_account_number;
             self.awb.transfer_account_holder_name = self.batch.transfer_account_holder_name;
             self.awb.transfer_bank_name = self.batch.transfer_bank_name;
-            self.awb.transfer_bank_address = self.batch.transfer_bank_address;
+            self.awb.transfer_cbu = self.batch.transfer_cbu;
+            self.awb.transfer_cuit = self.batch.transfer_cuit;
             self.awb.paymentDesc = self.batch.paymentDesc;
             self.awb.billing_total = self.batch.transfer_total;
             self.awb.state = 2;
             self.awb.successUrl = self.batch.successUrl || null;
             self.awb.paymentButton = self.batch.paymentButton || null;
-            if (self.awb.paymentMethod && (self.awb.transfer_account_number && self.awb.transfer_account_holder_name && self.awb.transfer_bank_name && self.awb.transfer_bank_address && self.awb.billing_total) || (self.awb.successUrl && self.awb.paymentButton)) {
+            if (self.awb.paymentMethod && (self.awb.transfer_account_number && self.awb.transfer_account_holder_name && self.awb.transfer_bank_name && self.awb.transfer_cbu && self.awb.transfer_cuit &&  self.awb.billing_total) || (self.awb.successUrl && self.awb.paymentButton)) {
                 airwayService.updateGuide(self.awb)
                     .then(function success(response) {
                         $http.post('./hbr-selfie/dist/php/notifications/payment_method.php', {
@@ -194,11 +195,12 @@ function airwayController(angular, app) {
                             transfer_account_number: self.awb.transfer_account_number,
                             transfer_account_holder_name: self.awb.transfer_account_holder_name,
                             transfer_bank_name: self.awb.transfer_bank_name,
-                            transfer_bank_address: self.awb.transfer_bank_address,
+                            transfer_cbu: self.awb.transfer_cbu,
+                            transfer_cuit: self.awb.transfer_cuit,
                             paymentDesc: self.awb.paymentDesc,
                             name: self.awb.user.name + " " + self.awb.user.lastname,
                             total: parseFloat(self.totalButton).toFixed(2),
-                            email: self.awb.user.email
+                            email: self.awb.user[0].email
                         }).then(function success(response) {
                             $rootScope.showSpinner = false;
                             $uibModalInstance.dismiss('cancel');
@@ -216,7 +218,8 @@ function airwayController(angular, app) {
                             transfer_account_number: self.awb.transfer_account_number,
                             transfer_account_holder_name: self.awb.transfer_account_holder_name,
                             transfer_bank_name: self.awb.transfer_bank_name,
-                            transfer_bank_address: self.awb.transfer_bank_address,
+                            transfer_cuit: self.awb.transfer_cuit,
+                            transfer_cbu: self.awb.transfer_cbu,
                             paymentDesc: self.awb.paymentDesc,
                             name: self.awb.user.name + " " + self.awb.user.lastname,
                             total: parseFloat(self.totalButton).toFixed(2),
@@ -310,7 +313,8 @@ function airwayController(angular, app) {
             self.batch.transfer_account_number = self.awb.transfer_account_number;
             self.batch.transfer_account_holder_name = self.awb.transfer_account_holder_name;
             self.batch.transfer_bank_name = self.awb.transfer_bank_name;
-            self.batch.transfer_bank_address = self.awb.transfer_bank_address;
+            self.batch.transfer_cbu = self.awb.transfer_cbu;
+            self.batch.transfer_cuit = self.awb.transfer_cuit;
             self.batch.paymentDesc = self.awb.paymentDesc;
         }
         init();
