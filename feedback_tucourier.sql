@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-02-2017 a las 19:25:19
+-- Tiempo de generación: 13-02-2017 a las 14:52:36
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -163,14 +163,24 @@ INSERT INTO `bills` (`bill_id`, `ventaId`, `whId`, `establishment`, `number`, `p
 (13, 7, 11, 'JJJJJJJJJJJ', 'JJJJJJJJJJJ', 'JJJJJJJJJJJ', 55, 55, '0000-00-00 00:00:00', 3025, 275, 'JJJJJJJJJJJ', 0, 1, '', ''),
 (14, 7, 11, 'DDDDDD', 'DDDDDD', 'DDDDDD', 3, 3, '0000-00-00 00:00:00', 6, 6, 'DDDDDD', 0, 1, '', ''),
 (15, 8, 18, 'THTHT', '123123', 'asdasd', 4, 0, '2017-02-05 19:29:54', 16, 16, 'asdasd', 0, 1, 'QATEST.pdf', '/dist/files/1486306432546/5b854b5f42c598fbc39237de459ae8072e8a548ed2dd4a00a89dfc751c23f09d.pdf'),
-(16, 9, 10, 'RRRRRRR', 'RRRRRRR', 'RRRRRRR', 6, 6, '0000-00-00 00:00:00', 26, 26, 'RRRRRRR', 0, 1, 'QATEST.pdf', '/dist/files/1486307512488/92dd580cdd3b800d11e6124ca01e0e017db32aa7f404823e41aabd816ec1d042.pdf'),
-(17, 9, 10, 'HHHHHH', 'HHHHHH', 'HHHHHH', 8, 8, '0000-00-00 00:00:00', 40, 40, 'HHHHHH', 0, 1, 'QATEST.pdf', '/dist/files/1486307512519/10519b2e05fb14e0e595521c3e443527147ab2cd6c76ddcb2c88388ad1a7e9a1.pdf'),
+(16, 9, 10, 'RRRRRRR', 'RRRRRRR', 'RRRRRRR', 17, 17, '0000-00-00 00:00:00', 169, 169, 'RRRRRRR', 0, 1, 'QATEST.pdf', '/dist/files/1486307512488/92dd580cdd3b800d11e6124ca01e0e017db32aa7f404823e41aabd816ec1d042.pdf'),
+(17, 9, 18, 'HHHHHH', 'HHHHHH', 'HHHHHH', 29, 29, '0000-00-00 00:00:00', 301, 301, 'HHHHHH', 0, 1, 'QATEST.pdf', '/dist/files/1486307512519/10519b2e05fb14e0e595521c3e443527147ab2cd6c76ddcb2c88388ad1a7e9a1.pdf'),
 (18, 10, 10, 'ERAQWE', 'ERAQWE', 'ERAQWE', 9, 0, '2017-02-08 22:15:43', 41, 41, 'ERAQWE', 0, 1, 'QATEST.pdf', '/dist/files/1486307575963/ef57f22d3f492d410292ad9217b0b98ac653e7d05495fdd039d647d4f7299621.pdf'),
-(19, 10, 10, 'XXXXXXX', 'XXXXXXX', 'XXXXXXX', 10, 0, '2017-02-08 22:15:43', 50, 50, 'XXXXXXX', 0, 1, 'QATEST.pdf', '/dist/files/1486307575990/216df7ded5cad6b2784b870bd1c7dc5b3ec30956bbb8f99742520880bd72960d.pdf'),
+(19, 10, 10, 'XXXXXXX', 'XXXXXXX', 'XXXXXXX', 52, 52, '0000-00-00 00:00:00', 9843, 822, 'XXXXXXX', 0, 1, 'QATEST.pdf', '/dist/files/1486307575990/216df7ded5cad6b2784b870bd1c7dc5b3ec30956bbb8f99742520880bd72960d.pdf'),
 (20, 11, 10, 'CCCC', 'CCCC', 'CCCC', 7, 7, '0000-00-00 00:00:00', 25, 25, 'CCCC', 0, 1, 'QATEST.pdf', '/dist/files/1486307714756/ff7a2fb5c4141b7b8b726ee0668cd72c2f85a58e0abf8bf6f39ef61ea5c081e3.pdf'),
 (21, 11, 18, '434322fgrthhs', '434322fgrthhs', '434322fgrthhs', 8, 0, '2017-02-05 19:28:34', 34, 34, '434322fgrthhs', 0, 1, 'QATEST.pdf', '/dist/files/1486307714789/fd2d722c840bfc8ee6df344a6caea974937d78a55fb8fb797203c17b56e0fbe5.pdf'),
 (22, 12, 12, 'mail', 'mail', 'mail', 24, 0, '2017-02-08 18:26:45', 450, 51, 'mail', 0, 1, 'QATEST.pdf', '/dist/files/1486578330030/d587fbce2ed9d2105380538ad2c54e7a24f552678c27603a34b7c321ba038449.pdf'),
-(23, 12, 12, 'mail2', 'mail2', 'mail2', 42, 0, '2017-02-08 18:26:46', 504, 504, 'mail2', 0, 1, 'QATEST.pdf', '/dist/files/1486578330178/40beffe374b0c16abaeab99035218335c002a7666ba9de7dbf0e3ce20b4d028a.pdf');
+(23, 12, 12, 'mail2', 'mail2', 'mail2', 42, 0, '2017-02-08 18:26:46', 504, 504, 'mail2', 0, 1, 'QATEST.pdf', '/dist/files/1486578330178/40beffe374b0c16abaeab99035218335c002a7666ba9de7dbf0e3ce20b4d028a.pdf'),
+(24, 13, 12, 'mailEdited3', 'mailEdited3', 'mailEdited3', 47, 47, '0000-00-00 00:00:00', 1105, 1105, 'mailEdited3', 0, 1, '', ''),
+(25, 13, 18, 'mailEdited', 'mailEdited', 'mailEdited', 54, 54, '0000-00-00 00:00:00', 1527, 1527, 'mailEdited', 0, 1, '', ''),
+(26, 14, 10, 'RRRRRRR', 'RRRRRRR', 'RRRRRRR', 17, 17, '0000-00-00 00:00:00', 169, 169, 'RRRRRRR', 0, 1, '', ''),
+(27, 14, 18, 'HHHHHH', 'HHHHHH', 'HHHHHH', 29, 29, '0000-00-00 00:00:00', 301, 301, 'HHHHHH', 0, 1, '', ''),
+(28, 15, 10, 'ERAQWE', 'ERAQWE', 'ERAQWE', 9, 9, '0000-00-00 00:00:00', 41, 41, 'ERAQWE', 0, 1, '', ''),
+(29, 15, 10, 'XXXXXXX', 'XXXXXXX', 'XXXXXXX', 52, 52, '0000-00-00 00:00:00', 9843, 822, 'XXXXXXX', 0, 1, '', ''),
+(30, 15, 18, 'qweTEST', 'qweTEST', 'qweTEST', 24, 24, '0000-00-00 00:00:00', 288, 288, 'qweTEST', 0, 1, 'QATEST_(1).pdf', '/dist/files/1486926561773/8cd8c6cc9b709f4c840ff408cbfa9911d028d3c1d7aec170e40fca14adbbaa79.pdf'),
+(31, 16, 11, 'qwe', 'qwe', 'qwe', 3, 3, '0000-00-00 00:00:00', 15, 15, 'qwe', 0, 1, 'QATEST_(1).pdf', '/dist/files/1486926796621/9db3b2996b62f3fd41409c12a881737120474c1371b11410a9182a4de120120e.pdf'),
+(32, 16, 18, 'test2', 'test2', 'test2', 5, 5, '0000-00-00 00:00:00', 13, 13, 'test2', 0, 1, 'QATEST_(1).pdf', '/dist/files/1486928328079/b47211b09171a2d63339658dc9f204e74052ecc881dbc4d215001a4dca0c861c.pdf'),
+(33, 16, 18, 'test3', 'test3', 'test3', 2, 2, '0000-00-00 00:00:00', 5, 5, 'test3', 0, 1, 'QATEST_(1).pdf', '/dist/files/1486928507787/939fa332aff1b6b3ac744a4dbcf301c3dc23d96309ed9a52454d81c6e806582d.pdf');
 
 -- --------------------------------------------------------
 
@@ -241,13 +251,13 @@ INSERT INTO `products` (`product_id`, `bill_id`, `category_id`, `name`, `price`,
 (19, 14, 2, 'DDDDDD', 2, 3, 3, 6, 6, 2, 2, 1, 0),
 (20, 15, 1, 'asadads', 4, 4, 0, 16, 16, 4, 4, 1, 0),
 (21, 16, 1, 'RRRRRRR', 5, 5, 5, 25, 25, 5, 5, 1, 0),
-(22, 16, 3, 'QQQQQQQ', 1, 1, 1, 1, 1, 1, 1, 1, 0),
-(23, 17, 2, 'HHHHHH', 6, 6, 6, 36, 36, 6, 6, 1, 0),
-(24, 17, 3, 'HHHHHH', 2, 2, 2, 4, 4, 2, 2, 1, 0),
+(22, 16, 3, 'ASDASD', 12, 12, 12, 144, 144, 12, 12, 1, 0),
+(23, 17, 2, 'ASDASD', 12, 12, 12, 144, 144, 12, 12, 1, 0),
+(24, 17, 1, 'HHHHHH', 2, 2, 2, 4, 4, 2, 2, 1, 0),
 (25, 18, 1, 'ERAQWE', 4, 4, 0, 16, 16, 4, 4, 1, 0),
 (26, 18, 2, 'ERAQWE', 5, 5, 0, 25, 25, 5, 5, 1, 0),
-(27, 19, 2, 'XXXXXXX', 5, 5, 0, 25, 25, 5, 5, 1, 0),
-(28, 19, 3, 'XXXXXXX', 5, 5, 0, 25, 25, 5, 5, 1, 0),
+(27, 19, 2, 'XXXXXXX', 5, 5, 5, 25, 25, 5, 5, 1, 0),
+(28, 19, 3, 'XXXXXXX', 5, 5, 5, 25, 25, 5, 5, 1, 0),
 (29, 20, 1, 'CCCC', 4, 4, 4, 16, 16, 4, 4, 1, 0),
 (30, 20, 3, 'FFFF', 3, 3, 3, 9, 9, 3, 3, 1, 0),
 (31, 21, 1, '434322fgrthhs', 5, 5, 0, 25, 25, 5, 5, 1, 0),
@@ -255,7 +265,33 @@ INSERT INTO `products` (`product_id`, `bill_id`, `category_id`, `name`, `price`,
 (33, 22, 1, 'mail', 21, 21, 0, 441, 42, 2, 2, 1, 0),
 (34, 22, 2, 'mail2', 3, 3, 0, 9, 9, 3, 3, 1, 0),
 (35, 23, 2, 'mail22', 12, 21, 0, 252, 252, 12, 12, 1, 0),
-(36, 23, 3, 'mail23', 12, 21, 0, 252, 252, 12, 12, 1, 0);
+(36, 23, 3, 'mail23', 12, 21, 0, 252, 252, 12, 12, 1, 0),
+(37, 24, 1, 'mailEdited4', 24, 24, 24, 0, 0, 24, 24, 1, 0),
+(38, 24, 2, 'mailEdited3', 23, 23, 23, 0, 0, 23, 23, 1, 0),
+(39, 25, 2, 'mailEdited', 22, 22, 22, 0, 0, 22, 22, 1, 0),
+(40, 25, 3, 'mailEdited2', 23, 23, 23, 0, 0, 23, 23, 1, 0),
+(41, 26, 1, 'RRRRRRR', 5, 5, 5, 25, 25, 5, 5, 1, 0),
+(42, 26, 3, 'ASDASD', 12, 12, 12, 144, 144, 12, 12, 1, 0),
+(43, 27, 2, 'ASDASD', 12, 12, 12, 144, 144, 12, 12, 1, 0),
+(44, 27, 1, 'HHHHHH', 2, 2, 2, 4, 4, 2, 2, 1, 0),
+(45, 27, 1, 'sdf', 3, 3, 3, 9, 9, 3, 3, 1, 0),
+(46, 19, 1, 'XXXX', 11, 11, 11, 121, 121, 11, 11, 1, 0),
+(47, 19, 2, 'ghthght', 312, 31, 31, 9672, 651, 21, 21, 1, 0),
+(48, 28, 1, 'ERAQWE', 4, 4, 4, 16, 16, 4, 4, 1, 0),
+(49, 28, 2, 'ERAQWE', 5, 5, 5, 25, 25, 5, 5, 1, 0),
+(50, 29, 1, 'XXXX', 11, 11, 11, 121, 121, 11, 11, 1, 0),
+(51, 29, 2, 'XXXXXXX', 5, 5, 5, 25, 25, 5, 5, 1, 0),
+(52, 29, 3, 'XXXXXXX', 5, 5, 5, 25, 25, 5, 5, 1, 0),
+(53, 29, 2, 'ghthght', 312, 31, 31, 9672, 651, 21, 21, 1, 0),
+(54, 30, 2, 'qweTEST', 12, 12, 12, 144, 144, 12, 12, 1, 0),
+(55, 30, 2, 'qweTEST2', 12, 12, 12, 144, 144, 12, 12, 1, 0),
+(56, 31, 1, 'test', 4, 1, 1, 4, 4, 4, 4, 1, 0),
+(57, 31, 2, 'test2', 6, 1, 1, 6, 6, 6, 6, 1, 0),
+(58, 31, 2, 'test3', 5, 1, 1, 5, 5, 5, 5, 1, 0),
+(59, 32, 1, 'test2', 2, 2, 2, 4, 4, 2, 2, 1, 0),
+(60, 32, 2, 'test3', 3, 3, 3, 9, 9, 3, 3, 1, 0),
+(61, 33, 1, 'test4', 3, 1, 1, 3, 3, 3, 3, 1, 0),
+(62, 33, 2, 'test5', 2, 1, 1, 2, 2, 2, 2, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -294,8 +330,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `lastname`, `company_name`, `company_real_name`, `warehouse_name`, `tel`, `cel`, `email`, `password`, `sskey`, `codeType`, `idCode`, `deleted`, `address`, `localidad`, `postalcode`, `registerToken`, `registertimestamp`, `isAdmin`, `isPremium`, `client_type`, `showTutorial`) VALUES
-(1, 'Nicolas', 'Sigal', NULL, NULL, NULL, '12345', 12345, 'nicolas.sigal@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '80d956f91dbd7926164c6fda993cb5a3', 1, '00000001', 0, 'tabanera 33853', 'mendozaa', '55000', '0d75211910d3131a7d2472c4c41cead1', 1475968389, 0, 1, 0, 0),
-(2, 'Santiago', 'Lloret', NULL, NULL, NULL, '1234', 0, 'santi', '21232f297a57a5a743894a0e4a801fc3', '1007568ccd2adbc7a7c844696084be98', 1, '12345678', 0, 'tabanera 3385', 'mendoza', '5500', '308192ed9a7cf69af0c004179844ace7', 1475968761, 1, 0, 0, 0),
+(1, 'Nicolas', 'Sigal', NULL, NULL, NULL, '12345', 12345, 'nicolas.sigal@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '3c86b5a0e2c95b806447bac06df92f35', 1, '00000001', 0, 'tabanera 33853', 'mendozaa', '55000', '0d75211910d3131a7d2472c4c41cead1', 1475968389, 0, 1, 0, 0),
+(2, 'Santiago', 'Lloret', NULL, NULL, NULL, '1234', 0, 'santi', '21232f297a57a5a743894a0e4a801fc3', NULL, 1, '12345678', 0, 'tabanera 3385', 'mendoza', '5500', '308192ed9a7cf69af0c004179844ace7', 1475968761, 1, 0, 0, 0),
 (3, 'Roberto', 'Gomez', NULL, NULL, NULL, '4998877', 153997755, 'dix.inferno@gmail.com', '21232f297a57a5a743894a0e4a801fc3', NULL, 2, '7895761231', 0, 'cadetes chilenos 173', 'mendoza', '5500', 'c417aee12cc67a34d94aabdfd93377b4', 1477164242, 0, 0, 0, 0),
 (7, '', '', 'pepe', 'pepe s.a.', NULL, '1231231', 12312312, 'pepe@pepetransf.com.ar', '21232f297a57a5a743894a0e4a801fc3', NULL, 1, '12312312312', 0, 'asdds 123123', 'mendoza', '5500', '4574ae68157b6fd29a41000e75343e16', 1480195796, 0, 0, 1, 0),
 (8, 'part', 'part', '', '', NULL, '123123', 123123123, 'part@part.com', 'c30cc3ceb47f9c2a6217e6b731d27293', NULL, 2, '123123123123123', 0, 'part 1231', 'part', '5500', 'aa586af0a185a06981497e4a186aff9d', 1480196869, 0, 0, 0, 0),
@@ -327,26 +363,31 @@ CREATE TABLE `ventas` (
   `deleted` int(1) NOT NULL DEFAULT '0',
   `venta_state` int(11) NOT NULL DEFAULT '0',
   `totalweight` double DEFAULT NULL,
-  `guide_amount` int(11) DEFAULT '0'
+  `guide_amount` int(11) DEFAULT '0',
+  `state` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ventas`
 --
 
-INSERT INTO `ventas` (`id`, `uid`, `parcial_price`, `total`, `total_quantity`, `total_remaining_quantity`, `timestamp`, `deleted`, `venta_state`, `totalweight`, `guide_amount`) VALUES
-(1, 1, 18, 18, 6, 6, '1486247506906', 0, 0, 18, 0),
-(2, 1, 41, 41, 11, 11, '1486247582130', 0, 0, 35, 0),
-(3, 1, 185, 185, 21, 21, '1486250908240', 0, 0, 185, 0),
-(4, 1, 34, 34, 11, 11, '1486250996129', 0, 0, 31, 0),
-(5, 1, 347, 347, 67, 67, '1486251204183', 0, 0, 347, 0),
-(6, 1, 300, 300, 62, 62, '1486251374863', 0, 0, 300, 0),
-(7, 1, 3031, 3031, 58, 58, '1486251446189', 0, 0, 281, 0),
-(8, 1, 16, 16, 4, 0, '1486306432529', 0, 0, 16, 1),
-(9, 1, 66, 66, 14, 14, '1486307512457', 0, 0, 66, 0),
-(10, 1, 91, 91, 19, 0, '1486307575945', 0, 0, 91, 5),
-(11, 1, 59, 59, 15, 0, '1486307714737', 0, 0, 59, 1),
-(12, 1, 954, 954, 66, 0, '1486578329923', 0, 0, 555, 2);
+INSERT INTO `ventas` (`id`, `uid`, `parcial_price`, `total`, `total_quantity`, `total_remaining_quantity`, `timestamp`, `deleted`, `venta_state`, `totalweight`, `guide_amount`, `state`) VALUES
+(1, 1, 18, 18, 6, 6, '1486247506906', 0, 0, 18, 0, 0),
+(2, 1, 41, 41, 11, 11, '1486247582130', 0, 0, 35, 0, 0),
+(3, 1, 185, 185, 21, 21, '1486250908240', 0, 0, 185, 0, 0),
+(4, 1, 34, 34, 11, 11, '1486250996129', 0, 0, 31, 0, 0),
+(5, 1, 347, 347, 67, 67, '1486251204183', 0, 0, 347, 0, 0),
+(6, 1, 300, 300, 62, 62, '1486251374863', 0, 0, 300, 0, 0),
+(7, 1, 3031, 3031, 58, 58, '1486251446189', 0, 0, 281, 0, 0),
+(8, 1, 16, 16, 4, 0, '1486306432529', 0, 0, 16, 1, 0),
+(9, 1, 66, 66, 14, 14, '1486307512457', 0, 0, 66, 0, 0),
+(10, 1, 91, 91, 19, 0, '1486307575945', 0, 0, 91, 5, 0),
+(11, 1, 59, 59, 15, 0, '1486307714737', 0, 0, 59, 1, 0),
+(12, 1, 954, 954, 66, 0, '1486578329923', 0, 0, 555, 2, 0),
+(13, 1, 954, 954, 66, 66, '1486867175885', 0, 0, 555, 0, 0),
+(14, 1, 461, 461, 43, 43, '1486925373139', 0, 0, 461, 0, 0),
+(15, 1, 10172, 10172, 85, 85, '1486926561709', 0, 0, 1151, 0, 0),
+(16, 1, 33, 33, 10, 10, '1486930301111', 0, 0, 33, 0, 1);
 
 --
 -- Índices para tablas volcadas
@@ -412,7 +453,7 @@ ALTER TABLE `airway_bill_product`
 -- AUTO_INCREMENT de la tabla `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `bill_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `bill_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT de la tabla `categories`
 --
@@ -422,7 +463,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
@@ -432,7 +473,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
