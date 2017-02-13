@@ -36,6 +36,7 @@
                      <td><span>Cant. Gu&iacute;as</span></td>
                     <td><span>Peso Total</span></td>
                     <td class="large-row"><span>Precio Total</span></td>
+                    <td class="large-row"><span>Estado</span></td>
                     <td><span>M&aacute;s Info.</span></td>
                 </tr>
             </thead>
@@ -50,8 +51,10 @@
                     <td ng-if="venta.guide_amount == '0'"><span class="unpayed"> Procesando Info.</span></td>
                     <td><span>{{ venta.total_weight }} Kg.</span></td>
                     <td><span> {{ venta.total | currency }}</span></td>
+                    <td><span class="text-danger" ng-if="venta.state == 0">Sin Terminar</span><span class="text-success" ng-if="venta.state == 1">Enviado</span></td>
                     <td>
-                        <button ng-click="shoppingList.moreInfo(venta.bills)" class="btn btn-default"> <i class="fa fa-plus"></i> Info </button>
+                        <button ng-click="shoppingList.moreInfo(venta.bills)" class="btn btn-default pull-left"> <i class="fa fa-plus"></i> Info </button>
+                        <button ng-if="venta.state == 0" ng-click="shoppingList.continuePurchase(venta)" class="btn btn-default pull-right"> Continuar </button>
                     </td>
                 </tr>
             </tbody>            

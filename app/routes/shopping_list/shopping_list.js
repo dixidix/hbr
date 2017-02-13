@@ -41,6 +41,9 @@ function shoppingListController(angular, app) {
             openModal('md', items);
         }
 
+        function continuePurchase (venta) {
+            $state.go('dashboard.shopping', {venta: venta}, {reload:true});
+        }
         function init() {
             $rootScope.showSpinner = true;
             self.ventas = [];
@@ -77,6 +80,7 @@ function shoppingListController(angular, app) {
                         });
                     });
             });
+            self.continuePurchase = continuePurchase;
         }
 
         init();

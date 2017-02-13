@@ -1,5 +1,4 @@
 <div class="shopping container-fluid" ng-cloak>
-    <link rel="stylesheet" type="text/css" href="./hbr-selfie/dist/routes/shopping/shopping.css">
     <div class="loadingSpinner" ng-show="shopping.spinner">
         <div class="spinner-backdrop"></div>
         <div class="spinner-container">
@@ -26,16 +25,29 @@
         <div uib-collapse="shopping.collapse_purchase" class="shopping__purchase">
             <div ng-include src="'hbr-selfie/dist/routes/shopping/forms/product-purchase-form-tmpl.html'"></div>
         </div>
+        <div class="notification">
+            <div class="col-xs-12 no-padding">
+                <div class="close-button"><i ng-click="shopping.closeNotification()" class="fa fa-times-circle pull-right"></i></div>                
+                <div class="col-xs-3 logo">
 
+                </div>
+                <div class="col-xs-9 text">
+                    <p>
+                        Factura Agregada<br>
+                       <a ng-click="shopping.showBills()">Ver todas las facturas <i class="fa fa-chevron-right"></i></a>
+                    </p>     
+                </div>
+            </div>
+        </div>
         <!-- LISTA DE COMPRAS -->
         <a ng-click="shopping.collapse_list = !shopping.collapse_list">
             <i ng-class="shopping.collapse_list ? 'fa fa-chevron-right' : 'fa fa-chevron-down'"></i> Lista de compras
             <span class="badge" ng-if="shopping.lote.bills.length > 0">
-                {{ shopping.lote.bills.length }}
+                Facturas agregadas: {{ shopping.lote.bills.length }}
             </span>
         </a>
         <hr>
-        <div uib-collapse="shopping.collapse_list" class="shopping__purchase-list">
+        <div id="billList" uib-collapse="shopping.collapse_list" class="shopping__purchase-list">
             <div ng-include src="'hbr-selfie/dist/routes/shopping/forms/products-list-tmpl.html'"></div>
         </div>
     </div>

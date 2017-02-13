@@ -1,5 +1,10 @@
 @import 'mixins/main';
 @import 'modules/main';
+
+@import './../routes/shopping/shopping';
+@import './../routes/dashboard/dashboard';
+@import './../components/navbar/navbar';
+
 .material-icons {
     font-family: 'Material Icons';
     font-weight: normal;

@@ -133,38 +133,47 @@ function addPurchase($data){
 	$total_quantity = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['total_quantity']));
 	$uid = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['userId']));
 	$timestamp = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['timestamp']));
+	$state = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['state']));
 	// $products = $data['products'];
 
-	if (empty($errors)){
-		MysqliDB::getInstance()->query("INSERT INTO `ventas`(`uid`, `parcial_price`, `total`, `total_quantity`,`total_remaining_quantity`, `timestamp`,  `totalweight`, `guide_amount`) VALUES ('".$uid."',".(float)$parcial_price.",".(float)$total.",".(float)$total_quantity.",".(int)$total_quantity.",".$timestamp.",".$total_weight.", '0')");
+		if (empty($errors)){
+			if(empty($_POST['id'])){ 
+					MysqliDB::getInstance()->query("INSERT INTO `ventas`(`uid`, `parcial_price`, `total`, `total_quantity`,`total_remaining_quantity`, `timestamp`,  `totalweight`, `guide_amount`,`state`) VALUES ('".$uid."',".(float)$parcial_price.",".(float)$total.",".(float)$total_quantity.",".(int)$total_quantity.",".$timestamp.",".$total_weight.", '0',".$state.")");
+					$res = MysqliDB::getInstance()->query("SELECT MAX(id) as id FROM `ventas`");		
+				
 
-		$res = MysqliDB::getInstance()->query("SELECT MAX(id) as id FROM `ventas`");		
-		$rows = mysqli_num_rows($res);
+				$res = MysqliDB::getInstance()->query("SELECT MAX(id) as id FROM `ventas`");		
+				$rows = mysqli_num_rows($res);
 
-		if ($rows > 0){
-			$rss = $res->fetch_array(MYSQLI_ASSOC);
-			$venta_id = $rss['id'];
-
+				if ($rows > 0){
+					$rss = $res->fetch_array(MYSQLI_ASSOC);
+					$venta_id = $rss['id'];
+				}
+				
+			}else{
+			$venta_id = $_POST['id'];
+			MysqliDB::getInstance()->query("UPDATE `ventas` SET `parcial_price`=".(float)$parcial_price.",`total`=".(float)$total.",`total_quantity`=".(int)$total_quantity.",`total_remaining_quantity`=".(int)$total_quantity.",`timestamp`=".$timestamp.", `totalweight`=".(float)$total_weight.",`guide_amount`= 0,`state`=".(int)$state." WHERE `id` = ".$_POST['id']."");
+			}
+		} else {
+			$resolve_data['errors'] = $errors;
+			echo json_encode($resolve_data);
 		}
-	} else {
-		$resolve_data['errors'] = $errors;
-		echo json_encode($resolve_data);
-	}
 
-	$res3 = MysqliDB::getInstance()->query("SELECT * FROM users WHERE id='".$uid."' AND deleted='0'");
-	$rows3 = mysqli_num_rows($res3);
-	if ($rows3 == 1){
-		$rss3 = $res3->fetch_array(MYSQLI_ASSOC);
-		$resolve_data['name'] = $rss3['name'];
-		$resolve_data['lastname'] = $rss3['lastname'];
-		$resolve_data['email'] = $rss3['email'];
-		$resolve_data['lote'] = $venta_id;
-		$resolve_data['date'] = $timestamp;
-		$resolve_data['ventaId'] = $venta_id;
-	}
-	MysqliDB::getInstance()->close();
-	$resolve_data['success'] = true;
-	echo json_encode($resolve_data);
+		$res3 = MysqliDB::getInstance()->query("SELECT * FROM users WHERE id='".$uid."' AND deleted='0'");
+		$rows3 = mysqli_num_rows($res3);
+		if ($rows3 == 1){
+			$rss3 = $res3->fetch_array(MYSQLI_ASSOC);
+			$resolve_data['name'] = $rss3['name'];
+			$resolve_data['lastname'] = $rss3['lastname'];
+			$resolve_data['email'] = $rss3['email'];
+			$resolve_data['lote'] = $venta_id;
+			$resolve_data['date'] = $timestamp;
+			$resolve_data['ventaId'] = $venta_id;
+		}
+		MysqliDB::getInstance()->close();
+		$resolve_data['success'] = true;
+		echo json_encode($resolve_data);
+	
 }
 //ELIMINAR UN USUARIO
 function deletePurchase($data){

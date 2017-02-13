@@ -1,3 +1,4 @@
+
 <div class="row" ng-if="!shopping.lote.bills.length">
     <div class="empty-list">
         <h3>No se han registrado compras asociadas a&uacute;n.</h3>
@@ -50,7 +51,7 @@
                 <td><span>{{ bill.quantity }}</span></td>
                 <td><span>{{ bill.total_weight }} KG. </span></td>
                 <td><span>{{ bill.total_price }}</span></td>
-                <td><span><i class="fa fa-close" ng-click="shopping.lote.bills.splice($index, 1);"></i></span></td>
+                <td><span><i class="fa fa-edit" ng-click="shopping.showEditBill(bill, product, $index);"></i></span><span><i class="fa fa-close" ng-click="shopping.lote.bills.splice($index, 1);"></i></span></td>
             </tr>
         </tbody>
     </table>
@@ -79,6 +80,7 @@
     </ul>
 </div>
 <button class="btn btn-hbr-blue pull-right">Cancelar compra</button>
-<button class="btn btn-hbr-blue pull-right" ng-click="shopping.finish()">Enviar</button>
+<button class="btn btn-hbr-blue pull-right" ng-click="shopping.updateSave()">Guardar y continuar luego</button>
+<button class="btn btn-hbr-blue pull-right" ng-click="shopping.finish()">Terminar Compra</button>
 </ul>
 </div>

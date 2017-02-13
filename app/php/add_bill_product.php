@@ -6,7 +6,7 @@ $errors = array();
 $resolve_data = array();
 
 $bill_id = (int) MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['bill_id']));
-$category_id = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['category']));	
+$categoryId = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['categoryId']));	
 $name = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['name']));
 $price = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['price']));
 $quantity = (int) MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['quantity']));
@@ -26,8 +26,10 @@ $weight = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_stri
 $userId = (int) MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['userId']));
 
 
-if (empty($errors)){    
-    MysqliDB::getInstance()->query("INSERT INTO `products`( `bill_id`, `category_id`, `name`, `price`, `quantity`,`remaining_quantity`, `totalprice`, `totalweight`, `weight`, `real_weight`, `userId`) VALUES (".$bill_id.",".$category_id.",'".$name."',".(float)$price.",".$quantity.",".$quantity.",".(float)$totalprice.",".(float)$totalweight.",".(float)$weight.",".(float)$weight.",".$userId.")");
+if (empty($errors)){   
+    if(empty($_POST['product_id'])){ 
+        MysqliDB::getInstance()->query("INSERT INTO `products`( `bill_id`, `category_id`, `name`, `price`, `quantity`,`remaining_quantity`, `totalprice`, `totalweight`, `weight`, `real_weight`, `userId`) VALUES (".$bill_id.",".$categoryId.",'".$name."',".(float)$price.",".$quantity.",".$quantity.",".(float)$totalprice.",".(float)$totalweight.",".(float)$weight.",".(float)$weight.",".$userId.")");
+    }
     MysqliDB::getInstance()->close();
 
 $resolve_data['success'] = true;

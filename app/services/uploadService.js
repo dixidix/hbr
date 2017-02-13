@@ -4,16 +4,16 @@ function uploadService(angular, app) {
     uploadService.$inject = ["$http", "$q"];
 
     function uploadService($http, $q) {
-        this.uploadProducts = function(products, ventaId, timestamp) {
+        this.uploadProducts = function (products, ventaId, timestamp) {
             var deferred = $q.defer();
-            angular.forEach(products, function(product) {
+            angular.forEach(products, function (product) {
                 product.ventaId = ventaId;
                 product.timestamp = timestamp;
                 var formData = new FormData();
                 if (!product.weight) {
                     product.weight = 0.00;
                 }
-                angular.forEach(product, function(key, value) {
+                angular.forEach(product, function (key, value) {
 
                     formData.append(value, key);
                 });
@@ -26,7 +26,7 @@ function uploadService(angular, app) {
             return deferred.promise;
         }
 
-        this.uploadBills = function(bill, ventaId, userId, timestamp) {
+        this.uploadBills = function (bill, ventaId, userId, timestamp) {
             var deferred = $q.defer();
 
             bill.ventaId = ventaId;
@@ -34,7 +34,7 @@ function uploadService(angular, app) {
             bill.userId = userId;
             var formData = new FormData();
             var products = [];
-            angular.forEach(bill, function(key, value) {
+            angular.forEach(bill, function (key, value) {
                 if (value !== "products" && value !== "warehouse") {
                     formData.append(value, key);
                 } else {
@@ -49,12 +49,12 @@ function uploadService(angular, app) {
 
         }
 
-        this.uploadProducts = function(product) {
+        this.uploadProducts = function (product) {
 
             var deferred = $q.defer();
 
             var formDataProd = new FormData();
-            angular.forEach(product, function(key, value) {
+            angular.forEach(product, function (key, value) {
                 formDataProd.append(value, key);
             });
 
@@ -63,6 +63,30 @@ function uploadService(angular, app) {
                 headers: { 'Content-Type': undefined }
             });
         };
+
+        this.edit_product = function (product) {
+            var formDataProd = new FormData();
+            product.categoryId = parseInt(product.category.category_id);
+            angular.forEach(product, function (key, value) {
+                formDataProd.append(value, key);
+            });
+            return $http.post('./hbr-selfie/dist/php/edit_product.php', formDataProd, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            });
+        };
+
+        this.edit_bill = function (bill) {
+            bill.timestamp = new Date().getTime();
+            var formDataProd = new FormData();
+            angular.forEach(bill, function (key, value) {
+                formDataProd.append(value, key);
+            });
+            return $http.post('./hbr-selfie/dist/php/edit_bill.php', formDataProd, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            });
+        }
 
     }
 }

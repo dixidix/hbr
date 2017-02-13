@@ -58,114 +58,43 @@ form {
 /* Fonts */
 /** Devices Breakpoints **/
 /** Mixins for responsive content **/
-.material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;
-  /* Preferred icon size */
-  display: inline-block;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
-  /* Support for IE. */
-  font-feature-settings: 'liga'; }
-
-html {
-  margin: 0;
-  padding: 0;
-  height: 100%; }
-  html body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: "museoSans-100", Arial; }
-    html body .col-md-4.col-sm-4.col-xs-12.tipo-boton-class.boton_solo {
-      margin: 0;
-      padding: 0;
-      width: 100%; }
-    html body .pagination > .active > a,
-    html body .pagination > .active > a:focus,
-    html body .pagination > .active > a:hover,
-    html body .pagination > .active > span,
-    html body .pagination > .active > span:focus,
-    html body .pagination > .active > span:hover {
-      background-color: #19156a;
-      border-color: #19156a;
-      color: #b4ec13; }
-    html body .pagination > li > a, html body .pagination > li > span {
+.shopping {
+  /*
+ * Adding the animation to our element
+ */ }
+  .shopping .notification {
+    position: fixed;
+    background: #fcfcfc;
+    width: 300px;
+    height: 70px;
+    right: 30px;
+    text-align: center;
+    z-index: 9999999999999999999999999999999;
+    box-shadow: 1px 1px 5px;
+    bottom: 30px; }
+    .shopping .notification .close-button i {
+      z-index: 999;
+      cursor: pointer;
+      position: absolute;
+      right: 5px;
+      top: 5px;
       color: #19156a; }
-    html body .empty-list {
-      margin-top: 50px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      align-content: center; }
-      html body .empty-list .btn-hbr-blue {
-        margin-top: 20px;
-        width: auto;
-        height: 50px;
-        color: #b4ec13;
-        background: #19156a;
-        border: none;
-        border-radius: 3px;
-        padding: 15px 30px;
-        font-size: 16px;
-        font-family: "museoSans-500", Arial;
-        font-weight: bold; }
-    html body .no-padding {
-      padding-left: 0;
-      padding-right: 0; }
-    html body .loadingSpinner {
-      position: fixed;
-      z-index: 9999999999;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
+    .shopping .notification .logo {
+      height: 70px;
+      background: #19156a; }
+    .shopping .notification .text {
+      height: 70px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-content: center;
       align-items: center; }
-      html body .loadingSpinner .spinner-backdrop {
-        background: rgba(0, 0, 0, 0.5);
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 9999999999; }
-      html body .loadingSpinner .spinner-container {
-        background: white;
-        z-index: 99999999999;
-        border: 2px solid #19156a;
-        width: 100px;
-        height: 100px;
-        border-radius: 15px;
-        opacity: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-content: center;
-        align-items: center; }
-        html body .loadingSpinner .spinner-container i {
-          color: #19156a; }
-
-.shopping {
-  /*
- * Adding the animation to our element
- */ }
+      .shopping .notification .text p {
+        font-size: 14px;
+        width: 100%; }
+        .shopping .notification .text p a {
+          font-weight: bold;
+          font-size: 15px; }
   .shopping form {
     width: 100%; }
   .shopping input[type=number]::-webkit-inner-spin-button,
@@ -232,6 +161,8 @@ html {
   60% {
     transform: translateY(-15px); } }
   .shopping .badge {
+    padding: 5px 10px;
+    border-radius: 5px;
     background-color: #b4ec13;
     color: #19156a;
     font-weight: bold;
@@ -242,7 +173,9 @@ html {
     padding: 15px;
     border-color: #b4ec13; }
   .shopping__purchase .product-table {
-    padding: 20px 0px;
+    padding-left: 20px;
+    max-height: 400px;
+    overflow-y: auto;
     text-align: center; }
     .shopping__purchase .product-table thead {
       color: #b4ec13;
@@ -262,7 +195,7 @@ html {
   .shopping__purchase .form-padding {
     padding-bottom: 25px; }
   .shopping__purchase .btn-hbr-green {
-    width: 120px;
+    width: auto;
     height: 40px;
     color: #19156a;
     background: #b4ec13;
@@ -293,7 +226,7 @@ html {
     cursor: pointer; }
   .shopping__purchase .btn-hbr-blue {
     width: auto;
-    height: 50px;
+    height: 40px;
     color: #b4ec13;
     background: #19156a;
     border: none;
@@ -301,7 +234,10 @@ html {
     padding: 15px 30px;
     font-size: 16px;
     font-family: "museoSans-500", Arial;
-    font-weight: bold; }
+    font-weight: bold;
+    font-size: 13px;
+    padding: 10px 30px;
+    margin-top: 15px; }
   .shopping__purchase-list .well-lg {
     width: 100%;
     border-color: #b4ec13; }
