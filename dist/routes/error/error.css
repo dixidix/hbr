@@ -141,7 +141,14 @@ form {
       color: #19156a; }
     .shopping .notification .logo {
       height: 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-content: center;
+      align-items: center;
       background: #19156a; }
+      .shopping .notification .logo img {
+        width: 100%; }
     .shopping .notification .text {
       height: 70px;
       display: flex;

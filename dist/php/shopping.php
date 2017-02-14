@@ -133,12 +133,12 @@ function addPurchase($data){
 	$total_quantity = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['total_quantity']));
 	$uid = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['userId']));
 	$timestamp = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['timestamp']));
-	$state = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['state']));
+	$venta_state = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['venta_state']));
 	// $products = $data['products'];
 
 		if (empty($errors)){
 			if(empty($_POST['id'])){ 
-					MysqliDB::getInstance()->query("INSERT INTO `ventas`(`uid`, `parcial_price`, `total`, `total_quantity`,`total_remaining_quantity`, `timestamp`,  `totalweight`, `guide_amount`,`state`) VALUES ('".$uid."',".(float)$parcial_price.",".(float)$total.",".(float)$total_quantity.",".(int)$total_quantity.",".$timestamp.",".$total_weight.", '0',".$state.")");
+					MysqliDB::getInstance()->query("INSERT INTO `ventas`(`uid`, `parcial_price`, `total`, `total_quantity`,`total_remaining_quantity`, `timestamp`,  `totalweight`, `guide_amount`,`venta_state`) VALUES ('".$uid."',".(float)$parcial_price.",".(float)$total.",".(float)$total_quantity.",".(int)$total_quantity.",".$timestamp.",".$total_weight.", '0',".$venta_state.")");
 					$res = MysqliDB::getInstance()->query("SELECT MAX(id) as id FROM `ventas`");		
 				
 
@@ -152,7 +152,7 @@ function addPurchase($data){
 				
 			}else{
 			$venta_id = $_POST['id'];
-			MysqliDB::getInstance()->query("UPDATE `ventas` SET `parcial_price`=".(float)$parcial_price.",`total`=".(float)$total.",`total_quantity`=".(int)$total_quantity.",`total_remaining_quantity`=".(int)$total_quantity.",`timestamp`=".$timestamp.", `totalweight`=".(float)$total_weight.",`guide_amount`= 0,`state`=".(int)$state." WHERE `id` = ".$_POST['id']."");
+			MysqliDB::getInstance()->query("UPDATE `ventas` SET `parcial_price`=".(float)$parcial_price.",`total`=".(float)$total.",`total_quantity`=".(int)$total_quantity.",`total_remaining_quantity`=".(int)$total_quantity.",`timestamp`=".$timestamp.", `totalweight`=".(float)$total_weight.",`guide_amount`= 0,`venta_state`=".(int)$venta_state." WHERE `id` = ".$_POST['id']."");
 			}
 		} else {
 			$resolve_data['errors'] = $errors;

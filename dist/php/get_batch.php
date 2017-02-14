@@ -33,7 +33,7 @@ $res = MysqliDB::getInstance()->query("SELECT * from ventas WHERE deleted = 0");
 		$outp .= '"total": '  . $rs["total"] . ',';
 		$outp .= '"total_quantity":"'  . $rs["total_quantity"] . '",';
 		$outp .= '"total_remaining_quantity":"'  . $rs["total_remaining_quantity"] . '",';
-		$outp .= '"state":"'  . $rs["state"] . '",';
+		$outp .= '"venta_state":"'  . $rs["venta_state"] . '",';
 		$outp .= '"guide_amount":"'  . $rs["guide_amount"] . '",';
 		$uname = MysqliDB::getInstance()->query("SELECT * FROM bills where ventaId =" . $rs["id"]);
 
@@ -122,7 +122,7 @@ $res = MysqliDB::getInstance()->query("SELECT * from ventas WHERE deleted = 0 AN
 		$outp .= '"total": '  . $rs["total"] . ',';
 		$outp .= '"total_quantity":"'  . $rs["total_quantity"] . '",';
 		$outp .= '"total_remaining_quantity":"'  . $rs["total_remaining_quantity"] . '",';
-		$outp .= '"state":"'  . $rs["state"] . '",';
+		$outp .= '"venta_state":"'  . $rs["venta_state"] . '",';
 		$outp .= '"guide_amount":"'  . $rs["guide_amount"] . '",';
 		$uname = MysqliDB::getInstance()->query("SELECT * FROM bills where ventaId =" . $rs["id"]);
 
@@ -202,13 +202,12 @@ function getByWhId(){
 
 		$outp .= '{"id":"'  . $rs["id"] . '",';
 		$outp .= '"uid":"'  . $rs["uid"] . '",';
-		$outp .= '"state":"'  . $rs["state"] . '",';
+		$outp .= '"venta_state":"'  . $rs["venta_state"] . '",';
         $outp .= '"parcial_price":"'  . (float) $rs["parcial_price"] . '",';
 		$outp .= '"total_weight":"'  . $rs["totalweight"] . '",';
 		$outp .= '"total": '  . $rs["total"] . ',';
 		$outp .= '"total_quantity":"'  . $rs["total_quantity"] . '",';
 		$outp .= '"total_remaining_quantity":"'  . $rs["total_remaining_quantity"] . '",';
-		$outp .= '"state":"'  . $rs["venta_state"] . '",';
 		$outp .= '"guide_amount":"'  . $rs["guide_amount"] . '",';
 		$uname = MysqliDB::getInstance()->query("SELECT * FROM bills where ventaId =" . $rs["id"]." and deleted= 0  and whId = ".$_GET['whId']);
 

@@ -44,7 +44,7 @@ if(!empty($_GET['state'])){
 		$outp .= '"quantity":"'  . $rs["quantity"] . '",';
 		$outp .= '"weight":"'  .(float) $rs["weight"] . '",';
 		$outp .= '"price":"'  . (float)$rs["price"] . '",';
-		$outp .= '"state":"'  . $rs["state"] . '",';
+		$outp .= '"state":"'  . (int)$rs["state"] . '",';
 
 		$outp .= '"warehouse_enter":"'  . (float)$rs["warehouse_enter"] . '",';
 		$outp .= '"warehouse_aditional_weight":"'  . (float)$rs["warehouse_aditional_weight"] . '",';
@@ -81,7 +81,7 @@ if(!empty($_GET['state'])){
         $outp .= '"venta_total_quantity":"'  . (float) $rs["total_quantity"] . '",';
         $outp .= '"venta_total_remaining_quantity":"'  . (float) $rs["total_remaining_quantity"] . '",';
         $outp .= '"venta_timestamp":"'  . (float) $rs["timestamp"] . '",';
-        $outp .= '"venta_state":"'  . (float) $rs["state"] . '",';
+        $outp .= '"venta_state":"'  . (float) $rs["venta_state"] . '",';
         $outp .= '"venta_totalweight":"'  . (float) $rs["totalweight"] . '",';
 
         $uname = MysqliDB::getInstance()->query("SELECT * FROM airway_bill_product INNER JOIN categories ON airway_bill_product.category_id = categories.category_id where  airway_bill_product.airwayId =".$rs["airwayId"]." AND airway_bill_product.deleted = 0");

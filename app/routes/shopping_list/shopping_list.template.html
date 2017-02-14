@@ -10,7 +10,7 @@
             </div>
         </div>
         <table class="table table-bordered table-striped table-curved rounded" ng-if="shoppingList.ventas.length">
-            <div class="row">
+            <div class="row" ng-if="shoppingList.ventas.length">
                 <div class="col-xs-3">
                     <label for="">Buscar por Venta</label>
                     <div class="input-group">
@@ -51,15 +51,15 @@
                     <td ng-if="venta.guide_amount == '0'"><span class="unpayed"> Procesando Info.</span></td>
                     <td><span>{{ venta.total_weight }} Kg.</span></td>
                     <td><span> {{ venta.total | currency }}</span></td>
-                    <td><span class="text-danger" ng-if="venta.state == 0">Sin Terminar</span><span class="text-success" ng-if="venta.state == 1">Enviado</span></td>
+                    <td><span class="text-danger" ng-if="venta.venta_state == 0">Sin Terminar</span><span class="text-success" ng-if="venta.venta_state == 1">Enviado</span></td>
                     <td>
                         <button ng-click="shoppingList.moreInfo(venta.bills)" class="btn btn-default pull-left"> <i class="fa fa-plus"></i> Info </button>
-                        <button ng-if="venta.state == 0" ng-click="shoppingList.continuePurchase(venta)" class="btn btn-default pull-right"> Continuar </button>
+                        <button ng-if="venta.venta_state == 0" ng-click="shoppingList.continuePurchase(venta)" class="btn btn-default pull-right"> Continuar </button>
                     </td>
                 </tr>
             </tbody>            
         </table>
-        <ul uib-pagination  first-text="primero" last-text="&uacute;ltimo" next-text="Siguiente" previous-text="Anterior" total-items="filtered.length" ng-model="currentPage" max-size="maxSize" class="pagination-sm pull-right" boundary-links="true" force-ellipses="true"></ul>
+        <ul ng-if="shoppingList.ventas.length" uib-pagination  first-text="primero" last-text="&uacute;ltimo" next-text="Siguiente" previous-text="Anterior" total-items="filtered.length" ng-model="currentPage" max-size="maxSize" class="pagination-sm pull-right" boundary-links="true" force-ellipses="true"></ul>
     </div>
     <div ng-include src="'hbr-selfie/dist/routes/shopping_list/moreinfo/moreinfo.template.html'"></div>
 </div>

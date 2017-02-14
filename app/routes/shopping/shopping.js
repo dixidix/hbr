@@ -30,7 +30,7 @@ function shoppingController(angular, app) {
              self.lote.parcial_price = 0.00;
              self.lote.total_weight = 0.00;
              self.lote.total_quantity = 0;
-             self.lote.state = 1;
+             self.lote.venta_state = 1;
             angular.forEach(self.lote.bills, function (k, v) {
                 self.lote.total_price = parseFloat(self.lote.total_price) + parseFloat(k.total_price);
                 self.lote.parcial_price = parseFloat(self.lote.parcial_price) + parseFloat(k.total_price);
@@ -51,7 +51,7 @@ function shoppingController(angular, app) {
                     total_quantity: self.lote.total_quantity,
                     userId: self.lote.user.id,
                     timestamp: new Date().getTime(),
-                    state: self.lote.state,
+                    venta_state: self.lote.venta_state,
                     method: "POST"
                 })
                 .success(function (response) {
@@ -101,7 +101,7 @@ function shoppingController(angular, app) {
              self.lote.parcial_price = 0.00;
              self.lote.total_weight = 0.00;
              self.lote.total_quantity = 0;
-             self.lote.state = 0;
+             self.lote.venta_state = 0;
             angular.forEach(self.lote.bills, function (k, v) {
                 self.lote.total_price = parseFloat(self.lote.total_price) + parseFloat(k.total_price);
                 self.lote.parcial_price = parseFloat(self.lote.parcial_price) + parseFloat(k.total_price);
@@ -122,7 +122,7 @@ function shoppingController(angular, app) {
                     total_quantity: self.lote.total_quantity,
                     userId: self.lote.user.id,
                     timestamp: new Date().getTime(),
-                    state: self.lote.state,
+                    venta_state: self.lote.venta_state,
                     method: "POST"
                 })
                 .success(function (response) {

@@ -24,7 +24,15 @@
         }
         .logo {
             height: 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
             background: $hbr-blue;
+            img{
+                width:100%;
+            }
         }
         .text {
             height: 70px;
