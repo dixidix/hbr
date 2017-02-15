@@ -73,11 +73,11 @@
                     <td>
                         <div class="flex-row">
                             <div ng-if="guide.state == 2 && guide.paymentMethod == 1" style="width:100%;min-width: 100px;" ng-bind-html="guide.paymentButton" rel="payment_button" class="col-xs-5"></div>
-                            <div>
+
                                 <button style="margin:0px 5px;" class="btn btn-default" ng-click="airwayList.seeMore(guide, guide.products)"><i class="fa fa-plus"></i> Info </button>
-                            </div>
-                           <div ng-if="guide.state == 3">
-                              <a target="_blank" href="http://tucourier.aftership.com/{{ guide.hbr_tracking }}?"><button class="btn btn-default"><i class="fa fa-plane"></i> Track</button></a>
+
+                              <a class="pull-right" target="_blank" href="http://tucourier.aftership.com/{{ guide.hbr_tracking }}?" ng-disabled="guide.state != 3"><button ng-disabled="guide.state != 3" class="btn btn-default"><i class="fa fa-plane"></i> Track</button></a>
+
                            </div>
                         </div>
                     </td>

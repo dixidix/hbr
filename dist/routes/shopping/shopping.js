@@ -5,9 +5,9 @@ function shoppingController(angular, app) {
 
     app.controller('shoppingCtrl', shoppingCtrl);
 
-    shoppingCtrl.$inject = ['$scope', 'categoryService', 'productService', '$http', '$state', 'uploadService', '$timeout', '$filter', '$q'];
+    shoppingCtrl.$inject = ['$scope', 'categoryService', 'productService', '$uibModal', '$rootScope', '$http', '$state', 'uploadService', '$timeout', '$filter', '$q'];
 
-    function shoppingCtrl($scope, categoryService, productService, $http, $state, uploadService, $timeout, $filter, $q) {
+    function shoppingCtrl($scope, categoryService, productService, $uibModal, $rootScope, $http, $state, uploadService, $timeout, $filter, $q) {
         'use strict';
         var self = this; //jshint ignore:line
         function get_userdata() {
@@ -26,11 +26,11 @@ function shoppingController(angular, app) {
             var requests = [];
             var whEmail = [];
             self.spinner = true;
-             self.lote.total_price = 0.00;
-             self.lote.parcial_price = 0.00;
-             self.lote.total_weight = 0.00;
-             self.lote.total_quantity = 0;
-             self.lote.venta_state = 1;
+            self.lote.total_price = 0.00;
+            self.lote.parcial_price = 0.00;
+            self.lote.total_weight = 0.00;
+            self.lote.total_quantity = 0;
+            self.lote.venta_state = 1;
             angular.forEach(self.lote.bills, function (k, v) {
                 self.lote.total_price = parseFloat(self.lote.total_price) + parseFloat(k.total_price);
                 self.lote.parcial_price = parseFloat(self.lote.parcial_price) + parseFloat(k.total_price);
@@ -40,7 +40,88 @@ function shoppingController(angular, app) {
                     key.categoryId = parseInt(key.category.category_id);
                 });
             });
-            
+
+            $http
+                .post('./hbr-selfie/dist/php/shopping.php', {
+                    peso_excedente: self.lote.peso_excedente,
+                    id: self.lote.id || null,
+                    parcial_price: self.lote.total_price,
+                    total_weight: self.lote.total_weight,
+                    total: self.lote.total_price,
+                    total_quantity: self.lote.total_quantity,
+                    userId: self.lote.user.id,
+                    timestamp: new Date().getTime(),
+                    venta_state: self.lote.venta_state,
+                    method: "POST"
+                })
+                .success(function (response) {
+                    if (response.success) {
+                        self.response = response;
+                        var sequence = $q.defer();
+                        sequence.resolve();
+                        sequence = sequence.promise;
+                        angular.forEach(self.lote.bills, function (bill) {
+                            if (whEmail.indexOf(bill.warehouse.email) == -1) {
+                                whEmail.push(bill.warehouse.email);
+                            }
+                            sequence = sequence.then(function () {
+                                return uploadService.uploadBills(bill, response.ventaId, self.lote.user.id, new Date().getTime())
+                                    .success(function (response) {
+                                        angular.forEach(bill.products, function (product) {
+                                            product.bill_id = response.bill_id;
+                                            product.userId = self.lote.user.id;
+                                            uploadService.uploadProducts(product);
+                                        });
+                                    });
+                            });
+                        });
+                        $q.all(sequence).then(function () {
+                            $http.post('./hbr-selfie/dist/php/solicitud_venta.php', {
+                                lote: self.response.lote,
+                                date: self.response.date,
+                                email: self.response.email,
+                                name: self.response.name + " " + self.response.lastname,
+                                whEmail: whEmail
+                            }).success(function (response) {
+                                setTimeout(function () {
+                                    $state.go('dashboard.shopping_list', {}, { reload: true });
+                                    self.spinner = false;
+                                }, 2000);
+                            });
+                        });
+                    }
+                });
+        }
+        function confirmUpdate() {
+            var title = "Continuar Luego";
+            var msg = "Recuerde que tiene 7 dias para seguir comprando dentro de este lote de compra. A la vez hasta que el lote no este cerrado sus envíos no serán despachados a su domicilio. Ante la necesidad de despachar el lote puede optar por finalizar la compra e iniciar una compra nueva.";
+            confirm(title, msg);
+        }
+        function confirmFinish() {
+            var title = "Finalizar Compra";
+            var msg = "Esta seguro que desea finalizar la compra? al finalizar la compra ya no podrá seguir agregando facturas al lote de compras.";
+            confirm(title, msg);
+        }
+        function updateSave() {
+            var requests = [];
+            var whEmail = [];
+            self.spinner = true;
+            self.lote.total_price = 0.00;
+            self.lote.parcial_price = 0.00;
+            self.lote.total_weight = 0.00;
+            self.lote.total_quantity = 0;
+            self.lote.venta_state = 0;
+            angular.forEach(self.lote.bills, function (k, v) {
+                k.bill_state = 1;
+                self.lote.total_price = parseFloat(self.lote.total_price) + parseFloat(k.total_price);
+                self.lote.parcial_price = parseFloat(self.lote.parcial_price) + parseFloat(k.total_price);
+                self.lote.total_weight = parseFloat(self.lote.total_weight) + parseFloat(k.total_weight);
+                self.lote.total_quantity = parseInt(self.lote.total_quantity) + parseInt(k.quantity);
+                angular.forEach(k.products, function (key, val) {
+                    key.categoryId = parseInt(key.category.category_id);
+                });
+            });
+
             $http
                 .post('./hbr-selfie/dist/php/shopping.php', {
                     peso_excedente: self.lote.peso_excedente,
@@ -93,81 +174,25 @@ function shoppingController(angular, app) {
                 });
         }
 
-        function updateSave() {
-            var requests = [];
-            var whEmail = [];
-            self.spinner = true;
-             self.lote.total_price = 0.00;
-             self.lote.parcial_price = 0.00;
-             self.lote.total_weight = 0.00;
-             self.lote.total_quantity = 0;
-             self.lote.venta_state = 0;
-            angular.forEach(self.lote.bills, function (k, v) {
-                self.lote.total_price = parseFloat(self.lote.total_price) + parseFloat(k.total_price);
-                self.lote.parcial_price = parseFloat(self.lote.parcial_price) + parseFloat(k.total_price);
-                self.lote.total_weight = parseFloat(self.lote.total_weight) + parseFloat(k.total_weight);
-                self.lote.total_quantity = parseInt(self.lote.total_quantity) + parseInt(k.quantity);
-                angular.forEach(k.products, function (key, val) {
-                    key.categoryId = parseInt(key.category.category_id);
-                });
+        function confirm(title, msg) {
+            self.confirmModal = $uibModal.open({
+                templateUrl: 'confirm-modal.html',
+                backdrop: 'static',
+                keyboard: false,
+                scope: $scope,
+                size: 'sm'
             });
-            
-            $http
-                .post('./hbr-selfie/dist/php/shopping.php', {
-                    peso_excedente: self.lote.peso_excedente,
-                    id: self.lote.id || null,
-                    parcial_price: self.lote.total_price,
-                    total_weight: self.lote.total_weight,
-                    total: self.lote.total_price,
-                    total_quantity: self.lote.total_quantity,
-                    userId: self.lote.user.id,
-                    timestamp: new Date().getTime(),
-                    venta_state: self.lote.venta_state,
-                    method: "POST"
-                })
-                .success(function (response) {
-                    if (response.success) {
-                        self.response = response;
-                        var sequence = $q.defer();
-                        sequence.resolve();
-                        sequence = sequence.promise;
-                        angular.forEach(self.lote.bills, function (bill) {
-                            if (whEmail.indexOf(bill.warehouse.email) == -1) {
-                                whEmail.push(bill.warehouse.email);
-                            }
-                            sequence = sequence.then(function () {
-                                return uploadService.uploadBills(bill, response.ventaId, self.lote.user.id, new Date().getTime())
-                                    .success(function (response) {
-                                        angular.forEach(bill.products, function (product) {
-                                            product.bill_id = response.bill_id;
-                                            product.userId = self.lote.user.id;
-                                            uploadService.uploadProducts(product);
-                                        });
-                                    });
-                            });
-                            setTimeout(function () {
-                                $state.go('dashboard.shopping_list', {}, { reload: true });
-                                self.spinner = false;
-                            }, 2000);
-                        });
-                        // $q.all(sequence).then(function () {
-                        //     $http.post('./hbr-selfie/dist/php/solicitud_venta.php', {
-                        //         lote: self.response.lote,
-                        //         date: self.response.date,
-                        //         email: self.response.email,
-                        //         name: self.response.name + " " + self.response.lastname,
-                        //         whEmail: whEmail
-                        //     }).success(function (response) {
-                        //         setTimeout(function () {
-                        //             $state.go('dashboard.shopping', {}, { reload: true });
-                        //             self.spinner = false;
-                        //         }, 2000);
-                        //     });
-                        // });
-                    }
-                });
+            $scope.title = title;
+            $scope.msg = msg;
         }
 
+        $scope.confirmAccept = function () {
+            self.confirmModal.dismiss('cancel');
+        }
+
+        $scope.confirmCancel = function () {
+            self.confirmModal.dismiss('cancel');
+        }
         function get_categories() {
             categoryService
                 .get_categories()
@@ -255,6 +280,7 @@ function shoppingController(angular, app) {
                 self.lote.total_quantity = parseInt(parseInt(self.lote.total_quantity) + parseInt(self.bill.quantity));
                 self.bill.warehouse = self.bill.whId;
                 self.bill.whId = self.bill.whId.id;
+                self.bill.bill_state = 0;
                 self.lote.bills.push(self.bill);
                 $('#bill_file').val("");
 
@@ -378,6 +404,18 @@ function shoppingController(angular, app) {
             $scope.editProduct = false;
         }
 
+        function delete_bill(bill, $index) {
+            self.lote.bills.splice($index, 1);
+            self.lote.total_price = 0.00;
+            self.lote.total_quantity = 0;
+            self.lote.total_weight = 0.00;
+            angular.forEach(self.lote.bills, function (bill) {
+                self.lote.total_price = (parseFloat(self.lote.total_price) + parseFloat(bill.total_price)).toFixed(2);
+                self.lote.total_quantity = parseInt(self.lote.total_quantity) + parseInt(bill.quantity);
+                self.lote.total_weight = (parseFloat(self.lote.total_weight) + parseFloat(bill.total_weight)).toFixed(2);
+            });
+        }
+
         function edit_bill() {
             self.bill.warehouse = self.bill.whId;
             self.bill.whId = self.bill.whId.id;
@@ -460,6 +498,9 @@ function shoppingController(angular, app) {
             self.showEditProduct = showEditProduct;
             self.edit_product = edit_product;
             self.edit_bill = edit_bill;
+            self.delete_bill = delete_bill;
+            self.confirmUpdate = confirmUpdate;
+            self.confirmFinish = confirmFinish;
         }
 
         init();

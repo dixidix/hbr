@@ -16,6 +16,7 @@ $totalprice = (float) MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real
 $totalweight = (float) MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['total_weight']));
 $trackingnumber = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['tracking_number']));
 $userId = (int) MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['userId']));
+$bill_state = (int) MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['bill_state']));
 
 $file_name_bill = "";
 $path_bill = "";
@@ -46,7 +47,7 @@ if(empty($_POST['bill_id'])){
 	}
 
 	if (empty($errors)){
-		MysqliDB::getInstance()->query("INSERT INTO `bills`(`ventaId`,`whId`, `establishment`, `number`, `provider`, `quantity`,`remaining_quantity`, `timestamp`, `totalprice`, `totalweight`, `trackingnumber`, `userId`, `bill_file_name`, `bill_file_path`) VALUES (".$ventaId.",".$whId.",'".$establishment."','".$number."','".$provider."',".$quantity.",".$remaining_quantity.",'".$timestamp."',".$totalprice.",".$totalweight.",'".$trackingnumber."',".$userId.",'".$file_name_bill."','".$path_bill."')");
+		MysqliDB::getInstance()->query("INSERT INTO `bills`(`ventaId`,`whId`, `establishment`, `number`, `provider`, `quantity`,`remaining_quantity`, `timestamp`, `totalprice`, `totalweight`, `trackingnumber`, `userId`, `bill_file_name`, `bill_file_path`, `bill_state`) VALUES (".$ventaId.",".$whId.",'".$establishment."','".$number."','".$provider."',".$quantity.",".$remaining_quantity.",'".$timestamp."',".$totalprice.",".$totalweight.",'".$trackingnumber."',".$userId.",'".$file_name_bill."','".$path_bill."',".$bill_state.")");
 
 		$res = MysqliDB::getInstance()->query("SELECT MAX(bill_id) as id FROM `bills`");		
 		$rows = mysqli_num_rows($res);
@@ -64,5 +65,8 @@ if(empty($_POST['bill_id'])){
 		MysqliDB::getInstance()->close();
 		echo json_encode($resolve_data);
 	}
+} else {
+	    MysqliDB::getInstance()->query("UPDATE `bills` SET `bill_state`= ".$bill_state." WHERE `bill_id`= ".$_POST['bill_id']."");
+		MysqliDB::getInstance()->close();
 }
 ?>

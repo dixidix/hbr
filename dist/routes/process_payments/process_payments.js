@@ -4,7 +4,7 @@ function processPaymentsController(angular, app) {
     'use angular template'; //jshint ignore:line
 
     app.controller('processPaymentsCtrl', processPaymentsCtrl);
-    processPaymentsCtrl.$inject = ['$http', '$filter', '$state', '$scope', '$uibModal', '$rootScope','authenticationService'];
+    processPaymentsCtrl.$inject = ['$http', '$filter', '$state', '$scope', '$uibModal', '$rootScope', 'authenticationService'];
 
     app.controller('modaProcessCtrl', modaProcessCtrl);
     modaProcessCtrl.$inject = ['$scope', '$state', '$filter', '$uibModalInstance', '$uibModal', '$sce', '$compile', '$rootScope', 'venta', 'bills', '$http'];
@@ -12,7 +12,7 @@ function processPaymentsController(angular, app) {
     app.controller('makeGuidesModalCtrl', makeGuidesModalCtrl);
     makeGuidesModalCtrl.$inject = ['$scope', '$state', '$filter', '$uibModalInstance', '$uibModal', '$sce', '$compile', '$rootScope', 'venta', 'bills', '$http', 'airwayService', '$q'];
 
-    function processPaymentsCtrl($http, $filter, $state, $scope, $uibModal, $rootScope,authenticationService) {
+    function processPaymentsCtrl($http, $filter, $state, $scope, $uibModal, $rootScope, authenticationService) {
         var self = this; //jshint ignore:line
 
         function processPaymentModal(size, venta, bills) {
@@ -24,10 +24,10 @@ function processPaymentsController(angular, app) {
                 controllerAs: 'modaProcess',
                 size: size,
                 resolve: {
-                    venta: function() {
+                    venta: function () {
                         return venta;
                     },
-                    bills: function() {
+                    bills: function () {
                         return bills;
                     },
                 }
@@ -44,10 +44,10 @@ function processPaymentsController(angular, app) {
                 controllerAs: 'guides',
                 size: size,
                 resolve: {
-                    venta: function() {
+                    venta: function () {
                         return venta;
                     },
-                    bills: function() {
+                    bills: function () {
                         return bills;
                     },
                 }
@@ -64,14 +64,18 @@ function processPaymentsController(angular, app) {
 
         function init() {
             $rootScope.showSpinner = true;
-             self.ventas = [];
-             authenticationService.checkAuth().then(function(response) {
-                 if(response.data.isAdmin == 1){
-                     $scope.filtered= [];
+            self.ventas = [];
+            authenticationService.checkAuth().then(function (response) {
+                if (response.data.isAdmin == 1) {
+                    $scope.filtered = [];
                     $http.get('./hbr-selfie/dist/php/get_batch.php', { params: { action: "getAll" } })
-                        .then(function(response) {
-                            angular.forEach(response.data.ventas, function(value, key) {
+                        .then(function (response) {
+                            angular.forEach(response.data.ventas, function (value, key) {
                                 response.data.ventas[key].timestamp = moment(parseInt(value.timestamp)).format("DD/MM/YYYY HH:mm");
+                                var requestDate = moment(parseInt(value.timestamp), "DD-MM-YYYY");
+                              
+                                response.data.ventas[key].daysSinceRequest = moment().diff(requestDate, 'days');
+                                console.log("days:", response.data.ventas[key].daysSinceRequest, requestDate, moment());
                                 response.data.ventas[key].parcial_price = parseFloat(value.parcial_price).toFixed(2);
                                 response.data.ventas[key].total = parseFloat(value.total).toFixed(2);
                                 response.data.ventas[key].peso_total = parseFloat(value.peso_total).toFixed(2);
@@ -88,13 +92,13 @@ function processPaymentsController(angular, app) {
                             $scope.currentPage = 1;
                             $scope.itemsPerPage = 5;
                             $scope.maxSize = 5;
-                            $scope.setPage = function(pageNo) {
+                            $scope.setPage = function (pageNo) {
                                 $scope.currentPage = pageNo;
                             };
-                            $scope.pageChanged = function() {
+                            $scope.pageChanged = function () {
 
                             };
-                            $scope.$watch('search', function(term) {
+                            $scope.$watch('search', function (term) {
                                 var obj = term;
                                 $scope.filtered = $filter('filter')(self.ventas, obj);
                                 $scope.currentPage = 1;
@@ -103,48 +107,51 @@ function processPaymentsController(angular, app) {
                             self.processPayment = processPayment;
                             self.setGuides = setGuides;
                         });
-                 } else {
-                     if(response.data.client_type){
-                          $scope.filtered = [];
-                        $http.get('./hbr-selfie/dist/php/get_batch.php', { params: { action: "getByWhId", whId: response.data.uid} })
-                        .then(function(response) {
-                            angular.forEach(response.data.ventas, function(value, key) {
-                                response.data.ventas[key].parcial_price = parseFloat(value.parcial_price).toFixed(2);
-                                response.data.ventas[key].total = parseFloat(value.total).toFixed(2);
-                                response.data.ventas[key].peso_total = parseFloat(value.peso_total).toFixed(2);
-                                response.data.ventas[key].totalWarehouse = "0";
-                                response.data.ventas[key].totalFlete = "0";
-                                response.data.ventas[key].totalImpuestos = "0";
-                                $rootScope.showSpinner = false;
-                            });
+                } else {
+                    if (response.data.client_type) {
+                        $scope.filtered = [];
+                        $http.get('./hbr-selfie/dist/php/get_batch.php', { params: { action: "getByWhId", whId: response.data.uid } })
+                            .then(function (response) {
+                                var today = moment();
+                                angular.forEach(response.data.ventas, function (value, key) {
+                                    response.data.ventas[key].parcial_price = parseFloat(value.parcial_price).toFixed(2);
+                                    response.data.ventas[key].daysSinceRequest = moment(today.diff(moment(parseInt(response.data.ventas[key].timestamp))));
+                                    console.log("days:", response.data.ventas[key].daysSinceRequest)
+                                    response.data.ventas[key].total = parseFloat(value.total).toFixed(2);
+                                    response.data.ventas[key].peso_total = parseFloat(value.peso_total).toFixed(2);
+                                    response.data.ventas[key].totalWarehouse = "0";
+                                    response.data.ventas[key].totalFlete = "0";
+                                    response.data.ventas[key].totalImpuestos = "0";
+                                    $rootScope.showSpinner = false;
+                                });
 
-                            angular.forEach(response.data.ventas, function(venta){
-                                if(venta.bills.length){
-                                    self.ventas.push(venta);
-                                }
-                            });
+                                angular.forEach(response.data.ventas, function (venta) {
+                                    if (venta.bills.length) {
+                                        self.ventas.push(venta);
+                                    }
+                                });
 
-                            $scope.totalItems = Object.keys(self.ventas).length;
-                            $scope.currentPage = 1;
-                            $scope.itemsPerPage = 5;
-                            $scope.maxSize = 5;
-                            $scope.setPage = function(pageNo) {
-                                $scope.currentPage = pageNo;
-                            };
-                            $scope.pageChanged = function() {
-
-                            };
-                            $scope.$watch('search', function(term) {
-                                var obj = term;
-                                $scope.filtered = $filter('filter')(self.ventas, obj);
+                                $scope.totalItems = Object.keys(self.ventas).length;
                                 $scope.currentPage = 1;
+                                $scope.itemsPerPage = 5;
+                                $scope.maxSize = 5;
+                                $scope.setPage = function (pageNo) {
+                                    $scope.currentPage = pageNo;
+                                };
+                                $scope.pageChanged = function () {
+
+                                };
+                                $scope.$watch('search', function (term) {
+                                    var obj = term;
+                                    $scope.filtered = $filter('filter')(self.ventas, obj);
+                                    $scope.currentPage = 1;
+                                });
+                                self.processPayment = processPayment;
+                                self.setGuides = setGuides;
                             });
-                            self.processPayment = processPayment;
-                            self.setGuides = setGuides;
-                        });
-                     }
-                 }
-                });
+                    }
+                }
+            });
         }
 
         init();
@@ -167,10 +174,10 @@ function processPaymentsController(angular, app) {
 
         function send() {
             $http.put('./hbr-selfie/dist/php/shopping.php', {
-                    paymentGatewayUrl: self.paymentGatewayUrl,
-                    id: self.venta.id,
-                    token: self.token
-                })
+                paymentGatewayUrl: self.paymentGatewayUrl,
+                id: self.venta.id,
+                token: self.token
+            })
                 .then(function success(response) {
                     $http.post('./hbr-selfie/dist/php/cargar_venta.php', {
                         lote: self.venta.id,
@@ -249,7 +256,7 @@ function processPaymentsController(angular, app) {
 
             self.currentProduct.total_iva = (parseFloat(self.currentProduct.iva) + parseFloat(self.currentProduct.iva_adic)).toFixed(2);
             self.currentProduct.total = (parseFloat(self.currentProduct.base_iva) + parseFloat(self.currentProduct.total_iva)).toFixed(2);
-            angular.forEach(self.products, function(key, value) {
+            angular.forEach(self.products, function (key, value) {
                 if (key.id == self.currentProduct.id) {
                     self.products[value].total_taxes = self.currentProduct.total;
                 }
@@ -271,11 +278,11 @@ function processPaymentsController(angular, app) {
         }
 
         function calcTaxes() {
-            angular.forEach(self.products, function(product) {
+            angular.forEach(self.products, function (product) {
                 processProduct(product);
             });
             self.showProductInfo = false;
-            angular.forEach(self.products, function(value) { self.totalBatchTaxes = (parseFloat(value.total_taxes) + parseFloat(self.totalBatchTaxes)).toFixed(2); });
+            angular.forEach(self.products, function (value) { self.totalBatchTaxes = (parseFloat(value.total_taxes) + parseFloat(self.totalBatchTaxes)).toFixed(2); });
         }
 
 
@@ -286,7 +293,7 @@ function processPaymentsController(angular, app) {
             self.venta.peso_total = parseFloat(self.venta.peso_total).toFixed(2);
             self.venta.parcial_price = parseFloat(self.venta.parcial_price).toFixed(2);
             $http.get('./hbr-selfie/dist/php/users.php', { params: { action: "getUserById", id: self.venta.uid } })
-                .then(function(response) {
+                .then(function (response) {
                     self.user = response.data;
                 });
             self.totalTax = [];
@@ -327,7 +334,7 @@ function processPaymentsController(angular, app) {
 
         function selectBill(bill) {
 
-            angular.forEach(self.bills, function(bills) {
+            angular.forEach(self.bills, function (bills) {
                 if (bill.bill_id !== bills.bill_id) {
                     bills.isOpen = false;
                 }
@@ -353,8 +360,8 @@ function processPaymentsController(angular, app) {
 
             self.venta.total_remaining_quantity = parseInt(parseInt(self.venta.total_remaining_quantity) - parseInt(amount));
             var ExceedAmount = 0;
-            angular.forEach(self.guideBatch, function(guide) {
-                angular.forEach(bill.products, function(value) {
+            angular.forEach(self.guideBatch, function (guide) {
+                angular.forEach(bill.products, function (value) {
                     if (value.product_id == product.product_id) {
                         if (value.quantity > 0) {
                             if (guide.number === guideNumber) {
@@ -408,8 +415,8 @@ function processPaymentsController(angular, app) {
         }
 
         function removeProduct(product, guide) {
-            angular.forEach(self.bills, function(bill) {
-                angular.forEach(bill.products, function(value) {
+            angular.forEach(self.bills, function (bill) {
+                angular.forEach(bill.products, function (value) {
                     if (value.product_id == product.product_id) {
                         value.remaining_quantity = parseInt(parseInt(value.remaining_quantity) + parseInt(product.quantity));
                         bill.remaining_quantity = parseInt(parseInt(bill.remaining_quantity) + parseInt(product.quantity));
@@ -421,7 +428,7 @@ function processPaymentsController(angular, app) {
                     }
                 });
             });
-            angular.forEach(guide.products, function(value, index) {
+            angular.forEach(guide.products, function (value, index) {
                 if (value.product_id == product.product_id) {
 
                     guide.products.splice(index, 1);
@@ -430,7 +437,7 @@ function processPaymentsController(angular, app) {
                     guide.price = parseFloat(parseFloat(guide.price) - (parseFloat(product.price) * product.quantity)).toFixed(2);
                     if (!self.deleted) {
                         $http.post('./hbr-selfie/dist/php/delete_product_guide.php', { id: product.awb_productId })
-                            .then(function() {
+                            .then(function () {
                                 airwayService.save(guide);
                             });
                     }
@@ -467,13 +474,13 @@ function processPaymentsController(angular, app) {
             var product = "";
             var guideProduct = "";
             var ventaTotalWeight = 0.00;
-            angular.forEach(self.bills, function(bill) {
+            angular.forEach(self.bills, function (bill) {
                 bill.total_weight = 0.00;
                 product = $filter('filter')(bill.products, { product_id: $scope.RealWeightProduct.product_id })[0];
                 if (product !== undefined) {
                     product.real_weight = weight;
                     product.total_weight = parseFloat(parseFloat(product.real_weight) * parseInt(product.quantity));
-                    angular.forEach(self.guideBatch, function(guide) {
+                    angular.forEach(self.guideBatch, function (guide) {
                         guideProduct = $filter('filter')(guide.products, { product_id: product.product_id })[0];
                         if (guideProduct) {
                             guideProduct.real_weight = parseFloat(product.real_weight).toFixed(2);
@@ -484,7 +491,7 @@ function processPaymentsController(angular, app) {
                     });
                 }
 
-                angular.forEach(bill.products, function(product) {
+                angular.forEach(bill.products, function (product) {
                     bill.total_weight = parseFloat(parseFloat(bill.total_weight) + parseFloat(product.total_weight));
                 });
                 airwayService.updateBill(bill);
@@ -505,10 +512,10 @@ function processPaymentsController(angular, app) {
             sequence.resolve();
             sequence = sequence.promise;
             self.guideBatch.splice($index, 1);
-            angular.forEach(guide.products, function(product) {
-                sequence = sequence.then(function() {
+            angular.forEach(guide.products, function (product) {
+                sequence = sequence.then(function () {
                     $http.post('./hbr-selfie/dist/php/delete_product_guide.php', { id: product.awb_productId })
-                        .then(function() {
+                        .then(function () {
                             self.deleted = true;
                             removeProduct(product, guide);
                         });
@@ -521,13 +528,13 @@ function processPaymentsController(angular, app) {
                     sequence2.resolve();
                     sequence2 = sequence2.promise;
                     var ExceedAmount = 0;
-                    angular.forEach(self.guideBatch, function(batchGuide) {
+                    angular.forEach(self.guideBatch, function (batchGuide) {
                         batchGuide.number = ++guideNumber;
                         sequence2 = sequence2
-                            .then(function() {
+                            .then(function () {
                                 return airwayService.updateGuide(batchGuide);
                             })
-                            .then(function() {
+                            .then(function () {
                                 if (batchGuide.weight > 40 || batchGuide.price > 900) {
                                     $('#guide_list_' + batchGuide.number).addClass('row-warning');
                                     self.danger_msg = "";
@@ -558,11 +565,11 @@ function processPaymentsController(angular, app) {
             sequence.resolve();
             sequence = sequence.promise;
 
-            angular.forEach(self.guideBatch, function(awb) {
+            angular.forEach(self.guideBatch, function (awb) {
                 if (awb.products.length > 0) {
-                    sequence = sequence.then(function() {
-                        return airwayService.save(awb).success(function(response) {
-                            angular.forEach(awb.products, function(product) {
+                    sequence = sequence.then(function () {
+                        return airwayService.save(awb).success(function (response) {
+                            angular.forEach(awb.products, function (product) {
                                 product.airwayId = response.airwayId;
                                 airwayService.addProductToAwb(product)
                             });
@@ -578,16 +585,16 @@ function processPaymentsController(angular, app) {
             sequence.resolve();
             sequence = sequence.promise;
             var ventaQuantity = 0;
-            angular.forEach(self.venta.bills, function(bill) {
+            angular.forEach(self.venta.bills, function (bill) {
                 var billQuantity = 0;
-                angular.forEach(bill.products, function(product) {
+                angular.forEach(bill.products, function (product) {
                     billQuantity = parseInt(parseInt(billQuantity) + parseInt(product.remaining_quantity));
                 });
 
                 bill.remaining_quantity = billQuantity;
-                sequence = sequence.then(function() {
-                    return airwayService.updateBill(bill).success(function(response) {
-                        angular.forEach(bill.products, function(product) {
+                sequence = sequence.then(function () {
+                    return airwayService.updateBill(bill).success(function (response) {
+                        angular.forEach(bill.products, function (product) {
                             airwayService.updateProduct(product);
                         });
                     });
@@ -598,7 +605,7 @@ function processPaymentsController(angular, app) {
             self.venta.total_remaining_quantity = ventaQuantity;
             console.log(self.venta.total_remaining_quantity);
             self.venta.guide_amount = self.guideBatch.length;
-            airwayService.updateVenta(self.venta).success(function(response) {
+            airwayService.updateVenta(self.venta).success(function (response) {
                 $uibModalInstance.dismiss('cancel');
                 $state.go('dashboard.process_payments', { reload: true });
             });
@@ -621,13 +628,13 @@ function processPaymentsController(angular, app) {
             $scope.tempFinishGuide = self.tempFinishGuide;
         }
 
-        $scope.confirmAccept = function() {
+        $scope.confirmAccept = function () {
             self.tempFinishGuide.state = 1;
             airwayService.updateGuide(self.tempFinishGuide);
             self.confirmModal.dismiss('cancel');
         }
 
-        $scope.confirmCancel = function() {
+        $scope.confirmCancel = function () {
             self.confirmModal.dismiss('cancel');
         }
 
@@ -637,7 +644,7 @@ function processPaymentsController(angular, app) {
             self.guideNumber = 0;
             self.bills = bills;
             self.confirmModal = null;
-            angular.forEach(self.bills, function(bill) {
+            angular.forEach(self.bills, function (bill) {
                 bill.isOpen = false;
             });
             self.deleted = false;
@@ -659,11 +666,11 @@ function processPaymentsController(angular, app) {
             self.tempFinishGuide = {};
             self.tempFinishGuideIndex = 0;
             airwayService.get_airwayBills(self.venta.id, null)
-                .success(function(response) {
+                .success(function (response) {
                     self.guideBatch = response.guideBatch;
 
                     var ExceedAmount = 0;
-                    angular.forEach(self.guideBatch, function(guide) {
+                    angular.forEach(self.guideBatch, function (guide) {
                         if (guide.weight > 40 || guide.price > 900) {
                             $('#guide_list_' + guide.number).addClass('row-warning');
                             self.danger_msg = "";
@@ -681,7 +688,7 @@ function processPaymentsController(angular, app) {
                     });
                     self.danger_msg = ExceedAmount > 0 ? "Has Excedido el limite de 50 Kg o U$D 1,000.00" : "";
                 })
-                .error(function(err) {
+                .error(function (err) {
                     console.log(err);
                 });
 

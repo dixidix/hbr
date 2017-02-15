@@ -51,7 +51,7 @@
                 <td><span>{{ bill.quantity }}</span></td>
                 <td><span>{{ bill.total_weight }} KG. </span></td>
                 <td><span>{{ bill.total_price }}</span></td>
-                <td><span><i class="fa fa-edit" ng-click="shopping.showEditBill(bill, product, $index);"></i></span><span><i class="fa fa-close" ng-click="shopping.lote.bills.splice($index, 1);"></i></span></td>
+                <td><span ng-if="bill.bill_state == 0"><i class="fa fa-close" ng-click="shopping.delete_bill(bill, $index);"></i></span></td>
             </tr>
         </tbody>
     </table>
@@ -79,8 +79,8 @@
         </li>
     </ul>
 </div>
-<button class="btn btn-hbr-blue pull-right">Cancelar compra</button>
-<button class="btn btn-hbr-blue pull-right" ng-click="shopping.updateSave()">Guardar y continuar luego</button>
-<button class="btn btn-hbr-blue pull-right" ng-click="shopping.finish()">Terminar Compra</button>
+<button class="btn btn-hbr-red pull-right">Cancelar compra</button>
+<button class="btn btn-hbr-blue pull-right" ng-click="shopping.confirmUpdate()">Guardar y continuar luego</button>
+<button class="btn btn-hbr-blue pull-right" ng-click="shopping.confirmFinish()">Terminar Compra</button>
 </ul>
 </div>

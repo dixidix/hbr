@@ -196,6 +196,10 @@
 }
 
 .process_payments {
+    a{
+        cursor:pointer;
+        color:$hbr-blue;
+    }
     .payed {
         color: green;
     }

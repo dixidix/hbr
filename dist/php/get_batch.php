@@ -44,6 +44,7 @@ $res = MysqliDB::getInstance()->query("SELECT * from ventas WHERE deleted = 0");
 			$outpm .= '{"bill_id":"'   . $rss["bill_id"].'",';
 			$outpm .= '"establishment":"'  . $rss["establishment"] . '",';
 			$outpm .= '"whId":"'  . $rss["whId"] . '",';
+			$outpm .= '"bill_state":"'  . $rss["bill_state"] . '",';
 
 			$wh =  MysqliDB::getInstance()->query("SELECT * FROM users where id =" . $rss["whId"] . " and deleted = 0");
 			while($rswh = $wh->fetch_array(MYSQLI_ASSOC)) {
@@ -133,7 +134,8 @@ $res = MysqliDB::getInstance()->query("SELECT * from ventas WHERE deleted = 0 AN
 			$outpm .= '{"bill_id":"'   . $rss["bill_id"].'",';
 			$outpm .= '"establishment":"'  . $rss["establishment"] . '",';
 			$outpm .= '"whId":"'  . $rss["whId"] . '",';
-
+			$outpm .= '"bill_state":"'  . $rss["bill_state"] . '",';
+			
 			$wh =  MysqliDB::getInstance()->query("SELECT * FROM users where id =" . $rss["whId"] . " and deleted = 0");
 			while($rswh = $wh->fetch_array(MYSQLI_ASSOC)) {
 				if ($outpwh != "") {$outpwh .= ",";}

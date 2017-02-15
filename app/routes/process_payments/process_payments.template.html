@@ -34,7 +34,7 @@
             <thead>
                 <tr>
                     <td><span>Lot #</span></td>
-                    <td><span>Request Date</span></td>
+                    <td style="width: 100px;"><span>Request Date</span></td>
                     <td><span>Price</span></td>
                     <td><span>Total Weight</span></td>
                     <td><span>Products quantity </span></td>
@@ -44,6 +44,7 @@
                     <td><span>Total Freight</span></td>
                     <td><span>Total</span></td>
                     <td><span>Total Taxes <br> (to pay upon delivery)</span></td>
+                    <td><span>Days since request</span></td>
                     <td><span>Actions</span></td>
                 </tr>
             </thead>
@@ -72,14 +73,19 @@
                         <span ng-if="venta.totalImpuestos > 0">{{ venta.totalImpuestos | currency}}</span>
                         <span ng-if="venta.totalImpuestos == 0">No Info.</span>
                     </td>
+                    <td><span ng-class="processPayments.daysSinceRequest < 7 ? 'text-sucess':'text-danger'"><b>{{ venta.daysSinceRequest }}</b></span></td>
                     <td ng-if="venta.paymentGatewayUrl" ng-class="venta.state == 1 ? 'payed' : 'unpayed' "><span ng-bind="venta.state == 0 ? 'Pendiente de pago' : 'Pagado'"></span></td>
                     <td ng-if="!venta.paymentGatewayUrl">
-                        <button ng-click="processPayments.setGuides(venta, venta.bills)" class="btn btn-default">Make AWB</button>
+                        <div style="display: flex;flex-direction: row; justify-content: space-between">
+                            <a  tooltip-placement="top" uib-tooltip="Make AWB" ng-click="processPayments.setGuides(venta, venta.bills)"><i class="fa fa-gear"></i></a>
+                            <a  tooltip-placement="top" uib-tooltip="Finish Lot" ng-click="processPayments.setGuides(venta, venta.bills)"> <i class=" fa fa-share-square-o"></i></a>
+                        </div>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <ul uib-pagination total-items="filtered.length" ng-model="currentPage" max-size="maxSize" class="pagination-sm pull-right" boundary-links="true" force-ellipses="true"></ul>
+        <ul uib-pagination total-items="filtered.length" ng-model="currentPage" max-size="maxSize" class="pagination-sm pull-right"
+            boundary-links="true" force-ellipses="true"></ul>
     </div>
 
     <div ng-include src="'hbr-selfie/dist/routes/process_payments/modals/processPayments.template.html'"></div>

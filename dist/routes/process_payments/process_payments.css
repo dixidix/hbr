@@ -118,6 +118,171 @@ form {
 /* Fonts */
 /** Devices Breakpoints **/
 /** Mixins for responsive content **/
+.modal-dialog {
+  width: 90%;
+  margin-top: 100px; }
+  .modal-dialog .fa-save {
+    margin-right: 15px; }
+  .modal-dialog .switch {
+    width: 42px;
+    height: 20px;
+    background: #19156a;
+    border-color: #19156a; }
+  .modal-dialog .switch small {
+    width: 20px;
+    height: 20px; }
+  .modal-dialog .switch.checked {
+    background: #b4ec13;
+    border-color: #b4ec13; }
+  .modal-dialog .switch.checked small {
+    /* button when enabled */ }
+  .modal-dialog .btn-hbr-blue {
+    width: 150px;
+    height: 50px;
+    color: #b4ec13;
+    background: #19156a;
+    border: none;
+    border-radius: 3px;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-family: "museoSans-500", Arial;
+    font-weight: bold; }
+  .modal-dialog .btn-hbr-red {
+    width: 150px;
+    height: 50px;
+    color: white;
+    background: #19156a;
+    border: none;
+    border-radius: 3px;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-family: "museoSans-500", Arial;
+    font-weight: bold;
+    background: darkred; }
+  .modal-dialog .modal-body input::-webkit-outer-spin-button,
+  .modal-dialog .modal-body input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0;
+    /* <-- Apparently some margin are still there even though it's hidden */ }
+  .modal-dialog .modal-body p {
+    padding: 20px 30px;
+    white-space: pre-wrap;
+    font-size: 18px;
+    line-height: 28px;
+    text-align: justify; }
+  .modal-dialog .modal-body .controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end; }
+    .modal-dialog .modal-body .controls label {
+      white-space: nowrap;
+      margin-right: 10px; }
+    .modal-dialog .modal-body .controls button {
+      margin-left: 10px; }
+    .modal-dialog .modal-body .controls i {
+      font-size: 18px;
+      vertical-align: middle; }
+  .modal-dialog .modal-body .input-group-addon {
+    background-color: #b4ec13;
+    color: #19156a;
+    border-color: #19156a;
+    font-family: "museoSans-500", Arial;
+    min-width: 45px; }
+  .modal-dialog .modal-body .form-control {
+    outline: none;
+    border-color: #19156a;
+    box-shadow: none; }
+  .modal-dialog .modal-body h3 {
+    color: #19156a;
+    margin-top: 0; }
+  .modal-dialog .modal-body hr {
+    background-color: #19156a;
+    height: 1px;
+    border: 0;
+    margin-bottom: 50px; }
+  .modal-dialog .modal-body a {
+    outline: none;
+    box-shadow: none;
+    text-shadow: none;
+    text-decoration: none;
+    cursor: pointer; }
+  .modal-dialog .modal-body .product-action i {
+    padding: 0px 30px; }
+  .modal-dialog .modal-body input {
+    width: 100%; }
+  .modal-dialog .modal-body ul {
+    list-style: none; }
+    .modal-dialog .modal-body ul li strong {
+      font-family: "museoSans-500", Arial; }
+  .modal-dialog .modal-body h3.table-title {
+    margin: 15px 0px; }
+  .modal-dialog .modal-body .product-table {
+    padding-top: 30px; }
+  .modal-dialog .modal-body .table {
+    border: 0.1px solid #19156a; }
+    .modal-dialog .modal-body .table .empty_product {
+      cursor: not-allowed !important;
+      background-color: #eee; }
+      .modal-dialog .modal-body .table .empty_product a {
+        cursor: not-allowed; }
+      .modal-dialog .modal-body .table .empty_product .remaining-products {
+        color: red !important; }
+    .modal-dialog .modal-body .table .empty_bill .remaining-products {
+      color: red !important; }
+  .modal-dialog .modal-body .table-bordered > tbody .row-danger {
+    background-color: rgba(255, 0, 0, 0.4);
+    font-weight: bold; }
+  .modal-dialog .modal-body .table-bordered > tbody .row-warning {
+    background-color: rgba(241, 241, 18, 0.4);
+    font-weight: bold; }
+  .modal-dialog .modal-body .table-bordered > tbody .row-finished {
+    background-color: #7a8699;
+    cursor: not-allowed;
+    pointer-events: none;
+    color: #2e2e2e; }
+    .modal-dialog .modal-body .table-bordered > tbody .row-finished i,
+    .modal-dialog .modal-body .table-bordered > tbody .row-finished a {
+      color: #2e2e2e; }
+  .modal-dialog .modal-body .table-bordered > thead > tr > th,
+  .modal-dialog .modal-body .table-bordered > tbody > tr > th,
+  .modal-dialog .modal-body .table-bordered > tfoot > tr > th,
+  .modal-dialog .modal-body .table-bordered > thead > tr > td,
+  .modal-dialog .modal-body .table-bordered > tbody > tr > td,
+  .modal-dialog .modal-body .table-bordered > tfoot > tr > td {
+    border: 0.1px solid #19156a;
+    text-align: center; }
+  .modal-dialog .modal-body .rounded {
+    padding-top: 2%; }
+    .modal-dialog .modal-body .rounded thead {
+      margin-top: 5%; }
+      .modal-dialog .modal-body .rounded thead tr {
+        font-family: "museoSans-500", Arial;
+        background: #b4ec13;
+        color: #19156a;
+        text-align: center;
+        font-size: 12px; }
+    .modal-dialog .modal-body .rounded tbody tr td {
+      text-align: center;
+      vertical-align: middle; }
+      .modal-dialog .modal-body .rounded tbody tr td span {
+        font-size: 12px; }
+        .modal-dialog .modal-body .rounded tbody tr td span i {
+          cursor: pointer;
+          vertical-align: middle;
+          margin: 0 5px;
+          font-size: 12px; }
+          .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-file-pdf-o {
+            color: #DA251C; }
+          .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-edit {
+            color: green; }
+          .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-close {
+            color: red; }
+          .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-folder-open, .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-folder {
+            color: black;
+            margin-left: 15px; }
+
 .shopping {
   /*
  * Adding the animation to our element
@@ -199,6 +364,19 @@ form {
     min-width: 45px; }
   .shopping .btn-hbr-blue {
     margin: 25px 0px; }
+  .shopping .btn-hbr-red {
+    margin: 25px 0px 0px 10px;
+    width: auto;
+    height: 50px;
+    color: white;
+    background: #19156a;
+    border: none;
+    border-radius: 3px;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-family: "museoSans-500", Arial;
+    font-weight: bold;
+    background: darkred; }
   .shopping .form-control {
     outline: none;
     border-color: #19156a;
@@ -1101,6 +1279,10 @@ html {
           .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-folder-open, .modal-dialog .modal-body .rounded tbody tr td span i.fa.fa-folder {
             color: black;
             margin-left: 15px; }
+
+.process_payments a {
+  cursor: pointer;
+  color: #19156a; }
 
 .process_payments .payed {
   color: green; }

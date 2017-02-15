@@ -1,6 +1,211 @@
 @import '../../styles/mixins/main';
 @import '../../styles/modules/main';
-
+.modal-dialog {
+    width: 90%;
+    margin-top: 100px;
+    .fa-save {
+        margin-right: 15px;
+    }
+    .switch {
+        width: 42px;
+        height: 20px;
+        background: $hbr-blue;
+        border-color: $hbr-blue;
+    }
+    .switch small {
+        width: 20px;
+        height: 20px;
+    }
+    .switch.checked {
+        background: $hbr-green;
+        border-color: $hbr-green;
+    }
+    .switch.checked small {
+        /* button when enabled */
+    }
+    .btn-hbr-blue {
+        @include hbr-btn-blue(150px, 50px, $hbr-green);
+    }
+    .btn-hbr-red {
+        @include hbr-btn-blue(150px, 50px, white);
+        background:darkred;
+    }
+    .modal-body {
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            /* display: none; <- Crashes Chrome on hover */
+            -webkit-appearance: none;
+            margin: 0;
+            /* <-- Apparently some margin are still there even though it's hidden */
+        }
+        p{
+            padding: 20px 30px;
+            white-space: pre-wrap;
+            font-size: 18px;
+            line-height: 28px;
+            text-align: justify;
+        }
+        .controls {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+            label {
+                white-space: nowrap;
+                margin-right: 10px;
+            }
+            button {
+                margin-left: 10px;
+            }
+            i {
+                font-size: 18px;
+                vertical-align: middle;
+            }
+        }
+        .input-group-addon {
+            background-color: $hbr-green;
+            color: $hbr-blue;
+            border-color: $hbr-blue;
+            font-family: $museoSans-500;
+            min-width: 45px;
+        }
+        .form-control {
+            outline: none;
+            border-color: $hbr-blue;
+            box-shadow: none;
+        }
+        h3 {
+            color: $hbr-blue;
+            margin-top: 0;
+        }
+        hr {
+            background-color: $hbr-blue;
+            height: 1px;
+            border: 0;
+            margin-bottom: 50px;
+        }
+        a {
+            outline: none;
+            box-shadow: none;
+            text-shadow: none;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .product-action {
+            i {
+                padding: 0px 30px;
+            }
+        }
+        input {
+            width: 100%;
+        }
+        ul {
+            list-style: none;
+            li {
+                strong {
+                    font-family: $museoSans-500;
+                }
+            }
+        }
+        h3.table-title {
+            margin: 15px 0px;
+        }
+        .product-table {
+            padding-top: 30px;
+        }
+        .table {
+            border: 0.1px solid $hbr-blue;
+            .empty_product {
+                cursor: not-allowed !important;
+                background-color: #eee;
+                a {
+                    cursor: not-allowed;
+                }
+                .remaining-products {
+                    color: red !important;
+                }
+            }
+            .empty_bill {
+                .remaining-products {
+                    color: red !important;
+                }
+            }
+        }
+        .table-bordered>tbody {
+            .row-danger {
+                background-color: rgba(255, 0, 0, 0.4);
+                font-weight: bold;
+            }
+            .row-warning {
+                background-color: rgba(241, 241, 18, 0.4);
+                font-weight: bold;
+            }
+            .row-finished {
+                background-color: #7a8699;
+                cursor: not-allowed;
+                pointer-events: none;
+                color: #2e2e2e;
+                i,
+                a {
+                    color: #2e2e2e;
+                }
+            }
+        }
+        .table-bordered>thead>tr>th,
+        .table-bordered>tbody>tr>th,
+        .table-bordered>tfoot>tr>th,
+        .table-bordered>thead>tr>td,
+        .table-bordered>tbody>tr>td,
+        .table-bordered>tfoot>tr>td {
+            border: 0.1px solid $hbr-blue;
+            text-align: center;
+        }
+        .rounded {
+            padding-top: 2%;
+            thead {
+                margin-top: 5%;
+                tr {
+                    font-family: $museoSans-500;
+                    background: $hbr-green;
+                    color: $hbr-blue;
+                    text-align: center;
+                    font-size: 12px;
+                }
+            }
+            tbody {
+                tr {
+                    td {
+                        text-align: center;
+                        vertical-align: middle;
+                        span {
+                            font-size: 12px;
+                            i {
+                                cursor: pointer;
+                                vertical-align: middle;
+                                margin: 0 5px;
+                                font-size: 12px;
+                                &.fa.fa-file-pdf-o {
+                                    color: #DA251C;
+                                }
+                                &.fa.fa-edit {
+                                    color: green;
+                                }
+                                &.fa.fa-close {
+                                    color: red;
+                                }
+                                &.fa.fa-folder-open,
+                                &.fa.fa-folder {
+                                    color: black;
+                                    margin-left: 15px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 .shopping {
     .notification {
         position: fixed;
@@ -96,6 +301,11 @@
     }
     .btn-hbr-blue {
         margin: 25px 0px;
+    }
+    .btn-hbr-red {
+        margin: 25px 0px 0px 10px;
+        @include hbr-btn-blue(auto, 50px, white);
+        background:darkred;
     }
     .form-control {
         outline: none;
