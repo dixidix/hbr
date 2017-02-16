@@ -1210,6 +1210,16 @@ html {
 .users .table-bordered > tfoot > tr > td {
   border: 0.1px solid #19156a;
   text-align: center; }
+  .users .table-bordered > thead > tr > th .flex-row,
+  .users .table-bordered > tbody > tr > th .flex-row,
+  .users .table-bordered > tfoot > tr > th .flex-row,
+  .users .table-bordered > thead > tr > td .flex-row,
+  .users .table-bordered > tbody > tr > td .flex-row,
+  .users .table-bordered > tfoot > tr > td .flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; }
 
 .users .rounded {
   margin-top: 2%; }
@@ -1217,18 +1227,21 @@ html {
     font-family: "museoSans-500", Arial;
     background: #b4ec13;
     color: #19156a;
-    text-align: center; }
+    text-align: center;
+    font-size: 10px; }
   .users .rounded tbody tr td {
     text-align: center;
     vertical-align: middle; }
-    .users .rounded tbody tr td span i {
-      cursor: pointer;
-      vertical-align: middle;
-      margin: 0 5px;
-      font-size: 15px; }
-      .users .rounded tbody tr td span i.fa.fa-file-pdf-o {
-        color: #DA251C; }
-      .users .rounded tbody tr td span i.fa.fa-edit {
-        color: green; }
-      .users .rounded tbody tr td span i.fa.fa-close {
-        color: red; }
+    .users .rounded tbody tr td span {
+      font-size: 10px; }
+      .users .rounded tbody tr td span i {
+        cursor: pointer;
+        vertical-align: middle;
+        margin: 0 5px;
+        font-size: 10px; }
+        .users .rounded tbody tr td span i.fa.fa-file-pdf-o {
+          color: #DA251C; }
+        .users .rounded tbody tr td span i.fa.fa-edit {
+          color: green; }
+        .users .rounded tbody tr td span i.fa.fa-close {
+          color: red; }

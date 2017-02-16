@@ -4,7 +4,7 @@ function usersController(angular, app) {
   'use angular template'; //jshint ignore:line
 
   app.controller('usersCtrl', usersCtrl);
-  usersCtrl.$inject = ['usersService', '$http', '$filter', '$state', '$scope', '$uibModal'];
+  usersCtrl.$inject = ['usersService', '$scope','$filter', '$http',  '$state', '$uibModal'];
 
   app.controller('modalAddUserCtrl', modalAddUserCtrl);
   modalAddUserCtrl.$inject = ['usersService', '$scope', '$state', '$filter', '$uibModalInstance', '$sce', '$compile', 'userType', '$rootScope', '$http'];
@@ -14,7 +14,7 @@ function usersController(angular, app) {
   app.controller('modalDeleteUserCtrl', modalDeleteUserCtrl);
   modalDeleteUserCtrl.$inject = ['usersService', '$scope', '$state', '$filter', '$uibModalInstance', '$sce', '$compile', '$rootScope', 'user', '$http'];
 
-  function usersCtrl(usersService, $http, $filter, $state, $scope, $uibModal) {
+  function usersCtrl(usersService,$scope,$filter, $http,  $state,  $uibModal) {
     var self = this; //jshint ignore:line
     function edit(size, user) {
       var modalInstance = $uibModal.open({
@@ -90,7 +90,6 @@ function usersController(angular, app) {
         });
     }
     function init() {
-      $scope.filtered = [];
       self.client_type = $state.params.client_type;
       $http.get('./hbr-selfie/dist/php/users.php', {
         params: {
@@ -100,7 +99,7 @@ function usersController(angular, app) {
       }).then(function (response) {
         self.userlist = response.data.users;
 
-        $scope.totalItems = Object.keys(self.userlist).length;
+        $scope.totalItems = self.userlist.length;
             $scope.currentPage = 1;
             $scope.itemsPerPage = 5;
             $scope.maxSize = 5;

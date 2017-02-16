@@ -4,10 +4,10 @@ function categoryController(angular, app) {
     'use angular template'; //jshint ignore:line
 
     app.controller('categoryCtrl', categoryCtrl);
-    categoryCtrl.$inject = ['categoryService', '$uibModal'];
+    categoryCtrl.$inject = ['categoryService','$scope', '$filter', '$uibModal'];
 
     app.controller('modalAddcategoryCtrl', modalAddcategoryCtrl);
-    modalAddcategoryCtrl.$inject = ['categoryService', '$scope', '$state', '$filter', '$uibModalInstance', '$sce', '$compile', '$rootScope', '$http'];
+    modalAddcategoryCtrl.$inject = ['categoryService','$scope',  '$state', '$filter', '$uibModalInstance', '$sce', '$compile', '$rootScope', '$http'];
 
     app.controller('modalEditcategoryCtrl', modalEditcategoryCtrl);
     modalEditcategoryCtrl.$inject = ['categoryService', '$scope', '$state', '$filter', '$uibModalInstance', '$sce', '$compile', '$rootScope', 'category', '$http'];
@@ -15,7 +15,7 @@ function categoryController(angular, app) {
     app.controller('modalDeletecategoryCtrl', modalDeletecategoryCtrl);
     modalDeletecategoryCtrl.$inject = ['categoryService', '$scope', '$state', '$filter', '$uibModalInstance', '$sce', '$compile', '$rootScope', 'category', '$http'];
 
-    function categoryCtrl(categoryService, $uibModal) {
+    function categoryCtrl(categoryService, $scope, $filter, $uibModal) {
         var self = this; //jshint ignore:line
 
 
@@ -59,17 +59,30 @@ function categoryController(angular, app) {
         function init() {
             categoryService
                 .get_categories()
-                .success(function (data) {
-                    self.categories = data.categories;
-                })
-                .error(function (error) {
-                    console.log(error);
+                .then(function (response) {
+                    self.category_list = response.data.category_list;
+                    $scope.totalItems = self.category_list.length;
+                    $scope.currentPage = 1;
+                    $scope.itemsPerPage = 5;
+                    $scope.maxSize = 5;
+  
                 });
+              
             self.newcategory = newcategory;
             self.editcategory = editcategory;
             self.removecategory = removecategory;
         }
+        $scope.setPage = function(pageNo) {
+            $scope.currentPage = pageNo;
+        };
+        $scope.pageChanged = function() {
 
+        };
+        $scope.$watch('search', function(term) {
+            var obj = term;
+            $scope.filtered = $filter('filter')(self.category_list, obj);
+            $scope.currentPage = 1;
+        });
         init();
     }
 

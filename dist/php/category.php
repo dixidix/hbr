@@ -149,7 +149,8 @@ function getAllcategories($data){
 		}
 		$outp .= '"name":"'   . $rs["category_name"]  . '"}';
 	}
-	$outp ='{"categories":['.$outp.']}';
+	$outp ='{"category_list":['.$outp.']}';
+
 
 	echo($outp);
 }

@@ -1227,6 +1227,16 @@ html {
 .category .table-bordered > tfoot > tr > td {
   border: 0.1px solid #19156a;
   text-align: center; }
+  .category .table-bordered > thead > tr > th .flex-row,
+  .category .table-bordered > tbody > tr > th .flex-row,
+  .category .table-bordered > tfoot > tr > th .flex-row,
+  .category .table-bordered > thead > tr > td .flex-row,
+  .category .table-bordered > tbody > tr > td .flex-row,
+  .category .table-bordered > tfoot > tr > td .flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; }
 
 .category .rounded {
   margin-top: 2%; }
@@ -1234,21 +1244,24 @@ html {
     font-family: "museoSans-500", Arial;
     background: #b4ec13;
     color: #19156a;
-    text-align: center; }
+    text-align: center;
+    font-size: 10px; }
   .category .rounded tbody tr td {
     text-align: center;
     vertical-align: middle; }
-    .category .rounded tbody tr td span i {
-      cursor: pointer;
-      vertical-align: middle;
-      margin: 0 5px;
-      font-size: 15px; }
-      .category .rounded tbody tr td span i.fa.fa-file-pdf-o {
-        color: #DA251C; }
-      .category .rounded tbody tr td span i.fa.fa-edit {
-        color: green; }
-      .category .rounded tbody tr td span i.fa.fa-close {
-        color: red; }
+    .category .rounded tbody tr td span {
+      font-size: 10px; }
+      .category .rounded tbody tr td span i {
+        cursor: pointer;
+        vertical-align: middle;
+        margin: 0 5px;
+        font-size: 10px; }
+        .category .rounded tbody tr td span i.fa.fa-file-pdf-o {
+          color: #DA251C; }
+        .category .rounded tbody tr td span i.fa.fa-edit {
+          color: green; }
+        .category .rounded tbody tr td span i.fa.fa-close {
+          color: red; }
 
 .category.wh-modal .btn-hbr-blue {
   width: 150px;

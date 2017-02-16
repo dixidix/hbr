@@ -13,7 +13,7 @@
 			<label for="">General Search</label>
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>
-				<input type="text" name="search" class="form-control" placeholder="Purchase Id" ng-model="generalSearch">
+				<input type="text" name="search" class="form-control" placeholder="General Search" ng-model="generalSearch">
 			</div>
 		</div>
 </div>
@@ -36,7 +36,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr  ng-repeat="user in users.userlist  | filter : generalSearch  track by $index">
+			<tr  ng-repeat="user in filtered = ( users.userlist  | filter : generalSearch )  | start: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage | filter : paginate  track by $index">
 				<td ng-if="users.client_type == 0"><span>{{ user.name }}</span></td>
 				<td ng-if="users.client_type == 0"><span>{{ user.lastname }}</span></td>
 				<td ng-if="users.client_type == 1"><span>{{ user.company_name }}</span></td>
@@ -58,6 +58,7 @@
 			</tr>
 		</tbody>
 	</table>
+	   <uib-pagination next-text="Siguiente" previous-text="Anterior" total-items="filtered.length" data-num-pages="categories.noOfPages" ng-model="currentPage" class="pagination-sm pull-right" items-per-page="itemsPerPage" boundary-link-numbers="true"></uib-pagination>
 </div>
 <div ng-include src="'hbr-selfie/dist/routes/users/modals/editUser.template.html'"></div>
 <div ng-include src="'hbr-selfie/dist/routes/users/modals/addUser.template.html'"></div>

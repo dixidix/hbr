@@ -81,7 +81,7 @@
                 </tr>
             </tbody>
         </table>
-       <ul uib-pagination total-items="filtered.length" ng-model="currentPage" max-size="maxSize" class="pagination-sm pull-right" boundary-links="true" force-ellipses="true"></ul>
+      <uib-pagination next-text="Siguiente" previous-text="Anterior" total-items="filtered.length" data-num-pages="shoppingList.noOfPages" ng-model="currentPage" class="pagination-sm pull-right" items-per-page="itemsPerPage" boundary-link-numbers="true"></uib-pagination>
     </div>
 </div>
 <div ng-include src="'hbr-selfie/dist/routes/airwayBills/modals/process-airway.template.html'"></div>

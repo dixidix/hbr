@@ -57,54 +57,62 @@
 		font-size: 16px;
 		padding:0px 5px;
 	}
-	.table {
-		border: 0.1px solid $hbr-blue;
-	}
-	.table-bordered > thead > tr > th,
-	.table-bordered > tbody > tr > th,
-	.table-bordered > tfoot > tr > th,
-	.table-bordered > thead > tr > td,
-	.table-bordered > tbody > tr > td,
-	.table-bordered > tfoot > tr > td {
-		border: 0.1px solid $hbr-blue;
-		text-align: center;
-	}
-	.rounded{
-		margin-top:2%;
-		thead{
-			tr{
-				font-family: $museoSans-500;
-				background:$hbr-green;
-				color:$hbr-blue;
-				text-align: center;
-			}
-		}
-		tbody{
-			tr{
-				td{
-					text-align: center;
-					vertical-align: middle;
-					span{
-						i{
-							cursor: pointer;
-							vertical-align: middle;
-							margin:0 5px;
-							font-size: 15px;
-							&.fa.fa-file-pdf-o{
-								color:#DA251C;
-							}
-							&.fa.fa-edit{
-								color:green;
-							}
-							&.fa.fa-close{
-								color:red;
-							}
-						}
-					}
-				}
-			}			
-		}
-	}
+    .table {
+        border: 0.1px solid $hbr-blue;
+    }
+    .table-bordered>thead>tr>th,
+    .table-bordered>tbody>tr>th,
+    .table-bordered>tfoot>tr>th,
+    .table-bordered>thead>tr>td,
+    .table-bordered>tbody>tr>td,
+    .table-bordered>tfoot>tr>td {
+        border: 0.1px solid $hbr-blue;
+        text-align: center;
+        .flex-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .rounded {
+        margin-top: 2%;
+        thead {
+            tr {
+                font-family: $museoSans-500;
+                background: $hbr-green;
+                color: $hbr-blue;
+                text-align: center;
+                font-size: 10px;
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    text-align: center;
+                    vertical-align: middle;
+                    span {
+                        font-size: 10px;
+                        i {
+                            cursor: pointer;
+                            vertical-align: middle;
+                            margin: 0 5px;
+                            font-size: 10px;
+                            &.fa.fa-file-pdf-o {
+                                color: #DA251C;
+                            }
+                            &.fa.fa-edit {
+                                color: green;
+                            }
+                            &.fa.fa-close {
+                                color: red;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 	&.wh-modal{
 		.btn-hbr-blue{
 			@include hbr-btn-blue(150px,50px,$hbr-green);

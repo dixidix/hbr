@@ -4,7 +4,7 @@ function warehouseController(angular, app) {
     'use angular template'; //jshint ignore:line
 
     app.controller('warehouseCtrl', warehouseCtrl);
-    warehouseCtrl.$inject = ['$http', '$filter', '$state', '$scope', '$uibModal', 'warehouseService'];
+    warehouseCtrl.$inject = ['$http', '$scope', '$filter', '$state', '$uibModal', 'warehouseService'];
 
     app.controller('modalAddWarehouseCtrl', modalAddWarehouseCtrl);
     modalAddWarehouseCtrl.$inject = ['warehouseService', '$scope', '$state', '$filter', '$uibModalInstance', '$sce', '$compile', '$rootScope', '$http'];
@@ -15,7 +15,7 @@ function warehouseController(angular, app) {
     app.controller('modalDeleteWarehouseCtrl', modalDeleteWarehouseCtrl);
     modalDeleteWarehouseCtrl.$inject = ['warehouseService', '$scope', '$state', '$filter', '$uibModalInstance', '$sce', '$compile', '$rootScope', 'warehouse', '$http', 'warehouseService'];
 
-    function warehouseCtrl($http, $filter, $state, $scope, $uibModal) {
+    function warehouseCtrl($http, $scope, $filter, $state, $uibModal) {
         var self = this; //jshint ignore:line
 
         function add(size) {
@@ -68,7 +68,6 @@ function warehouseController(angular, app) {
         }
 
         function init() {
-             $scope.filtered = [];
             $http.get('./hbr-selfie/dist/php/warehouse.php', {
                 params: {
                     action: 'getAll'
@@ -76,7 +75,7 @@ function warehouseController(angular, app) {
             }).then(function(response) {
                 self.warehouses = response.data.warehouses;
 
-                $scope.totalItems = Object.keys(self.warehouses).length;
+                $scope.totalItems = self.warehouses.length;
                 $scope.currentPage = 1;
                 $scope.itemsPerPage = 5;
                 $scope.maxSize = 5;
