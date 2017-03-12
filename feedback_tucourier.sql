@@ -1,33 +1,5 @@
--- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 16-02-2017 a las 19:47:31
--- Versión del servidor: 10.1.16-MariaDB
--- Versión de PHP: 5.6.24
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `feedback_tucourier`
---
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `airway_bill`
---
-
-CREATE TABLE `airway_bill` (
-  `airwayId` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `airway_bill` (
+  `airwayId` int(11) NOT NULL AUTO_INCREMENT,
   `ventaId` int(11) NOT NULL,
   `number` int(150) NOT NULL,
   `quantity` int(150) NOT NULL,
@@ -57,17 +29,12 @@ CREATE TABLE `airway_bill` (
   `transfer_bank_name` varchar(150) DEFAULT NULL,
   `transfer_cuit` varchar(150) DEFAULT NULL,
   `transfer_cbu` varchar(150) DEFAULT NULL,
-  `paymentDesc` text
+  `paymentDesc` text,
+  PRIMARY KEY (`airwayId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `airway_bill_product`
---
-
-CREATE TABLE `airway_bill_product` (
-  `awb_productId` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `airway_bill_product` (
+  `awb_productId` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `airwayId` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
@@ -78,17 +45,12 @@ CREATE TABLE `airway_bill_product` (
   `real_weight` float NOT NULL,
   `total_weight` float NOT NULL,
   `userId` int(11) NOT NULL,
-  `deleted` int(11) NOT NULL DEFAULT '0'
+  `deleted` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`awb_productId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `bills`
---
-
-CREATE TABLE `bills` (
-  `bill_id` int(100) NOT NULL,
+CREATE TABLE IF NOT EXISTS `bills` (
+  `bill_id` int(100) NOT NULL AUTO_INCREMENT,
   `ventaId` int(11) NOT NULL,
   `whId` int(11) DEFAULT NULL,
   `establishment` varchar(150) NOT NULL,
@@ -104,29 +66,19 @@ CREATE TABLE `bills` (
   `userId` int(150) NOT NULL,
   `bill_file_name` varchar(150) NOT NULL,
   `bill_file_path` varchar(150) NOT NULL,
-  `bill_state` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `bill_state` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`bill_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `categories`
---
-
-CREATE TABLE `categories` (
-  `category_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `categories` (
+  `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(150) NOT NULL,
-  `deleted` int(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `deleted` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `products`
---
-
-CREATE TABLE `products` (
-  `product_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `products` (
+  `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `bill_id` int(100) NOT NULL,
   `category_id` int(100) NOT NULL,
   `name` varchar(150) NOT NULL,
@@ -138,17 +90,12 @@ CREATE TABLE `products` (
   `weight` float NOT NULL,
   `real_weight` float NOT NULL,
   `userId` int(11) NOT NULL,
-  `deleted` int(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `deleted` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `users`
---
-
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(65) NOT NULL,
   `lastname` varchar(65) NOT NULL,
   `company_name` varchar(150) DEFAULT NULL,
@@ -170,26 +117,12 @@ CREATE TABLE `users` (
   `isAdmin` int(1) NOT NULL DEFAULT '0',
   `isPremium` int(1) DEFAULT '0',
   `client_type` int(1) NOT NULL DEFAULT '0',
-  `showTutorial` int(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `showTutorial` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `users`
---
-
-INSERT INTO `users` (`id`, `name`, `lastname`, `company_name`, `company_real_name`, `warehouse_name`, `tel`, `cel`, `email`, `password`, `sskey`, `codeType`, `idCode`, `deleted`, `address`, `localidad`, `postalcode`, `registerToken`, `registertimestamp`, `isAdmin`, `isPremium`, `client_type`, `showTutorial`) VALUES
-(1, 'Santiago', 'LLoret', '', '', '', '+54911-123456789', 54911, 'santiago.lloret@tucourier.com.ar', '21232f297a57a5a743894a0e4a801fc3', '654a0d2a82afe3b135091c25693c3660', 1, '27-8978912378912-7', 0, 'Av. Corrientes 123', 'Buenos Aires, Capital Federal', '1101', 'd6f81559201988fde9039bf45bcae1b4', 1487257235, 1, 0, 0, 0),
-(2, '', '', '', '', 'GL', '2613412351', 2147483647, 'nicolas.sigal@globallogic.com', '69f9003053357d4e4f1d9c12985f3c19', NULL, 1, '231231231231237', 0, 'Av. Mitre 870', 'Mendoza', '', 'c5ea21426b2675e72f6f9d4323458928', 1487257730, 0, 0, 2, 0),
-(3, 'Test', 'User', '', '', '', '123456789', 123456789, 'nicolas.sigal@gmail.com', '098f6bcd4621d373cade4e832627b4f6', 'e6567f02b4b2519eb27045f4ba48fe31', 2, '27-12312312321-7', 0, 'Calle Falsa 123', 'Mendoza', '55500', '27bed4482a7803b9426925d6fdecace8', 1487257855, 0, 0, 0, 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `ventas`
---
-
-CREATE TABLE `ventas` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `ventas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL,
   `parcial_price` float NOT NULL,
   `total` double NOT NULL,
@@ -201,94 +134,27 @@ CREATE TABLE `ventas` (
   `totalweight` double DEFAULT NULL,
   `guide_amount` int(11) DEFAULT '0',
   `status` varchar(150) NOT NULL DEFAULT 'En Curso',
-  `reason` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `reason` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
---
--- Índices para tablas volcadas
---
 
---
--- Indices de la tabla `airway_bill`
---
-ALTER TABLE `airway_bill`
-  ADD PRIMARY KEY (`airwayId`);
 
---
--- Indices de la tabla `airway_bill_product`
---
-ALTER TABLE `airway_bill_product`
-  ADD PRIMARY KEY (`awb_productId`);
 
---
--- Indices de la tabla `bills`
---
-ALTER TABLE `bills`
-  ADD PRIMARY KEY (`bill_id`);
 
---
--- Indices de la tabla `categories`
---
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`category_id`);
+INSERT INTO `bills` (`bill_id`,`ventaId`,`whId`,`establishment`,`number`,`provider`,`quantity`,`remaining_quantity`,`timestamp`,`totalprice`,`totalweight`,`trackingnumber`,`deleted`,`userId`,`bill_file_name`,`bill_file_path`,`bill_state`) VALUES (1,1,2,'Tst','Tst','Tst',7,7,'0000-00-00 00:00:00',26,26,'Tst',0,3,'QATEST.pdf','/dist/files/1489330077246/414fd1561cc0d4d76b140e0336fdc4b2cae75091dbd3a49b28e88357557e4f9c.pdf',0);
+INSERT INTO `bills` (`bill_id`,`ventaId`,`whId`,`establishment`,`number`,`provider`,`quantity`,`remaining_quantity`,`timestamp`,`totalprice`,`totalweight`,`trackingnumber`,`deleted`,`userId`,`bill_file_name`,`bill_file_path`,`bill_state`) VALUES (2,1,2,'Tst2','Tst2','Tst2',6,6,'0000-00-00 00:00:00',20,20,'Tst2',0,3,'QATEST.pdf','/dist/files/1489330077299/5da9969acdb08b53486c02e25db8caad2c7815aa1ab447c6a36b119a7532e835.pdf',0);
 
---
--- Indices de la tabla `products`
---
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`product_id`);
+INSERT INTO `categories` (`category_id`,`category_name`,`deleted`) VALUES (1,'testCat',0);
+INSERT INTO `categories` (`category_id`,`category_name`,`deleted`) VALUES (2,'testCat2',0);
 
---
--- Indices de la tabla `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+INSERT INTO `products` (`product_id`,`bill_id`,`category_id`,`name`,`price`,`quantity`,`remaining_quantity`,`totalprice`,`totalweight`,`weight`,`real_weight`,`userId`,`deleted`) VALUES (1,1,1,'Tst',3,2,2,6,6,3,3,3,0);
+INSERT INTO `products` (`product_id`,`bill_id`,`category_id`,`name`,`price`,`quantity`,`remaining_quantity`,`totalprice`,`totalweight`,`weight`,`real_weight`,`userId`,`deleted`) VALUES (2,1,1,'Tst',4,5,5,20,20,4,4,3,0);
+INSERT INTO `products` (`product_id`,`bill_id`,`category_id`,`name`,`price`,`quantity`,`remaining_quantity`,`totalprice`,`totalweight`,`weight`,`real_weight`,`userId`,`deleted`) VALUES (3,2,1,'Tst2',4,4,4,16,16,4,4,3,0);
+INSERT INTO `products` (`product_id`,`bill_id`,`category_id`,`name`,`price`,`quantity`,`remaining_quantity`,`totalprice`,`totalweight`,`weight`,`real_weight`,`userId`,`deleted`) VALUES (4,2,1,'Tst2',2,2,2,4,4,2,2,3,0);
 
---
--- Indices de la tabla `ventas`
---
-ALTER TABLE `ventas`
-  ADD PRIMARY KEY (`id`);
+INSERT INTO `users` (`id`,`name`,`lastname`,`company_name`,`company_real_name`,`warehouse_name`,`tel`,`cel`,`email`,`password`,`sskey`,`codeType`,`idCode`,`deleted`,`address`,`localidad`,`postalcode`,`registerToken`,`registertimestamp`,`isAdmin`,`isPremium`,`client_type`,`showTutorial`) VALUES (1,'Santiago','LLoret','','','','+54911-123456789',54911,'santiago.lloret@tucourier.com.ar','21232f297a57a5a743894a0e4a801fc3','c354c50216838ebad1ad242c52342b6b',1,'27-8978912378912-7',0,'Av. Corrientes 123','Buenos Aires, Capital Federal','1101','d6f81559201988fde9039bf45bcae1b4',1487257235,1,0,0,0);
+INSERT INTO `users` (`id`,`name`,`lastname`,`company_name`,`company_real_name`,`warehouse_name`,`tel`,`cel`,`email`,`password`,`sskey`,`codeType`,`idCode`,`deleted`,`address`,`localidad`,`postalcode`,`registerToken`,`registertimestamp`,`isAdmin`,`isPremium`,`client_type`,`showTutorial`) VALUES (2,'','','','','GL','2613412351',2147483647,'nicolas.sigal@globallogic.com','21232f297a57a5a743894a0e4a801fc3',NULL,1,'231231231231237',0,'Av. Mitre 870','Mendoza','5500','c5ea21426b2675e72f6f9d4323458928',1487257730,0,0,2,0);
+INSERT INTO `users` (`id`,`name`,`lastname`,`company_name`,`company_real_name`,`warehouse_name`,`tel`,`cel`,`email`,`password`,`sskey`,`codeType`,`idCode`,`deleted`,`address`,`localidad`,`postalcode`,`registerToken`,`registertimestamp`,`isAdmin`,`isPremium`,`client_type`,`showTutorial`) VALUES (3,'Test','User','','','','123456789',123456789,'nicolas.sigal@gmail.com','098f6bcd4621d373cade4e832627b4f6',NULL,2,'27-12312312321-7',0,'Calle Falsa 123','Mendoza','55500','27bed4482a7803b9426925d6fdecace8',1487257855,0,0,0,1);
 
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `airway_bill`
---
-ALTER TABLE `airway_bill`
-  MODIFY `airwayId` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `airway_bill_product`
---
-ALTER TABLE `airway_bill_product`
-  MODIFY `awb_productId` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `bills`
---
-ALTER TABLE `bills`
-  MODIFY `bill_id` int(100) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `categories`
---
-ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `products`
---
-ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT de la tabla `ventas`
---
-ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+INSERT INTO `ventas` (`id`,`uid`,`parcial_price`,`total`,`total_quantity`,`total_remaining_quantity`,`timestamp`,`deleted`,`venta_state`,`totalweight`,`guide_amount`,`status`,`reason`) VALUES (1,3,46,46,13,13,'1489330077195',0,1,46,0,'Finalizado',NULL);
