@@ -229,6 +229,7 @@ function getByWhId(){
 	$outp="";
 	while($rs = $res->fetch_array(MYSQLI_ASSOC)) {
 		$outpm ="";
+		$outpuser = "";
 		if ($outp != "") {$outp .= ",";}
 
 		$outp .= '{"id":"'  . $rs["id"] . '",';
@@ -242,6 +243,30 @@ function getByWhId(){
 		$outp .= '"reason":"'  . $rs["reason"] . '",';
 		$outp .= '"total_remaining_quantity":"'  . $rs["total_remaining_quantity"] . '",';
 		$outp .= '"guide_amount":"'  . $rs["guide_amount"] . '",';
+
+		$user = MysqliDB::getInstance()->query("SELECT * FROM users  where  id =".$rs["uid"]." AND deleted = 0");
+		while($rsuser = $user->fetch_array(MYSQLI_ASSOC)) {				
+			if ($outpuser != "") {$outpuser .= ",";}
+			$outpuser .= '{"name":"'   . $rsuser["name"].'",';
+			$outpuser .= '"lastname":"'  . $rsuser["lastname"] . '",';
+			$outpuser .= '"company_real_name":"'  . $rsuser["company_real_name"] . '",';
+			$outpuser .= '"warehouse_name":"'  . $rsuser["warehouse_name"] . '",';
+			$outpuser .= '"tel":"'  . $rsuser["tel"] . '",';
+			$outpuser .= '"cel":"'  . $rsuser["cel"] . '",';
+			$outpuser .= '"email":"'  . $rsuser["email"] . '",';
+			$outpuser .= '"codeType":"'  . $rsuser["codeType"] . '",';
+			$outpuser .= '"idCode":"'  . $rsuser["idCode"] . '",';
+			$outpuser .= '"address":"'  . $rsuser["address"] . '",';
+			$outpuser .= '"localidad":"'  . $rsuser["localidad"] . '",';
+			$outpuser .= '"postalcode":"'  . $rsuser["postalcode"] . '",';
+			$outpuser .= '"isAdmin":"'  . $rsuser["isAdmin"] . '",';
+			$outpuser .= '"isPremium":"'  . $rsuser["isPremium"] . '",';
+			$outpuser .= '"client_type":"'  . $rsuser["client_type"] . '",';
+			$outpuser .= '"company_name":"'   . $rsuser["company_name"].'"}';
+		}
+
+		$outp .='"user":['.$outpuser.'],';
+
 		$uname = MysqliDB::getInstance()->query("SELECT * FROM bills where ventaId =" . $rs["id"]." and deleted= 0  and whId = ".$_GET['whId']);
 
 		while($rss = $uname->fetch_array(MYSQLI_ASSOC)) {

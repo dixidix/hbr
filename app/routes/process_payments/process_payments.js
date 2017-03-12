@@ -165,11 +165,11 @@ function processPaymentsController(angular, app) {
                     if (response.data.client_type) {
                         $scope.filtered = [];
                         $http.get('./hbr-selfie/dist/php/get_batch.php', { params: { action: "getByWhId", whId: response.data.uid } })
-                            .then(function (response) {
-                                var today = moment();
+                            .then(function (response) {                              
                                 angular.forEach(response.data.ventas, function (value, key) {
-                                    response.data.ventas[key].parcial_price = parseFloat(value.parcial_price).toFixed(2);
-                                    response.data.ventas[key].daysSinceRequest = moment(today.diff(moment(parseInt(response.data.ventas[key].timestamp))));
+                                    var requestDate = moment(parseInt(value.timestamp));
+                                    response.data.ventas[key].timestamp = moment(parseInt(value.timestamp)).format("DD/MM/YYYY HH:mm");                                 response.data.ventas[key].daysSinceRequest = moment().diff(requestDate, 'days');  
+                                    response.data.ventas[key].parcial_price = parseFloat(value.parcial_price).toFixed(2);                                    
                                     response.data.ventas[key].total = parseFloat(value.total).toFixed(2);
                                     response.data.ventas[key].peso_total = parseFloat(value.peso_total).toFixed(2);
                                     response.data.ventas[key].totalWarehouse = "0";
