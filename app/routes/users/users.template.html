@@ -8,6 +8,15 @@
 </div>
 	<br><br>
 	<hr>
+
+        <div class="col-xs-12 content" ng-if="!users.userlist.length && $root.showSpinner == false">
+        <div class="row">
+            <div class="empty-list">
+                <h3>No users have been registered yet.</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 content" ng-if="users.userlist.length">
 	<div class="row">                 
 		<div class="col-xs-6">
 			<label for="">General Search</label>
@@ -64,3 +73,4 @@
 <div ng-include src="'hbr-selfie/dist/routes/users/modals/addUser.template.html'"></div>
 <div ng-include src="'hbr-selfie/dist/routes/users/modals/deleteUser.template.html'"></div>
 
+</div>

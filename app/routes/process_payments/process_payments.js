@@ -34,6 +34,42 @@ function processPaymentsController(angular, app) {
             });
         }
 
+        function finishLot(venta){
+            self.confirmModal = $uibModal.open({
+                templateUrl: 'finish-lot.html',
+                backdrop: 'static',
+                keyboard: false,
+                scope: $scope,
+                size: 'sm'
+            });
+            $scope.tempFinishLot = venta;        
+
+        $scope.confirmFinishLot = function () {
+            $rootScope.showSpinner = true;
+            venta.reason = $scope.tempFinishLot.reason;
+           $http.post('./hbr-selfie/dist/php/shopping.php', {
+                    peso_excedente: venta.peso_excedente,
+                    id: venta.id || null,
+                    parcial_price: venta.total,
+                    total_weight: venta.total_weight,
+                    total: venta.total,
+                    total_quantity: venta.total_quantity,
+                    userId: venta.uid,
+                    venta_state: 1,
+                    status: "Finalizado por Admin.",
+                    reason: venta.reason,
+                    method: "POST"
+                })
+                .success(function (response) {
+                    $rootScope.showSpinner = false;
+                    $state.go($state.current,{},{reload:true});
+                });
+        }
+
+        $scope.confirmCancelFinishLot = function () {
+            self.confirmModal.dismiss('cancel');
+        }
+        }
 
         function makeGuidesModal(size, venta, bills) {
             var modalInstance = $uibModal.open({
@@ -64,27 +100,45 @@ function processPaymentsController(angular, app) {
 
         function init() {
             $rootScope.showSpinner = true;
+              self.finishLot = finishLot;
             self.ventas = [];
             authenticationService.checkAuth().then(function (response) {
                 if (response.data.isAdmin == 1) {
                     $scope.filtered = [];
                     $http.get('./hbr-selfie/dist/php/get_batch.php', { params: { action: "getAll" } })
                         .then(function (response) {
+                            if(response.data.ventas){
                             angular.forEach(response.data.ventas, function (value, key) {
+                                var requestDate = moment(parseInt(value.timestamp));
                                 response.data.ventas[key].timestamp = moment(parseInt(value.timestamp)).format("DD/MM/YYYY HH:mm");
-                                var requestDate = moment(parseInt(value.timestamp), "DD-MM-YYYY");
-                              
-                                response.data.ventas[key].daysSinceRequest = moment().diff(requestDate, 'days');
-                                console.log("days:", response.data.ventas[key].daysSinceRequest, requestDate, moment());
+                                                              
+                                response.data.ventas[key].daysSinceRequest = moment().diff(requestDate, 'days');                           
                                 response.data.ventas[key].parcial_price = parseFloat(value.parcial_price).toFixed(2);
                                 response.data.ventas[key].total = parseFloat(value.total).toFixed(2);
                                 response.data.ventas[key].peso_total = parseFloat(value.peso_total).toFixed(2);
                                 response.data.ventas[key].totalWarehouse = "0";
                                 response.data.ventas[key].totalFlete = "0";
                                 response.data.ventas[key].totalImpuestos = "0";
+
+                                    switch (value.status) {
+                                        case 'Finalizado': 
+                                            response.data.ventas[key].status = "Finished";                                            
+                                        break;
+                                        case 'En Curso': 
+                                            response.data.ventas[key].status = "In Progress";                                            
+                                        break;
+                                        case 'Finalizado por Admin.': 
+                                            response.data.ventas[key].status = "Finished by Admin.";                                            
+                                        break;
+                                        default:
+                                            break;
+                                    }
+
                                 $rootScope.showSpinner = false;
                             });
-
+                            
+                            }
+                            $rootScope.showSpinner = false;
                             self.ventas = response.data.ventas;
 
 
@@ -116,12 +170,26 @@ function processPaymentsController(angular, app) {
                                 angular.forEach(response.data.ventas, function (value, key) {
                                     response.data.ventas[key].parcial_price = parseFloat(value.parcial_price).toFixed(2);
                                     response.data.ventas[key].daysSinceRequest = moment(today.diff(moment(parseInt(response.data.ventas[key].timestamp))));
-                                    console.log("days:", response.data.ventas[key].daysSinceRequest)
                                     response.data.ventas[key].total = parseFloat(value.total).toFixed(2);
                                     response.data.ventas[key].peso_total = parseFloat(value.peso_total).toFixed(2);
                                     response.data.ventas[key].totalWarehouse = "0";
                                     response.data.ventas[key].totalFlete = "0";
                                     response.data.ventas[key].totalImpuestos = "0";
+
+                                    switch (value.status) {
+                                        case 'Finalizado': 
+                                            response.data.ventas[key].status = "Finished";                                            
+                                        break;
+                                        case 'En Curso': 
+                                            response.data.ventas[key].status = "In Progress";                                            
+                                        break;
+                                        case 'Finalizado por Admin.': 
+                                            response.data.ventas[key].status = "Finished by Admin.";                                            
+                                        break;
+                                        default:
+                                            break;
+                                    }
+
                                     $rootScope.showSpinner = false;
                                 });
 
@@ -148,6 +216,7 @@ function processPaymentsController(angular, app) {
                                 });
                                 self.processPayment = processPayment;
                                 self.setGuides = setGuides;
+                              
                             });
                     }
                 }
@@ -603,7 +672,6 @@ function processPaymentsController(angular, app) {
                 ventaQuantity = parseInt(parseInt(ventaQuantity) + parseInt(bill.remaining_quantity));
             });
             self.venta.total_remaining_quantity = ventaQuantity;
-            console.log(self.venta.total_remaining_quantity);
             self.venta.guide_amount = self.guideBatch.length;
             airwayService.updateVenta(self.venta).success(function (response) {
                 $uibModalInstance.dismiss('cancel');

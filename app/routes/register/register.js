@@ -26,6 +26,7 @@ function registerController(angular, app) {
                         self.success = true;
                         $rootScope.showSpinner = false;
                     } else {
+                         $rootScope.showSpinner = false;
                         if (response.data.errors.existingEmail) {
                             self.existingEmail = response.data.errors.existingEmail;
                             self.registerForm.email.$invalid = true;

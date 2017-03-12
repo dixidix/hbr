@@ -25,12 +25,14 @@ function shoppingController(angular, app) {
         function finish() {
             var requests = [];
             var whEmail = [];
+            var timestamp = self.lote.timestamp || new Date().getTime();
             self.spinner = true;
             self.lote.total_price = 0.00;
             self.lote.parcial_price = 0.00;
             self.lote.total_weight = 0.00;
             self.lote.total_quantity = 0;
             self.lote.venta_state = 1;
+            self.lote.status = "Finalizado";
             angular.forEach(self.lote.bills, function (k, v) {
                 self.lote.total_price = parseFloat(self.lote.total_price) + parseFloat(k.total_price);
                 self.lote.parcial_price = parseFloat(self.lote.parcial_price) + parseFloat(k.total_price);
@@ -40,7 +42,11 @@ function shoppingController(angular, app) {
                     key.categoryId = parseInt(key.category.category_id);
                 });
             });
-
+            if(self.lote.total_quantity > 0 && self.lote.total_spent_quantity){
+                var total_remaining_quantity = parseInt(self.lote.total_quantity) - (self.lote.total_spent_quantity);
+            } else {
+                var total_remaining_quantity = self.lote.total_quantity;
+            }
             $http
                 .post('./hbr-selfie/dist/php/shopping.php', {
                     peso_excedente: self.lote.peso_excedente,
@@ -50,8 +56,10 @@ function shoppingController(angular, app) {
                     total: self.lote.total_price,
                     total_quantity: self.lote.total_quantity,
                     userId: self.lote.user.id,
-                    timestamp: new Date().getTime(),
+                    timestamp: timestamp,
                     venta_state: self.lote.venta_state,
+                    status: self.lote.status,
+                    total_remaining_quantity: total_remaining_quantity,
                     method: "POST"
                 })
                 .success(function (response) {
@@ -92,25 +100,19 @@ function shoppingController(angular, app) {
                     }
                 });
         }
-        function confirmUpdate() {
-            var title = "Continuar Luego";
-            var msg = "Recuerde que tiene 7 dias para seguir comprando dentro de este lote de compra. A la vez hasta que el lote no este cerrado sus envíos no serán despachados a su domicilio. Ante la necesidad de despachar el lote puede optar por finalizar la compra e iniciar una compra nueva.";
-            confirm(title, msg);
-        }
-        function confirmFinish() {
-            var title = "Finalizar Compra";
-            var msg = "Esta seguro que desea finalizar la compra? al finalizar la compra ya no podrá seguir agregando facturas al lote de compras.";
-            confirm(title, msg);
-        }
+
         function updateSave() {
             var requests = [];
             var whEmail = [];
+            var timestamp = self.lote.timestamp || new Date().getTime();
+           
             self.spinner = true;
             self.lote.total_price = 0.00;
             self.lote.parcial_price = 0.00;
             self.lote.total_weight = 0.00;
             self.lote.total_quantity = 0;
             self.lote.venta_state = 0;
+            self.lote.status = "En Curso";
             angular.forEach(self.lote.bills, function (k, v) {
                 k.bill_state = 1;
                 self.lote.total_price = parseFloat(self.lote.total_price) + parseFloat(k.total_price);
@@ -121,7 +123,11 @@ function shoppingController(angular, app) {
                     key.categoryId = parseInt(key.category.category_id);
                 });
             });
-
+            if(self.lote.total_quantity > 0 && self.lote.total_spent_quantity){
+                var total_remaining_quantity = parseInt(self.lote.total_quantity) - (self.lote.total_spent_quantity);
+            } else {
+                var total_remaining_quantity = self.lote.total_quantity;
+            }
             $http
                 .post('./hbr-selfie/dist/php/shopping.php', {
                     peso_excedente: self.lote.peso_excedente,
@@ -131,8 +137,10 @@ function shoppingController(angular, app) {
                     total: self.lote.total_price,
                     total_quantity: self.lote.total_quantity,
                     userId: self.lote.user.id,
-                    timestamp: new Date().getTime(),
+                    timestamp:timestamp,
                     venta_state: self.lote.venta_state,
+                    status: self.lote.status,
+                    total_remaining_quantity: total_remaining_quantity,
                     method: "POST"
                 })
                 .success(function (response) {
@@ -186,18 +194,40 @@ function shoppingController(angular, app) {
             $scope.msg = msg;
         }
 
-        $scope.confirmAccept = function () {
-            self.confirmModal.dismiss('cancel');
-        }
+        function confirmUpdate() {
+            var title = "Continuar Luego";
+            var msg = "Recuerde que tiene 7 dias para seguir comprando dentro de este lote de compra. A la vez hasta que el lote no este cerrado sus envíos no serán despachados a su domicilio. Ante la necesidad de despachar el lote puede optar por finalizar la compra e iniciar una compra nueva.";
+            confirm(title, msg);
 
-        $scope.confirmCancel = function () {
-            self.confirmModal.dismiss('cancel');
+            $scope.confirmAccept = function () {
+                self.updateSave();
+                self.confirmModal.dismiss('cancel');
+            }
+
+            $scope.confirmCancel = function () {
+                self.confirmModal.dismiss('cancel');
+            }
         }
+        function confirmFinish() {
+            var title = "Finalizar Compra";
+            var msg = "Esta seguro que desea finalizar la compra? al finalizar la compra ya no podrá seguir agregando facturas al lote de compras.";
+            confirm(title, msg);
+
+            $scope.confirmAccept = function () {
+                self.finish();
+                self.confirmModal.dismiss('cancel');
+            }
+
+            $scope.confirmCancel = function () {
+                self.confirmModal.dismiss('cancel');
+            }
+        }
+        
         function get_categories() {
             categoryService
                 .get_categories()
                 .success(function (data) {
-                    self.categories = data.categories;
+                    self.categories = data.category_list;
 
                     if (self.lote.bills.length > 0) {
                         angular.forEach(self.lote.bills, function (bill) {
@@ -317,7 +347,6 @@ function shoppingController(angular, app) {
         }
 
         function closeNotification() {
-            console.log("removes");
             $('.notification').removeClass('notification-in');
             $('.notification').addClass('notification-out');
         }
@@ -458,11 +487,14 @@ function shoppingController(angular, app) {
                 self.lote.total_price = 0.00;
                 self.lote.total_weight = 0.00;
                 self.lote.total_quantity = 0;
+                
                 angular.forEach(self.lote.bills, function (bill) {
                     self.lote.total_price = (parseFloat(self.lote.total_price) + parseFloat(bill.total_price)).toFixed(2);
                     self.lote.total_quantity = parseInt(self.lote.total_quantity) + parseInt(bill.quantity);
                     self.lote.total_weight = (parseFloat(self.lote.total_weight) + parseFloat(bill.total_weight)).toFixed(2);
                 });
+
+                self.lote.total_spent_quantity = parseInt(self.lote.total_quantity)  - parseInt(self.lote.total_remaining_quantity);
             }
 
             self.get_warehouses = get_warehouses;

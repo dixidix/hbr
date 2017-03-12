@@ -37,13 +37,13 @@
                     <td><span>Peso Total</span></td>
                     <td class="large-row"><span>Precio Total</span></td>
                     <td class="large-row"><span>Estado</span></td>
-                    <td><span>M&aacute;s Info.</span></td>
+                    <td style="width:155px"><span>M&aacute;s Info.</span></td>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="venta in filtered = (shoppingList.ventas | filter: { id: searchByPurchase } | filter: { timestamp : searchByDate }) | orderBy: '-timestamp'  | start: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage | filter : paginate track by $index">
                     <td><span>{{ venta.id }}</span></td>                    
-                    <td><span>{{ venta.timestamp}}</span></td>      
+                    <td><span>{{ venta.requestDate}}</span></td>      
                     <td><span>{{ venta.bills.length }}</span></td>             
                     <td><span>{{ venta.total_quantity }}</span></td>
                     <td><span>{{ venta.total_remaining_quantity }}</span></td>
@@ -51,7 +51,7 @@
                     <td ng-if="venta.guide_amount == '0'"><span class="unpayed"> Procesando Info.</span></td>
                     <td><span>{{ venta.total_weight }} Kg.</span></td>
                     <td><span> {{ venta.total | currency }}</span></td>
-                    <td><span class="text-danger" ng-if="venta.venta_state == 0">En Curso</span><span class="text-success" ng-if="venta.venta_state == 1">Enviado</span></td>
+                    <td><span>{{ venta.status }}  <i ng-if="venta.status === 'Finalizado por Admin.'" style="font-size: 14px;vertical-align: middle;margin: 0;padding: 5px;" class="fa fa-info-circle" tooltip-placement="top" uib-tooltip="{{venta.reason}}"></i></span></td>
                     <td>
                         <button ng-click="shoppingList.moreInfo(venta.bills)" class="btn btn-default pull-left"> <i class="fa fa-plus"></i> Info </button>
                         <button ng-if="venta.venta_state == 0" ng-click="shoppingList.continuePurchase(venta)" class="btn btn-default pull-right"> Continuar </button>
@@ -59,7 +59,7 @@
                 </tr>
             </tbody>            
         </table>    
-        <uib-pagination next-text="Siguiente" previous-text="Anterior" total-items="filtered.length" data-num-pages="shoppingList.noOfPages" ng-model="currentPage" class="pagination-sm pull-right" items-per-page="itemsPerPage" boundary-link-numbers="true"></uib-pagination>
+        <uib-pagination ng-if="shoppingList.ventas.length" next-text="Siguiente" previous-text="Anterior" total-items="filtered.length" data-num-pages="shoppingList.noOfPages" ng-model="currentPage" class="pagination-sm pull-right" items-per-page="itemsPerPage" boundary-link-numbers="true"></uib-pagination>
     </div>
     <div ng-include src="'hbr-selfie/dist/routes/shopping_list/moreinfo/moreinfo.template.html'"></div>
 </div>

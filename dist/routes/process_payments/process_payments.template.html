@@ -39,6 +39,7 @@
                 <tr>
                     <td><span>Lot #</span></td>
                     <td style="width: 100px;"><span>Request Date</span></td>
+                    <td style="width: 100px;"><span>Client</span></td>
                     <td><span>Price</span></td>
                     <td><span>Total Weight</span></td>
                     <td><span>Products quantity </span></td>
@@ -48,14 +49,16 @@
                     <td><span>Total Freight</span></td>
                     <td><span>Total</span></td>
                     <td><span>Total Taxes <br> (to pay upon delivery)</span></td>
+                    <td><span>Status</span></td>
                     <td><span>Days since request</span></td>
-                    <td><span>Actions</span></td>
+                    <td style="width:50px"><span>Actions</span></td>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="venta in filtered = ( processPayments.ventas |filter: { state: selectedFilter,daysSinceRequest: expired, timestamp: date,  id: searchLote }) | orderBy: '-timestamp' | start: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage | filter : paginate track by $index">
                     <td><span>{{ venta.id }}</span></td>
                     <td><span>{{ venta.timestamp }}</span></td>
+                    <td><span>{{ venta.user[0].company_real_name }} {{ venta.user[0].name }} {{ venta.user[0].lastname }}</span></td>
                     <td><span>${{ venta.parcial_price }}</span></td>
                     <td><span>{{ venta.total_weight }}</span></td>
                     <td><span>{{ venta.total_quantity }}</span></td>
@@ -77,12 +80,14 @@
                         <span ng-if="venta.totalImpuestos > 0">{{ venta.totalImpuestos | currency}}</span>
                         <span ng-if="venta.totalImpuestos == 0">No Info.</span>
                     </td>
+                      <td><span>{{ venta.status }} <i ng-if="venta.status === 'Finished by Admin.'" style="font-size: 14px;vertical-align: middle;margin: 0;padding: 5px;" class="fa fa-info-circle" tooltip-placement="top" uib-tooltip="{{venta.reason}}"></i></span></td>
                     <td><span ng-class="processPayments.daysSinceRequest < 7 ? 'text-sucess':'text-danger'"><b>{{ venta.daysSinceRequest }}</b></span></td>
                     <td ng-if="venta.paymentGatewayUrl" ng-class="venta.state == 1 ? 'payed' : 'unpayed' "><span ng-bind="venta.state == 0 ? 'Pendiente de pago' : 'Pagado'"></span></td>
                     <td ng-if="!venta.paymentGatewayUrl">
                         <div style="display: flex;flex-direction: row; justify-content: space-between">
                             <a  tooltip-placement="top" uib-tooltip="Make AWB" ng-click="processPayments.setGuides(venta, venta.bills)"><i class="fa fa-gear"></i></a>
-                            <a  tooltip-placement="top" uib-tooltip="Finish Lot" ng-click="processPayments.setGuides(venta, venta.bills)"> <i class=" fa fa-share-square-o"></i></a>
+                            <a ng-if="venta.status !== 'Finished' && venta.status !== 'Finished by Admin.'"  tooltip-placement="right" uib-tooltip="Finish Lot" ng-click="processPayments.finishLot(venta)"> <i class=" fa fa-share-square-o"></i></a>
+                            <i ng-if="venta.status === 'Finished' || venta.status === 'Finished by Admin.'" style="color:#ccc;" class="fa fa-share-square-o"></i>
                         </div>
                     </td>
                 </tr>
@@ -93,4 +98,5 @@
 
     <div ng-include src="'hbr-selfie/dist/routes/process_payments/modals/processPayments.template.html'"></div>
     <div ng-include src="'hbr-selfie/dist/routes/process_payments/modals/makeGuides.template.html'"></div>
+      <div ng-include src="'hbr-selfie/dist/routes/process_payments/modals/finish-lot.template.html'"></div>
 </div>

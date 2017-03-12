@@ -674,7 +674,7 @@ form {
           .dashboard__sidebar ul a:hover {
             font-family: "museoSans-500", Arial; }
           .dashboard__sidebar ul a i {
-            font-size: 18px; }
+            font-size: 16px; }
           .dashboard__sidebar ul a li {
             padding: 20px 20px; }
             .dashboard__sidebar ul a li:hover {
@@ -698,7 +698,7 @@ form {
             height: 40px;
             text-decoration: none;
             color: white;
-            font-size: 24px; }
+            font-size: 18px; }
             .dashboard__sidebar--collapsed ul a:hover {
               font-family: "museoSans-500", Arial;
               background: #b4ec13; }
@@ -741,7 +741,7 @@ form {
           .dashboard__sidebar ul a:hover {
             font-family: "museoSans-500", Arial; }
           .dashboard__sidebar ul a i {
-            font-size: 18px; }
+            font-size: 16px; }
           .dashboard__sidebar ul a li {
             padding: 20px 20px; }
             .dashboard__sidebar ul a li:hover {
@@ -765,7 +765,7 @@ form {
             height: 40px;
             text-decoration: none;
             color: white;
-            font-size: 24px; }
+            font-size: 18px; }
             .dashboard__sidebar--collapsed ul a:hover {
               font-family: "museoSans-500", Arial;
               background: #b4ec13; }
@@ -803,7 +803,7 @@ form {
           height: 40px;
           text-decoration: none;
           color: white;
-          font-size: 18px; }
+          font-size: 16px; }
           .dashboard__sidebar ul a:hover {
             font-family: "museoSans-500", Arial; }
           .dashboard__sidebar ul a li {
@@ -829,7 +829,7 @@ form {
             height: 40px;
             text-decoration: none;
             color: white;
-            font-size: 30px; }
+            font-size: 18px; }
             .dashboard__sidebar--collapsed ul a:hover {
               font-family: "museoSans-500", Arial;
               color: #b4ec13; }

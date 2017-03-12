@@ -1,12 +1,12 @@
 <script type="text/ng-template" id="makeGuides.html">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="guides.cancel()">&times;</button>
-        <h3 class="modal-title" id="modal-title">AirWay Bills</h3>
+        <h3 class="modal-title" id="modal-title">AirWay Bills - {{guides.venta.user[0].company_real_name}} {{guides.venta.user[0].name}} {{guides.venta.user[0].lastname}}</h3>
     </div>
     <div class="modal-body" id="modal-body">
         <div class="row">
             <div class="col-xs-12">
-                <h3 class="pull-left">Lot</h3>
+                <h3 class="pull-left">Lot: N° {{guides.venta.id}}</h3>
                 <h3 class="pull-right">Products in Lot: {{ guides.venta.total_remaining_quantity }} </h3>
                 <table class="table overflow-table table-bordered table-striped table-curved rounded">
                     <thead>
@@ -25,7 +25,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="bill in guides.bills track by $index" ng-class="bill.remaining_quantity > 0 ? 'has-bill':'empty_bill'">
-                            <td><a ng-click="guides.selectBill(bill)"> {{ bill.number }} <i ng-class="bill.isOpen ? 'fa fa-folder-open': 'fa fa-folder'"></i></a></td>
+                            <td style="text-align:left"><a ng-click="guides.selectBill(bill)"><i ng-class="bill.isOpen ? 'fa fa-folder-open': 'fa fa-folder'"></i> {{ bill.number }}</a></td>
                             <td><span>{{ bill.tracking_number }}</span></td>
                             <td><span>{{ bill.provider }}</span></td>
                             <td><span>{{bill.establishment }}</span></td>

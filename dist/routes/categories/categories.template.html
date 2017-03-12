@@ -8,6 +8,15 @@
     </div>
     <br><br>
     <hr>
+
+        <div class="col-xs-12 content" ng-if="!categories.category_list.length && $root.showSpinner == false">
+        <div class="row">
+            <div class="empty-list">
+                <h3>No Categories have been registered yet.</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 content" ng-if="categories.category_list.length">
     <div class="row">                 
     <div class="col-xs-4">
         <label for="">Search by Category name</label>
@@ -42,4 +51,5 @@
         </tbody>
     </table>
     <uib-pagination next-text="Siguiente" previous-text="Anterior" total-items="filtered.length" data-num-pages="categories.noOfPages" ng-model="currentPage" class="pagination-sm pull-right" items-per-page="itemsPerPage" boundary-link-numbers="true"></uib-pagination>
+</div>
 </div>

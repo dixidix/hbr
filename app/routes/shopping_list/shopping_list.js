@@ -53,7 +53,7 @@ function shoppingListController(angular, app) {
                     .success(function (response) {
                         if (response.ventas.length) {
                             angular.forEach(response.ventas, function (venta) {
-                                venta.timestamp = moment(parseInt(venta.timestamp)).format("DD/MM/YYYY HH:mm");
+                                venta.requestDate = moment(parseInt(venta.timestamp)).format("DD/MM/YYYY HH:mm");
                             });
 
                             self.ventas = response.ventas;

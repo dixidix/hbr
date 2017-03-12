@@ -79,7 +79,7 @@
         </li>
     </ul>
 </div>
-<button class="btn btn-hbr-red pull-right">Cancelar compra</button>
+<a ui-sref="dashboard.shopping_list" ui-opts="{reload:true}"><button class="btn btn-hbr-red pull-right">Cancelar</button></a>
 <button class="btn btn-hbr-blue pull-right" ng-click="shopping.confirmUpdate()">Guardar y continuar luego</button>
 <button class="btn btn-hbr-blue pull-right" ng-click="shopping.confirmFinish()">Terminar Compra</button>
 </ul>

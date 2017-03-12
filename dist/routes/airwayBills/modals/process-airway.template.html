@@ -1,7 +1,7 @@
 <script type="text/ng-template" id="process-airway.html">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="airwaybill.cancel()">&times;</button>
-        <h3 class="modal-title" id="modal-title">Process Airway Bill</h3>
+        <h3 class="modal-title" id="modal-title">Process Airway Bill - {{airwaybill.awb.user[0].company_real_name}} {{airwaybill.awb.username}}</h3>
     </div>
     <div class="modal-body" id="modal-body">
 
@@ -9,7 +9,7 @@
 
         <table class="table overflow-table table-bordered table-striped product-table table-curved rounded" ng-if="airwaybill.awb.products.length">
             <div class="col-xs-9">
-                <h3 class="table-title" ng-if="airwaybill.awb.products.length">Products</h3>
+                <h3 class="table-title" ng-if="airwaybill.awb.products.length">Products for Lot {{airwaybill.awb.ventaId}} AWB {{airwaybill.awb.number}}</h3>
             </div>
             <thead>
                 <tr>

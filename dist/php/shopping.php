@@ -95,6 +95,8 @@ function getAll(){
 		$outp .= '"total_remaining_quantity":"'  . $rs["total_remaining_quantity"] . '",';
 		$outp .= '"transporte":"'  . $rs["transporte"] . '",';
 		$outp .= '"state":"'  . $rs["state"] . '",';
+		$outp .= '"status":"'  . $rs["status"] . '",';
+		$outp .= '"reason":"'  . $rs["reason"] . '",';
 		$outp .= '"paymentButton":"'  . $rs["paymentButton"] . '",';
 		$uname = MysqliDB::getInstance()->query("SELECT * FROM producto INNER JOIN categories ON producto.category_id = categories.category_id where producto.venta_id =" . $rs["id"]);
 		while($rss = $uname->fetch_array(MYSQLI_ASSOC)) {
@@ -131,28 +133,38 @@ function addPurchase($data){
 	$total_weight = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['total_weight']));	
 	$total = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['total']));
 	$total_quantity = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['total_quantity']));
+	$total_remaining_quantity = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['total_remaining_quantity']));
 	$uid = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['userId']));
-	$timestamp = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['timestamp']));
+	if(!empty($data['timestamp'])){
+		$timestamp = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['timestamp']));
+	}
 	$venta_state = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['venta_state']));
+	$status = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['status']));
+	
+	
 	// $products = $data['products'];
 
 		if (empty($errors)){
-			if(empty($_POST['id'])){ 
-					MysqliDB::getInstance()->query("INSERT INTO `ventas`(`uid`, `parcial_price`, `total`, `total_quantity`,`total_remaining_quantity`, `timestamp`,  `totalweight`, `guide_amount`,`venta_state`) VALUES ('".$uid."',".(float)$parcial_price.",".(float)$total.",".(float)$total_quantity.",".(int)$total_quantity.",".$timestamp.",".$total_weight.", '0',".$venta_state.")");
-					$res = MysqliDB::getInstance()->query("SELECT MAX(id) as id FROM `ventas`");		
+				if(empty($_POST['id'])){ 	
+						MysqliDB::getInstance()->query("INSERT INTO `ventas`(`uid`, `parcial_price`, `total`, `total_quantity`,`total_remaining_quantity`, `timestamp`,  `totalweight`, `guide_amount`,`venta_state`,`status`) VALUES ('".$uid."',".(float)$parcial_price.",".(float)$total.",".(float)$total_quantity.",".(int)$total_quantity.",".$timestamp.",".$total_weight.", '0',".$venta_state.",'".$status."')");				
+
+						$res = MysqliDB::getInstance()->query("SELECT MAX(id) as id FROM `ventas`");		
+						$rows = mysqli_num_rows($res);
+
+					if ($rows > 0){
+						$rss = $res->fetch_array(MYSQLI_ASSOC);
+						$venta_id = $rss['id'];
+					}
+					
+				}else{
+				$venta_id = $_POST['id'];
+				if(!empty($data['reason'])){
+					$reason = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($data['reason']));
+					MysqliDB::getInstance()->query("UPDATE `ventas` SET `parcial_price`=".(float)$parcial_price.",`total`=".(float)$total.",`total_quantity`=".(int)$total_quantity.",`total_remaining_quantity`=".(int)$total_remaining_quantity.",`status`='".$status."',`reason`='".$reason."', `totalweight`=".(float)$total_weight.",`guide_amount`= 0,`venta_state`=".(int)$venta_state." WHERE `id` = ".$_POST['id']."");
 				
-
-				$res = MysqliDB::getInstance()->query("SELECT MAX(id) as id FROM `ventas`");		
-				$rows = mysqli_num_rows($res);
-
-				if ($rows > 0){
-					$rss = $res->fetch_array(MYSQLI_ASSOC);
-					$venta_id = $rss['id'];
+				}else{					
+					MysqliDB::getInstance()->query("UPDATE `ventas` SET `parcial_price`=".(float)$parcial_price.",`total`=".(float)$total.",`total_quantity`=".(int)$total_quantity.",`total_remaining_quantity`=".(int)$total_remaining_quantity.",`timestamp`=".$timestamp.",`status`='".$status."',`totalweight`=".(float)$total_weight.",`guide_amount`= 0,`venta_state`=".(int)$venta_state." WHERE `id` = ".$_POST['id']."");	
 				}
-				
-			}else{
-			$venta_id = $_POST['id'];
-			MysqliDB::getInstance()->query("UPDATE `ventas` SET `parcial_price`=".(float)$parcial_price.",`total`=".(float)$total.",`total_quantity`=".(int)$total_quantity.",`total_remaining_quantity`=".(int)$total_quantity.",`timestamp`=".$timestamp.", `totalweight`=".(float)$total_weight.",`guide_amount`= 0,`venta_state`=".(int)$venta_state." WHERE `id` = ".$_POST['id']."");
 			}
 		} else {
 			$resolve_data['errors'] = $errors;

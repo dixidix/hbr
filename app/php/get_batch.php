@@ -24,6 +24,7 @@ $res = MysqliDB::getInstance()->query("SELECT * from ventas WHERE deleted = 0");
 	$outp="";
 	while($rs = $res->fetch_array(MYSQLI_ASSOC)) {
 		$outpm ="";
+		$outpuser = "";
 		if ($outp != "") {$outp .= ",";}
 
 		$outp .= '{"id":"'  . $rs["id"] . '",';
@@ -34,12 +35,38 @@ $res = MysqliDB::getInstance()->query("SELECT * from ventas WHERE deleted = 0");
 		$outp .= '"total_quantity":"'  . $rs["total_quantity"] . '",';
 		$outp .= '"total_remaining_quantity":"'  . $rs["total_remaining_quantity"] . '",';
 		$outp .= '"venta_state":"'  . $rs["venta_state"] . '",';
+		$outp .= '"status":"'  . $rs["status"] . '",';
+		$outp .= '"reason":"'  . $rs["reason"] . '",';
 		$outp .= '"guide_amount":"'  . $rs["guide_amount"] . '",';
 		$uname = MysqliDB::getInstance()->query("SELECT * FROM bills where ventaId =" . $rs["id"]);
+
+		$user = MysqliDB::getInstance()->query("SELECT * FROM users  where  id =".$rs["uid"]." AND deleted = 0");
+		while($rsuser = $user->fetch_array(MYSQLI_ASSOC)) {				
+			if ($outpuser != "") {$outpuser .= ",";}
+			$outpuser .= '{"name":"'   . $rsuser["name"].'",';
+			$outpuser .= '"lastname":"'  . $rsuser["lastname"] . '",';
+			$outpuser .= '"company_real_name":"'  . $rsuser["company_real_name"] . '",';
+			$outpuser .= '"warehouse_name":"'  . $rsuser["warehouse_name"] . '",';
+			$outpuser .= '"tel":"'  . $rsuser["tel"] . '",';
+			$outpuser .= '"cel":"'  . $rsuser["cel"] . '",';
+			$outpuser .= '"email":"'  . $rsuser["email"] . '",';
+			$outpuser .= '"codeType":"'  . $rsuser["codeType"] . '",';
+			$outpuser .= '"idCode":"'  . $rsuser["idCode"] . '",';
+			$outpuser .= '"address":"'  . $rsuser["address"] . '",';
+			$outpuser .= '"localidad":"'  . $rsuser["localidad"] . '",';
+			$outpuser .= '"postalcode":"'  . $rsuser["postalcode"] . '",';
+			$outpuser .= '"isAdmin":"'  . $rsuser["isAdmin"] . '",';
+			$outpuser .= '"isPremium":"'  . $rsuser["isPremium"] . '",';
+			$outpuser .= '"client_type":"'  . $rsuser["client_type"] . '",';
+			$outpuser .= '"company_name":"'   . $rsuser["company_name"].'"}';
+		}
+
+		$outp .='"user":['.$outpuser.'],';
 
 		while($rss = $uname->fetch_array(MYSQLI_ASSOC)) {
 			$outpmn = "";
 			$outpwh = "";
+			
 			if ($outpm != "") {$outpm .= ",";}
 			$outpm .= '{"bill_id":"'   . $rss["bill_id"].'",';
 			$outpm .= '"establishment":"'  . $rss["establishment"] . '",';
@@ -64,7 +91,7 @@ $res = MysqliDB::getInstance()->query("SELECT * from ventas WHERE deleted = 0");
 			}
 
 			$outpm .='"warehouse":['.$outpwh.'],';
-		
+
 			$outpm .= '"number":"'  . $rss["number"] . '",';
 			$outpm .= '"provider":"'  . $rss["provider"] . '",';
 			$outpm .= '"quantity":"'  . $rss["quantity"] . '",';
@@ -124,6 +151,8 @@ $res = MysqliDB::getInstance()->query("SELECT * from ventas WHERE deleted = 0 AN
 		$outp .= '"total_quantity":"'  . $rs["total_quantity"] . '",';
 		$outp .= '"total_remaining_quantity":"'  . $rs["total_remaining_quantity"] . '",';
 		$outp .= '"venta_state":"'  . $rs["venta_state"] . '",';
+		$outp .= '"status":"'  . $rs["status"] . '",';
+		$outp .= '"reason":"'  . $rs["reason"] . '",';
 		$outp .= '"guide_amount":"'  . $rs["guide_amount"] . '",';
 		$uname = MysqliDB::getInstance()->query("SELECT * FROM bills where ventaId =" . $rs["id"]);
 
@@ -209,6 +238,8 @@ function getByWhId(){
 		$outp .= '"total_weight":"'  . $rs["totalweight"] . '",';
 		$outp .= '"total": '  . $rs["total"] . ',';
 		$outp .= '"total_quantity":"'  . $rs["total_quantity"] . '",';
+		$outp .= '"status":"'  . $rs["status"] . '",';
+		$outp .= '"reason":"'  . $rs["reason"] . '",';
 		$outp .= '"total_remaining_quantity":"'  . $rs["total_remaining_quantity"] . '",';
 		$outp .= '"guide_amount":"'  . $rs["guide_amount"] . '",';
 		$uname = MysqliDB::getInstance()->query("SELECT * FROM bills where ventaId =" . $rs["id"]." and deleted= 0  and whId = ".$_GET['whId']);
