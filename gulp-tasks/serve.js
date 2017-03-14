@@ -2,7 +2,6 @@ function serve(gulp, $) {
 	'use strict';
 	var browserSync = require('browser-sync'),
 		connect = require('gulp-connect-php'),
-		mysqlDump = require('mysqldump'),
 		reload = browserSync.reload;
 
 	function serve() {
@@ -13,16 +12,6 @@ function serve(gulp, $) {
 			// server: {
 			// 	baseDir: "./"
 			// }
-		});
-
-		mysqlDump({
-			host: 'localhost',
-			user: 'root',
-			password: '',
-			database: 'feedback_tucourier',
-			dest: './feedback_tucourier.sql' // destination file 
-		}, function (err) {
-			// create data.sql file; 
 		});
 
 		gulp.watch(['app/styles/**/*.scss  ', 'app/routes/**/*.scss', 'app/components/**/*.scss'], ['styles', reload]);

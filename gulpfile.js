@@ -3,7 +3,8 @@ var gulp = require('gulp'),
     browserify = require('browserify'),
     source = require('vinyl-source-stream'),
     path = require('path'),
-    $ = require('gulp-load-plugins')();
+    $ = require('gulp-load-plugins')(),
+    mysqlDump = require('mysqldump');
 $.paths = {
     html: {
         all: 'app/**/*.html',
@@ -27,32 +28,45 @@ var scriptTasks = getTasks('scripts'),
     bundleTask = getTasks('bundle');
 
 
-gulp.task('moveJSToDist', function() {
+gulp.task('moveJSToDist', function () {
     return scriptTasks.moveToDist();
 });
-gulp.task('scripts', ['moveJSToDist', 'bundleLibs', 'bundleApps'], function() {
+gulp.task('scripts', ['moveJSToDist', 'bundleLibs', 'bundleApps'], function () {
     return scriptTasks.moveScripts();
 });
-gulp.task('sass', function() {
+gulp.task('sass', function () {
     return styleTasks.styles();
 });
-gulp.task('styles', ['sass', 'resources'], function() {
+gulp.task('styles', ['sass', 'resources'], function () {
     return styleTasks.autoprefixAndMin();
 });
 
-gulp.task('resources', function() {
+gulp.task('resources', function () {
     return styleTasks.moveResourcesToDist();
 });
 
-gulp.task('html', function() {
+gulp.task('html', function () {
     return htmlTasks.moveHtml();
 });
-gulp.task('bundleLibs', function() {
+
+gulp.task('dump', function () {
+    mysqlDump({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'feedback_tucourier',
+        dest: './feedback_tucourier.sql' // destination file 
+    }, function (err) {
+        // create data.sql file; 
+    });
+});
+
+gulp.task('bundleLibs', function () {
     return bundleTask.buildLibs();
 });
-gulp.task('bundleApps', function() {
+gulp.task('bundleApps', function () {
     return bundleTask.buildApp();
 });
-gulp.task('serve', ['html', 'scripts', 'styles', 'bundleLibs', 'bundleApps'], function() {
+gulp.task('serve', ['html', 'scripts', 'styles', 'bundleLibs', 'bundleApps'], function () {
     return serveTasks.serve();
 });
