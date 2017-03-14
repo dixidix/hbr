@@ -145,7 +145,7 @@ function usersController(angular, app) {
         .then(function (response) {
           if (!response.data.errors) {
             $uibModalInstance.dismiss('cancel');
-            $state.go('dashboard.users', {}, { reload: true });
+            $state.go('dashboard.business', {}, { reload: true });
           }
         });
     };
@@ -216,7 +216,11 @@ function usersController(angular, app) {
         .then(function (response) {
           if (!response.data.errors) {
             $uibModalInstance.dismiss('cancel');
+            if(!$scope.showCompanyForm){
             $state.go('dashboard.users', {}, { reload: true });
+            } else {
+               $state.go('dashboard.business', {}, { reload: true });
+            } 
           }
         });
     };

@@ -38,6 +38,8 @@ function usersService(angular, app) {
         this.addcompany = function (company) {
             var deffered = $q.defer();
             return $http.post('./hbr-selfie/dist/php/users.php', {
+                name: company.name,
+                lastname: company.lastname,
                 company_name: company.company_name,
                 company_real_name: company.company_real_name,
                 tel: company.tel,

@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `airway_bill` (
   `transfer_cbu` varchar(150) DEFAULT NULL,
   `paymentDesc` text,
   PRIMARY KEY (`airwayId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `airway_bill_product` (
   `awb_productId` int(11) NOT NULL AUTO_INCREMENT,
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `airway_bill_product` (
   `userId` int(11) NOT NULL,
   `deleted` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`awb_productId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `bills` (
   `bill_id` int(100) NOT NULL AUTO_INCREMENT,
@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `client_type` int(1) NOT NULL DEFAULT '0',
   `showTutorial` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `ventas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -138,12 +138,12 @@ CREATE TABLE IF NOT EXISTS `ventas` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
+INSERT INTO `airway_bill` (`airwayId`,`ventaId`,`number`,`quantity`,`weight`,`price`,`deleted`,`state`,`warehouseId`,`warehouse_enter`,`warehouse_aditional_weight`,`warehouse_aditional_charges`,`warehouse_total`,`shipment_international`,`shipment_total`,`arrivalDate`,`leaveDate`,`paymentGatewayUrl`,`paymentButton`,`token`,`successUrl`,`billing_total`,`hbr_postal_provider`,`hbr_tracking`,`paymentMethod`,`transfer_account_number`,`transfer_account_holder_name`,`transfer_bank_name`,`transfer_cuit`,`transfer_cbu`,`paymentDesc`) VALUES (1,1,1,2,8,8,1,0,2,0,0,0,0,0,0,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 
-
-
+INSERT INTO `airway_bill_product` (`awb_productId`,`product_id`,`airwayId`,`category_id`,`name`,`price`,`quantity`,`total_price`,`real_weight`,`total_weight`,`userId`,`deleted`) VALUES (1,3,1,1,'Tst2',4,2,16,4,16,3,1);
 
 INSERT INTO `bills` (`bill_id`,`ventaId`,`whId`,`establishment`,`number`,`provider`,`quantity`,`remaining_quantity`,`timestamp`,`totalprice`,`totalweight`,`trackingnumber`,`deleted`,`userId`,`bill_file_name`,`bill_file_path`,`bill_state`) VALUES (1,1,2,'Tst','Tst','Tst',7,7,'0000-00-00 00:00:00',26,26,'Tst',0,3,'QATEST.pdf','/dist/files/1489330077246/414fd1561cc0d4d76b140e0336fdc4b2cae75091dbd3a49b28e88357557e4f9c.pdf',0);
-INSERT INTO `bills` (`bill_id`,`ventaId`,`whId`,`establishment`,`number`,`provider`,`quantity`,`remaining_quantity`,`timestamp`,`totalprice`,`totalweight`,`trackingnumber`,`deleted`,`userId`,`bill_file_name`,`bill_file_path`,`bill_state`) VALUES (2,1,2,'Tst2','Tst2','Tst2',6,6,'0000-00-00 00:00:00',20,20,'Tst2',0,3,'QATEST.pdf','/dist/files/1489330077299/5da9969acdb08b53486c02e25db8caad2c7815aa1ab447c6a36b119a7532e835.pdf',0);
+INSERT INTO `bills` (`bill_id`,`ventaId`,`whId`,`establishment`,`number`,`provider`,`quantity`,`remaining_quantity`,`timestamp`,`totalprice`,`totalweight`,`trackingnumber`,`deleted`,`userId`,`bill_file_name`,`bill_file_path`,`bill_state`) VALUES (2,1,2,'Tst2','Tst2','Tst2',6,6,'2017-03-12 13:16:36.000',20,20,'Tst2',0,3,'QATEST.pdf','/dist/files/1489330077299/5da9969acdb08b53486c02e25db8caad2c7815aa1ab447c6a36b119a7532e835.pdf',0);
 
 INSERT INTO `categories` (`category_id`,`category_name`,`deleted`) VALUES (1,'testCat',0);
 INSERT INTO `categories` (`category_id`,`category_name`,`deleted`) VALUES (2,'testCat2',0);
@@ -153,8 +153,10 @@ INSERT INTO `products` (`product_id`,`bill_id`,`category_id`,`name`,`price`,`qua
 INSERT INTO `products` (`product_id`,`bill_id`,`category_id`,`name`,`price`,`quantity`,`remaining_quantity`,`totalprice`,`totalweight`,`weight`,`real_weight`,`userId`,`deleted`) VALUES (3,2,1,'Tst2',4,4,4,16,16,4,4,3,0);
 INSERT INTO `products` (`product_id`,`bill_id`,`category_id`,`name`,`price`,`quantity`,`remaining_quantity`,`totalprice`,`totalweight`,`weight`,`real_weight`,`userId`,`deleted`) VALUES (4,2,1,'Tst2',2,2,2,4,4,2,2,3,0);
 
-INSERT INTO `users` (`id`,`name`,`lastname`,`company_name`,`company_real_name`,`warehouse_name`,`tel`,`cel`,`email`,`password`,`sskey`,`codeType`,`idCode`,`deleted`,`address`,`localidad`,`postalcode`,`registerToken`,`registertimestamp`,`isAdmin`,`isPremium`,`client_type`,`showTutorial`) VALUES (1,'Santiago','LLoret','','','','+54911-123456789',54911,'santiago.lloret@tucourier.com.ar','21232f297a57a5a743894a0e4a801fc3','c354c50216838ebad1ad242c52342b6b',1,'27-8978912378912-7',0,'Av. Corrientes 123','Buenos Aires, Capital Federal','1101','d6f81559201988fde9039bf45bcae1b4',1487257235,1,0,0,0);
+INSERT INTO `users` (`id`,`name`,`lastname`,`company_name`,`company_real_name`,`warehouse_name`,`tel`,`cel`,`email`,`password`,`sskey`,`codeType`,`idCode`,`deleted`,`address`,`localidad`,`postalcode`,`registerToken`,`registertimestamp`,`isAdmin`,`isPremium`,`client_type`,`showTutorial`) VALUES (1,'Santiago','LLoret','','','','+54911-123456789',54911,'santiago.lloret@tucourier.com.ar','21232f297a57a5a743894a0e4a801fc3','ba22b200c32429f94b5215f957f051c2',1,'27-8978912378912-7',0,'Av. Corrientes 123','Buenos Aires, Capital Federal','1101','d6f81559201988fde9039bf45bcae1b4',1487257235,1,0,0,0);
 INSERT INTO `users` (`id`,`name`,`lastname`,`company_name`,`company_real_name`,`warehouse_name`,`tel`,`cel`,`email`,`password`,`sskey`,`codeType`,`idCode`,`deleted`,`address`,`localidad`,`postalcode`,`registerToken`,`registertimestamp`,`isAdmin`,`isPremium`,`client_type`,`showTutorial`) VALUES (2,'','','','','GL','2613412351',2147483647,'nicolas.sigal@globallogic.com','21232f297a57a5a743894a0e4a801fc3',NULL,1,'231231231231237',0,'Av. Mitre 870','Mendoza','5500','c5ea21426b2675e72f6f9d4323458928',1487257730,0,0,2,0);
 INSERT INTO `users` (`id`,`name`,`lastname`,`company_name`,`company_real_name`,`warehouse_name`,`tel`,`cel`,`email`,`password`,`sskey`,`codeType`,`idCode`,`deleted`,`address`,`localidad`,`postalcode`,`registerToken`,`registertimestamp`,`isAdmin`,`isPremium`,`client_type`,`showTutorial`) VALUES (3,'Test','User','','','','123456789',123456789,'nicolas.sigal@gmail.com','098f6bcd4621d373cade4e832627b4f6',NULL,2,'27-12312312321-7',0,'Calle Falsa 123','Mendoza','55500','27bed4482a7803b9426925d6fdecace8',1487257855,0,0,0,1);
+INSERT INTO `users` (`id`,`name`,`lastname`,`company_name`,`company_real_name`,`warehouse_name`,`tel`,`cel`,`email`,`password`,`sskey`,`codeType`,`idCode`,`deleted`,`address`,`localidad`,`postalcode`,`registerToken`,`registertimestamp`,`isAdmin`,`isPremium`,`client_type`,`showTutorial`) VALUES (4,'','','CompanyName','CompanyRealName','','1234567',123123,'company@company.com','21232f297a57a5a743894a0e4a801fc3',NULL,1,'271235123399',1,'corrientes 123','Bs As','5500','a3b0eb82258ad0dbbd223ffddc2c7311',1489453801,0,0,1,0);
+INSERT INTO `users` (`id`,`name`,`lastname`,`company_name`,`company_real_name`,`warehouse_name`,`tel`,`cel`,`email`,`password`,`sskey`,`codeType`,`idCode`,`deleted`,`address`,`localidad`,`postalcode`,`registerToken`,`registertimestamp`,`isAdmin`,`isPremium`,`client_type`,`showTutorial`) VALUES (5,'ContactName','ContactLastname','CompanyName','CompanyRealName','','123123123',123123123,'company@company.com','21232f297a57a5a743894a0e4a801fc3',NULL,1,'123123123',0,'av corrientes 123','Bs As','5500','8c05d264f3b5f196cbec59b54e5cd8d1',1489454854,0,0,1,0);
 
-INSERT INTO `ventas` (`id`,`uid`,`parcial_price`,`total`,`total_quantity`,`total_remaining_quantity`,`timestamp`,`deleted`,`venta_state`,`totalweight`,`guide_amount`,`status`,`reason`) VALUES (1,3,46,46,13,13,'1489330077195',0,1,46,0,'Finalizado',NULL);
+INSERT INTO `ventas` (`id`,`uid`,`parcial_price`,`total`,`total_quantity`,`total_remaining_quantity`,`timestamp`,`deleted`,`venta_state`,`totalweight`,`guide_amount`,`status`,`reason`) VALUES (1,3,46,46,13,13,'1489330077195',0,1,46,1,'Finalizado',NULL);
