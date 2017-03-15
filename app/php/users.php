@@ -245,9 +245,11 @@ function login($data){
 		}
 		if(!empty($rss['company_name'])){
 			$resolve_data['name'] = $rss['company_name'];
+			$resolve_data['company_name'] = $rss['company_name'];
 		}
 		if(!empty($rss['warehouse_name'])){
 			$resolve_data['name'] = $rss['warehouse_name'];
+			$resolve_data['warehouse_name'] = $rss['warehouse_name'];
 		}
 		$resolve_data['lastname'] = $rss['lastname'];
 		$resolve_data['isAdmin'] = $rss['isAdmin'];
@@ -328,7 +330,9 @@ function getUserById($data){
 		if(!empty($rss["company_real_name"])){
 			$resolve_data['company_real_name'] = $rss['company_real_name'];
 		}
-
+		if(!empty($rss["warehouse_name"])){
+			$resolve_data['warehouse_name'] = $rss['warehouse_name'];
+		}
 		$resolve_data['tel'] = $rss['tel'];
 		$resolve_data['cel'] = $rss['cel'];
 		$resolve_data['email'] = $rss['email'];

@@ -10,8 +10,10 @@ function warehouseService(angular, app) {
 
 			var deffered = $q.defer();
 
-			return $http.post('./hbr-selfie/dist/php/warehouse.php',{
+			return $http.post('./hbr-selfie/dist/php/warehouse.php', {
 				warehouse_name: warehouse.name,
+				user_name: warehouse.user_name,
+				user_lastname: warehouse.user_lastname,
 				tel: warehouse.tel,
 				cel: warehouse.cel,
 				codeType: '1',
@@ -20,10 +22,10 @@ function warehouseService(angular, app) {
 				address: warehouse.address,
 				localidad: warehouse.localidad,
 				postalcode: warehouse.postalcode,
-				password: warehouse.idCode,
-				password2: warehouse.idCode,
-				client_type:'2',
-				method:"POST"
+				password: warehouse.password,
+				password2: warehouse.password2,
+				client_type: '2',
+				method: "POST"
 
 			});
 		};
@@ -31,9 +33,11 @@ function warehouseService(angular, app) {
 
 			var deffered = $q.defer();
 
-			return $http.put('./hbr-selfie/dist/php/warehouse.php',{
+			return $http.put('./hbr-selfie/dist/php/warehouse.php', {
 				id: warehouse.id,
 				warehouse_name: warehouse.name,
+				user_name: warehouse.user_name,
+				user_lastname: warehouse.user_lastname,
 				tel: warehouse.tel,
 				cel: warehouse.cel,
 				codeType: '1',
@@ -42,10 +46,10 @@ function warehouseService(angular, app) {
 				address: warehouse.address,
 				localidad: warehouse.localidad,
 				postalcode: warehouse.postalcode,
-				password: warehouse.password || warehouse.idCode,
-				password2: warehouse.password2 || warehouse.idCode,
-				client_type:'2',
-				action:"edit"
+				password: warehouse.password,
+				password2: warehouse.password2,
+				client_type: '2',
+				action: "edit"
 
 			});
 		};
@@ -53,9 +57,9 @@ function warehouseService(angular, app) {
 			console.log(warehouse.id);
 			var deffered = $q.defer();
 
-			return $http.put('./hbr-selfie/dist/php/warehouse.php',{
+			return $http.put('./hbr-selfie/dist/php/warehouse.php', {
 				id: warehouse.id,
-				action:"delete"			
+				action: "delete"
 			});
 		};
 	}

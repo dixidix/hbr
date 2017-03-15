@@ -20,7 +20,11 @@ function loginController(angular, app) {
                         sessionStorage.setItem("isAdmin", response.isAdmin);
                         sessionStorage.setItem("clientType", response.client_type);
                         sessionStorage.setItem("clientType", response.client_type);
+                        if(response.company_name || response.warehouse_name){
+                            sessionStorage.username = response.company_name || response.warehouse_name; 
+                        }else{
                         sessionStorage.username = response.name + " " + response.lastname;
+                        }
 
                         self.loginForm.username.$invalid = false;
                         self.loginForm.username.$valid = true;

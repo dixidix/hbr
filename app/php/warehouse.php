@@ -117,7 +117,7 @@ function addWarehouse($data){
 		}
 
 		MysqliDB::getInstance()->query("INSERT INTO `users`( `name`, `lastname`, `company_name`, `company_real_name`,`warehouse_name`, `tel`, `cel`, `email`, `password`, `codeType`, `idCode`,`deleted`, `address`, `localidad`, `postalcode`, `registerToken`, `registertimestamp`, `client_type`)
-			VALUES ('".$aux_name."','".$aux_lastname."','".$aux_company_name."','".$aux_company_real_name."','".$aux_warehouse_name."','".$tel."','".$cel."','".$email."','".$password."','".$codeType."','".$idCode."',0,'".$address."','".$localidad."','".$postalcode."','".$registerToken."',".$timestamp.",".$client_type.")");
+			VALUES ('".$user_name."','". $user_lastname."','".$aux_company_name."','".$aux_company_real_name."','".$aux_warehouse_name."','".$tel."','".$cel."','".$email."','".$password."','".$codeType."','".$idCode."',0,'".$address."','".$localidad."','".$postalcode."','".$registerToken."',".$timestamp.",".$client_type.")");
 		
 		MysqliDB::getInstance()->close();
 		$resolve_data['registerToken'] = $registerToken;
@@ -183,7 +183,7 @@ function editWarehouse($data){
 			$client_type = 1;
 		}
 
-		MysqliDB::getInstance()->query("UPDATE `users` SET `warehouse_name`='" .$aux_warehouse_name. "',`tel`='" .$tel. "',`cel`='" .$cel. "',`email`='" .$email. "',`password`='" .$password. "', `codeType`='" .$codeType. "',`idCode`='" .$idCode. "',`address`='" .$address. "',`localidad`='" .$localidad. "',`postalcode`='" .$postalcode. "'  WHERE id='" .$id. "'");
+		MysqliDB::getInstance()->query("UPDATE `users` SET `warehouse_name`='" .$aux_warehouse_name. "',`name`='" .$user_name. "',`lastname`='" .$user_lastname. "',`tel`='" .$tel. "',`cel`='" .$cel. "',`email`='" .$email. "',`password`='" .$password. "', `codeType`='" .$codeType. "',`idCode`='" .$idCode. "',`address`='" .$address. "',`localidad`='" .$localidad. "',`postalcode`='" .$postalcode. "'  WHERE id='" .$id. "'");
 		
 		MysqliDB::getInstance()->close();
 		echo json_encode($resolve_data);
@@ -221,6 +221,8 @@ function getAllWarehouses($data){
 		if(!empty($rs["warehouse_name"])){
 			$outp .= '"name":"'  . $rs["warehouse_name"] . '",';
 		}
+		$outp .= '"user_name":"'  . $rs["name"] . '",';
+		$outp .= '"user_lastname":"'  . $rs["lastname"] . '",';
 		$outp .= '"tel":"'  . $rs["tel"] . '",';
 		$outp .= '"cel":"'  . $rs["cel"] . '",';
 		$outp .= '"email":"'  . $rs["email"] . '",';
