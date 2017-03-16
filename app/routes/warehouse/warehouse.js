@@ -7,7 +7,7 @@ function warehouseController(angular, app) {
     warehouseCtrl.$inject = ['$http', '$scope', '$filter', '$state', '$uibModal', 'warehouseService'];
 
     app.controller('modalAddWarehouseCtrl', modalAddWarehouseCtrl);
-    modalAddWarehouseCtrl.$inject = ['warehouseService', '$scope', '$state', '$filter', '$uibModalInstance', '$sce', '$compile', '$rootScope', '$http'];
+    modalAddWarehouseCtrl.$inject = ['warehouseService', '$scope', '$state', '$filter', '$uibModalInstance', '$sce', '$compile', '$rootScope', 'warehouses', '$http'];
 
     app.controller('modalEditWarehouseCtrl', modalEditWarehouseCtrl);
     modalEditWarehouseCtrl.$inject = ['warehouseService', '$scope', '$state', '$filter', '$uibModalInstance', '$sce', '$compile', '$rootScope', 'warehouse', '$http', 'warehouseService'];
@@ -23,7 +23,12 @@ function warehouseController(angular, app) {
                 templateUrl: './hbr-selfie/dist/routes/warehouse/modals/addwarehouse.template.html',
                 controller: 'modalAddWarehouseCtrl',
                 controllerAs: 'modalAddWarehouse',
-                size: size
+                size: size,
+                resolve: {
+                    warehouses: function () {
+                        return  self.warehouses;
+                    }
+                }
             });
         }
 
@@ -34,7 +39,7 @@ function warehouseController(angular, app) {
                 controllerAs: 'modalEditWarehouse',
                 size: size,
                 resolve: {
-                    warehouse: function() {
+                    warehouse: function () {
                         return warehouse;
                     }
                 }
@@ -48,7 +53,7 @@ function warehouseController(angular, app) {
                 controllerAs: 'modalDeleteWarehouse',
                 size: size,
                 resolve: {
-                    warehouse: function() {
+                    warehouse: function () {
                         return warehouse;
                     }
                 }
@@ -72,20 +77,20 @@ function warehouseController(angular, app) {
                 params: {
                     action: 'getAll'
                 }
-            }).then(function(response) {
+            }).then(function (response) {
                 self.warehouses = response.data.warehouses;
 
                 $scope.totalItems = self.warehouses.length;
                 $scope.currentPage = 1;
                 $scope.itemsPerPage = 5;
                 $scope.maxSize = 5;
-                $scope.setPage = function(pageNo) {
+                $scope.setPage = function (pageNo) {
                     $scope.currentPage = pageNo;
                 };
-                $scope.pageChanged = function() {
+                $scope.pageChanged = function () {
 
                 };
-                $scope.$watch('search', function(term) {
+                $scope.$watch('search', function (term) {
                     var obj = term;
                     $scope.filtered = $filter('filter')(self.warehouses, obj);
                     $scope.currentPage = 1;
@@ -99,7 +104,7 @@ function warehouseController(angular, app) {
         init();
     }
 
-    function modalAddWarehouseCtrl(warehouseService, $scope, $state, $filter, $uibModalInstance, $sce, $compile, $rootScope) {
+    function modalAddWarehouseCtrl(warehouseService, $scope, $state, $filter, $uibModalInstance, $sce, $compile, $rootScope, warehouses, $http) {
         var self = this;
 
         function cancel() {
@@ -108,7 +113,7 @@ function warehouseController(angular, app) {
 
         function addWarehouse() {
             warehouseService.add_warehouse(self.warehouse)
-                .then(function(response) {
+                .then(function (response) {
                     if (!response.data.errors) {
                         $uibModalInstance.dismiss('cancel');
                         $state.go('dashboard.warehouse', {}, { reload: true });
@@ -153,7 +158,7 @@ function warehouseController(angular, app) {
 
         function init() {
             self.warehouse = {};
-
+            self.warehouses = warehouses;
             self.cancel = cancel;
             self.addWarehouse = addWarehouse;
         }
@@ -170,7 +175,7 @@ function warehouseController(angular, app) {
 
         function editWarehouse() {
             warehouseService.editWarehouse(self.warehouse)
-                .then(function(response) {
+                .then(function (response) {
                     if (!response.data.errors) {
                         $uibModalInstance.dismiss('cancel');
                         $state.go('dashboard.warehouse', {}, { reload: true });
@@ -197,7 +202,7 @@ function warehouseController(angular, app) {
 
         function deleteWarehouse() {
             warehouseService.deleteWarehouse(self.warehouse)
-                .then(function(response) {
+                .then(function (response) {
                     if (!response.data.errors) {
                         $uibModalInstance.dismiss('cancel');
                         $state.go('dashboard.warehouse', {}, { reload: true });
