@@ -41,6 +41,8 @@ function authenticationService(angular, app) {
             return $http.post('./hbr-selfie/dist/php/users.php', {
                 company_name: company.company_name,
                 company_real_name: company.company_real_name,
+                name: company.name,
+                lastname: company.lastname,
                 tel: company.tel,
                 cel: company.cel,
                 codeType: company.codeType.toString(),

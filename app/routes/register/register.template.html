@@ -1,7 +1,7 @@
 <div class="register container" ng-cloak>
 	<link rel="stylesheet" type="text/css" href="./hbr-selfie/dist/routes/register/register.css">
 	<form ng-hide="register.success" name="register.registerForm" novalidate data-ng-submit="register.registerForm.$valid && !register.registerForm.$pristine && register.registerForm.$submitted && register.register()">
-		<div  class="form-group col-xs-12 col-sm-12">
+		<div class="form-group col-xs-12 col-sm-12">
 			<label class="control-label" for="name">Tipo de cuenta (*)</label><br>
 			<label class="radio-inline">
 				<input type="radio"  name="optradio" ng-checked="true" ng-model="register.client_type" ng-value="0"> Cliente Particular
@@ -14,21 +14,22 @@
 
 			<div class="form-group col-xs-12 col-sm-6" data-ng-class="{'has-error': register.registerForm.name.$invalid && register.registerForm.$submitted}">
 				<label class="control-label" for="name">Nombre (*)</label><br>
-				<input id="name" class="form-control" type="text" name="name" ng-model="register.user.name" placeholder="Nombre"  autocomplete="off" required>
+				<input id="name" class="form-control" type="text" name="name" ng-model="register.user.name" placeholder="Nombre" autocomplete="off"
+				 required>
 			</div>
 			<div class="form-group col-xs-12 col-sm-6" data-ng-class="{'has-error': register.registerForm.lastname.$invalid && register.registerForm.$submitted}">
 				<label class="control-label" for="lastname">Apellido (*)</label><br>
-				<input id="lastname"  autocomplete="off" class="form-control" type="text" name="lastname" ng-model="register.user.lastname" placeholder="Apellido"
-				required>
+				<input id="lastname" autocomplete="off" class="form-control" type="text" name="lastname" ng-model="register.user.lastname"
+				 placeholder="Apellido" required>
 			</div>
 			<div class="form-group" data-ng-class="{'has-error': register.telError && register.registerForm.$submitted}">
 				<div class="col-xs-12 col-md-6">
 					<label class="control-label" for="tel">Tel&eacute;fono</label><br>
-					<input id="tel"  autocomplete="off" class="form-control" type="text" name="tel" ng-model="register.user.tel" placeholder="Tel&eacute;fono">
+					<input id="tel" autocomplete="off" class="form-control" type="text" name="tel" ng-model="register.user.tel" placeholder="Tel&eacute;fono">
 				</div>
 				<div class="col-xs-12 col-md-6">
 					<label class="control-label" for="cel">Celular</label><br>
-					<input id="cel"  autocomplete="off" class="form-control" type="text" name="cel" ng-model="register.user.cel" placeholder="Celular">
+					<input id="cel" autocomplete="off" class="form-control" type="text" name="cel" ng-model="register.user.cel" placeholder="Celular">
 				</div>
 				<span class="has-error col-xs-12 help-block" ng-if="register.telError">
 					<i class="fa fa-times-circle"></i>  {{:: register.telError }}
@@ -42,13 +43,13 @@
 					<option value="2">Cuil</option>
 				</select>
 				<input id="idCode" class="form-control" type="text" name="idCode" ng-model="register.user.idCode" placeholder="C&oacute;digo de identificaci&oacute;n Cuit/Cuil"
-				required>
+				 required>
 			</div>
 			<div class="form-group" data-ng-class="{'has-error': register.registerForm.email.$invalid && register.registerForm.$submitted}">
 				<div class="col-xs-12">
 					<label class="control-label" for="email">Correo Electr&oacute;nico (*)</label><br>
-					<input id="email"  autocomplete="off" class="form-control" type="email" name="email" ng-model="register.user.email" placeholder="Correo electr&oacute;nico"
-					required>
+					<input id="email" autocomplete="off" class="form-control" type="email" name="email" ng-model="register.user.email" placeholder="Correo electr&oacute;nico"
+					 required>
 				</div>
 				<span class="has-error col-xs-12 help-block" ng-if="register.existingEmail">
 					<i class="fa fa-times-circle"></i>  {{:: register.existingEmail}}
@@ -57,13 +58,13 @@
 			<div class="form-group" data-ng-class="{'has-error': register.registerForm.password.$invalid && register.registerForm.$submitted}">
 				<div class="col-xs-12 col-md-6">
 					<label class="control-label" for="pwd">Contrase&ntilde;a (*)</label><br>
-					<input id="pwd"  autocomplete="off" class="form-control" type="password" name="password" ng-model="register.user.password" placeholder="Contrase&ntilde;a"
-					required>
+					<input id="pwd" autocomplete="off" class="form-control" type="password" name="password" ng-model="register.user.password"
+					 placeholder="Contrase&ntilde;a" required>
 				</div>
 				<div class="col-xs-12 col-md-6">
 					<label class="control-label" for="pwd2">Repita la contrase&ntilde;a (*)</label><br>
-					<input id="pwd2"  autocomplete="off" class="form-control" type="password" name="password2" ng-model="register.user.password2" placeholder="Contrase&ntilde;a"
-					required>
+					<input id="pwd2" autocomplete="off" class="form-control" type="password" name="password2" ng-model="register.user.password2"
+					 placeholder="Contrase&ntilde;a" required>
 				</div>
 				<span class="has-error col-xs-12 help-block" ng-if="register.passwordError">
 					<i class="fa fa-times-circle"></i>  {{:: register.passwordError}}
@@ -71,18 +72,18 @@
 			</div>
 			<div class="form-group col-xs-12 col-md-5" data-ng-class="{'has-error': register.registerForm.address.$invalid && register.registerForm.$submitted}">
 				<label class="control-label" for="address">Direcci&oacute;n de entrega(*)</label><br>
-				<input id="address"  autocomplete="off" class="form-control" type="text" name="address" ng-model="register.user.address" placeholder="Direcci&oacute;n"
-				required>
+				<input id="address" autocomplete="off" class="form-control" type="text" name="address" ng-model="register.user.address" placeholder="Direcci&oacute;n"
+				 required>
 			</div>
 			<div class="form-group col-xs-12 col-md-4" data-ng-class="{'has-error': register.registerForm.localidad.$invalid && register.registerForm.$submitted}">
 				<label class="control-label" for="localidad">Localidad(*)</label><br>
-				<input id="localidad"  autocomplete="off" class="form-control" type="text" name="localidad" ng-model="register.user.localidad" placeholder="Localidad"
-				required>
+				<input id="localidad" autocomplete="off" class="form-control" type="text" name="localidad" ng-model="register.user.localidad"
+				 placeholder="Localidad" required>
 			</div>
 			<div class="form-group col-xs-12 col-md-3" data-ng-class="{'has-error': register.registerForm.postalCode.$invalid && register.registerForm.$submitted}">
 				<label class="control-label" for="postalCode">CP (*)</label><br>
-				<input id="postalCode"  autocomplete="off" class="form-control" type="text" name="postalCode" ng-model="register.user.postalCode" placeholder="C&oacute;digo postal"
-				required>
+				<input id="postalCode" autocomplete="off" class="form-control" type="text" name="postalCode" ng-model="register.user.postalCode"
+				 placeholder="C&oacute;digo postal" required>
 			</div>
 			<div class="form-group col-xs-12">
 				<button class="btn btn-hbr-green" type="submit">REGISTRARME</button>
@@ -90,23 +91,34 @@
 		</div>
 
 		<div ng-if="register.client_type === 1">
-			<div class="form-group col-xs-12 col-sm-6" data-ng-class="{'has-error': register.registerForm.name.$invalid && register.registerForm.$submitted}">
-				<label class="control-label" for="name">Nombre de la empresa(*)</label><br>
-				<input id="name" class="form-control" type="text" name="name" ng-model="register.company.company_name" placeholder="Nombre"  autocomplete="off" required>
+			<div class="form-group col-xs-12 col-sm-6" data-ng-class="{'has-error': register.registerForm.company_name.$invalid && register.registerForm.$submitted}">
+				<label class="control-label" for="company_name">Nombre de la empresa(*)</label><br>
+				<input id="company_name" class="form-control" type="text" name="company_name" ng-model="register.company.company_name" placeholder="Nombre de la empresa"
+				 autocomplete="off" required>
 			</div>
-			<div class="form-group col-xs-12 col-sm-6" data-ng-class="{'has-error': register.registerForm.lastname.$invalid && register.registerForm.$submitted}">
-				<label class="control-label" for="lastname">Raz&oacute;n Social (*)</label><br>
-				<input id="lastname"  autocomplete="off" class="form-control" type="text" name="lastname" ng-model="register.company.company_real_name" placeholder="Apellido"
-				required>
+			<div class="form-group col-xs-12 col-sm-6" data-ng-class="{'has-error': register.registerForm.company_real_name.$invalid && register.registerForm.$submitted}">
+				<label class="control-label" for="company_real_name">Raz&oacute;n Social (*)</label><br>
+				<input id="company_real_name" autocomplete="off" class="form-control" type="text" name="company_real_name" ng-model="register.company.company_real_name"
+				 placeholder="Raz&oacute;n Social" required>
+			</div>
+			<div class="form-group col-xs-12 col-sm-6"  data-ng-class="{'has-error': register.registerForm.name.$invalid  && register.registerForm.$submitted}">
+				<label class="control-label" for="name">Nombre de Contacto (*)</label><br>
+				<input id="name" class="form-control" type="text" name="name" ng-model="register.company.name" placeholder="Nombre" autocomplete="off"
+				 required>
+			</div>
+			<div class="form-group col-xs-12 col-sm-6"  data-ng-class="{'has-error':  register.registerForm.lastname.$invalid  && register.registerForm.$submitted}">
+				<label class="control-label" for="lastname">Apellido de Contacto (*)</label><br>
+				<input id="lastname" autocomplete="off" class="form-control" type="text" name="lastname" ng-model="register.company.lastname"
+				 placeholder="Apellido" required>
 			</div>
 			<div class="form-group" data-ng-class="{'has-error': register.telError && register.registerForm.$submitted}">
 				<div class="col-xs-12 col-md-6">
 					<label class="control-label" for="tel">Tel&eacute;fono</label><br>
-					<input id="tel"  autocomplete="off" class="form-control" type="text" name="tel" ng-model="register.company.tel" placeholder="Tel&eacute;fono">
+					<input id="tel" autocomplete="off" class="form-control" type="text" name="tel" ng-model="register.company.tel" placeholder="Tel&eacute;fono">
 				</div>
 				<div class="col-xs-12 col-md-6">
 					<label class="control-label" for="cel">Celular</label><br>
-					<input id="cel"  autocomplete="off" class="form-control" type="text" name="cel" ng-model="register.company.cel" placeholder="Celular">
+					<input id="cel" autocomplete="off" class="form-control" type="text" name="cel" ng-model="register.company.cel" placeholder="Celular">
 				</div>
 				<span class="has-error col-xs-12 help-block" ng-if="register.telError">
 					<i class="fa fa-times-circle"></i>  {{:: register.telError }}
@@ -120,13 +132,13 @@
 <!-- 					<option value="2" disabled>Cuil</option> -->
 				</select>
 				<input id="idCode" class="form-control" type="text" name="idCode" ng-model="register.company.idCode" placeholder="C&oacute;digo de identificaci&oacute;n Cuit"
-				required>
+				 required>
 			</div>
 			<div class="form-group" data-ng-class="{'has-error': register.registerForm.email.$invalid && register.registerForm.$submitted}">
 				<div class="col-xs-12">
 					<label class="control-label" for="email">Correo Electr&oacute;nico (*)</label><br>
-					<input id="email"  autocomplete="off" class="form-control" type="email" name="email" ng-model="register.company.email" placeholder="Correo electr&oacute;nico"
-					required>
+					<input id="email" autocomplete="off" class="form-control" type="email" name="email" ng-model="register.company.email" placeholder="Correo electr&oacute;nico"
+					 required>
 				</div>
 				<span class="has-error col-xs-12 help-block" ng-if="register.existingEmail">
 					<i class="fa fa-times-circle"></i>  {{:: register.existingEmail}}
@@ -135,13 +147,13 @@
 			<div class="form-group" data-ng-class="{'has-error': register.registerForm.password.$invalid && register.registerForm.$submitted}">
 				<div class="col-xs-12 col-md-6">
 					<label class="control-label" for="pwd">Contrase&ntilde;a (*)</label><br>
-					<input id="pwd"  autocomplete="off" class="form-control" type="password" name="password" ng-model="register.company.password" placeholder="Contrase&ntilde;a"
-					required>
+					<input id="pwd" autocomplete="off" class="form-control" type="password" name="password" ng-model="register.company.password"
+					 placeholder="Contrase&ntilde;a" required>
 				</div>
 				<div class="col-xs-12 col-md-6">
 					<label class="control-label" for="pwd2">Repita la contrase&ntilde;a (*)</label><br>
-					<input id="pwd2"  autocomplete="off" class="form-control" type="password" name="password2" ng-model="register.company.password2" placeholder="Contrase&ntilde;a"
-					required>
+					<input id="pwd2" autocomplete="off" class="form-control" type="password" name="password2" ng-model="register.company.password2"
+					 placeholder="Contrase&ntilde;a" required>
 				</div>
 				<span class="has-error col-xs-12 help-block" ng-if="register.passwordError">
 					<i class="fa fa-times-circle"></i>  {{:: register.passwordError}}
@@ -149,18 +161,18 @@
 			</div>
 			<div class="form-group col-xs-12 col-md-5" data-ng-class="{'has-error': register.registerForm.address.$invalid && register.registerForm.$submitted}">
 				<label class="control-label" for="address">Direcci&oacute;n de entrega(*)</label><br>
-				<input id="address"  autocomplete="off" class="form-control" type="text" name="address" ng-model="register.company.address" placeholder="Direcci&oacute;n"
-				required>
+				<input id="address" autocomplete="off" class="form-control" type="text" name="address" ng-model="register.company.address"
+				 placeholder="Direcci&oacute;n" required>
 			</div>
 			<div class="form-group col-xs-12 col-md-4" data-ng-class="{'has-error': register.registerForm.localidad.$invalid && register.registerForm.$submitted}">
 				<label class="control-label" for="localidad">Localidad(*)</label><br>
-				<input id="localidad"  autocomplete="off" class="form-control" type="text" name="localidad" ng-model="register.company.localidad" placeholder="Localidad"
-				required>
+				<input id="localidad" autocomplete="off" class="form-control" type="text" name="localidad" ng-model="register.company.localidad"
+				 placeholder="Localidad" required>
 			</div>
 			<div class="form-group col-xs-12 col-md-3" data-ng-class="{'has-error': register.registerForm.postalCode.$invalid && register.registerForm.$submitted}">
 				<label class="control-label" for="postalCode">CP (*)</label><br>
-				<input id="postalCode"  autocomplete="off" class="form-control" type="text" name="postalCode" ng-model="register.company.postalCode" placeholder="C&oacute;digo postal"
-				required>
+				<input id="postalCode" autocomplete="off" class="form-control" type="text" name="postalCode" ng-model="register.company.postalCode"
+				 placeholder="C&oacute;digo postal" required>
 			</div>
 			<div class="form-group col-xs-12">
 				<button class="btn btn-hbr-green" type="submit">REGISTRARME</button>
