@@ -1,40 +1,45 @@
-<div class="well well-lg">
-    <span class="help-block"><i class="fa fa-warning"></i>  Revisa tu informaci&oacute;n personal antes de solicitar el env&iacute;o de tus productos. Puedes modificar tu informaci&oacute;n haciendo click en tu nombre ubicado en la barra de navegaci&oacute;n.</span>
-</div>
-<form name="shopping.shoppingForm_data_data" novalidate data-ng-submit="shopping.shoppingForm_data_data.$valid && !shopping.shoppingForm_data_data.$pristine && shopping.shoppingForm_data_data.$submitted">
+<form class="personal-info" name="shopping.shoppingForm_data_data" novalidate data-ng-submit="shopping.shoppingForm_data_data.$valid && !shopping.shoppingForm_data_data.$pristine && shopping.shoppingForm_data_data.$submitted">
+    <div class="col-xs-12 info">
+        <span><i class="fa fa-info-circle"></i>  Revisa tu informaci&oacute;n personal antes de solicitar el env&iacute;o de tus productos. Puedes modificar tu informaci&oacute;n haciendo click en tu nombre ubicado en la barra de navegaci&oacute;n.</span>
+    </div>
     <div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_data_data.name.$invalid && shopping.shoppingForm_data_data.$submitted}">
         <label class="control-label" for="name">Nombre</label><br>
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
-            <input disabled id="name" class="form-control" type="text" name="name" ng-model="shopping.lote.user.name" placeholder="Nombre" autocomplete="off" required>
+            <input disabled id="name" class="form-control" type="text" name="name" ng-model="shopping.lote.user.name" placeholder="Nombre"
+                autocomplete="off" required>
         </div>
     </div>
     <div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_data_data.lastname.$invalid && shopping.shoppingForm_data_data.$submitted}">
         <label class="control-label" for="lastname">Apellido</label><br>
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
-            <input disabled id="lastname" class="form-control" type="text" name="lastname" ng-model="shopping.lote.user.lastname" placeholder="Apellido" autocomplete="off" required>
+            <input disabled id="lastname" class="form-control" type="text" name="lastname" ng-model="shopping.lote.user.lastname" placeholder="Apellido"
+                autocomplete="off" required>
         </div>
     </div>
     <div ng-if="shopping.lote.user.tel > 0" class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_data_data.tel.$invalid && shopping.shoppingForm_data.$submitted}">
         <label class="control-label" for="tel">Tel&eacute;fono Fijo</label><br>
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-phone"></i></span>
-            <input disabled id="tel" class="form-control" type="text" name="tel" ng-model="shopping.lote.user.tel" placeholder="Tel&eacute;fono" autocomplete="off" required>
+            <input disabled id="tel" class="form-control" type="text" name="tel" ng-model="shopping.lote.user.tel" placeholder="Tel&eacute;fono"
+                autocomplete="off" required>
         </div>
     </div>
     <div class="form-group col-xs-12 col-sm-4" ng-if="shopping.lote.user.cel > 0" data-ng-class="{'has-error': shopping.shoppingForm_data.cel.$invalid && shopping.shoppingForm_data.$submitted}">
         <label class="control-label" for="cel">Tel&eacute;fono Celular</label><br>
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-mobile"></i></span>
-            <input disabled id="cel" class="form-control" type="text" name="cel" ng-model="shopping.lote.user.cel" placeholder="Tel&eacute;fono Celular" autocomplete="off" required>
+            <input disabled id="cel" class="form-control" type="text" name="cel" ng-model="shopping.lote.user.cel" placeholder="Tel&eacute;fono Celular"
+                autocomplete="off" required>
         </div>
     </div>
     <div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_data.mail.$invalid && shopping.shoppingForm_data.$submitted}">
         <label class="control-label" for="mail">E-Mail</label><br>
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope"></i></span>
-            <input disabled id="mail" class="form-control" type="text" name="mail" ng-model="shopping.lote.user.email" placeholder="E-Mail" autocomplete="off" required>
+            <input disabled id="mail" class="form-control" type="text" name="mail" ng-model="shopping.lote.user.email" placeholder="E-Mail"
+                autocomplete="off" required>
         </div>
     </div>
     <div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_data.code.$invalid && shopping.shoppingForm_data.$submitted}">
@@ -42,28 +47,36 @@
         <div ng-if="shopping.lote.user.codeType == '1'"><label class="control-label" for="code">Cuil</label><br></div>
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-hashtag"></i></span>
-            <input disabled id="code" class="form-control" type="text" name="code" ng-model="shopping.lote.user.idCode" placeholder="Cuit/Cuil" autocomplete="off" required>
+            <input disabled id="code" class="form-control" type="text" name="code" ng-model="shopping.lote.user.idCode" placeholder="Cuit/Cuil"
+                autocomplete="off" required>
         </div>
     </div>
     <div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_data.address.$invalid && shopping.shoppingForm_data.$submitted}">
         <label class="control-label" for="address">Direcci&oacute;n de entrega</label><br>
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-map"></i></span>
-            <input disabled id="address" class="form-control" type="text" name="address" ng-model="shopping.lote.user.address" placeholder="Direcci&oacute;n de entrega" autocomplete="off" required>
+            <input disabled id="address" class="form-control" type="text" name="address" ng-model="shopping.lote.user.address" placeholder="Direcci&oacute;n de entrega"
+                autocomplete="off" required>
         </div>
     </div>
     <div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_data.localidad.$invalid && shopping.shoppingForm_data.$submitted}">
         <label class="control-label" for="localidad">Localidad</label><br>
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-map"></i></span>
-            <input disabled id="localidad" class="form-control" type="text" name="localidad" ng-model="shopping.lote.user.localidad" placeholder="Localidad" autocomplete="off" required>
+            <input disabled id="localidad" class="form-control" type="text" name="localidad" ng-model="shopping.lote.user.localidad"
+                placeholder="Localidad" autocomplete="off" required>
         </div>
     </div>
     <div class="form-group col-xs-12 col-sm-4" data-ng-class="{'has-error': shopping.shoppingForm_data.postal.$invalid && shopping.shoppingForm_data.$submitted}">
         <label class="control-label" for="postal">C&oacute;digo postal</label><br>
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-map"></i></span>
-            <input disabled id="postal" class="form-control" type="text" name="postal" ng-model="shopping.lote.user.postalcode" placeholder="C&oacute;digo Postal" autocomplete="off" required>
+            <input disabled id="postal" class="form-control" type="text" name="postal" ng-model="shopping.lote.user.postalcode" placeholder="C&oacute;digo Postal"
+                autocomplete="off" required>
         </div>
+    </div>
+
+    <div class="col-xs-12">
+        <button class="btn pull-right btn-hbr-steps" ng-click="shopping.nextStep($index)">Siguiente Paso <i class="fa fa-chevron-right"></i></button>
     </div>
 </form>

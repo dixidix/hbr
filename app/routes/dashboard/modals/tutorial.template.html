@@ -1,25 +1,134 @@
 <div class="warehouse wh-modal container-fluid" ng-cloak>
 	<div class="tutorial">
 		<div class="modal-header">
-			<h3>Bienvenido a Tu Courier MyHBR</h3>
+			<h3 class="pull-right">{{step}}/4</h3>
+			<h3>Bienvenido a HBR SELFIE</h3>
 		</div>
-		
-		<div class="modal-body">		
-				<div ng-if="step == 1">
-					<img src="./hbr-selfie/dist/routes/dashboard/modals/step1.png" class="img-responsive" alt="">
-				</div>
-				<div ng-if="step == 2">
-					<img src="./hbr-selfie/dist/routes/dashboard/modals/step2.png" class="img-responsive" alt="">
-				</div>
-				<div ng-if="step == 3">
-					<img src="./hbr-selfie/dist/routes/dashboard/modals/step3.png" class="img-responsive" alt="">
-				</div>
+
+		<div class="modal-body">
+			<div ng-if="step == 1">
+				<article>
+					<header>						
+						<h4>Es tu primera vez? No te preocupes, te guiaremos en el proceso. </h4> 
+					</header>
+					<p class="tutorial-text">
+						<i class="fa fa-arrow-right"></i> A traves de nuestros servicios puedes:
+						<ol>
+							<li class="what-we-do"><i class="fa fa-shopping-cart"></i> Agregar las facturas de tus compras.</li>
+							<li class="what-we-do"><i class="fa fa-list-alt"></i> Consultar tus lotes de compra.</li>
+							<li class="what-we-do"><i class="fa fa-plane"></i> Consultar tus gu&iacute;as.</li>
+							<li class="what-we-do"><i class="fa fa-credit-card"></i> Realizar el pago de tus env&iacute;os. </li>
+						</ol>
+					</p>
+					<p class="tutorial-text" style="padding-top:25px;">
+						<i class="fa fa-arrow-right"></i> Ten en cuenta que hemos hubicado Iconos de ayuda "<i class="fa fa-question-circle-o"></i>"
+						en las secciones donde el proceso pueda ser m&aacute;s complejo o confuso. Adem&aacute;s encontrar&aacute;s textos
+						informativos "<i class="fa fa-info"></i>" para ayudarte en tus compras.
+					</p>
+					<p class="tutorial-text" style="padding-top:25px;">
+						<span>Presiona Siguiente para continuar con el tutorial.</span>
+					</p>
+				</article>
+			</div>
+			<div ng-if="step == 2">
+				<article>
+					<header>
+						<h4><i class="fa fa-shopping-cart"></i> Agregar Compra</h4>
+					</header>
+					<p class="tutorial-text">
+						Para comenzar deber&aacute;s agregar las compras que has realizado. Recuerda contar con tu factura en mano ya que es necesaria
+						para el proceso de env&iacute;o.
+						<ol>
+							<li class="steps"><i class="fa fa-shopping-cart"></i> Haz click en el menu <b><u> Agregar Compra</u></b> hubicado en la barra lateral.
+								Aqu&iacute; es donde comienza el proceso de env&iacute;os.</li>
+							<li class="steps"><i class="fa fa-user"></i> Paso 1: Verifica tu <b><u> informaci&oacute;n personal</u></b> , esta informaci&oacute;n
+								es la que utilizaremos para enviar tu producto, por lo tanto asegurate que sea tanto ver&iacute;dica como acertada.
+								Si necesitas modificar algunos de los datos, lo puedes realizar en tu perfil, haciendo click en tu nombre en la barra
+								de navegaci&oacute;n superior. Una vez que estes listo, haz click en siguiente.</li>
+							<li class="steps"><i class="fa fa-file-text"></i> Paso 2: Agrega la informaci&oacute;n de facturaci&oacute;n que la tienda donde adquiriste
+								los productos te provee, debes agregar una copia digital en formato PDF de dicha factura.<br> Luego comienza a agregar
+								los productos que has adquirido en la tienda. Recuerda una factura posee uno o varios productos como m&iacute;nimo.<br>								A medida que vayas agregando los productos podr&aacute;s observar la factura y su detalle generandose al fondo del
+								formulario. Si tienes dudas o necesitas mas informaci&oacute;n de cada uno de los campos que debes llenar, encontrar&aacute;s
+								nuestro signo de Ayuda <i class="fa fa-question-circle-o"></i> </li>
+							<li class="steps"><i class="fa fa-check"></i> Paso 3: Verifica toda la informaci&oacute;n que has cargado. recuerda que puedes cargar
+								tantas facturas como desees y tantos productos por factura como quieras, las mismas se mostrar&aacute;n en una tabla
+								a modo de resumen en este paso. Adem&aacute;s podr&aacute;s ver el total en valor moneda (precio del lote), peso
+								total y cantidad total de productos.</br>
+								</br>
+								Puedes optar por las siguientes opciones:
+								<ul>
+									<li><i class="fa fa-send"></i>
+										<u><b>Terminar Compra</b></u>: Da por finalizado el lote de compra (un lote contiene una o mas facturas). Esta acci&oacute;n
+										nos notifica para que podamos dar comienzo a el proceso de recepci&oacute;n y env&iacute;o de tus productos. Recuerda
+										hasta que no des por finalizado tu lote, no podr&eacute;mos procesarlo.</li>
+									<li><i class="fa fa-save"></i>
+										<u><b>Guardar y continuar luego</b></u>: Guardamos el estado de la carga de tus facturas para que puedas seguir comprando.
+										Puedes optar por esta opci&oacute;n y guardaremos el estado de tu compra hasta por 7 (siete) d&iacute;s. Recuerda
+										que hasta que no des por finalizado el lote no procesaremos tu informaci&oacute;n. Si Necesitas que lo hagamos,
+										puedes optar por terminar esta compra y crear una nueva. </li>
+									<li><i class="fa fa-close"></i>
+										<u><b>Cancelar</b></u>: Esta acci&oacute;n deshace la carga de la factura si no la has guardado anteriormente. Si
+										has guardardo para continuar luego y oprimes en cancelar, volveremos al &uacute;ltimo estado de tu lote de compra.
+										</li>
+								</ul>
+							</li>
+						</ol>
+						Una vez que des por terminado el lote de compra o lo guardes para continuar despu&eacute;s, encontrar&aacute;s tu compra
+						en la secci&oacute;n de <b>"<i class="fa fa-list-alt"></i> Ver Compras"</b>.
+					</p>
+				</article>
+			</div>
+			<div ng-if="step == 3">
+				<article>
+					<header>
+						<h4><i class="fa fa-list-alt"></i> Ver Compras</h4>
+					</header>
+					<p class="tutorial-text">
+						<i class="fa fa-dropbox"></i> En esta pantalla encontrar&aacute;s toda la informaci&oacute;n perteneciente a tus lotes
+						de compras finalizados o en proceso (Guardados para continuar luego). Desde aqu&iacute; podr&aacute;s continuar con
+						tus cargas de facturas si aun no lo has finalizado realizando click en el bot&oacute;n "Continuar", en caso contrario
+						no dispondr&aacute;s de dicho bot&oacute;n. Adem&aacute;s posees un bot&oacute;n con el texto de "+ info", donde podr&aacute;s
+						consultar los productos que has agregado a ese lote de compras.
+						<br><br>
+						<i class="fa fa-plane"></i> Una vez que des por finalizado el lote de compra, nuestro equipo de profesionales proceder&aacute;
+						en la recepci&oacute;n, el procesamiento y posterior env&iacute;o de tus productos. Tu lote de compra ser&aacute; dividido
+						en lo que llamamos "Gu&iacute;as". Una Gu&iacute;a es en otras palabras el env&iacute;o que realizaremos desde nuestros
+						depositos hasta tu direcci&oacute;n de entrega. La misma puede ser por el total del lote de compra o por una porci&oacute;n
+						del mismo, esto se divide seg&uacute;n el producto / cantidad / peso de cada lote. Cada Gu&iacute;a posee un n&uacute;mero
+						de seguimiento y entrega, y un valor que deber&aacute;s abonar antes del env&iacute;o, por medio de transferencia bancaria
+						o por medio de tarjetas de cr&eacute;dito.
+					</p>
+				</article>
+			</div>
+			<div ng-if="step == 4">
+				<article>
+					<header>
+						<h4><i class="fa fa-plane"></i> Ver Gu&iacute;as</h4>
+					</header>
+					<p class="tutorial-text">
+						Esta pantalla posee toda la informaci&oacute;n de tu gu&iacute;a de compra, y los m&eacute;todos de pagos disponibles para
+						que puedas abonarla. Si la opci&oacute;n de pago disponible es por medio de transferencia bancaria, encontrar&aacute;s
+						la informaci&oacute;n de pago (cbu y otros) realizando click en el bot&oacute;n "+ info". Si la opci&oacute;n de pago
+						disponible es por medio tarjeta de cr&eacute;dito (por medio de todo pago), encontrar&aacute;s un bot&oacute;n de pago
+						con la leyenda "Pagar" que lo llevar&aacute; a un sector seguro para su compra.
+					</p>
+					<p class="tutorial-text">
+						<i class="fa fa-truck"></i> Una vez que el pago este realizado, pondr&eacute;mos a tu disposici&oacute;n la fecha estimada de salida de nuestros dep&oacute;sitos,
+						la fecha estimada de arribo a tu direcci&oacute;n de entrega, el prestador postal que realizar&aacute; la entrega y
+						el c&oacute;digo de tracking de la gu&iacute;a para que puedas darle seguimiento. Para observar dicho seguimiento,
+						puedes realizar click en el bot&oacute;n "Track".
+					</p>
+					<p class="tutorial-text">
+						Si Tienes alguna duda, o si necesitas mas informaci&oacute;n puedes contactarnos a traves del siguiente enlace <a href="http://tucourier.com.ar/#contacto">Contacto</a>
+					</p>
+				</article>
+			</div>
 		</div>
 		<div class="modal-footer">
 			<label for="" class="pull-left"><input type="checkbox" ng-model="tutorial.dontShow"/> No mostrar tutorial de nuevo</label>
-			<button class="btn btn-hbr-blue pull-right" ng-if="step == 3" ng-click="tutorial.cancel()"> <i class="fa fa-close"></i> Cerrar</button>
-			<button class="btn btn-hbr-blue pull-right" ng-if="step != 3" ng-click="tutorial.next()">Siguiente <i class="fa fa-chevron-right"></i></button>	
-			<button class="btn btn-hbr-blue pull-right" ng-if="step != 1" ng-click="tutorial.prev()"><i class="fa fa-chevron-left"></i> Anterior </button>			
+			<button class="btn btn-hbr-blue pull-right" ng-if="step == 4" ng-click="tutorial.cancel()"> <i class="fa fa-close"></i> Cerrar</button>
+			<button class="btn btn-hbr-blue pull-right" ng-if="step != 4" ng-click="tutorial.next()">Siguiente <i class="fa fa-chevron-right"></i></button>
+			<button class="btn btn-hbr-blue pull-right" ng-if="step != 1" ng-click="tutorial.prev()"><i class="fa fa-chevron-left"></i> Anterior </button>
 		</div>
 	</div>
-</div> 
+</div>

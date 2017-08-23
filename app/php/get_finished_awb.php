@@ -21,6 +21,8 @@ if(!empty($_GET['state'])){
 		$outp .= '"ventaId":"'  . $rs["ventaId"] . '",';
         $outp .= '"number":"'  . (int) $rs["number"] . '",';
         $outp .= '"whId":"'  . (int) $rs["warehouseId"] . '",';
+        $outp .= '"wh_leave_date":"'  .  $rs["wh_leave_date"] . '",';
+        $outp .= '"estimatedArrivalDate":"'  .  $rs["estimatedArrivalDate"] . '",';
 		$outpwh="";
 		$wh =  MysqliDB::getInstance()->query("SELECT * FROM users where id =" . (int) $rs["warehouseId"] . " and deleted = 0");
 		while($rswh = $wh->fetch_array(MYSQLI_ASSOC)) {

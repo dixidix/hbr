@@ -1,0 +1,13 @@
+@import '../../../styles/base';
+.shipping {
+    h3 {
+        color: $hbr-blue;
+        margin-top: 0;
+    }
+    hr {
+        background-color: $hbr-blue;
+        height: 1px;
+        border: 0;
+        margin-bottom: 50px;
+    }
+}

@@ -1,0 +1,171 @@
+@import '../../../styles/base';
+.stock-rooms {
+    h3 {
+        color: $hbr-blue;
+        margin-top: 0;
+    }
+    hr {
+        background-color: $hbr-blue;
+        height: 1px;
+        border: 0;
+        margin-bottom: 50px;
+    }
+    .btn-hbr-blue {
+        @include hbr-btn-blue(100%, 40px, $hbr-green);
+        padding: 0;
+        font-size: 11px;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        align-items: center;
+        justify-content: space-around;
+        &.btn-search {
+            width: 60px;
+            border-left: 1px solid $hbr-green;
+        }
+        outline: none;
+        box-shadow: none;
+    }
+    .filterBoxes {
+        .badge {
+            padding: 5px 10px;
+            background: $hbr-blue;
+            color: $hbr-green;
+            vertical-align: middle;
+            font-size: 12px;
+            margin: 5px 10px;
+            a {
+                margin-left: 5px;
+                cursor: pointer;
+                color: white;
+            }
+        }
+        &:first-child {
+            margin-left: 0;
+            padding-left: 0;
+        }
+    }
+    .input-group {
+        margin: 10px 0px;
+        input {
+            height: 40px;
+        }
+        button {
+            height: 40px;
+            width: 160px;
+            padding: 0;
+            font-size: 11px;
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            align-items: center;
+            justify-content: space-around;
+        }
+        a {
+            cursor: pointer;
+        }
+    }
+    .boxes {
+        padding-right: 0;
+        margin-right: 0;
+        margin-top: 2%;
+        padding-bottom: 50px;
+        transition: all 0.5s ease-in-out;
+        .popover-content {
+            width: 235px;
+            max-height: 290px;
+            color: $hbr-blue;
+            padding: 5px 3px;
+            overflow-y: auto;
+            .popover-card {
+                font-size: 11px;
+                border: 2px solid $hbr-blue;
+                border-radius: 5px;
+                .stock-card__header {
+                    background: $hbr-blue;
+                    padding: 0;
+                    color: $hbr-green;
+                    padding: 0px 15px;
+                    margin-bottom: 15px;
+                }
+                .stock-card__data {
+                    font-size: 12px;
+                    padding: 0 10px;
+                    li {
+                        padding: 5px 0px;
+                    }
+                }
+            }
+        }
+        .stock-card {
+            i {
+                cursor: pointer;
+            }
+            &:hover {
+                box-shadow: 0px 0px 2px 1px #84838c;
+            }
+            position: relative;
+            margin: 1%;
+            width: 31%;
+            height: 170px;
+            background: #fcfcfc;
+            border: 1px solid $hbr-blue;
+            border-radius: 5px;
+            opacity: 1;
+            color: $hbr-blue;
+            &__header {
+                h3 {
+                    margin: 0;
+                    padding: 10px 5px;
+                    font-weight: bold;
+                }
+            }
+            &__data {
+                list-style: none;
+                padding: 0px 20px;
+                font-size: 14px;
+            }
+            &__footer {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 30px;
+                display: flex;
+                flex-direction: row;
+                align-content: space-around;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0px 10px;
+                background: $hbr-blue;
+                color: $hbr-green;
+            }
+        }
+    }
+    .footer {
+        border-top: 2px solid $hbr-green;
+        position: fixed;
+        width: 100%;
+        left: 0;
+        right: 0;
+        height: 35px;
+        color: $hbr-green;
+        background: $hbr-blue;
+        bottom: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-content: space-around;
+        align-items: center;
+    }
+}
+
+.box-modal {
+    .modal {
+        &-body {
+            textarea {
+                height: 80px;
+            }
+        }
+    }
+}

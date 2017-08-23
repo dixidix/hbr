@@ -29,10 +29,10 @@
                 </a>
             </div>
             <div ng-if="dashboard.isAdmin == 0 && dashboard.clientType != '2'">
-                <a href="" ui-sref="dashboard.shopping" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Agregar Compra">
+                <a href="" ui-sref="dashboard.shopping({ venta: null})" ui-sref-opts="{reload: true, notify: true}" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Agregar Compra">
                     <li><i class="fa fa-shopping-cart"></i></li>
                 </a>
-                <a href="" ui-sref="dashboard.shopping" ng-if="!dashboard.collapse">
+                <a href="" ui-sref="dashboard.shopping({ venta: null})" ui-sref-opts="{reload: true, notify: true}" ng-if="!dashboard.collapse">
                     <li><i class="fa fa-shopping-cart"></i><span> Agregar Compra </span></li>
                 </a>
                 <a href="" ui-sref="dashboard.shopping_list" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Ver Compras">
@@ -54,6 +54,12 @@
                 </a>
                 <a href="" ui-sref="dashboard.process_payments" ng-if="!dashboard.collapse">
                     <li><i class="fa fa-dropbox"></i><span>Lots </span></li>
+                </a>
+                <a href="" ui-sref="dashboard.manage_awb" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="AirWay Bill">
+                    <li><i class="fa fa-plane"></i></li>
+                </a>
+                <a href="" ui-sref="dashboard.manage_awb" ng-if="!dashboard.collapse">
+                    <li><i class="fa fa-plane"></i><span>AirWay Bill </span></li>
                 </a>
             </div>
             <div ng-if="dashboard.isAdmin == 1">
@@ -92,6 +98,26 @@
                 </a>
                 <a href="" ui-sref="dashboard.warehouse" ng-if="!dashboard.collapse">
                     <li><i class="fa fa-home"></i><span> Warehouse </span></li>
+                </a>
+            </div>
+            <div ng-if="dashboard.clientType !== 0 || dashboard.isAdmin == 1">
+                <a href="" ui-sref="dashboard.stock_rooms" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Stock Rooms">
+                    <li><i class="fa fa-cubes"></i></li>
+                </a>
+                <a href="" ui-sref="dashboard.stock_rooms" ng-if="!dashboard.collapse">
+                    <li><i class="fa fa-cubes"></i><span>Stock Rooms </span></li>
+                </a>
+                <a href="" ui-sref="dashboard.history" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="History">
+                    <li><i class="fa fa-history"></i></li>
+                </a>
+                <a href="" ui-sref="dashboard.history" ng-if="!dashboard.collapse">
+                    <li><i class="fa fa-history"></i><span>History</span></li>
+                </a>
+                <a href="" ui-sref="dashboard.shipping" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Shipping">
+                    <li><i class="fa fa-truck"></i></li>
+                </a>
+                <a href="" ui-sref="dashboard.shipping" ng-if="!dashboard.collapse">
+                    <li><i class="fa fa-truck"></i><span>Shipping</span></li>
                 </a>
             </div>
         </ul>

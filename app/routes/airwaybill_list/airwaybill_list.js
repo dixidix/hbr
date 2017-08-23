@@ -22,10 +22,10 @@ function airwayListController(angular, app) {
                 controllerAs: 'airwaybill_desc',
                 size: size,
                 resolve: {
-                    awb: function() {
+                    awb: function () {
                         return awb;
                     },
-                    products: function() {
+                    products: function () {
                         return products;
                     },
                 }
@@ -38,35 +38,38 @@ function airwayListController(angular, app) {
 
         function init() {
             $rootScope.showSpinner = true;
-             $scope.filtered = [];
+            self.paymentPending = false;
+            $scope.filtered = [];
             authenticationService.checkAuth()
-                .then(function(response) {
+                .then(function (response) {
                     self.uid = response.data.uid;
                     airwayService.get_finished_airwaybillsByUserId(self.uid)
                         .then(function success(response) {
                             self.guides = response.data.guideBatch;
-
-                            angular.forEach(self.guides, function(guide) {
+                            angular.forEach(self.guides, function (guide) {
+                                if (guide.state == 2 && guide.paymentMethod != 1) {                                
+                                    self.paymentPending = true;
+                                }
                                 if (guide.paymentButton) {
                                     guide.paymentButton = $sce.trustAsHtml(guide.paymentButton);
                                 }
                             });
                             $rootScope.showSpinner = false;
-                        $scope.totalItems = Object.keys(self.guides).length;
-                        $scope.currentPage = 1;
-                        $scope.itemsPerPage = 5;
-                        $scope.maxSize = 5;
-                        $scope.setPage = function(pageNo) {
-                            $scope.currentPage = pageNo;
-                        };
-                        $scope.pageChanged = function() {
-
-                        };
-                        $scope.$watch('search', function(term) {
-                            var obj = term;
-                            $scope.filtered = $filter('filter')(self.guides, obj);
+                            $scope.totalItems = Object.keys(self.guides).length;
                             $scope.currentPage = 1;
-                        });
+                            $scope.itemsPerPage = 5;
+                            $scope.maxSize = 5;
+                            $scope.setPage = function (pageNo) {
+                                $scope.currentPage = pageNo;
+                            };
+                            $scope.pageChanged = function () {
+
+                            };
+                            $scope.$watch('search', function (term) {
+                                var obj = term;
+                                $scope.filtered = $filter('filter')(self.guides, obj);
+                                $scope.currentPage = 1;
+                            });
                         });
                 });
             self.seeMore = seeMore;
@@ -78,7 +81,7 @@ function airwayListController(angular, app) {
         function setLink() {
             $('[rel="payment_button"]')
                 .find('a')
-                .each(function(index, link) {
+                .each(function (index, link) {
                     $(link).attr('target', '_blank');
                 });
         }

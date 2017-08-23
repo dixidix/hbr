@@ -36,7 +36,6 @@ function airwayService(angular, app) {
         };
 
         this.updateGuide = function(guide) {
-            console.log(guide);
             var formData = new FormData();
             var products = [];
             angular.forEach(guide, function(key, value) {

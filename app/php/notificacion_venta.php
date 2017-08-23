@@ -13,8 +13,8 @@ $mail->SMTPDebug = 2;                               // Enable verbose debug outp
 $mail->isSMTP();                                      // Set mailer to use SMTP
 $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
 $mail->SMTPAuth = true;                               // Enable SMTP authentication
-$mail->Username = 'nicolas.sigal@gmail.com';                 // SMTP username
-$mail->Password = 'panchirulo173';                           // SMTP password
+$mail->Username = 'santiago.lloret@tucourier.com.ar';                 // SMTP username
+$mail->Password = 'reset2016';                           // SMTP password
 $mail->SMTPSecure="ssl";                          // Enable TLS encryption, `ssl` also accepted
 $mail->Port = 465;                                    // TCP port to connect to
 
@@ -28,7 +28,7 @@ $htmlStringToReplace = array('$email','$date','$lote','$name');
  $replaceWith   = array("$email","$date",$lote, "$name");
 $body = str_replace($htmlStringToReplace, $replaceWith, $body);
 
-$to = "nicolas.sigal@gmail.com";
+$to = "santiago.lloret@tucourier.com.ar";
 $name = "HBR | tu courier";
 $subject = "Notificacion de venta";
 $mail->CharSet = 'UTF-8';

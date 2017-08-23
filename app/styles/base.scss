@@ -1,10 +1,8 @@
 @import 'mixins/main';
 @import 'modules/main';
-
 @import './../routes/shopping/shopping';
 @import './../routes/dashboard/dashboard';
 @import './../components/navbar/navbar';
-
 .material-icons {
     font-family: 'Material Icons';
     font-weight: normal;
@@ -37,26 +35,25 @@ html {
         padding: 0;
         height: 100%;
         font-family: $museoSans-100;
-        .col-md-4.col-sm-4.col-xs-12.tipo-boton-class.boton_solo{
-            margin:0;
-            padding:0;
-            width:100%;
+        .col-md-4.col-sm-4.col-xs-12.tipo-boton-class.boton_solo {
+            margin: 0;
+            padding: 0;
+            width: 100%;
         }
         .pagination>.active>a,
         .pagination>.active>a:focus,
-        .pagination>.active>a:hover, 
-        .pagination>.active>span, 
-        .pagination>.active>span:focus, 
-        .pagination>.active>span:hover{
-            background-color:$hbr-blue;
-            border-color:$hbr-blue;
-            color:$hbr-green;
+        .pagination>.active>a:hover,
+        .pagination>.active>span,
+        .pagination>.active>span:focus,
+        .pagination>.active>span:hover {
+            background-color: $hbr-blue;
+            border-color: $hbr-blue;
+            color: $hbr-green;
         }
-
-        .pagination>li>a, .pagination>li>span{
-            color:$hbr-blue;
+        .pagination>li>a,
+        .pagination>li>span {
+            color: $hbr-blue;
         }
-
         .empty-list {
             margin-top: 50px;
             display: flex;

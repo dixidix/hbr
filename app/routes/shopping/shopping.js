@@ -42,7 +42,7 @@ function shoppingController(angular, app) {
                     key.categoryId = parseInt(key.category.category_id);
                 });
             });
-            if(self.lote.total_quantity > 0 && self.lote.total_spent_quantity){
+            if (self.lote.total_quantity > 0 && self.lote.total_spent_quantity) {
                 var total_remaining_quantity = parseInt(self.lote.total_quantity) - (self.lote.total_spent_quantity);
             } else {
                 var total_remaining_quantity = self.lote.total_quantity;
@@ -105,7 +105,7 @@ function shoppingController(angular, app) {
             var requests = [];
             var whEmail = [];
             var timestamp = self.lote.timestamp || new Date().getTime();
-           
+
             self.spinner = true;
             self.lote.total_price = 0.00;
             self.lote.parcial_price = 0.00;
@@ -123,7 +123,7 @@ function shoppingController(angular, app) {
                     key.categoryId = parseInt(key.category.category_id);
                 });
             });
-            if(self.lote.total_quantity > 0 && self.lote.total_spent_quantity){
+            if (self.lote.total_quantity > 0 && self.lote.total_spent_quantity) {
                 var total_remaining_quantity = parseInt(self.lote.total_quantity) - (self.lote.total_spent_quantity);
             } else {
                 var total_remaining_quantity = self.lote.total_quantity;
@@ -137,7 +137,7 @@ function shoppingController(angular, app) {
                     total: self.lote.total_price,
                     total_quantity: self.lote.total_quantity,
                     userId: self.lote.user.id,
-                    timestamp:timestamp,
+                    timestamp: timestamp,
                     venta_state: self.lote.venta_state,
                     status: self.lote.status,
                     total_remaining_quantity: total_remaining_quantity,
@@ -210,7 +210,7 @@ function shoppingController(angular, app) {
         }
         function confirmFinish() {
             var title = "Finalizar Compra";
-            var msg = "Esta seguro que desea finalizar la compra? al finalizar la compra ya no podrá seguir agregando facturas al lote de compras.";
+            var msg = "Esta seguro que desea finalizar la compra? al finalizar la compra ya no podrá seguir agregando facturas al lote de compras, ni eliminar / editar el mismo.";
             confirm(title, msg);
 
             $scope.confirmAccept = function () {
@@ -222,7 +222,7 @@ function shoppingController(angular, app) {
                 self.confirmModal.dismiss('cancel');
             }
         }
-        
+
         function get_categories() {
             categoryService
                 .get_categories()
@@ -280,7 +280,9 @@ function shoppingController(angular, app) {
                         self.bill.total_weight = (parseFloat(parseFloat(self.bill.total_weight || 0) + (parseFloat(product.weight || 0) * parseInt(product.quantity))).toFixed(2)) || 0.00;
                         self.bill.quantity = parseInt(parseInt(self.bill.quantity) + parseInt(product.quantity)) || 0;
                     });
-
+                    $('html, body').animate({
+                        scrollTop: $("#bill-detail").offset().top
+                    }, 500);
                 } else {
                     self.product_error = "Debe completar la información de producto para continuar";
                 }
@@ -337,9 +339,6 @@ function shoppingController(angular, app) {
                 self.shoppingForm_purchase.$submitted = false;
                 self.shoppingForm_purchase.$setPristine();
                 self.shoppingForm_purchase.$setUntouched();
-                $('html, body').animate({
-                    scrollTop: $("#product-info").offset().top
-                }, 100);
             } else {
                 self.bill_error = "Debe completar la información de factura para continuar";
                 self.shoppingForm_purchase.$submitted = true;
@@ -475,7 +474,26 @@ function shoppingController(angular, app) {
                 });
         }
 
+        function nextStep(index) {
+            var nextIndex = parseInt(index) + 1;
+            self.tabs[nextIndex].disabled = false;
+            self.tabActive = parseInt(index) + 2;
+            $('html, body').animate({
+                scrollTop: 0
+            }, 500);
+        }
+
+        function toggleHelp() {
+            self.helpOpened = !self.helpOpened;
+            $scope.ttext = self.helpOpened ? 'Cerrar Ayuda' : 'Ver Ayuda';
+
+        }
+
         function init() {
+            self.nextStep = nextStep;
+            self.toggleHelp = toggleHelp;
+            self.helpOpened = false;
+            $scope.ttext = 'Ver Ayuda';
             $('.notification').hide();
             $scope.editBill = false;
             $scope.editProduct = false;
@@ -487,14 +505,14 @@ function shoppingController(angular, app) {
                 self.lote.total_price = 0.00;
                 self.lote.total_weight = 0.00;
                 self.lote.total_quantity = 0;
-                
+
                 angular.forEach(self.lote.bills, function (bill) {
                     self.lote.total_price = (parseFloat(self.lote.total_price) + parseFloat(bill.total_price)).toFixed(2);
                     self.lote.total_quantity = parseInt(self.lote.total_quantity) + parseInt(bill.quantity);
                     self.lote.total_weight = (parseFloat(self.lote.total_weight) + parseFloat(bill.total_weight)).toFixed(2);
                 });
 
-                self.lote.total_spent_quantity = parseInt(self.lote.total_quantity)  - parseInt(self.lote.total_remaining_quantity);
+                self.lote.total_spent_quantity = parseInt(self.lote.total_quantity) - parseInt(self.lote.total_remaining_quantity);
             }
 
             self.get_warehouses = get_warehouses;
@@ -533,6 +551,25 @@ function shoppingController(angular, app) {
             self.delete_bill = delete_bill;
             self.confirmUpdate = confirmUpdate;
             self.confirmFinish = confirmFinish;
+            self.tabs = [
+                {
+                    title: "Información Personal",
+                    content: "hbr-selfie/dist/routes/shopping/forms/personal-form-tmpl.html",
+                    helpText: ''
+                },
+                {
+                    title: "Cargar Factura",
+                    content: "hbr-selfie/dist/routes/shopping/forms/product-purchase-form-tmpl.html",
+                    helpText: '',
+                    disabled: self.lote.bills.length ? false : true
+                },
+                {
+                    title: "Verificar y Finalizar compra",
+                    content: "hbr-selfie/dist/routes/shopping/forms/products-list-tmpl.html",
+                    helpText: '',
+                    disabled: self.lote.bills.length ? false : true
+                }
+            ];
         }
 
         init();

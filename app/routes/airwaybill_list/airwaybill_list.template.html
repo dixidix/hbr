@@ -10,6 +10,12 @@
         </div>
     </div>
     <div class="col-xs-12 content" ng-if="airwayList.guides.length">
+        <div class="warnings help-block">
+            <div class="text-danger" ng-if="airwayList.paymentPending">
+                <span><i class="fa fa-warning"></i> Algunas gu&iacute;as estan pendientes de pago. Para ver la informaci&oacute;n de pago has click en el bot&oacute;n "+ info" en la gu&iacute;a que tenga el estado pendiente de pago. Puedes buscar por estado "pendiente de pago" y te mostraremos cuales son.</span>
+                
+            </div>
+        </div>
         <table class="table table-bordered table-striped table-curved rounded">
             <div class="row">
                 <div class="col-xs-3">
@@ -26,12 +32,22 @@
                         <input type="text" name="search" class="form-control" placeholder="Buscar por gu&iacute;a" ng-model="searchByAwb">
                     </div>
                 </div>
-                <div class="col-xs-5">
+                <div class="col-xs-3">
                     <label for="">Buscar por Tracking</label>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1"><i  class="fa fa-search"></i></span>
                         <input type="text" name="search" class="form-control" placeholder="Buscar por Tracking" ng-model="searchByTracking">
                     </div>
+                </div>
+                <div class="col-xs-3">
+                    <label for="">Buscar por Estado</label>
+                    <select class="form-control" ng-model="filterState">
+                        <option value="" selected>-- Todos --</option>
+                        <option value="1">Procesando</option>
+                        <option value="2">Pendiente de pago</option>
+                        <option value="3">Pagado</option>
+                        <option value="4">Entregado</option>
+                    </select>
                 </div>
             </div>
             <thead>
@@ -44,47 +60,54 @@
                     <td><span>Tracking</span></td>
                     <td><span>Warehouse</span></td>
                     <td><span>Salida</span></td>
-                    <td><span>Arribo Estimado</span></td>
+                    <td>
+                        <span ng-if="guide.state === 4">Arribo Estimado</span>
+                        <span ng-if="guide.state !== 4">Fecha de entrega</span>
+                    </td>
                     <td><span>Total</span></td>
                     <td><span>Estado</span></td>
                     <td style="width:155px"><span>Acciones</span></td>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="guide in filtered = (airwayList.guides | filter: { ventaId: searchByBatch } | filter: { number: searchByAwb } | filter: { hbr_tracking: searchByTracking }) | orderBy: '-ventaId'  | start: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage | filter : paginate  track by $index" id="guide_list_{{guide.number}}">
+                <tr ng-repeat="guide in filtered = (airwayList.guides | filter: { ventaId: searchByBatch } | filter: { state: filterState } | filter: { number: searchByAwb } | filter: { hbr_tracking: searchByTracking }) | orderBy: '-ventaId'  | start: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage | filter : paginate  track by $index"
+                    id="guide_list_{{guide.number}}">
                     <td><span>{{ guide.ventaId }}</span></td>
                     <td><span>{{ guide.number }}</span></td>
                     <td><span>{{ guide.quantity }}</span></td>
                     <td><span>{{ guide.weight }} Kg.</span></td>
-                    <td ng-if="guide.hbr_postal_provider.length"><span>{{ guide.hbr_postal_provider }}</span></td>
+                    <td class="small-col" ng-if="guide.hbr_postal_provider.length"><span>{{ guide.hbr_postal_provider }}</span></td>
                     <td ng-if="!guide.hbr_postal_provider.length"><span class="text-danger">Procesando..</span></td>
-                    <td ng-if="guide.hbr_tracking.length"><span>{{ guide.hbr_tracking }}</span></td>
+                    <td class="small-col" ng-if="guide.hbr_tracking.length"><span>{{ guide.hbr_tracking }}</span></td>
                     <td ng-if="!guide.hbr_tracking.length"><span class="text-danger">Procesando..</span></td>
                     <td><span>{{ guide.warehouse[0].name }}</span></td>
-                    <td ng-if="guide.leaveDate.length"><span>{{ guide.leaveDate *1000 | date:'dd-MM-yyyy'}}</span></td>
+                    <td class="med-col" ng-if="guide.leaveDate.length"><span>{{ guide.leaveDate *1000 | date:'dd-MM-yyyy'}}</span></td>
                     <td ng-if="!guide.leaveDate.length"><span class="text-danger">Procesando..</span></td>
-                    <td ng-if="guide.arrivalDate.length"><span>{{ guide.arrivalDate  *1000 | date:'dd-MM-yyyy'}}</span></td>
-                    <td ng-if="!guide.arrivalDate.length"><span class="text-danger">Procesando..</span></td>
+                    <td class="med-col" ng-if="guide.estimatedArrivalDate.length"><span>{{ guide.estimatedArrivalDate  *1000 | date:'dd-MM-yyyy'}}</span></td>
+                    <td ng-if="!guide.estimatedArrivalDate.length"><span class="text-danger">Procesando..</span></td>
                     <td><span>{{ guide.billing_total | currency }}</span></td>
                     <td>
-                        <span ng-if="guide.state == 2 && guide.paymentMethod != 1" class="text-danger">Pago no registrado</span>
+                        <span ng-if="guide.state == 2 && guide.paymentMethod != 1" class="text-danger"><i class="fa fa-warning"></i> Pendiente de Pago</span>
                         <span ng-if="guide.state == 3" class="text-success">Pagado</span>
+                        <span ng-if="guide.state == 4" class="text-success">Entregado</span>
                     </td>
                     <td>
                         <div class="flex-row">
-                            <div ng-if="guide.state == 2 && guide.paymentMethod == 1" style="width:100%;min-width: 100px;" ng-bind-html="guide.paymentButton" rel="payment_button" class="col-xs-5"></div>
+                            <div ng-if="guide.state == 2 && guide.paymentMethod == 1" style="width:100%;min-width: 100px;" ng-bind-html="guide.paymentButton"
+                                rel="payment_button" class="col-xs-5"></div>
 
-                                <button style="margin:0px 5px;" class="btn btn-default" ng-click="airwayList.seeMore(guide, guide.products)"><i class="fa fa-plus"></i> Info </button>
+                            <button style="margin:0px 5px;" class="btn btn-default" ng-click="airwayList.seeMore(guide, guide.products)"><i class="fa fa-plus"></i> Info </button>
 
-                              <a class="pull-right" target="_blank" href="http://tucourier.aftership.com/{{ guide.hbr_tracking }}?" ng-disabled="guide.state != 3"><button ng-disabled="guide.state != 3" class="btn btn-default"><i class="fa fa-plane"></i> Track</button></a>
+                            <a class="pull-right" target="_blank" href="http://tucourier.aftership.com/{{ guide.hbr_tracking }}?" ng-disabled="guide.state != 3"><button ng-disabled="guide.state != 3" class="btn btn-default"><i class="fa fa-plane"></i> Track</button></a>
 
-                           </div>
                         </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-          <uib-pagination next-text="Siguiente" previous-text="Anterior" total-items="filtered.length" data-num-pages="shoppingList.noOfPages" ng-model="currentPage" class="pagination-sm pull-right" items-per-page="itemsPerPage" boundary-link-numbers="true"></uib-pagination>
     </div>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    <uib-pagination next-text="Siguiente" previous-text="Anterior" total-items="filtered.length" data-num-pages="shoppingList.noOfPages"
+        ng-model="currentPage" class="pagination-sm pull-right" items-per-page="itemsPerPage" boundary-link-numbers="true"></uib-pagination>
+</div>
 </div>
 <div ng-include src="'hbr-selfie/dist/routes/airwaybill_list/modals/airwaydesc.template.html'"></div>

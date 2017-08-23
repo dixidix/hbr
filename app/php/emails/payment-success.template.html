@@ -117,8 +117,9 @@
             <p>
                 Se le notifica que el pago de la gu&iacute;a N° $guide_number perteneciente a la compra N° $ventaId se ha realizado con &eacute;xito. A continuaci&oacute;n se proporciona informaci&oacute;n para el seguimiento de la gu&iacute;a:
                 <ul>
-                    <li><strong>Fecha de salida de Warehouse:</strong> $leaveDate</li>
-                    <li><strong>Fecha estimada de llegada:</strong> $arrivalDate</li>
+                    $arrivalDateHtml
+                    $leaveDateHtml
+                    $estimatedArrivalDateHtml
                     <li><strong>N° Tracking:</strong> $hbr_tracking</li>
                     <li><strong>Proveedor Postal:</strong> $hbr_postal_provider</li>
                 </ul>
@@ -127,7 +128,7 @@
                     Recuerde comunicarse con el prestador para coordinar la entrega y los impuestos de aduana.
                 </p>
                 <p>
-                    Desde ya muchas gracias por utilizar los servicios de myHBR.
+                    Desde ya muchas gracias por utilizar los servicios de HBR SELFIE.
                 </p>
         </article>
     </div>

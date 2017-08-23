@@ -196,9 +196,17 @@
 }
 
 .process_payments {
-    a{
-        cursor:pointer;
-        color:$hbr-blue;
+
+    .small-col {
+        width: 100px;
+        word-wrap: break-word;
+    }
+    .med-col {
+        width: 110px;
+    }
+    a {
+        cursor: pointer;
+        color: $hbr-blue;
     }
     .payed {
         color: green;
@@ -248,6 +256,7 @@
                 color: $hbr-blue;
                 text-align: center;
                 font-size: 10px;
+                font-weight:bold;
             }
         }
         tbody {
@@ -277,4 +286,25 @@
             }
         }
     }
+     tbody.batch-table {  
+        tr {
+            td {
+                text-align: center;
+                vertical-align: middle;
+                span {
+                    font-size: 11px;
+                    font-family: $museoSans-500;
+                }
+            }
+        } 
+        tr.readed {
+            background: lighten(#ccc, 15%) !important;
+            td{ 
+                span{
+                    font-size: 10px;
+                    font-family:$museoSans-100;
+                }
+            }
+        }
+     }
 }

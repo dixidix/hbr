@@ -33,9 +33,9 @@
                 <div class="pull-left">
                     <h4>Total: U$D {{airwaybill.totalWarehouse }}.-</h4>
                 </div>
-                <div class="pull-right product-action">
+                <div class="pull-right product-action" ng-if="airwaybill.awb.state != 4">
                     <a href="" class="text-primary" ng-click="airwaybill.saveWarehouse()"><i class="fa fa-save fa-2x"></i></a>
-                    <a href="" ng-click="airwaybill.showProductInfo = false" class="text-danger"><i data-toggle="collapse" data-target="#collapse-warehouse" class="fa fa-close fa-2x"></i></a>
+                    <a href="" ng-click="airwaybill.showProductInfo = false; airwaybill.collapsedWarehouse = true;" class="text-danger"><i data-toggle="collapse" data-target="#collapse-warehouse" class="fa fa-close fa-2x"></i></a>
                     <p class="text-primary">{{warehouseSave}}</p>
                 </div>
             </div>

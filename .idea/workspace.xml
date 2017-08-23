@@ -2,57 +2,57 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f2604792-26f5-4e47-8c83-2a77ae5112a9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.js" afterPath="$PROJECT_DIR$/app/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/navbar/navbar.js" afterPath="$PROJECT_DIR$/app/components/navbar/navbar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/php/add_bill.php" afterPath="$PROJECT_DIR$/app/php/add_bill.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/php/emails/solicitud_venta.template.html" afterPath="$PROJECT_DIR$/app/php/emails/solicitud_venta.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/php/notifications/payment_method.php" afterPath="$PROJECT_DIR$/app/php/notifications/payment_method.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/php/notifications/payment_success.php" afterPath="$PROJECT_DIR$/app/php/notifications/payment_success.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/php/notifications/update_dates.php" afterPath="$PROJECT_DIR$/app/php/notifications/update_dates.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/php/solicitud_venta.php" afterPath="$PROJECT_DIR$/app/php/solicitud_venta.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/airwayBills/modals/process-airway.template.html" afterPath="$PROJECT_DIR$/app/routes/airwayBills/modals/process-airway.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/dashboard/dashboard.template.html" afterPath="$PROJECT_DIR$/app/routes/dashboard/dashboard.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/login/login.js" afterPath="$PROJECT_DIR$/app/routes/login/login.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/process_payments/modals/makeGuides.template.html" afterPath="$PROJECT_DIR$/app/routes/process_payments/modals/makeGuides.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/process_payments/process_payments.js" afterPath="$PROJECT_DIR$/app/routes/process_payments/process_payments.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/process_payments/process_payments.template.html" afterPath="$PROJECT_DIR$/app/routes/process_payments/process_payments.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/shopping/forms/product-purchase-form-tmpl.html" afterPath="$PROJECT_DIR$/app/routes/shopping/forms/product-purchase-form-tmpl.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/shopping/shopping.js" afterPath="$PROJECT_DIR$/app/routes/shopping/shopping.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/shopping_list/shopping_list.js" afterPath="$PROJECT_DIR$/app/routes/shopping_list/shopping_list.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/shopping_list/shopping_list.template.html" afterPath="$PROJECT_DIR$/app/routes/shopping_list/shopping_list.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/users/users.js" afterPath="$PROJECT_DIR$/app/routes/users/users.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/login/login.js" afterPath="$PROJECT_DIR$/app/routes/login/login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/process_payments/process_payments.js" afterPath="$PROJECT_DIR$/app/routes/process_payments/process_payments.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/users/users.scss" afterPath="$PROJECT_DIR$/app/routes/users/users.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/users/users.template.html" afterPath="$PROJECT_DIR$/app/routes/users/users.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/authentication/authentication.js" afterPath="$PROJECT_DIR$/app/services/authentication/authentication.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/forms/users.js" afterPath="$PROJECT_DIR$/app/services/forms/users.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/app.bundle.min.js" afterPath="$PROJECT_DIR$/dist/app.bundle.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/app.js" afterPath="$PROJECT_DIR$/dist/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/components/navbar/navbar.js" afterPath="$PROJECT_DIR$/dist/components/navbar/navbar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/libs.bundle.min.js" afterPath="$PROJECT_DIR$/dist/libs.bundle.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/php/add_bill.php" afterPath="$PROJECT_DIR$/dist/php/add_bill.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/php/emails/solicitud_venta.template.html" afterPath="$PROJECT_DIR$/dist/php/emails/solicitud_venta.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/php/notifications/payment_method.php" afterPath="$PROJECT_DIR$/dist/php/notifications/payment_method.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/php/notifications/payment_success.php" afterPath="$PROJECT_DIR$/dist/php/notifications/payment_success.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/airwayBills/modals/process-airway.template.html" afterPath="$PROJECT_DIR$/app/routes/airwayBills/modals/process-airway.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/shopping_list/shopping_list.template.html" afterPath="$PROJECT_DIR$/app/routes/shopping_list/shopping_list.template.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/php/notifications/update_dates.php" afterPath="$PROJECT_DIR$/dist/php/notifications/update_dates.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/php/solicitud_venta.php" afterPath="$PROJECT_DIR$/dist/php/solicitud_venta.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/airwayBills/modals/process-airway.template.html" afterPath="$PROJECT_DIR$/dist/routes/airwayBills/modals/process-airway.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/dashboard/dashboard.template.html" afterPath="$PROJECT_DIR$/dist/routes/dashboard/dashboard.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/login/login.js" afterPath="$PROJECT_DIR$/dist/routes/login/login.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/process_payments/modals/makeGuides.template.html" afterPath="$PROJECT_DIR$/dist/routes/process_payments/modals/makeGuides.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gulp-tasks/bundle.js" afterPath="$PROJECT_DIR$/gulp-tasks/bundle.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/process_payments/process_payments.js" afterPath="$PROJECT_DIR$/dist/routes/process_payments/process_payments.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/process_payments/process_payments.template.html" afterPath="$PROJECT_DIR$/dist/routes/process_payments/process_payments.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/shopping/forms/product-purchase-form-tmpl.html" afterPath="$PROJECT_DIR$/app/routes/shopping/forms/product-purchase-form-tmpl.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/php/add_bill.php" afterPath="$PROJECT_DIR$/app/php/add_bill.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/process_payments/modals/makeGuides.template.html" afterPath="$PROJECT_DIR$/app/routes/process_payments/modals/makeGuides.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/php/solicitud_venta.php" afterPath="$PROJECT_DIR$/dist/php/solicitud_venta.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/shopping/forms/product-purchase-form-tmpl.html" afterPath="$PROJECT_DIR$/dist/routes/shopping/forms/product-purchase-form-tmpl.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/shopping/shopping.js" afterPath="$PROJECT_DIR$/dist/routes/shopping/shopping.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/shopping_list/shopping_list.js" afterPath="$PROJECT_DIR$/dist/routes/shopping_list/shopping_list.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/shopping_list/shopping_list.template.html" afterPath="$PROJECT_DIR$/dist/routes/shopping_list/shopping_list.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/users/users.css" afterPath="$PROJECT_DIR$/dist/routes/users/users.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/app.js" afterPath="$PROJECT_DIR$/dist/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/app.bundle.min.js" afterPath="$PROJECT_DIR$/dist/app.bundle.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/process_payments/modals/makeGuides.template.html" afterPath="$PROJECT_DIR$/dist/routes/process_payments/modals/makeGuides.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/php/add_bill.php" afterPath="$PROJECT_DIR$/dist/php/add_bill.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/php/notifications/payment_method.php" afterPath="$PROJECT_DIR$/app/php/notifications/payment_method.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/dashboard/dashboard.template.html" afterPath="$PROJECT_DIR$/dist/routes/dashboard/dashboard.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/php/emails/solicitud_venta.template.html" afterPath="$PROJECT_DIR$/dist/php/emails/solicitud_venta.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/shopping/shopping.js" afterPath="$PROJECT_DIR$/app/routes/shopping/shopping.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/php/solicitud_venta.php" afterPath="$PROJECT_DIR$/app/php/solicitud_venta.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/process_payments/process_payments.template.html" afterPath="$PROJECT_DIR$/dist/routes/process_payments/process_payments.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/authentication/authentication.js" afterPath="$PROJECT_DIR$/app/services/authentication/authentication.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/libs.bundle.min.js" afterPath="$PROJECT_DIR$/dist/libs.bundle.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/navbar/navbar.js" afterPath="$PROJECT_DIR$/app/components/navbar/navbar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/airwayBills/modals/process-airway.template.html" afterPath="$PROJECT_DIR$/dist/routes/airwayBills/modals/process-airway.template.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/users/users.js" afterPath="$PROJECT_DIR$/dist/routes/users/users.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/users/users.template.html" afterPath="$PROJECT_DIR$/dist/routes/users/users.template.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/services/authentication/authentication.js" afterPath="$PROJECT_DIR$/dist/services/authentication/authentication.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/services/forms/users.js" afterPath="$PROJECT_DIR$/dist/services/forms/users.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gulp-tasks/bundle.js" afterPath="$PROJECT_DIR$/gulp-tasks/bundle.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/users/users.template.html" afterPath="$PROJECT_DIR$/app/routes/users/users.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/dashboard/dashboard.template.html" afterPath="$PROJECT_DIR$/app/routes/dashboard/dashboard.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/php/notifications/payment_success.php" afterPath="$PROJECT_DIR$/app/php/notifications/payment_success.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/process_payments/process_payments.template.html" afterPath="$PROJECT_DIR$/app/routes/process_payments/process_payments.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/php/emails/solicitud_venta.template.html" afterPath="$PROJECT_DIR$/app/php/emails/solicitud_venta.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/php/notifications/payment_success.php" afterPath="$PROJECT_DIR$/dist/php/notifications/payment_success.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/forms/users.js" afterPath="$PROJECT_DIR$/app/services/forms/users.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/users/users.css" afterPath="$PROJECT_DIR$/dist/routes/users/users.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/users/users.template.html" afterPath="$PROJECT_DIR$/dist/routes/users/users.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/shopping/shopping.js" afterPath="$PROJECT_DIR$/dist/routes/shopping/shopping.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/shopping_list/shopping_list.template.html" afterPath="$PROJECT_DIR$/dist/routes/shopping_list/shopping_list.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/shopping_list/shopping_list.js" afterPath="$PROJECT_DIR$/dist/routes/shopping_list/shopping_list.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.js" afterPath="$PROJECT_DIR$/app/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/users/users.js" afterPath="$PROJECT_DIR$/app/routes/users/users.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/components/navbar/navbar.js" afterPath="$PROJECT_DIR$/dist/components/navbar/navbar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/php/notifications/payment_method.php" afterPath="$PROJECT_DIR$/dist/php/notifications/payment_method.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/php/notifications/update_dates.php" afterPath="$PROJECT_DIR$/app/php/notifications/update_dates.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/login/login.js" afterPath="$PROJECT_DIR$/dist/routes/login/login.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -76,7 +76,7 @@
       <file leaf-file-name="users.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/routes/users/users.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
+            <state relative-caret-position="1265">
               <caret line="52" column="42" lean-forward="false" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
               <folding />
             </state>
@@ -86,7 +86,7 @@
       <file leaf-file-name="shopping_list.template.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes/shopping_list/shopping_list.template.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="503">
+            <state relative-caret-position="1035">
               <caret line="45" column="4" lean-forward="false" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="103" />
               <folding />
             </state>
@@ -96,7 +96,7 @@
       <file leaf-file-name="addUser.template.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes/users/modals/addUser.template.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
+            <state relative-caret-position="1633">
               <caret line="71" column="137" lean-forward="false" selection-start-line="71" selection-start-column="125" selection-end-line="71" selection-end-column="137" />
               <folding />
             </state>
@@ -106,7 +106,7 @@
       <file leaf-file-name="users.template.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes/users/users.template.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="411">
+            <state relative-caret-position="1058">
               <caret line="46" column="50" lean-forward="false" selection-start-line="46" selection-start-column="50" selection-end-line="46" selection-end-column="50" />
               <folding />
             </state>
@@ -116,7 +116,7 @@
       <file leaf-file-name="register.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes/register/register.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
+            <state relative-caret-position="575">
               <caret line="25" column="40" lean-forward="false" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
               <folding />
             </state>
@@ -126,7 +126,7 @@
       <file leaf-file-name="register.template.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes/register/register.template.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-279">
+            <state relative-caret-position="2691">
               <caret line="117" column="20" lean-forward="false" selection-start-line="117" selection-start-column="20" selection-end-line="117" selection-end-column="68" />
               <folding />
             </state>
@@ -331,6 +331,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -553,7 +554,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -720,7 +720,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16815476" sideWeight="0.16786571" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20937042" sideWeight="0.8321343" order="0" side_tool="false" content_ui="combo" x="1" y="23" width="269" height="726" />
@@ -728,18 +728,18 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329582" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16815476" sideWeight="0.3993559" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="WINDOWED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" x="127" y="377" width="1177" height="314" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850242" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16815476" sideWeight="0.3993559" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39906833" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="WINDOWED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" x="127" y="377" width="1177" height="314" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39906833" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -761,344 +761,41 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/routes/products/modals/addproducts.template.html">
+    <entry file="file://$PROJECT_DIR$/app/routes/users/users.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" column="103" lean-forward="false" selection-start-line="12" selection-start-column="92" selection-end-line="12" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/products/products.template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="40" lean-forward="false" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/products/products.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="156" column="118" lean-forward="false" selection-start-line="156" selection-start-column="20" selection-end-line="156" selection-end-column="118" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/php/product.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="173" column="58" lean-forward="false" selection-start-line="173" selection-start-column="58" selection-end-line="173" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/php/shopping.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="119" column="28" lean-forward="false" selection-start-line="119" selection-start-column="28" selection-end-line="119" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/php/notificacion_venta.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/services/uploadService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/php/category.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="149" column="50" lean-forward="false" selection-start-line="149" selection-start-column="37" selection-end-line="149" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/php/add_products.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="50" column="344" lean-forward="false" selection-start-line="50" selection-start-column="344" selection-end-line="50" selection-end-column="344" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/components/navbar/navbar.template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/shopping/shopping.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="117" column="0" lean-forward="false" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/home/home.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="42" lean-forward="false" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/home/home.template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="6" lean-forward="false" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/login/login.template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="60" lean-forward="false" selection-start-line="6" selection-start-column="60" selection-end-line="6" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/services/authentication/authentication.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gulpfile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-407">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gulp-tasks/scripts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/styles/base.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="46" column="36" lean-forward="false" selection-start-line="46" selection-start-column="36" selection-end-line="46" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/shopping/shopping.template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="137" column="102" lean-forward="false" selection-start-line="137" selection-start-column="102" selection-end-line="137" selection-end-column="102" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/shopping/shopping.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="52" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/login/login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="51" lean-forward="false" selection-start-line="34" selection-start-column="51" selection-end-line="34" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/dashboard/dashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/components/navbar/navbar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" column="58" lean-forward="false" selection-start-line="32" selection-start-column="58" selection-end-line="32" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/php/bd.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="34" column="5" lean-forward="true" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/php/users.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="603">
-          <caret line="211" column="0" lean-forward="false" selection-start-line="211" selection-start-column="0" selection-end-line="211" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/process_payments/process_payments.template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="64" column="9" lean-forward="false" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
+        <state relative-caret-position="1265">
+          <caret line="52" column="42" lean-forward="false" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/process_payments/process_payments.scss">
+    <entry file="file://$PROJECT_DIR$/app/routes/shopping_list/shopping_list.template.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="75" column="26" lean-forward="false" selection-start-line="75" selection-start-column="26" selection-end-line="75" selection-end-column="26" />
+        <state relative-caret-position="1035">
+          <caret line="45" column="4" lean-forward="false" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="103" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/process_payments/process_payments.js">
+    <entry file="file://$PROJECT_DIR$/app/routes/users/modals/addUser.template.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="142" column="0" lean-forward="false" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
+        <state relative-caret-position="1633">
+          <caret line="71" column="137" lean-forward="false" selection-start-line="71" selection-start-column="125" selection-end-line="71" selection-end-column="137" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css">
+    <entry file="file://$PROJECT_DIR$/app/routes/users/users.template.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/styles/modules/bootstrap.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/styles/base.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/styles/modules/ui-bootstrap-csp.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-414">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/styles/modules/bootstrap-theme.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/shopping_list/shopping_list.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="9" lean-forward="false" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" column="101" lean-forward="false" selection-start-line="9" selection-start-column="101" selection-end-line="9" selection-end-column="101" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gulp-tasks/bundle.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-23">
-          <caret line="17" column="61" lean-forward="false" selection-start-line="17" selection-start-column="61" selection-end-line="17" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="30" column="7" lean-forward="false" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/shopping_list/shopping_list.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1081">
-          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/dashboard/dashboard.template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="30" column="72" lean-forward="false" selection-start-line="30" selection-start-column="72" selection-end-line="30" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/warehouse/warehouse.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="43" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/users/users.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="31" column="5" lean-forward="false" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/warehouse/warehouse.template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="15" lean-forward="false" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/users/modals/deleteUser.template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="13" column="9" lean-forward="false" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/users/modals/editUser.template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" column="56" lean-forward="false" selection-start-line="3" selection-start-column="56" selection-end-line="3" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/services/forms/users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+        <state relative-caret-position="1058">
+          <caret line="46" column="50" lean-forward="false" selection-start-line="46" selection-start-column="50" selection-end-line="46" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/register/register.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
+        <state relative-caret-position="575">
           <caret line="25" column="40" lean-forward="false" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
           <folding />
         </state>
@@ -1106,40 +803,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/register/register.template.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-279">
+        <state relative-caret-position="2691">
           <caret line="117" column="20" lean-forward="false" selection-start-line="117" selection-start-column="20" selection-end-line="117" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/shopping_list/shopping_list.template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="45" column="4" lean-forward="false" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="103" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/users/users.template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="46" column="50" lean-forward="false" selection-start-line="46" selection-start-column="50" selection-end-line="46" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/users/modals/addUser.template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="71" column="137" lean-forward="false" selection-start-line="71" selection-start-column="125" selection-end-line="71" selection-end-column="137" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/users/users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="52" column="42" lean-forward="false" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
           <folding />
         </state>
       </provider>

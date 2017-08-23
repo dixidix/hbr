@@ -36,6 +36,7 @@ $res = MysqliDB::getInstance()->query("SELECT * from ventas WHERE deleted = 0");
 		$outp .= '"total_remaining_quantity":"'  . $rs["total_remaining_quantity"] . '",';
 		$outp .= '"venta_state":"'  . $rs["venta_state"] . '",';
 		$outp .= '"status":"'  . $rs["status"] . '",';
+		$outp .= '"readed":"'  . (int) $rs["readed"] . '",';
 		$outp .= '"reason":"'  . $rs["reason"] . '",';
 		$outp .= '"guide_amount":"'  . $rs["guide_amount"] . '",';
 		$uname = MysqliDB::getInstance()->query("SELECT * FROM bills where ventaId =" . $rs["id"]);
@@ -121,6 +122,7 @@ $res = MysqliDB::getInstance()->query("SELECT * from ventas WHERE deleted = 0");
 
 			$outpm .= '"userId":"'  . $rss["userId"] . '",';
 			$outpm .= '"bill_file_name":"'  . $rss["bill_file_name"] . '",';
+			$outpm .= '"wh_enter_date":"'  . $rss["wh_enter_date"] . '",';
 			$outpm .= '"bill_file_path":"'   . $rss["bill_file_path"].'"}';
 		}
 
@@ -213,6 +215,7 @@ $res = MysqliDB::getInstance()->query("SELECT * from ventas WHERE deleted = 0 AN
 
 			$outpm .= '"userId":"'  . $rss["userId"] . '",';
 			$outpm .= '"bill_file_name":"'  . $rss["bill_file_name"] . '",';
+			$outpm .= '"wh_enter_date":"'  . $rss["wh_enter_date"] . '",';
 			$outpm .= '"bill_file_path":"'   . $rss["bill_file_path"].'"}';
 		}
 
@@ -325,6 +328,7 @@ function getByWhId(){
 
 			$outpm .= '"userId":"'  . $rss["userId"] . '",';
 			$outpm .= '"bill_file_name":"'  . $rss["bill_file_name"] . '",';
+			$outpm .= '"wh_enter_date":"'  . $rss["wh_enter_date"] . '",';
 			$outpm .= '"bill_file_path":"'   . $rss["bill_file_path"].'"}';
 		}
 

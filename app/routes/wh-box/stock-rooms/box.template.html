@@ -1,0 +1,16 @@
+<script type="text/ng-template" id="stock-card-info.html">
+    <div class="popover-card">
+        <div class="stock-card__header clearfix">
+            <h5 class="pull-left"><b>Box: #{{::box.id}}</b></h5>
+            <h5 ng-if="stockRooms.isAdmin == 1" class="pull-right"><b>{{::box.user.company_name}}</b></h5>
+        </div>
+        <ul class="stock-card__data">
+            <li><b>{{::stockRooms.lang.box.lastEdited}}:</b> {{::box.last_edited * 1000 | date : "dd/MM/yyyy hh:mm"}}</li>
+            <li><b>Desc.:</b> {{::box.long_desc}}</li>
+            <li><b>Warehouse:</b> {{::box.warehouse.warehouse_name}}</li>
+            <li><b>{{::stockRooms.lang.box.boxValue}}:</b> {{::box.box_value | currency}}</li>
+            <li><b>{{::stockRooms.lang.box.shippingValue}}:</b> {{::box.box_shipping_value | currency }}</li>
+            <li><b>{{::stockRooms.lang.box.warehouseValue}}:</b> {{::box.box_warehouse_value | currency }}</li>
+        </ul>
+    </div>
+</script>

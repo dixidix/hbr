@@ -10,6 +10,7 @@
         <table class="table overflow-table table-bordered table-striped product-table table-curved rounded" ng-if="airwaybill.awb.products.length">
             <div class="col-xs-9">
                 <h3 class="table-title" ng-if="airwaybill.awb.products.length">Products for Lot {{airwaybill.awb.ventaId}} AWB {{airwaybill.awb.number}}</h3>
+                <h4><span ng-if="airwaybill.awb.state != 4"><i style="color:orange;" class="fa fa-circle"></i> AWB in progress</span> <span ng-if="airwaybill.awb.state == 4"><i style="color:green;" class="fa fa-circle"></i> AWB Delivered </span></h4>
             </div>
             <thead>
                 <tr>
@@ -31,11 +32,39 @@
             </tbody>
         </table>
     </div>
-    <div class="container-fluid">
-
+    <div class="container-fluid" ng-if="airwaybill.isWh">
+        <div class="form-group col-xs-12">
+            <label for="wh_leave_date">Warehouse Leave Date (*) </label>
+            <div class="input-group">
+                <input class="form-control" type="date" id="wh_leave_date" name="wh_leave_date" ng-model="airwaybill.batch.wh_leave_date" name="success" autocomplete="off" ng-disabled="airwaybill.awb.state == 4">
+                <span class="input-group-addon">
+                    <i style="padding-top:3px;" class="fa fa-plane"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" ng-if="!airwaybill.isWh">
         <div ng-include src="'hbr-selfie/dist/routes/airwayBills/modals/warehouse-form.template.html'"></div>
         <div ng-include src="'hbr-selfie/dist/routes/airwayBills/modals/flete-form.template.html'"></div>
+        <div class="form-group">
+            <label for="wh_leave_date">Buenos Aires Arrival Date (*) </label>
+            <div class="input-group">
 
+                <input class="form-control" type="date" id="wh_leave_date" name="wh_leave_date" ng-model="airwaybill.batch.arrivalDate" name="success" autocomplete="off" ng-disabled="airwaybill.awb.state == 4">
+                <span class="input-group-addon">
+                    <i style="padding-top:3px;" class="fa fa-plane"></i>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="wh_leave_date">Buenos Aires Leave Date (*) </label>
+            <div class="input-group">
+                <input class="form-control" type="date" id="wh_leave_date" name="wh_leave_date" ng-model="airwaybill.batch.leaveDate" name="success" autocomplete="off" ng-disabled="airwaybill.awb.state == 4">
+                <span class="input-group-addon">
+                    <i style="padding-top:3px;" class="fa fa-truck"></i>
+                </span>
+            </div>
+        </div>
         <!-- TOTAL BOTON -->
         <div class="row">
             <div class="col-xs-12">
@@ -51,20 +80,21 @@
             <switch id="payed" name="enabled" ng-model="airwaybill.batch.paymentStatus" class="green" disabled="airwaybill.awb.state != 2"></switch>
         </div>
         <div class="form-group" ng-if="airwaybill.batch.paymentStatus">
-            <label class="label-group"> Warehouse Leave Date</label>
-            <input class="form-control" type="date" ng-model="airwaybill.batch.leaveDate" name="success" placeholder="leave Date" required autocomplete="off">
-        </div>
-        <div class="form-group" ng-if="airwaybill.batch.paymentStatus">
-            <label class="label-group"> Estimated Arrival Date</label>
-            <input class="form-control" type="date" ng-model="airwaybill.batch.arrivalDate" name="success" placeholder="Arrival Date" required autocomplete="off">
+            <label for="estimatedArrivalDate" class="label-group"> Estimated Arrival Date</label>
+            <div class="input-group">
+                <input class="form-control" type="date" id="estimatedArrivalDate" ng-model="airwaybill.batch.estimatedArrivalDate" name="estimatedArrivalDate" autocomplete="off" ng-disabled="airwaybill.awb.state == 4">
+                <span class="input-group-addon">
+                    <i style="padding-top:3px;" class="fa fa-dropbox"></i>
+                </span>
+            </div>
         </div>
         <div class="form-group" ng-if="airwaybill.batch.paymentStatus">
             <label class="label-group"> Airway Bill Tracking Number</label>
-            <input class="form-control" type="text" ng-model="airwaybill.batch.hbr_tracking" name="hbr_tracking" placeholder="Tracking Number" required autocomplete="off" ng-disabled="airwaybill.awb.state == 3">
+            <input class="form-control" type="text" ng-model="airwaybill.batch.hbr_tracking" name="hbr_tracking" placeholder="Tracking Number" required autocomplete="off" ng-disabled="airwaybill.awb.state == 3 || airwaybill.awb.state == 4">
         </div>
         <div class="form-group" ng-if="airwaybill.batch.paymentStatus">
             <label class="label-group"> Postal Provider	</label>
-            <input class="form-control" type="text" ng-model="airwaybill.batch.hbr_postal_provider" name="hbr_postal_provider" placeholder="Postal Provider" required autocomplete="off" ng-disabled="airwaybill.awb.state == 3">
+            <input class="form-control" type="text" ng-model="airwaybill.batch.hbr_postal_provider" name="hbr_postal_provider" placeholder="Postal Provider" required autocomplete="off" ng-disabled="airwaybill.awb.state == 3 || airwaybill.awb.state == 4">
         </div>
         <div class="form-group">
             <label class="label-group"> Payment Method	</label>
@@ -90,7 +120,7 @@
                 <div class="form-group">
                     <label class="label-group"> Account Holder Name (*) </label>
                     <input class="form-control" type="text" ng-model="airwaybill.batch.transfer_account_holder_name" name="acc_name" placeholder="Account Holder Name" required autocomplete="off" ng-disabled="airwaybill.awb.state != 1">
-                </div>  
+                </div>
                 <div class="form-group">
                     <label class="label-group"> Bank Name (*) </label>
                     <input class="form-control" type="text" ng-model="airwaybill.batch.transfer_bank_name" name="bank_name" placeholder="Bank Name" required autocomplete="off" ng-disabled="airwaybill.awb.state != 1">
@@ -132,9 +162,17 @@
     </div>
     </div>
     <div class="modal-footer " id="modal-footer">
-        <button style="width:250px;" class="btn btn-hbr-blue" ng-click="airwaybill.sendPaymentMethod()" ng-if="airwaybill.awb.state == 1" ng-disabled="noCalculated  || airwaybill.totalFlete == 0 || airwaybill.totalWarehouse == 0 || airwaybill.batch.paymentMethod.value == 0">Send Payment Method</button>
-        <button style="width:250px;" class="btn btn-hbr-blue" ng-click="airwaybill.finishAwb()" ng-if="airwaybill.awb.state == 2" ng-disabled="!airwaybill.batch.paymentStatus || !airwaybill.batch.arrivalDate || !airwaybill.batch.leaveDate || !airwaybill.batch.hbr_postal_provider || !airwaybill.batch.hbr_tracking">Finish</button>
-        <button style="width:250px;" class="btn btn-hbr-blue" ng-click="airwaybill.updateArrivalDate()" ng-if="airwaybill.awb.state == 3">Update Dates</button>
-        <button class="btn btn-hbr-blue" ng-click="airwaybill.cancel()">Close</button>
+        <div ng-if="!airwaybill.isWh">
+            <button style="width:250px;" class="btn btn-hbr-blue" ng-click="airwaybill.sendPaymentMethod()" ng-if="airwaybill.awb.state == 1" ng-disabled="noCalculated  || airwaybill.totalFlete == 0 || airwaybill.totalWarehouse == 0 || airwaybill.batch.paymentMethod.value == 0">Send Payment Method</button>
+            <button style="width:250px;" class="btn btn-hbr-blue" ng-click="airwaybill.finishAwb()" ng-if="airwaybill.awb.state == 2" ng-disabled="!airwaybill.batch.paymentStatus || !airwaybill.batch.arrivalDate || !airwaybill.batch.leaveDate || !airwaybill.batch.hbr_postal_provider || !airwaybill.batch.hbr_tracking">Finish</button>
+            <button class="btn btn-hbr-blue" ng-click="airwaybill.saveDates()" ng-if="airwaybill.awb.state == 2 && !airwaybill.batch.paymentStatus" ng-disabled="!airwaybill.batch.arrivalDate || !airwaybill.batch.leaveDate">Save Dates</button>
+            <button class="btn btn-hbr-blue" ng-click="airwaybill.updateArrivalDate()" ng-if="airwaybill.awb.state == 3">Update Dates</button>
+            <button style="width:250px;" class="btn btn-hbr-blue" ng-click="airwaybill.markAsDelivered()" ng-if="airwaybill.awb.state == 3">Mark as Delivered</button>
+            <button class="btn btn-hbr-blue" ng-click="airwaybill.cancel()">Close</button>
+        </div>
+        <div ng-if="airwaybill.isWh">
+            <button class="btn btn-hbr-blue" ng-click="airwaybill.updateWhLeaveDate()">Save</button>
+            <button class="btn btn-hbr-blue" ng-click="airwaybill.cancel()">Close</button>
+        </div>
     </div>
 </script>

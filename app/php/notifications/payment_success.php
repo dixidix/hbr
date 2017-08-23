@@ -27,17 +27,42 @@ $body = file_get_contents('./../emails/payment-success.template.html', FILE_USE_
 $hbr_tracking =  MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['hbr_tracking']));
 $arrivalDate =  MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['arrivalDate']));
 $leaveDate =  MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['leaveDate']));
+$estimatedArrivalDate =  MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['estimatedArrivalDate']));
 $hbr_postal_provider =  MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['hbr_postal_provider']));
 
 date_default_timezone_set('America/Argentina/Buenos_Aires');
-$arrivalDateParsed =  date('d-m-Y', $arrivalDate);
-$leaveDateParsed =  date('d-m-Y', $leaveDate);
 
+$leaveDateHtml   = "";
+$arrivalDateHtml = "";
+$estimatedArrivalDateHtml = "";
 
-$htmlStringToReplace = array('$ventaId','$guide_number','$hbr_tracking', '$arrivalDate', '$leaveDate', '$hbr_postal_provider');
-$replaceWith   = array("$ventaId","$guide_number",$hbr_tracking, "$arrivalDateParsed", "$leaveDateParsed", "$hbr_postal_provider");
-
+$htmlStringToReplace = array('$ventaId','$guide_number','$hbr_tracking', '$hbr_postal_provider');
+$replaceWith   = array("$ventaId","$guide_number",$hbr_tracking, "$hbr_postal_provider");
 $body = str_replace($htmlStringToReplace, $replaceWith, $body);
+
+if($leaveDate){
+    $leaveDateParsed =  date('d-m-Y', $leaveDate);
+    $leaveDateHtmlParsed   = "<li><strong>Fecha de salida de Buenos aires:</strong> $leaveDateParsed </li>";
+    $body = str_replace('$leaveDateHtml', "$leaveDateHtmlParsed", $body);
+}else{
+    $body = str_replace('$leaveDateHtml', "", $body);
+}
+
+if($arrivalDate){
+    $arrivalDateParsed =  date('d-m-Y', $arrivalDate);    
+    $arrivalDateHtmlParsed = "<li><strong>Fecha de llegada a Buenos Aires:</strong> $arrivalDateParsed </li>";
+    $body = str_replace('$arrivalDateHtml', "$arrivalDateHtmlParsed", $body);
+} else {
+    $body = str_replace('$arrivalDateHtml', "", $body);
+}
+
+if($estimatedArrivalDate){
+    $estimatedArrivalDateParsed =  date('d-m-Y', $estimatedArrivalDate);    
+    $estimatedArrivalDateHtmlParsed   = "<li><strong>Fecha estimada de llegada a tu dirección de entrega:</strong> $estimatedArrivalDateParsed </li>";
+    $body = str_replace('$estimatedArrivalDateHtml', "$estimatedArrivalDateHtmlParsed", $body);
+} else {
+    $body = str_replace('$estimatedArrivalDateHtml',"", $body);
+}
 
 $to = "'santiago.lloret@tucourier.com.ar";
 $name = "HBR | tu courier";

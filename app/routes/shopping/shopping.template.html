@@ -8,48 +8,13 @@
     <h3><i class="fa fa-shopping-cart"></i> Agregar Compras</h3>
     <hr>
     <div class="col-xs-12 content">
-        <!-- INFORMACION PERSONAL -->
-        <a ng-click="shopping.collapse_personal = !shopping.collapse_personal">
-            <i ng-class="shopping.collapse_personal ? 'fa fa-chevron-right' : 'fa fa-chevron-down'"></i> Informaci&oacute;n Personal
-        </a>
-        <hr>
-        <div uib-collapse="shopping.collapse_personal" class="shopping__data">
-            <div ng-include src="'hbr-selfie/dist/routes/shopping/forms/personal-form-tmpl.html'"></div>
-        </div>
-
-        <!-- COMPRA DE PRODUCTOS -->
-        <a ng-click="shopping.collapse_purchase = !shopping.collapse_purchase" id="product-info">
-            <i ng-class="shopping.collapse_purchase ? 'fa fa-chevron-right' : 'fa fa-chevron-down'"></i> Agregar Compras
-        </a>
-        <hr>
-        <div uib-collapse="shopping.collapse_purchase" class="shopping__purchase">
-            <div ng-include src="'hbr-selfie/dist/routes/shopping/forms/product-purchase-form-tmpl.html'"></div>
-        </div>
-        <div class="notification">
-            <div class="col-xs-12 no-padding">
-                <div class="close-button"><i ng-click="shopping.closeNotification()" class="fa fa-times-circle pull-right"></i></div>                
-                <div class="col-xs-3 no-padding logo">
-                    <img src="http://tucourier.com.ar/wp-content/uploads/2016/09/208x52-e1474997076478.png" alt="">
-                </div>
-                <div class="col-xs-9 text">
-                    <p>
-                        Factura Agregada<br>
-                       <a ng-click="shopping.showBills()">Ver todas las facturas <i class="fa fa-chevron-right"></i></a>
-                    </p>     
-                </div>
-            </div>
-        </div>
-        <!-- LISTA DE COMPRAS -->
-        <a ng-click="shopping.collapse_list = !shopping.collapse_list">
-            <i ng-class="shopping.collapse_list ? 'fa fa-chevron-right' : 'fa fa-chevron-down'"></i> Lista de compras
-            <span class="badge" ng-if="shopping.lote.bills.length > 0">
-                Facturas agregadas: {{ shopping.lote.bills.length }}
-            </span>
-        </a>
-        <hr>
-        <div id="billList" uib-collapse="shopping.collapse_list" class="shopping__purchase-list">
-            <div ng-include src="'hbr-selfie/dist/routes/shopping/forms/products-list-tmpl.html'"></div>
-            <div ng-include src="'hbr-selfie/dist/routes/shopping/confirm-modal.template.html'"></div>
-        </div>
+        <uib-tabset justified="true" active="shopping.tabActive">
+            <uib-tab index="$index + 1" ng-repeat="tab in shopping.tabs" disable="tab.disabled">
+                <uib-tab-heading>
+                    <span class="steps">PASO {{$index + 1}}</span>: {{tab.title}}
+                </uib-tab-heading>
+                <div ng-include="tab.content"></div>
+            </uib-tab>
+        </uib-tabset>
     </div>
 </div>

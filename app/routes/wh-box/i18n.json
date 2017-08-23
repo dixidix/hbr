@@ -1,0 +1,142 @@
+{
+    "es": {
+        "room": {
+            "title": "Almacenamiento",
+            "weight": "Peso Total",
+            "stock": "Stock total",
+            "box_qty": "Cant. Cajas",
+            "value": "Valor Total",
+            "shipping_val": "total Envío",
+            "warehouse_val": "total Almacenamiento",
+            "filter": {
+                "placeholder": "Buscar por...",
+                "placeholder_created": "día/mes/año",
+                "default": "Filtrar por",
+                "not_found": "No se han encontrado cajas.",
+                "list": {
+                    "client_name": "Nombre de cliente",
+                    "box_id": "N° de caja",
+                    "date": "Creado",
+                    "bill": "N° Factura",
+                    "remove": "Quitar Filtros"
+                }
+            }
+        },
+        "box": {
+            "bill": "Factura",
+            "created": "Creado",
+            "short_desc": "Desc. Corta",
+            "lastEdited": "Última edición",
+            "boxValue": "Total caja",
+            "shippingValue": "Total envío",
+            "warehouseValue": "Total almacenamiento",
+            "weight": "Peso"
+        },
+        "form": {
+            "add": {
+                "title": "Agregar Caja",
+                "bill": {
+                    "label": "Número de factura",
+                    "placeholder": "Número de factura"
+                },
+                "weight": {
+                    "label": "Peso  (*)",
+                    "placeholder": "Peso en kg"
+                },
+                "stock": {
+                    "label": "Cantidad de productos (*)",
+                    "placeholder": "Cantidad de productos"
+                },
+                "value": {
+                    "label": "Valor total en Dólares (*)",
+                    "placeholder": "valor total de la caja en dólares"
+                },
+                "short_desc": {
+                    "label": "descripción corta (*)",
+                    "placeholder": "descripción corta (máximo 15 caracteres)"
+                },
+                "long_desc": {
+                    "label": "descripción larga (*)",
+                    "placeholder": "descripción larga (máximo 50 caracteres)"
+                },
+                "warehouse": {
+                    "label": "Warehouse (*)",
+                    "placeholder": "-- Selecciona un Warehouse --"
+                },
+                "submitBtn": "Agregar",
+                "cancelBtn": "Cancelar",
+                "processLbl": "Enviando"
+            }
+        }
+    },
+    "en": {
+        "room": {
+            "title": "Stock Room",
+            "weight": "Weight",
+            "stock": "Stock",
+            "box_qty": "Boxes Qty.",
+            "value": "Room Value",
+            "shipping_val": "Room Shipping Value",
+            "warehouse_val": "Room warehouse value",
+            "filter": {
+                "placeholder": "Search by...",
+                "placeholder_created": "day/month/year",
+                "default": "Filter by",
+                "not_found": "No boxes found.",
+                "list": {
+                    "client_name": "Client name",
+                    "box_id": "Box Number",
+                    "date": "Created",
+                    "bill": "Bill Number",
+                    "remove": "Remove Filters"
+                }
+            }
+        },
+        "box": {
+            "bill": "Bill",
+            "created": "Created",
+            "short_desc": "Short desc.",
+            "lastEdited": "Last Edited",
+            "boxValue": "Box value",
+            "shippingValue": "Shipping value",
+            "warehouseValue": "Warehouse value",
+            "weight": "Weight"
+        },
+        "form": {
+            "add": {
+                "title": "Add Box",
+                "bill": {
+                    "label": "Bill Number (*)",
+                    "placeholder": "Bill Number"
+                },
+                "weight": {
+                    "label": "Weight  (*)",
+                    "placeholder": "weight in kg"
+                },
+                "stock": {
+                    "label": "Amount of products (*)",
+                    "placeholder": "Amount of products"
+                },
+                "value": {
+                    "label": "total value in Dollars (*)",
+                    "placeholder": "box total value in dollars "
+                },
+                "short_desc": {
+                    "label": "Short description (*)",
+                    "placeholder": "Short description (max. length 15 chars)"
+                },
+                "long_desc": {
+                    "label": "Long description (*)",
+                    "placeholder": "Long description (max. length 50 chars)"
+                },
+                "warehouse": {
+                    "label": "Warehouse (*)",
+                    "placeholder": "-- Select a Warehouse --"
+                },
+                "submitBtn": "Add",
+                "cancelBtn": "Cancel",
+                "processLbl": "Sending"
+            }
+        }
+    }
+}
