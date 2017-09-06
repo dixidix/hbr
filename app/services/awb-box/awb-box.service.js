@@ -92,7 +92,6 @@ function awbboxService(agular, app) {
             return authenticationService.checkAuth().then(function(response) {
                 awbBox.uid = parseInt(response.data.uid);
                 var whId = awbBox.whId ? awbBox.whId.id : awbBox.warehouse.id;
-                var isAdmin = parseInt(response.data.isAdmin);
                 return $http.post('./hbr-selfie/dist/php/awb-box/add_box.php', {
                     tracking: awbBox.tracking,
                     provider: awbBox.provider,
@@ -107,7 +106,21 @@ function awbboxService(agular, app) {
         }
 
         this._addBill = function(bill, boxId) {
+            return authenticationService.checkAuth().then(function(response) {
+                bill.uid = parseInt(response.data.uid);
+                bill.boxId = boxId;
+                bill.timestamp = Math.floor(new Date().getTime());
+                var formData = new FormData();
 
+                angular.forEach(bill, function(key, value) {
+                    formData.append(value, key);
+                });
+
+                return $http.post('./hbr-selfie/dist/php/awb-box/add_box_bill.php', formData, {
+                    transformRequest: angular.identity,
+                    headers: { 'Content-Type': undefined }
+                });
+            });
         }
 
         this._editAwbBox = function(awbBox) {
