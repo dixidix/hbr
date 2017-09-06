@@ -1,0 +1,16 @@
+<script type="text/ng-template" id="stock-card-info.html">
+    <div class="popover-card">
+        <div class="stock-card__header">
+            <h5 class="pull-left"><b>Box: #{{::box.id}}</b></h5>
+            <h5 ng-if="modalAddShippingBox.isAdmin == 1" class="pull-right"><b>{{::box.user.company_name}}</b></h5>
+        </div>
+        <ul class="stock-card__data">
+            <li><b>{{::modalAddShippingBox.boxLang.box.lastEdited}}:</b> <span ng-bind="box.edited ? (box.edited | date : 'dd/MM/yyyy HH:mm') : modalAddShippingBox.boxLang.box.processing"></span></li>
+            <li><b>Desc.:</b> {{::box.long_desc}}</li>
+            <li><b>Warehouse:</b> {{::box.warehouse.name}}</li>
+            <li><b>{{::modalAddShippingBox.boxLang.box.boxValue}}:</b><span ng-bind="box.box_value ? (box.box_value | currency) : modalAddShippingBox.boxLang.box.processing"></span></li>
+            <li><b>{{::modalAddShippingBox.boxLang.box.shippingValue}}:</b> <span ng-bind="box.box_shipping_value ? (box.box_shipping_value | currency) : modalAddShippingBox.boxLang.box.processing"></span></li>
+            <li><b>{{::modalAddShippingBox.boxLang.box.warehouseValue}}:</b><span ng-bind="box.box_warehouse_value ? (box.box_warehouse_value | currency) : modalAddShippingBox.boxLang.box.processing"></span></li>
+        </ul>
+    </div>
+</script>

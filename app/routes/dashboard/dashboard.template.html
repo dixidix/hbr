@@ -107,6 +107,12 @@
                 <a href="" ui-sref="dashboard.stock_rooms" ng-if="!dashboard.collapse">
                     <li><i class="fa fa-cubes"></i><span>Stock Rooms </span></li>
                 </a>
+                <a href="" ui-sref="dashboard.awb-box" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Box Airway bill">
+                    <li><i class="fa fa-suitcase"></i></li>
+                </a>
+                <a href="" ui-sref="dashboard.awb-box" ng-if="!dashboard.collapse">
+                    <li><i class="fa fa-suitcase"></i><span>Box Airway bill </span></li>
+                </a>
                 <a href="" ui-sref="dashboard.history" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="History">
                     <li><i class="fa fa-history"></i></li>
                 </a>

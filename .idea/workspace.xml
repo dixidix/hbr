@@ -2,57 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f2604792-26f5-4e47-8c83-2a77ae5112a9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/shopping_list/shopping_list.js" afterPath="$PROJECT_DIR$/app/routes/shopping_list/shopping_list.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/login/login.js" afterPath="$PROJECT_DIR$/app/routes/login/login.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/process_payments/process_payments.js" afterPath="$PROJECT_DIR$/app/routes/process_payments/process_payments.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/users/users.scss" afterPath="$PROJECT_DIR$/app/routes/users/users.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/airwayBills/modals/process-airway.template.html" afterPath="$PROJECT_DIR$/app/routes/airwayBills/modals/process-airway.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/shopping_list/shopping_list.template.html" afterPath="$PROJECT_DIR$/app/routes/shopping_list/shopping_list.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/php/notifications/update_dates.php" afterPath="$PROJECT_DIR$/dist/php/notifications/update_dates.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gulp-tasks/bundle.js" afterPath="$PROJECT_DIR$/gulp-tasks/bundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/process_payments/process_payments.js" afterPath="$PROJECT_DIR$/dist/routes/process_payments/process_payments.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/shopping/forms/product-purchase-form-tmpl.html" afterPath="$PROJECT_DIR$/app/routes/shopping/forms/product-purchase-form-tmpl.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/php/add_bill.php" afterPath="$PROJECT_DIR$/app/php/add_bill.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/process_payments/modals/makeGuides.template.html" afterPath="$PROJECT_DIR$/app/routes/process_payments/modals/makeGuides.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/php/solicitud_venta.php" afterPath="$PROJECT_DIR$/dist/php/solicitud_venta.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/shopping/forms/product-purchase-form-tmpl.html" afterPath="$PROJECT_DIR$/dist/routes/shopping/forms/product-purchase-form-tmpl.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/app.js" afterPath="$PROJECT_DIR$/dist/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/app.bundle.min.js" afterPath="$PROJECT_DIR$/dist/app.bundle.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/process_payments/modals/makeGuides.template.html" afterPath="$PROJECT_DIR$/dist/routes/process_payments/modals/makeGuides.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/php/add_bill.php" afterPath="$PROJECT_DIR$/dist/php/add_bill.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/php/notifications/payment_method.php" afterPath="$PROJECT_DIR$/app/php/notifications/payment_method.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/dashboard/dashboard.template.html" afterPath="$PROJECT_DIR$/dist/routes/dashboard/dashboard.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/php/emails/solicitud_venta.template.html" afterPath="$PROJECT_DIR$/dist/php/emails/solicitud_venta.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/shopping/shopping.js" afterPath="$PROJECT_DIR$/app/routes/shopping/shopping.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/php/solicitud_venta.php" afterPath="$PROJECT_DIR$/app/php/solicitud_venta.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/process_payments/process_payments.template.html" afterPath="$PROJECT_DIR$/dist/routes/process_payments/process_payments.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/authentication/authentication.js" afterPath="$PROJECT_DIR$/app/services/authentication/authentication.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/libs.bundle.min.js" afterPath="$PROJECT_DIR$/dist/libs.bundle.min.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/routes/wh-box/i18n.json" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/navbar/navbar.js" afterPath="$PROJECT_DIR$/app/components/navbar/navbar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/airwayBills/modals/process-airway.template.html" afterPath="$PROJECT_DIR$/dist/routes/airwayBills/modals/process-airway.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/users/users.js" afterPath="$PROJECT_DIR$/dist/routes/users/users.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/services/authentication/authentication.js" afterPath="$PROJECT_DIR$/dist/services/authentication/authentication.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/services/forms/users.js" afterPath="$PROJECT_DIR$/dist/services/forms/users.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/users/users.template.html" afterPath="$PROJECT_DIR$/app/routes/users/users.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/dashboard/dashboard.template.html" afterPath="$PROJECT_DIR$/app/routes/dashboard/dashboard.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/php/notifications/payment_success.php" afterPath="$PROJECT_DIR$/app/php/notifications/payment_success.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/process_payments/process_payments.template.html" afterPath="$PROJECT_DIR$/app/routes/process_payments/process_payments.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/php/emails/solicitud_venta.template.html" afterPath="$PROJECT_DIR$/app/php/emails/solicitud_venta.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/php/notifications/payment_success.php" afterPath="$PROJECT_DIR$/dist/php/notifications/payment_success.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/forms/users.js" afterPath="$PROJECT_DIR$/app/services/forms/users.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/users/users.css" afterPath="$PROJECT_DIR$/dist/routes/users/users.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/users/users.template.html" afterPath="$PROJECT_DIR$/dist/routes/users/users.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/shopping/shopping.js" afterPath="$PROJECT_DIR$/dist/routes/shopping/shopping.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/shopping_list/shopping_list.template.html" afterPath="$PROJECT_DIR$/dist/routes/shopping_list/shopping_list.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/shopping_list/shopping_list.js" afterPath="$PROJECT_DIR$/dist/routes/shopping_list/shopping_list.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.js" afterPath="$PROJECT_DIR$/app/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/users/users.js" afterPath="$PROJECT_DIR$/app/routes/users/users.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/components/navbar/navbar.js" afterPath="$PROJECT_DIR$/dist/components/navbar/navbar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/php/notifications/payment_method.php" afterPath="$PROJECT_DIR$/dist/php/notifications/payment_method.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/php/notifications/update_dates.php" afterPath="$PROJECT_DIR$/app/php/notifications/update_dates.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/routes/login/login.js" afterPath="$PROJECT_DIR$/dist/routes/login/login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/dashboard/dashboard.template.html" afterPath="$PROJECT_DIR$/app/routes/dashboard/dashboard.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/users/modals/addUser.template.html" afterPath="$PROJECT_DIR$/app/routes/users/modals/addUser.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/wh-box/shipping/shipping.js" afterPath="$PROJECT_DIR$/app/routes/wh-box/shipping/shipping.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/wh-box/shipping/shipping.scss" afterPath="$PROJECT_DIR$/app/routes/wh-box/shipping/shipping.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/wh-box/shipping/shipping.template.html" afterPath="$PROJECT_DIR$/app/routes/wh-box/shipping/shipping.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/wh-box/stock-rooms/box.template.html" afterPath="$PROJECT_DIR$/app/routes/wh-box/stock-rooms/box.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/wh-box/stock-rooms/modals/add-box.template.html" afterPath="$PROJECT_DIR$/app/routes/wh-box/stock-rooms/modals/add-box.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/wh-box/stock-rooms/stock-rooms.js" afterPath="$PROJECT_DIR$/app/routes/wh-box/stock-rooms/stock-rooms.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/wh-box/stock-rooms/stock-rooms.scss" afterPath="$PROJECT_DIR$/app/routes/wh-box/stock-rooms/stock-rooms.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/wh-box/stock-rooms/stock-rooms.template.html" afterPath="$PROJECT_DIR$/app/routes/wh-box/stock-rooms/stock-rooms.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/boxes/box.service.js" afterPath="$PROJECT_DIR$/app/services/boxes/box.service.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/styles/mixins/_variables.scss" afterPath="$PROJECT_DIR$/app/styles/mixins/_variables.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/styles/modules/_buttons.scss" afterPath="$PROJECT_DIR$/app/styles/modules/_buttons.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gulp-tasks/serve.js" afterPath="$PROJECT_DIR$/gulp-tasks/serve.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -67,17 +37,16 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="hbr-selfie" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="users.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="users.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes/users/users.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1265">
-              <caret line="52" column="42" lean-forward="false" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
+            <state relative-caret-position="-2295">
+              <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -86,18 +55,18 @@
       <file leaf-file-name="shopping_list.template.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes/shopping_list/shopping_list.template.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1035">
-              <caret line="45" column="4" lean-forward="false" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="103" />
+            <state relative-caret-position="154">
+              <caret line="45" column="4" lean-forward="false" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="70" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="addUser.template.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="addUser.template.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/routes/users/modals/addUser.template.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1633">
-              <caret line="71" column="137" lean-forward="false" selection-start-line="71" selection-start-column="125" selection-end-line="71" selection-end-column="137" />
+            <state relative-caret-position="765">
+              <caret line="45" column="36" lean-forward="false" selection-start-line="45" selection-start-column="36" selection-end-line="45" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -106,8 +75,8 @@
       <file leaf-file-name="users.template.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes/users/users.template.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1058">
-              <caret line="46" column="50" lean-forward="false" selection-start-line="46" selection-start-column="50" selection-end-line="46" selection-end-column="50" />
+            <state relative-caret-position="782">
+              <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -116,7 +85,7 @@
       <file leaf-file-name="register.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes/register/register.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="575">
+            <state relative-caret-position="425">
               <caret line="25" column="40" lean-forward="false" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
               <folding />
             </state>
@@ -126,8 +95,8 @@
       <file leaf-file-name="register.template.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes/register/register.template.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2691">
-              <caret line="117" column="20" lean-forward="false" selection-start-line="117" selection-start-column="20" selection-end-line="117" selection-end-column="68" />
+            <state relative-caret-position="1989">
+              <caret line="117" column="20" lean-forward="false" selection-start-line="117" selection-start-column="20" selection-end-line="117" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -238,10 +207,10 @@
         <option value="$PROJECT_DIR$/app/routes/users/users.scss" />
         <option value="$PROJECT_DIR$/app/routes/users/modals/deleteUser.template.html" />
         <option value="$PROJECT_DIR$/app/routes/users/modals/editUser.template.html" />
-        <option value="$PROJECT_DIR$/app/routes/users/modals/addUser.template.html" />
         <option value="$PROJECT_DIR$/app/services/forms/users.js" />
         <option value="$PROJECT_DIR$/app/routes/users/users.template.html" />
         <option value="$PROJECT_DIR$/app/routes/users/users.js" />
+        <option value="$PROJECT_DIR$/app/routes/users/modals/addUser.template.html" />
       </list>
     </option>
   </component>
@@ -306,6 +275,9 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
@@ -330,230 +302,19 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="services" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="services" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="forms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="services" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="authentication" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="routes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="warehouse" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="routes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="users" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="routes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="users" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modals" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="routes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="routes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shopping_list" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hbr-selfie" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="routes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="register" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
+          <expand>
+            <path>
+              <item name="hbr-selfie" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hbr-selfie" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -565,7 +326,7 @@
     <property name="ToolWindowRun.ShowToolbar" value="false" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
@@ -578,17 +339,26 @@
       <recent name="C:\xampp2\htdocs\hbr-selfie\app\routes\category\modals" />
     </key>
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager" selected="Gulp.js.serve">
-    <configuration default="false" name="serve" type="js.build_tools.gulp" factoryName="Gulp.js" temporary="true">
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-interpreter>project</node-interpreter>
       <node-options />
-      <gulpfile>$PROJECT_DIR$/gulpfile.js</gulpfile>
-      <tasks>
-        <task>serve</task>
-      </tasks>
+      <gulpfile />
+      <tasks />
       <arguments />
       <envs />
-      <method />
     </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <method />
@@ -620,15 +390,6 @@
       <option name="filePath" />
       <method />
     </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <arguments />
-      <envs />
-      <method />
-    </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
       <command value="run" />
       <scripts />
@@ -649,9 +410,16 @@
       <recursive>false</recursive>
       <method />
     </configuration>
-    <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="Gulp.js.serve" />
-    </list>
+    <configuration name="serve" type="js.build_tools.gulp" factoryName="Gulp.js" temporary="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile>$PROJECT_DIR$/gulpfile.js</gulpfile>
+      <tasks>
+        <task>serve</task>
+      </tasks>
+      <arguments />
+      <envs />
+    </configuration>
     <recent_temporary>
       <list size="1">
         <item index="0" class="java.lang.String" itemvalue="Gulp.js.serve" />
@@ -695,6 +463,7 @@
       <workItem from="1483387425696" duration="597000" />
       <workItem from="1483801507154" duration="599000" />
       <workItem from="1486251719049" duration="7480000" />
+      <workItem from="1504312291358" duration="426000" />
     </task>
     <task id="LOCAL-00001" summary="asd">
       <created>1481237044712</created>
@@ -707,7 +476,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="143182000" />
+    <option name="totallyTimeSpent" value="143608000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -719,31 +488,30 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="0" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16815476" sideWeight="0.16786571" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20937042" sideWeight="0.8321343" order="0" side_tool="false" content_ui="combo" x="1" y="23" width="269" height="726" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16764276" sideWeight="0.8321343" order="0" side_tool="false" content_ui="combo" x="1" y="23" width="269" height="726" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329582" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" x="11" y="266" width="1344" height="205" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329582" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16815476" sideWeight="0.3993559" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="WINDOWED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" x="127" y="377" width="1177" height="314" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850242" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16815476" sideWeight="0.3993559" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39906833" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="WINDOWED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" x="127" y="377" width="1177" height="314" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39906833" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="processedProjectFiles" value="true" />
+    <option name="version" value="1" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -763,39 +531,39 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/routes/users/users.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1265">
-          <caret line="52" column="42" lean-forward="false" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/shopping_list/shopping_list.template.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1035">
-          <caret line="45" column="4" lean-forward="false" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="103" />
+        <state relative-caret-position="765">
+          <caret line="45" column="4" lean-forward="false" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="70" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/users/modals/addUser.template.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1633">
-          <caret line="71" column="137" lean-forward="false" selection-start-line="71" selection-start-column="125" selection-end-line="71" selection-end-column="137" />
+        <state relative-caret-position="1207">
+          <caret line="71" column="26" lean-forward="true" selection-start-line="71" selection-start-column="26" selection-end-line="71" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/users/users.template.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1058">
-          <caret line="46" column="50" lean-forward="false" selection-start-line="46" selection-start-column="50" selection-end-line="46" selection-end-column="50" />
+        <state relative-caret-position="782">
+          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/register/register.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
+        <state relative-caret-position="425">
           <caret line="25" column="40" lean-forward="false" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
           <folding />
         </state>
@@ -803,8 +571,56 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/register/register.template.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2691">
-          <caret line="117" column="20" lean-forward="false" selection-start-line="117" selection-start-column="20" selection-end-line="117" selection-end-column="68" />
+        <state relative-caret-position="1989">
+          <caret line="117" column="20" lean-forward="false" selection-start-line="117" selection-start-column="20" selection-end-line="117" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/users/users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2295">
+          <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/users/users.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/register/register.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="40" lean-forward="false" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/register/register.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1989">
+          <caret line="117" column="20" lean-forward="false" selection-start-line="117" selection-start-column="20" selection-end-line="117" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/shopping_list/shopping_list.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="45" column="4" lean-forward="false" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/users/modals/addUser.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="45" column="36" lean-forward="false" selection-start-line="45" selection-start-column="36" selection-end-line="45" selection-end-column="36" />
           <folding />
         </state>
       </provider>

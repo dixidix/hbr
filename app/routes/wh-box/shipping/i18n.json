@@ -1,0 +1,72 @@
+{
+    "es": {
+        "title": "Envíos",
+        "board": {
+            "warehouse": {
+                "title": "Depósito"
+            },
+            "country": {
+                "title": "Buenos Aires"
+            },
+            "arrived": {
+                "title": "Despachado"
+            }
+        },
+        "form": {
+            "shippingBox": {
+                "title": "Caja de envío"
+            },
+            "title": "",
+            "add": {
+                "title": "Agregar Caja de envío",
+                "submitBtn": "Enviar",
+                "cancelBtn": "Cancelar",
+                "processLbl": "Enviando",
+                "required": "Los campos con (*) son requeridos."
+            },
+            "edit": {
+                "title": "Editar Caja de envío"
+            }
+        },
+        "addToShipping": {
+            "msg": "Agregar stock a caja de envíos",
+            "confirm": "Agregar",
+            "cancel": "Cancelar"
+        }
+    },
+    "en": {
+        "title": "Shipping",
+        "board": {
+            "warehouse": {
+                "title": "Warehouse"
+            },
+            "country": {
+                "title": "Buenos Aires"
+            },
+            "arrived": {
+                "title": "dispatched"
+            }
+        },
+        "form": {
+            "shippingBox": {
+                "title": "Shipping box"
+            },
+            "title": "",
+            "add": {
+                "title": "Add shipping box",
+                "submitBtn": "Submit",
+                "cancelBtn": "Cancel",
+                "processLbl": "Sending",
+                "required": "Fields with (*) are required."
+            },
+            "edit": {
+                "title": "Edit shipping box"
+            }
+        },
+        "addToShipping": {
+            "msg": "Add stock quantity to shipping box",
+            "confirm": "Add",
+            "cancel": "Cancel"
+        }
+    }
+}

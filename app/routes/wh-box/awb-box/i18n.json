@@ -1,0 +1,247 @@
+{
+    "es": {
+        "title": "Guías de envío para negocios",
+        "filter": {
+            "placeholder": "Buscar por...",
+            "placeholder_created": "día/mes/año",
+            "default": "Filtrar por",
+            "not_found": "No se han encontrado guías.",
+            "add": "Agregar guía",
+            "list": {
+                "client_name": "Nombre de cliente",
+                "box_id": "N° de caja",
+                "date": "Creado",
+                "provider": "Proveedor Postal",
+                "tracking": "Codigo de tracking",
+                "bill": "N° Factura",
+                "remove": "Quitar Filtros",
+                "age_less": "Cant. Días max.",
+                "age_greater": "Cant. Días mín."
+            }
+        },
+        "awb": {
+            "header": {
+                "id": "Caja de envío N° ",
+                "processing": "Procesando",
+                "processed": "Procesado"
+            },
+            "body": {
+                "provider": "Proveedor postal",
+                "warehouse": "Depósito",
+                "track_number": "Código tracking",
+                "search_box": "Buscar cajas en Almacenamiento",
+                "bill": {
+                    "title": "Facturas",
+                    "id": "N° Factura",
+                    "products": "Productos",
+                    "download": "Descargar",
+                    "value": "Valor"
+                },
+                "created": "Creado",
+                "lastEdited": "Última edición",
+                "age": "días desde creada",
+                "age_unit": "días"
+            },
+            "footer": {
+                "weight": "Peso total",
+                "value": "Valor total"
+            },
+            "delete": {
+                "msg": "Esta seguro que desea eliminar esta caja?",
+                "confirm": "Eliminar",
+                "cancel": "Cancelar"
+            }
+        },
+        "form": {
+            "title": "",
+            "add": {
+                "title": "Agregar Caja",
+                "provider": {
+                    "label": "Proveedor postal (*)",
+                    "placeholder": "Proveedor postal"
+                },
+                "weight": {
+                    "label": "Peso total(Kg.)",
+                    "placeholder": "Peso en kg"
+                },
+                "stock": {
+                    "label": "Cant. total de productos (*)",
+                    "placeholder": "Cant. total de productos adquiridos"
+                },
+                "tracking": {
+                    "label": "Tracking (*)",
+                    "placeholder": "Código de tracking"
+                },
+                "value": {
+                    "label": "Valor total en Dólares (*)",
+                    "placeholder": "valor total de la caja en dólares"
+                },
+                "bill": {
+                    "tip": "- Debes agregar al menos una factura",
+                    "number": {
+                        "label": "N° Factura (*)",
+                        "placeholder": "Número de factura"
+                    },
+                    "value": {
+                        "label": "Valor total en Dólares (*)",
+                        "placeholder": "valor total de la factura en dólares"
+                    },
+                    "weight": {
+                        "label": "Peso total de Factura (Solo si lo conoces) (Kg.)",
+                        "placeholder": "Peso de la factura en kg"
+                    },
+                    "stock": {
+                        "label": "Cant. de productos (*)",
+                        "placeholder": "Cant. de productos adquiridos"
+                    },
+                    "long_desc": {
+                        "label": "descripción (*)",
+                        "placeholder": "descripción de los productos (máximo 100 caracteres)"
+                    },
+                    "file": {
+                        "label": "Subir Archivo"
+                    },
+                    "button": "Agregar factura"
+                },
+                "warehouse": {
+                    "label": "Warehouse (*)",
+                    "placeholder": "-- Selecciona un Warehouse --"
+                },
+                "submitBtn": "Enviar",
+                "cancelBtn": "Cancelar",
+                "processLbl": "Enviando",
+                "required": "Los campos con (*) son requeridos."
+            },
+            "edit": {
+                "title": "Editar Caja"
+            }
+        }
+    },
+    "en": {
+        "title": "Airway bills for business",
+        "filter": {
+            "placeholder": "Search by...",
+            "placeholder_created": "day/month/year",
+            "default": "Filter by",
+            "not_found": "No guides found.",
+            "add": "Add guide",
+            "list": {
+                "client_name": "Client name",
+                "box_id": "Box Number",
+                "date": "Created",
+                "provider": "Postal provider",
+                "tracking": "Tracking code",
+                "bill": "Bill Number",
+                "remove": "Remove Filters",
+                "age_less": "Age less than",
+                "age_greater": "Age greater than"
+            }
+        },
+        "awb": {
+            "header": {
+                "id": "Airway box # ",
+                "processing": "Processing",
+                "processed": "Processed"
+            },
+            "body": {
+                "provider": "Postal provider",
+                "warehouse": "Warehouse",
+                "track_number": "Tracking code",
+                "search_box": "Search boxes in Stock room",
+                "bill": {
+                    "title": "Bills",
+                    "id": "Bill Number",
+                    "products": "Products",
+                    "download": "Download",
+                    "value": "Value"
+                },
+                "created": "Created",
+                "lastEdited": "Last Edited",
+                "age": "Age",
+                "age_unit": "days"
+            },
+            "footer": {
+                "weight": "Total weight",
+                "value": "Total value"
+            },
+            "delete": {
+                "msg": "Are you sure that you want to delete this box?",
+                "confirm": "Delete",
+                "cancel": "Cancel"
+            }
+        },
+        "form": {
+            "title": "",
+            "add": {
+                "title": "Add Box",
+
+                "weight": {
+                    "label": "Weight (Kg.)",
+                    "placeholder": "weight in kg"
+                },
+                "stock": {
+                    "label": "Total amount of products (*)",
+                    "placeholder": "Total amount of products"
+                },
+                "value": {
+                    "label": "total value in Dollars (*)",
+                    "placeholder": "box total value in dollars "
+                },
+                "shipping_val": {
+                    "label": "Shipping value in Dollars",
+                    "placeholder": "total shipping value in dollars"
+                },
+                "warehouse_val": {
+                    "label": "Warehouse value in Dollars",
+                    "placeholder": "Total warehouse value in dollars"
+                },
+                "short_desc": {
+                    "label": "Short description (*)",
+                    "placeholder": "Short description (max. length 25 chars)"
+                },
+                "long_desc": {
+                    "label": "Long description (*)",
+                    "placeholder": "Long description (max. length 50 chars)"
+                },
+                "warehouse": {
+                    "label": "Warehouse (*)",
+                    "placeholder": "-- Select a Warehouse --"
+                },
+                "bill": {
+                    "tip": "- you must add at least one bill",
+                    "number": {
+                        "label": "Bill number (*)",
+                        "placeholder": "Bill number"
+                    },
+                    "value": {
+                        "label": "Total value (*)",
+                        "placeholder": "Bill total value in dollars"
+                    },
+                    "weight": {
+                        "label": "Total bill weight (if you know it) (Kg.)",
+                        "placeholder": "Bill weight in kg"
+                    },
+                    "stock": {
+                        "label": "items Quantity (*)",
+                        "placeholder": "Amount of items purchased"
+                    },
+                    "long_desc": {
+                        "label": "Bill description (*)",
+                        "placeholder": "Bill description (max. 100 characters)"
+                    },
+                    "file": {
+                        "label": "Upload bill file"
+                    },
+                    "button": "Add bill"
+                },
+                "submitBtn": "Submit",
+                "cancelBtn": "Cancel",
+                "processLbl": "Adding box",
+                "required": "Fields with (*) are required."
+            },
+            "edit": {
+                "title": "Edit box"
+            }
+        }
+    }
+}

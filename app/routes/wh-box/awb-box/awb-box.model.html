@@ -1,0 +1,35 @@
+<div class="awb-card_header">
+    <h4><i class="fa fa-cube"></i> {{::lang.awb.header.id}}: {{::box.id }}</h4>
+    <h4 ng-if="box.status == 0">
+        <i style="cursor:pointer;" ng-click="editBox(box, $index)" class="fa fa-pencil"></i>
+        <i style="color:#ED5E68;cursor:pointer;" uib-popover-template="'delete-box.html'" popover-class="help  delete-box" popover-placement="left" data-toggle="popover" popover-trigger="outsideClick" class="fa fa-close"></i>
+    </h4>
+    <h4 ng-if="box.status == 1" style="color:#676d8d">
+        <i class="fa fa-gears"></i> {{lang.awb.header.processing}}
+    </h4>
+    <h4 ng-if="box.status == 2" style="color:green">
+        <i class="fa fa-check"></i> {{lang.awb.header.processed}}
+    </h4>
+</div>
+<div class="awb-card_body">
+    <ul>
+        <li>{{::lang.awb.body.provider}}: {{::box.provider }} </li>
+        <li>{{::lang.awb.body.warehouse}}: {{::box.warehouse.warehouse_name }} </li>
+        <li>{{::lang.awb.body.track_number}}: {{::box.tracking }} </li>
+        <li>{{::lang.awb.body.created}}: {{::box.created | date : 'dd/MM/yyyy HH:mm'}} </li>
+        <li><a style="cursor:pointer;" ng-click="navigate(box)"> {{::lang.awb.body.search_box}} <i class="fa fa-search"></i></a> </li>
+        <li class="clearfix bills">
+            <h5><i class="fa fa-file"></i> {{::lang.awb.body.bill.title}}</h5>
+            <ul class="col-xs-6" ng-repeat="bill in box.bills track by $index">
+                <li>{{::lang.awb.body.bill.id}}: {{::bill.number }}</li>
+                <li>{{::lang.awb.body.bill.products}}: {{:: bill.products }}</li>
+                <li>{{::lang.awb.body.bill.value}}: {{::bill.value | currency }}</li>
+                <li><a download href="{{::bill.file }}" target="_self">{{::lang.awb.body.bill.download}} <i class="fa fa-cloud-download"></i></a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div class="awb-card_footer">
+    <span>{{::lang.awb.footer.weight}}: 12.50 Kg.</span>
+    <span>{{::lang.awb.footer.value}}: U$D 1200.00</span>
+</div>

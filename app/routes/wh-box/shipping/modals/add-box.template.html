@@ -1,0 +1,115 @@
+<div class="box box-modal container-fluid" ng-cloak>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="modalAddShippingBox.cancel()">&times;</button>
+        <h3><i class="fa fa-dropbox" style="margin-right:5px"></i>{{::modalAddShippingBox.lang.form.title}}</h3>
+    </div>
+    <div class="modal-body clearfix">
+        <form id="boxForm" name="modalAddShippingBox.boxForm">
+            <div ng-class="col-xs-12">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="{{::modalAddShippingBox.boxLang.room.filter.placeholder}}" ng-model="modalAddShippingBox.searchBy">
+                    <span class="input-group-btn">
+                        <div class="btn-group">
+                            <div uib-dropdown is-open="status.isopen">
+                                <button class="btn btn-hbr-blue" uib-dropdown-toggle type="button">{{ modalAddShippingBox.filterName }} <span class="caret"></span></button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                        <li ng-if="modalAddShippingBox.isAdmin == 1" role="menuitem"><a ng-click="modalAddShippingBox.setFilter('company_name', modalAddShippingBox.boxLang.room.filter.list.client_name)">{{::modalAddShippingBox.boxLang.room.filter.list.client_name}}</a></li>
+                        <li role="menuitem"><a ng-click="modalAddShippingBox.setFilter('id',modalAddShippingBox.boxLang.room.filter.list.box_id)">{{::modalAddShippingBox.boxLang.room.filter.list.box_id}}</a></li>
+                        <li role="menuitem"><a ng-click="modalAddShippingBox.setFilter('bill',modalAddShippingBox.boxLang.room.filter.list.bill)">{{::modalAddShippingBox.boxLang.room.filter.list.bill}}</a></li>
+                        <li role="menuitem"><a ng-click="modalAddShippingBox.setFilter('warehouse_name', 'Warehouse')">Warehouse</a></li>
+                        <li role="menuitem"><a ng-click="modalAddShippingBox.setFilter('ageGreater',modalAddShippingBox.boxLang.room.filter.list.age_greater)">{{::modalAddShippingBox.boxLang.room.filter.list.age_greater}}</a></li>
+                        <li role="menuitem"><a ng-click="modalAddShippingBox.setFilter('ageLess', modalAddShippingBox.boxLang.room.filter.list.age_less)">{{::modalAddShippingBox.boxLang.room.filter.list.age_less}}</a></li>
+                        <li role="menuitem"><a ng-click="modalAddShippingBox.setFilter('', modalAddShippingBox.boxLang.room.filter.default)">{{::modalAddShippingBox.boxLang.room.filter.list.remove}}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <span class="btn-group">
+                    <button class="btn btn-hbr-blue btn-search" ng-click="modalAddShippingBox.applyFilter()"><i class="fa fa-search"></i></button>
+                </span>
+            </span>
+    </div>
+</div>
+<div class="filterBoxes">
+    <div class="badge" ng-repeat="filter in modalAddShippingBox.multipleFilter track by $index"><span>{{ filter.filterName }}: {{ filter.searchBy }}</span><a ng-click="modalAddShippingBox.removeFilter($index)"><i class="fa fa-close"></i></a></div>
+</div>
+<div class="col-xs-5 boxes">
+    <div class="help-block" ng-if="!modalAddShippingBox.filteredBoxes.length && modalAddShippingBox.searched">
+        <h3 class="text-center">{{::modalAddShippingBox.boxLang.room.filter.not_found}}</h3>
+    </div>
+    <div class="stock-card row" ng-repeat="box in modalAddShippingBox.filteredBoxes track by $index">
+        <div class="stock-card__header">
+            <h4>Box #{{box.id}}</h4>
+            <h4>{{box.user.company_name}}</h4>
+            <h4>
+                <i disabled="box.box_stock == 0" style="color:#ED5E68" uib-popover-template="'add-to-shipping-box.html'" popover-class="help  add-to-box" popover-placement="top" data-toggle="popover" popover-trigger="outsideClick" class="fa fa-dropbox"></i>
+            </h4>
+        </div>
+        <ul class="stock-card__data">
+            <li><b>{{::modalAddShippingBox.boxLang.box.bill}}:</b> {{box.bill}}</li>
+            <li><b>{{::modalAddShippingBox.boxLang.box.age}}:</b> {{box.age}} {{::modalAddShippingBox.boxLang.box.age_unit}}</li>
+            <li><b>{{::modalAddShippingBox.boxLang.box.created}}:</b> {{ box.created | date : "dd/MM/yyyy HH:mm" }}</li>
+            <li><b>{{::modalAddShippingBox.boxLang.box.short_desc}}:</b> {{box.short_desc}}</li>
+            <li><b>Warehouse:</b> {{box.warehouse.name}}</li>
+        </ul>
+        <div class="stock-card__footer">
+            <span>{{::modalAddShippingBox.boxLang.box.weight}}: <span ng-bind="box.box_weight > 0 ? box.box_weight + ' Kg.' : modalAddShippingBox.boxLang.box.processing"> </span></span>
+            <span>Stock: {{box.box_stock}}</span>
+            <span><i class="fa" popover-is-open="isOpen" ng-class="!isOpen ? 'fa-search' : 'fa-close'" uib-popover-template="'stock-card-info.html'" popover-class="help" popover-placement="top" data-toggle="popover" popover-trigger="outsideClick"></i></span>
+        </div>
+    </div>
+</div>
+<div class="col-xs-6 col-xs-offset-1 boxes">
+    <div class="stock-card row">
+        <div class="stock-card__header">
+            <h4>{{::modalAddShippingBox.lang.form.shippingBox.title}}</h4>
+        </div>
+
+        <ul class="stock-card__data col-xs-6" ng-repeat="shippingBox in modalAddShippingBox.shippingBox.boxes track by $index">
+            <li><b>{{::modalAddShippingBox.boxLang.box.id}}:</b> {{shippingBox.id}} <i style="color:red;" class="fa fa-close"></i></li>
+            <li><b>{{::modalAddShippingBox.boxLang.room.stock}}:</b> {{shippingBox.box_stock}}</li>
+            <li><b>{{::modalAddShippingBox.boxLang.box.boxValue}}:</b> {{shippingBox.box_value}}</li>
+            <li><b>{{::modalAddShippingBox.boxLang.box.weight}}:</b> {{shippingBox.box_weight}}</li>
+        </ul>
+        <div class="stock-card__footer">
+            <span>{{::modalAddShippingBox.boxLang.box.weight}}: {{modalAddShippingBox.shippingBox.weight}}</span>
+            <span>Stock: {{modalAddShippingBox.shippingBox.stock}}</span>
+            <span>value: {{modalAddShippingBox.shippingBox.value}}</span>
+        </div>
+    </div>
+</div>
+</form>
+</div>
+<div class="modal-footer clear-fix">
+    <div class="col-xs-12" ng-if="modalAddShippingBox.boxForm.$invalid">
+        <span class="pull-left"><i class="fa fa-warning"></i> {{::modalAddShippingBox.lang.form.add.required}}</span>
+    </div>
+    <button class="btn btn-hbr-blue" ng-disabled="modalAddShippingBox.boxForm.$invalid" ng-click="modalAddShippingBox.addBox()">
+            <span ng-if="modalAddShippingBox.spinner"><i class="fa fa-spinner fa-pulse" style="color:white;font-size:15px; margin-right:5px;"></i> {{::modalAddShippingBox.lang.form.add.processLbl}}</span>
+            <span ng-if="!modalAddShippingBox.spinner"> {{::modalAddShippingBox.lang.form.add.submitBtn}} </span>
+        </button>
+    <button class="btn btn-hbr-blue" type="button" ng-click="modalAddShippingBox.cancel()">{{::modalAddShippingBox.lang.form.add.cancelBtn}}</button>
+</div>
+</div>
+<div ng-include="'hbr-selfie/dist/routes/wh-box/shipping/modals/box.model.template.html'"></div>
+
+<script type="text/ng-template" id="add-to-shipping-box.html">
+    <div class="col-xs-12 add-to-box-title">
+        <span>{{:: modalAddShippingBox.lang.addToShipping.msg }}</span>
+        <input type="number" ng-model="modalAddShippingBox.stockToAdd" min="0" ng-max="box.box_stock" class "form-control" name="qty" id="qty" required/>
+
+    </div>
+
+    <div class="col-xs-12 no-padding add-to-box-body">
+        <button class="btn-flat btn-flat-danger" ng-click="modalAddShippingBox.addToShipping($index, box)">
+        {{:: modalAddShippingBox.lang.addToShipping.confirm }}
+        </button>
+
+        <button class="btn-flat btn-flat-default" ng-click="modalAddShippingBox.cancelAddToShipping()">
+         {{::modalAddShippingBox.lang.addToShipping.cancel }}
+         </button>
+    </div>
+</script>>
+</script>
+</button>
+</div>
+</script>

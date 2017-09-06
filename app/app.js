@@ -24,11 +24,13 @@
                 .state('dashboard.manage_awb', { url: "/airway-bills", templateUrl: "./hbr-selfie/dist/routes/airwayBills/airwaybills.template.html", data: { title: 'Airway Bills', requireAuth: true }, controller: "airwayCtrl", controllerAs: "airway" })
                 .state('dashboard.airwaybill_list', { url: "/airway/list", templateUrl: "./hbr-selfie/dist/routes/airwaybill_list/airwaybill_list.template.html", data: { title: 'Ver Guias', requireAuth: true }, controller: "airwayListCtrl", controllerAs: "airwayList" })
                 .state('dashboard.process_payments', { url: "/pagos", templateUrl: "./hbr-selfie/dist/routes/process_payments/process_payments.template.html", data: { title: 'Procesar Pagos', requireAuth: true }, controller: "processPaymentsCtrl", controllerAs: "processPayments" })
-                .state('dashboard.stock_rooms', { url: "/stock-rooms", templateUrl: "./hbr-selfie/dist/routes/wh-box/stock-rooms/stock-rooms.template.html", data: { title: 'Stock Rooms', requireAuth: true }, controller: "stockRoomsCtrl", controllerAs: "stockRooms" })
+                .state('dashboard.stock_rooms', { url: "/stock-rooms", params: { boxId: null, tracking: null }, templateUrl: "./hbr-selfie/dist/routes/wh-box/stock-rooms/stock-rooms.template.html", data: { title: 'Stock Rooms', requireAuth: true }, controller: "stockRoomsCtrl", controllerAs: "stockRooms" })
+                .state('dashboard.awb-box', { url: "/awb-box", params: { awbId: null }, templateUrl: "./hbr-selfie/dist/routes/wh-box/awb-box/awb-box.template.html", data: { title: 'Box Airway bill', requireAuth: true }, controller: "awbBoxCtrl", controllerAs: "awb" })
                 .state('dashboard.history', { url: "/history", templateUrl: "./hbr-selfie/dist/routes/wh-box/history/history.template.html", data: { title: 'History', requireAuth: true }, controller: "historyCtrl", controllerAs: "history" })
                 .state('dashboard.shipping', { url: "/shipping", templateUrl: "./hbr-selfie/dist/routes/wh-box/shipping/shipping.template.html", data: { title: 'Shipping Page', requireAuth: true }, controller: "shippingCtrl", controllerAs: "shipping" });
         }])
         .run(['$rootScope', '$state', '$stateParams', 'authenticationService', function($rootScope, $state, $stateParams, authenticationService) {
+
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams
             $rootScope.showSpinner = false;
@@ -60,6 +62,7 @@
             return input.slice(start);
         };
     });
+
     require('./routes/home/home.js')(angular, app);
     require('./routes/login/login.js')(angular, app);
     require('./routes/register/register.js')(angular, app);
@@ -80,9 +83,12 @@
     require('./routes/wh-box/history/history.js')(angular, app);
     require('./routes/wh-box/shipping/shipping.js')(angular, app);
     require('./routes/wh-box/stock-rooms/stock-rooms.js')(angular, app);
+    require('./routes/wh-box/awb-box/awb-box.js')(angular, app);
 
     require('./services/authentication/authentication.js')(angular, app);
     require('./services/boxes/box.service.js')(angular, app);
+    require('./services/awb-box/awb-box.service.js')(angular, app);
+    require('./services/boxes/shipping.service.js')(angular, app);
     require('./services/forms/warehouse.js')(angular, app);
     require('./services/forms/products.js')(angular, app);
     require('./services/forms/users.js')(angular, app);
@@ -92,4 +98,5 @@
 
     require('./components/navbar/navbar.js')(angular, app);
     require('./components/uploader/uploader.js')(angular, app);
+    require('./components/drag-drop/drag-drop.directive.js')(angular, app);
 })();

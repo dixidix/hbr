@@ -1,5 +1,5 @@
 @import '../../../styles/base';
-.stock-rooms {
+.awb-box {
     h3 {
         color: $hbr-blue;
         margin-top: 0;
@@ -65,100 +65,77 @@
             cursor: pointer;
         }
     }
-    .boxes {
-        padding-right: 0;
-        margin-right: 0;
-        margin-top: 2%;
-        padding-bottom: 50px;
-        transition: all 0.5s ease-in-out;
-        .popover-content {
-            width: 235px;
-            max-height: 290px;
-            color: $hbr-blue;
-            padding: 5px 3px;
+    .awb-card {
+        width: 48%;
+        margin: 1%;
+        height: 330px;
+        padding: 0;
+        position: relative;
+        background: #fcfcfc;
+        border: 1px solid $hbr-blue;
+        border-radius: 5px;
+        opacity: 1;
+        color: $hbr-blue;
+        ul {
+            list-style: none;
+        }
+        ul:first-child {
+            padding: 0;
+        }
+        &_header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            h4 {
+                margin: 0;
+                padding: 10px 15px;
+            }
+        }
+        &_body {
+            position: relative;
+            list-style: none;
+            height: 280px;
             overflow-y: auto;
-            .popover-card {
-                font-size: 11px;
-                border: 2px solid $hbr-blue;
-                border-radius: 5px;
-                .stock-card__header {
-                    background: $hbr-blue;
-                    padding: 0;
-                    color: $hbr-green;
-                    padding: 0px 15px;
+            padding: 0px 20px 30px 20px;
+            font-size: 13px;
+            ul {
+                .bills {
+                    padding: 5px 10px;
+                    margin-top: 10px;
+                    background: rgba(0, 0, 0, 0.05);
+                    border-radius: 5px;
+                }
+                ul {
                     margin-bottom: 15px;
                 }
-                .stock-card__data {
-                    font-size: 12px;
-                    padding: 0 10px;
-                    li {
-                        padding: 5px 0px;
+                li {
+                    a {
+                        color: $hbr-light-purple;
+                        &:hover {
+                            color: darken( $hbr-light-purple, 10%);
+                        }
                     }
                 }
             }
         }
-        .stock-card {
-            i {
-                cursor: pointer;
-            }
-            &:hover {
-                box-shadow: 0px 0px 2px 1px $hbr-light-purple;
-            }
-            position: relative;
-            margin: 1%;
-            width: 31%;
-            height: 170px;
-            background: #fcfcfc;
-            border: 1px solid $hbr-blue;
-            border-radius: 5px;
-            opacity: 1;
-            color: $hbr-blue;
-            &__header {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                h4 {
-                    margin: 0;
-                    padding: 10px 5px;
-                }
-            }
-            &__data {
-                list-style: none;
-                padding: 0px 20px;
-                font-size: 13px;
-            }
-            &__footer {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                height: 30px;
-                display: flex;
-                flex-direction: row;
-                align-content: space-around;
-                align-items: center;
-                justify-content: space-between;
-                padding: 0px 10px;
-                background: $hbr-blue;
-                color: $hbr-green;
-            }
+        &_footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            display: flex;
+            flex-direction: row;
+            align-content: space-around;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0px 10px;
+            background: $hbr-blue;
+            color: $hbr-green;
         }
-    }
-    .footer {
-        border-top: 2px solid $hbr-green;
-        position: fixed;
-        width: 100%;
-        left: 0;
-        right: 0;
-        height: 35px;
-        color: $hbr-green;
-        background: $hbr-blue;
-        bottom: 0;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-content: space-around;
-        align-items: center;
+        &:hover {
+            box-shadow: 0px 0px 2px 1px $hbr-light-purple;
+        }
     }
     .delete-box {
         margin: 0;
@@ -204,14 +181,39 @@
 .box-modal {
     .modal {
         &-body {
-            .form-group {
-                &.has-error {
-                    .form-control {
-                        border-color: $hbr-red;
+            .bills {
+                margin-top: 5%;
+                .bill {
+                    color: $hbr-blue;
+                    &-file {
+                        color: $hbr-light-purple;
+                        font-size: 25px;
                     }
                 }
+            }
+            .form-group {
                 textarea {
                     height: 80px;
+                }
+            }
+            input[type="file"]::-webkit-file-upload-button {
+                &,
+                &:active,
+                &:focus,
+                &:active:focus,
+                &:hover {
+                    background-color: $hbr-green;
+                    border: 1px solid $hbr-blue;
+                    color: $hbr-blue;
+                    width: 200px;
+                    height: 40px;
+                    outline: 0;
+                    padding: 0.4em 1em;
+                    font-family: $roboto;
+                }
+                &:hover {
+                    background-color: lighten($hbr-green, 5%);
+                    cursor: pointer;
                 }
             }
         }

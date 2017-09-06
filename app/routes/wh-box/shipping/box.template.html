@@ -1,0 +1,21 @@
+<div class="stock-card" drag-container="{{shipping.isAdmin == 1}}" drag-data="box" ng-style="{'cursor' : shipping.isAdmin == 1 ? 'move': 'default'}">
+    <div class="stock-card__header">
+        <h4>Box #{{box.id}}</h4>
+        <h4 ng-if="shipping.isAdmin == 1">{{box.user.company_name}}</h4>
+        <h4 ng-if="shipping.isAdmin == 1">
+            <i style="color:#ED5E68; cursor:pointer" ng-click="shipping.notify(box, $index)" class="fa fa-paper-plane" uib-tooltip="{{shipping.boxLang.box.notify}}" tooltip-placement="left"></i>
+            <i style="cursor:pointer" ng-click="shipping.navigate(box)" class="fa fa-eye" uib-tooltip="{{shipping.boxLang.box.open}}" tooltip-placement="right"></i>
+        </h4>
+    </div>
+    <ul class="stock-card__data">
+        <li><b>{{::shipping.boxLang.box.bill}}:</b> {{box.bill}}</li>
+        <li><b>{{::shipping.boxLang.box.age}}:</b> {{box.age}} {{::shipping.boxLang.box.age_unit}}</li>
+        <li><b>{{::shipping.boxLang.box.created}}:</b> {{ box.created | date : "dd/MM/yyyy HH:mm" }}</li>
+        <li><b>{{::shipping.boxLang.box.short_desc}}:</b> {{box.short_desc}}</li>
+        <li><b>Warehouse:</b> {{box.warehouse.name}}</li>
+    </ul>
+    <div class="stock-card__footer">
+        <span>{{::shipping.boxLang.box.weight}}: <span ng-bind="box.box_weight > 0 ? box.box_weight + ' Kg.' : shipping.boxLang.box.processing"> </span></span>
+        <span>Stock: {{box.box_stock}}</span>
+    </div>
+</div>

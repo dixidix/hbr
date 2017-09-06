@@ -1,57 +1,70 @@
 <div class="box box-modal container-fluid" ng-cloak>
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="modalAddBox.cancel()">&times;</button>
-        <h3><i class="fa fa-cubes" style="margin-right:5px"></i>{{::modalAddBox.lang.form.add.title}}</h3>
+        <h3><i class="fa fa-cubes" style="margin-right:5px"></i>{{::modalAddBox.lang.form.title}}</h3>
     </div>
     <div class="modal-body">
-        <form>
+        <form id="boxForm" name="modalAddBox.boxForm">
             <div class="row">
-                <div class="form-group col-xs-6">
-                    <label for="name">N&uacute;mero de factura  (*)</label>
-                    <input type="text" class="form-control" placeholder="N&uacute;mero de factura" ng-model="modalAddBox.box.bill" required>
+                <div class="form-group col-xs-6" data-ng-class="{'has-error': modalAddBox.boxForm.bill.$invalid && modalAddBox.boxForm.$submitted}">
+                    <label class="control-label" for="bill">{{::modalAddBox.lang.form.add.bill.label}}</label>
+                    <input type="text" name="bill" class="form-control" placeholder="{{::modalAddBox.lang.form.add.bill.placeholder}}" ng-model="modalAddBox.box.bill" required>
                 </div>
                 <div class="form-group col-xs-6">
-                    <label for="name">Peso  (*)</label>
-                    <input type="text" class="form-control" placeholder="Peso en kg" ng-model="modalAddBox.box.box_weight">
+                    <label for="name">{{::modalAddBox.lang.form.add.weight.label}}</label>
+                    <input min="0.00" type="number" step="0.01" class="form-control" placeholder="{{::modalAddBox.lang.form.add.weight.placeholder}}" ng-model="modalAddBox.box.box_weight">
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-xs-6">
-                    <label for="name">Cantidad de productos (*)</label>
-                    <input type="text" class="form-control" placeholder="Cantidad de productos" ng-model="modalAddBox.box.box_stock">
+                    <label for="name">{{::modalAddBox.lang.form.add.stock.label}}</label>
+                    <input min="0" type="number" required class="form-control" placeholder="{{::modalAddBox.lang.form.add.stock.placeholder}}" ng-model="modalAddBox.box.box_stock">
                 </div>
                 <div class="form-group col-xs-6">
-                    <label for="name">Valor total en D&oacute;lares (*)</label>
-                    <input type="text" class="form-control" placeholder="valor total de la caja en d&oacute;lares" ng-model="modalAddBox.box.box_value">
+                    <label for="name">{{::modalAddBox.lang.form.add.value.label}}</label>
+                    <input min="0.00" type="number" step="0.01" required class="form-control" placeholder="{{::modalAddBox.lang.form.add.value.placeholder}}" ng-model="modalAddBox.box.box_value">
+                </div>
+            </div>
+            <div class="row" ng-if="modalAddBox.isAdmin == 1">
+                <div class="form-group col-xs-6">
+                    <label for="name">{{::modalAddBox.lang.form.add.shipping_val.label}}</label>
+                    <input min="0" type="number" class="form-control" placeholder="{{::modalAddBox.lang.form.add.shipping_val.placeholder}}" ng-model="modalAddBox.box.box_shipping_value">
+                </div>
+                <div class="form-group col-xs-6">
+                    <label for="name">{{::modalAddBox.lang.form.add.warehouse_val.label}}</label>
+                    <input min="0.00" type="number" step="0.01" class="form-control" placeholder="{{::modalAddBox.lang.form.add.warehouse_val.placeholder}}" ng-model="modalAddBox.box.box_warehouse_value">
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-xs-12">
-                    <label for="name">descripci&oacute;n corta (*)</label>
-                    <input type="text" class="form-control" max-length="15" placeholder="descripci&oacute;n corta (m&aacute;ximo 15 caracteres)" ng-model="modalAddBox.box.short_desc">
+                    <label for="name">{{::modalAddBox.lang.form.add.short_desc.label}}</label>
+                    <input type="text" required class="form-control" maxlength="25" placeholder="{{::modalAddBox.lang.form.add.short_desc.placeholder}}" ng-model="modalAddBox.box.short_desc">
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-xs-12">
-                    <label for="name">descripci&oacute;n larga (*)</label>
-                    <textarea class="form-control" max-length="50" rows="15" placeholder="descripci&oacute;n larga (m&aacute;ximo 50 caracteres)" ng-model="modalAddBox.box.long_desc"></textarea>
+                    <label for="name">{{::modalAddBox.lang.form.add.long_desc.label}}</label>
+                    <textarea class="form-control" required maxlength="100" rows="15" placeholder="{{::modalAddBox.lang.form.add.long_desc.placeholder}}" ng-model="modalAddBox.box.long_desc"></textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-xs-12">
-                    <label for="name">Warehouse (*)</label>
-                    <select class="form-control" ng-options="warehouse.name for warehouse in modalAddBox.warehouses track by warehouse.id" name="warehouses" id="warehouses" ng-model="modalAddBox.box.whId">
-                        <option value="" disabled="disabled">-- Selecciona un Warehouse --</option>
+                    <label for="name">{{::modalAddBox.lang.form.add.warehouse.label}}</label>
+                    <select class="form-control" required ng-options="warehouse.name for warehouse in modalAddBox.warehouses track by warehouse.id" name="warehouses" id="warehouses" ng-model="modalAddBox.box.whId">
+                        <option value="" disabled="disabled">{{::modalAddBox.lang.form.add.warehouse.placeholder}}</option>
                     </select>
                 </div>
             </div>
         </form>
     </div>
     <div class="modal-footer clear-fix">
-        <button class="btn btn-hbr-blue" ng-click="modalAddBox.addBox()">
-            <span ng-if="modalAddBox.spinner"><i class="fa fa-spinner fa-pulse" style="color:white;font-size:15px; margin-right:5px;"></i> Enviando</span>
-            <span ng-if="!modalAddBox.spinner"> Agregar </span>
+        <div class="col-xs-12" ng-if="modalAddBox.boxForm.$invalid">
+            <span class="pull-left"><i class="fa fa-warning"></i> {{::modalAddBox.lang.form.add.required}}</span>
+        </div>
+        <button class="btn btn-hbr-blue" ng-disabled="modalAddBox.boxForm.$invalid" ng-click="modalAddBox.addBox()">
+            <span ng-if="modalAddBox.spinner"><i class="fa fa-spinner fa-pulse" style="color:white;font-size:15px; margin-right:5px;"></i> {{::modalAddBox.lang.form.add.processLbl}}</span>
+            <span ng-if="!modalAddBox.spinner"> {{::modalAddBox.lang.form.add.submitBtn}} </span>
         </button>
-        <button class="btn btn-hbr-blue" ng-click="modalAddBox.cancel()">Cancelar</button>
+        <button class="btn btn-hbr-blue" type="button" ng-click="modalAddBox.cancel()">{{::modalAddBox.lang.form.add.cancelBtn}}</button>
     </div>
 </div>
