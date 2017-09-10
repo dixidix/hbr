@@ -8,11 +8,11 @@
             <div class="row">
                 <div class="form-group col-xs-6">
                     <label class="control-label" for="provider">{{::modal.lang.form.add.provider.label}}</label>
-                    <input type="text" name="provider" class="form-control" placeholder="{{::modal.lang.form.add.provider.placeholder}}" ng-model="modal.box.provider" required>
+                    <input type="text" required autocomplete="off" name="provider" class="form-control" placeholder="{{::modal.lang.form.add.provider.placeholder}}" ng-model="modal.box.provider" required>
                 </div>
                 <div class="form-group col-xs-6">
                     <label for="tracking">{{::modal.lang.form.add.tracking.label}}</label>
-                    <input type="text" class="form-control" placeholder="{{::modal.lang.form.add.tracking.placeholder}}" ng-model="modal.box.tracking">
+                    <input type="text" required autocomplete="off" class="form-control" placeholder="{{::modal.lang.form.add.tracking.placeholder}}" ng-model="modal.box.tracking">
                 </div>
             </div>
             <div class="row">
@@ -30,27 +30,27 @@
             <div class="row">
                 <div class="form-group col-xs-6">
                     <label class="control-label" for="number">{{::modal.lang.form.add.bill.number.label}}</label>
-                    <input type="text" name="number" class="form-control" placeholder="{{::modal.lang.form.add.bill.number.placeholder}}" ng-model="modal.bill.number" required>
+                    <input required autocomplete="off" type="text" name="number" class="form-control" placeholder="{{::modal.lang.form.add.bill.number.placeholder}}" ng-model="modal.bill.number" required>
                 </div>
                 <div class="form-group col-xs-6">
                     <label for="value">{{::modal.lang.form.add.bill.value.label}}</label>
-                    <input type="text" name="value" class="form-control" placeholder="{{::modal.lang.form.add.bill.value.placeholder}}" ng-model="modal.bill.value">
+                    <input required autocomplete="off" type="text" name="value" class="form-control" placeholder="{{::modal.lang.form.add.bill.value.placeholder}}" ng-model="modal.bill.value">
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-xs-12">
-                    <label for="name">{{::modal.lang.form.add.bill.long_desc.label}}</label>
-                    <textarea class="form-control" required maxlength="100" rows="15" placeholder="{{::modal.lang.form.add.bill.long_desc.placeholder}}" ng-model="modal.bill.long_desc"></textarea>
+                    <label for="long_desc">{{::modal.lang.form.add.bill.long_desc.label}}</label>
+                    <textarea id="long_desc" required autocomplete="off" class="form-control" required maxlength="100" rows="15" placeholder="{{::modal.lang.form.add.bill.long_desc.placeholder}}" ng-model="modal.bill.long_desc"></textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-xs-6">
-                    <label for="name">{{::modal.lang.form.add.bill.weight.label}}</label>
-                    <input min="0" type="number" required class="form-control" placeholder="{{::modal.lang.form.add.bill.weight.placeholder}}" ng-model="modal.bill.weight">
+                    <label for="weight">{{::modal.lang.form.add.bill.weight.label}}</label>
+                    <input min="0" id="weight" required autocomplete="off" autocomplete="false" type="number" class="form-control" placeholder="{{::modal.lang.form.add.bill.weight.placeholder}}" ng-model="modal.bill.weight">
                 </div>
                 <div class="form-group col-xs-6">
                     <label for="value">{{::modal.lang.form.add.bill.stock.label}}</label>
-                    <input type="number" name="value" class="form-control" placeholder="{{::modal.lang.form.add.bill.stock.placeholder}}" ng-model="modal.bill.stock">
+                    <input required autocomplete="off" type="number" name="value" class="form-control" placeholder="{{::modal.lang.form.add.bill.stock.placeholder}}" ng-model="modal.bill.stock">
                 </div>
             </div>
             <div class="row">
@@ -58,13 +58,16 @@
                     <label for="bill_file" class="control-label">{{::modal.lang.form.add.bill.file.label}}</label>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1"><i class="fa fa-file-pdf-o"></i></span>
-                        <input type="file" name="bill_file" id="bill_file" required ng-model="modal.bill.bill_file" uploader-model="modal.bill.bill_file" />
+                        <input type="file" name="bill_file" id="bill_file" ng-change="angular.element(this).scope().getFilename(this)" required ng-model="modal.bill.bill_file" uploader-model="modal.bill.bill_file" />
                     </div>
+                </div>
+                <div class="help-block">
+                    <p class="text-danger">{{modal.fileError}}</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <button style="width: 180px;" class="btn btn-hbr-blue" type="button" ng-click="modal.addBill()">{{::modal.lang.form.add.bill.button}}</button>
+                    <button ng-disabled="!modal.bill.value || !modal.hasFile || !modal.bill.long_desc || !modal.bill.stock || !modal.bill.number" style="width: 180px;" class="btn btn-hbr-blue" type="button" ng-click="modal.addBill()">{{::modal.lang.form.add.bill.button}}</button>
                 </div>
             </div>
             <div class="row bills" ng-if="modal.box.bills.length">
@@ -80,7 +83,7 @@
             <div class="row">
                 <div class="form-group col-xs-4">
                     <label for="name">{{::modal.lang.form.add.weight.label}}</label>
-                    <input readonly type="text" required class="form-control" placeholder="{{::modal.lang.form.add.weight.placeholder}}" ng-model="modal.box.weight">
+                    <input readonly type="text" required class="form-control" placeholder="{{::modal.lang.form.add.weight.placeholder}}" ng-model="modal.box.box_weight">
                 </div>
                 <div class="form-group col-xs-4">
                     <label for="name">{{::modal.lang.form.add.value.label}}</label>
@@ -88,7 +91,7 @@
                 </div>
                 <div class="form-group col-xs-4">
                     <label for="name">{{::modal.lang.form.add.stock.label}}</label>
-                    <input readonly type="text" required class="form-control" placeholder="{{::modal.lang.form.add.stock.placeholder}}" ng-model="modal.box.stock">
+                    <input readonly type="text" required class="form-control" placeholder="{{::modal.lang.form.add.stock.placeholder}}" ng-model="modal.box.box_stock">
                 </div>
             </div>
         </form>
@@ -97,9 +100,13 @@
         <div class="col-xs-12" ng-if="modal.boxForm.$invalid">
             <span class="pull-left"><i class="fa fa-warning"></i> {{::modal.lang.form.add.required}}</span>
         </div>
-        <button class="btn btn-hbr-blue" ng-disabled="!modal.box.bills.length" ng-click="modal.addBox()">
+        <button ng-if="!modal.isEditing" class="btn btn-hbr-blue" ng-disabled="!modal.box.bills.length" ng-click="modal.addBox()">
             <span ng-if="modal.spinner"><i class="fa fa-spinner fa-pulse" style="color:white;font-size:15px; margin-right:5px;"></i> {{::modal.lang.form.add.processLbl}}</span>
             <span ng-if="!modal.spinner"> {{::modal.lang.form.add.submitBtn}} </span>
+        </button>
+        <button ng-if="modal.isEditing" class="btn btn-hbr-blue" ng-disabled="!modal.box.bills.length" ng-click="modal.edit()">
+            <span ng-if="modal.spinner"><i class="fa fa-spinner fa-pulse" style="color:white;font-size:15px; margin-right:5px;"></i> {{::modal.lang.form.add.processLbl}}</span>
+            <span ng-if="!modal.spinner"> {{::modal.lang.form.add.editButton}} </span>
         </button>
         <button class="btn btn-hbr-blue" type="button" ng-click="modal.cancel()">{{::modal.lang.form.add.cancelBtn}}</button>
     </div>

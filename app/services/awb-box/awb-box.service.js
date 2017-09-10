@@ -16,68 +16,7 @@ function awbboxService(agular, app) {
         }
 
         this._getAllAwbBoxes = function() {
-            var boxes = [{
-                    id: 1,
-                    tracking: "162767A42JD6335301",
-                    provider: "DHL",
-                    warehouse: {
-                        id: 1,
-                        warehouse_name: "MIAMI"
-                    },
-                    created: 1504376812000,
-                    age: 21,
-                    status: 0,
-                    value: 1200.00,
-                    weight: 120.50,
-                    bills: [{
-                            id: 1,
-                            number: 99011900,
-                            products: "t-shirts and shoes",
-                            value: 200.50,
-                            file: "http://tucourier.com.ar/hbr-selfie/wh-box/bills/1/21312312312312"
-                        },
-                        {
-                            id: 2,
-                            number: 888111811,
-                            products: "books",
-                            value: 500.50,
-                            file: "http://tucourier.com.ar/hbr-selfie/wh-box/bills/1/hfa1231fsadad"
-                        }
-                    ]
-
-                },
-                {
-                    id: 2,
-                    tracking: "162767XXXXXX6335301",
-                    provider: "FedEx",
-                    warehouse: {
-                        id: 2,
-                        warehouse_name: "China"
-                    },
-                    created: 1504373812000,
-                    age: 21,
-                    status: 1,
-                    value: 5730.00,
-                    weight: 220.00,
-                    bills: [{
-                            id: 1,
-                            number: 1245675321,
-                            products: "Canillas choperas",
-                            value: 12500.50,
-                            file: "http://http://tucourier.com.ar/hbr-selfie/wh-box/bills/1/fgawq123saasdad242"
-                        },
-                        {
-                            id: 2,
-                            number: 5555223242111,
-                            products: "Mesas",
-                            value: 11500.50,
-                            file: "http://http://tucourier.com.ar/hbr-selfie/wh-box/bills/1/yasdasdoiasdasd"
-                        }
-                    ]
-
-                }
-            ];
-            return boxes;
+            return $http.get('./hbr-selfie/dist/php/awb-box/get_box.php');
         }
 
         this._getAwbBoxesByUserId = function() {
@@ -88,6 +27,14 @@ function awbboxService(agular, app) {
 
         }
 
+        this._deleteBill = function(billId) {
+            return $http.post('./hbr-selfie/dist/php/awb-box/delete_bill.php', { id: billId });
+        }
+
+        this._deleteBill = function(bill) {
+            return $http.post('./hbr-selfie/dist/php/awb-box/delete_bill.php', { id: bill.id });
+        }
+
         this._addAwbBox = function(awbBox) {
             return authenticationService.checkAuth().then(function(response) {
                 awbBox.uid = parseInt(response.data.uid);
@@ -95,17 +42,34 @@ function awbboxService(agular, app) {
                 return $http.post('./hbr-selfie/dist/php/awb-box/add_box.php', {
                     tracking: awbBox.tracking,
                     provider: awbBox.provider,
-                    stock: awbBox.stock,
-                    value: awbBox.box_value,
-                    weight: awbBox.weight || "NULL",
-                    whId: awbBox.whId.id,
-                    uid: awbBox.uid,
+                    stock: parseInt(awbBox.box_stock),
+                    box_value: parseFloat(awbBox.box_value),
+                    weight: parseFloat(awbBox.box_weight) || "NULL",
+                    whId: parseInt(awbBox.whId.id),
+                    uid: parseInt(awbBox.uid),
                     created: Math.floor(new Date().getTime())
                 });
             });
         }
 
-        this._addBill = function(bill, boxId) {
+        this._editBox = function(awbBox) {
+            return authenticationService.checkAuth().then(function(response) {
+                awbBox.uid = parseInt(response.data.uid);
+                var whId = awbBox.whId ? awbBox.whId.id : awbBox.warehouse.id;
+                return $http.post('./hbr-selfie/dist/php/awb-box/edit_box.php', {
+                    tracking: awbBox.tracking,
+                    provider: awbBox.provider,
+                    stock: parseInt(awbBox.box_stock),
+                    status: parseInt(awbBox.status),
+                    id: parseInt(awbBox.id),
+                    box_value: parseFloat(awbBox.box_value),
+                    weight: parseFloat(awbBox.box_weight) || "NULL",
+                    whId: parseInt(awbBox.whId.id),
+                });
+            });
+        }
+
+        this._addBills = function(bill, boxId) {
             return authenticationService.checkAuth().then(function(response) {
                 bill.uid = parseInt(response.data.uid);
                 bill.boxId = boxId;
@@ -121,10 +85,6 @@ function awbboxService(agular, app) {
                     headers: { 'Content-Type': undefined }
                 });
             });
-        }
-
-        this._editAwbBox = function(awbBox) {
-
         }
 
         this._deleteAwbBox = function(awbBox) {

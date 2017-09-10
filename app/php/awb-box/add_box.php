@@ -15,7 +15,7 @@ foreach($_POST as $key=>$value) {
 }
 
 if(empty($errors)){
-    MysqliDB::getInstance()->query("INSERT INTO `awb_boxes`(`uid`,`tracking`,`provider`, `stock`, `value`, `weight`, `whId`, `created`) VALUES (".$uid.",'".$tracking."','".$provider."', ".$stock.", ".$value.",  ".$weight.",".$whId.", '".$created."')");
+    MysqliDB::getInstance()->query("INSERT INTO `awb_boxes`(`uid`,`tracking`,`provider`, `stock`, `value`, `weight`, `whId`, `created`) VALUES (".$uid.",'".$tracking."','".$provider."', ".(int) $stock.", ".(float) $box_value.",  ". (float) $weight.",".$whId.", '".$created."')");
     $res = MysqliDB::getInstance()->query("SELECT MAX(id) as id FROM `awb_boxes`");		
     $rows = mysqli_num_rows($res);
 

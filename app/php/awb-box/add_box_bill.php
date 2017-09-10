@@ -26,12 +26,12 @@ $path_bill = "";
 		$fileSystemname_bill = $file_name_bill . $timestamp;
 		$fileSystemname_bill = hash('sha256', $fileSystemname_bill);
 		$fileSystemname_bill = "$fileSystemname_bill.$file_ext_bill";
-		$tmp_path_bill = "../files/".$timestamp."/".$fileSystemname_bill;
+		$tmp_path_bill = "./../../files/".$timestamp."/".$fileSystemname_bill;
 		$path_bill = "/dist/files/".$timestamp."/".$fileSystemname_bill;
 	}
 
-	if(!file_exists("../files/".$timestamp."/")){
-		mkdir("../files/".$timestamp."/");
+	if(!file_exists("./../../files/".$timestamp."/")){
+		mkdir("./../../files/".$timestamp."/");
 		if(!empty($_FILES['bill_file'])){
 			move_uploaded_file($file_tmp_bill, "$tmp_path_bill");
 		}

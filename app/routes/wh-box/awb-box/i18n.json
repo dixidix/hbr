@@ -33,7 +33,7 @@
                 "bill": {
                     "title": "Facturas",
                     "id": "N° Factura",
-                    "products": "Productos",
+                    "products": "Descripción",
                     "download": "Descargar",
                     "value": "Valor"
                 },
@@ -54,6 +54,7 @@
         },
         "form": {
             "title": "",
+            "fileError": "El tipo de archivo es incorrecto. Intenta subir archivos PDF o Imágenes",
             "add": {
                 "title": "Agregar Caja",
                 "provider": {
@@ -99,7 +100,7 @@
                         "placeholder": "descripción de los productos (máximo 100 caracteres)"
                     },
                     "file": {
-                        "label": "Subir Archivo"
+                        "label": "Subir Archivo (PDF/IMÁGEN)"
                     },
                     "button": "Agregar factura"
                 },
@@ -108,6 +109,7 @@
                     "placeholder": "-- Selecciona un Warehouse --"
                 },
                 "submitBtn": "Enviar",
+                "editButton": "Editar",
                 "cancelBtn": "Cancelar",
                 "processLbl": "Enviando",
                 "required": "Los campos con (*) son requeridos."
@@ -151,7 +153,7 @@
                 "bill": {
                     "title": "Bills",
                     "id": "Bill Number",
-                    "products": "Products",
+                    "products": "Description",
                     "download": "Download",
                     "value": "Value"
                 },
@@ -172,6 +174,7 @@
         },
         "form": {
             "title": "",
+            "fileError": "File type is incorrect. Try uploading a PDF or image file",
             "add": {
                 "title": "Add Box",
 
@@ -230,11 +233,12 @@
                         "placeholder": "Bill description (max. 100 characters)"
                     },
                     "file": {
-                        "label": "Upload bill file"
+                        "label": "Upload bill file (PDF/IMAGE)"
                     },
                     "button": "Add bill"
                 },
                 "submitBtn": "Submit",
+                "editButton": "Edit",
                 "cancelBtn": "Cancel",
                 "processLbl": "Adding box",
                 "required": "Fields with (*) are required."
