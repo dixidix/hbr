@@ -29,12 +29,14 @@
                 "provider": "Proveedor postal",
                 "warehouse": "Depósito",
                 "track_number": "Código tracking",
+                "stock": "Cant. Productos",
                 "search_box": "Buscar cajas en Almacenamiento",
                 "bill": {
                     "title": "Facturas",
                     "id": "N° Factura",
                     "products": "Descripción",
                     "download": "Descargar",
+                    "stock": "Cantidad",
                     "value": "Valor"
                 },
                 "created": "Creado",
@@ -100,7 +102,7 @@
                         "placeholder": "descripción de los productos (máximo 100 caracteres)"
                     },
                     "file": {
-                        "label": "Subir Archivo (PDF/IMÁGEN)"
+                        "label": "Subir Archivo  (*) (PDF/IMÁGEN)"
                     },
                     "button": "Agregar factura"
                 },
@@ -116,6 +118,9 @@
             },
             "edit": {
                 "title": "Editar Caja"
+            },
+            "errors": {
+                "required": "Los campos con (*) son requeridos"
             }
         }
     },
@@ -149,12 +154,14 @@
                 "provider": "Postal provider",
                 "warehouse": "Warehouse",
                 "track_number": "Tracking code",
+                "stock": "total stock",
                 "search_box": "Search boxes in Stock room",
                 "bill": {
                     "title": "Bills",
                     "id": "Bill Number",
                     "products": "Description",
                     "download": "Download",
+                    "stock": "stock",
                     "value": "Value"
                 },
                 "created": "Created",
@@ -233,7 +240,7 @@
                         "placeholder": "Bill description (max. 100 characters)"
                     },
                     "file": {
-                        "label": "Upload bill file (PDF/IMAGE)"
+                        "label": "Upload bill file (*) (PDF/IMAGE)"
                     },
                     "button": "Add bill"
                 },
@@ -245,6 +252,9 @@
             },
             "edit": {
                 "title": "Edit box"
+            },
+            "errors": {
+                "required": "Fields with (*) are required"
             }
         }
     }

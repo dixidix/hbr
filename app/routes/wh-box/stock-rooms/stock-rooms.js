@@ -113,13 +113,11 @@ function stockRoomsController(angular, app) {
                     }
                 })
             });
-            console.log(self.boxes, self.filteredBoxes);
         }
 
         function cancelDeleteBox() {
             angular.element('.footer')[0].click();
         }
-
 
         function getAllBoxes(isAdmin) {
             if (isAdmin == 1) {
@@ -165,7 +163,6 @@ function stockRoomsController(angular, app) {
                     })
             }
         }
-
 
         function init() {
             self.isAdmin = parseInt(sessionStorage.getItem('isAdmin'));

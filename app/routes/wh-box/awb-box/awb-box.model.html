@@ -17,19 +17,22 @@
         <li>{{::lang.awb.body.warehouse}}: {{::box.warehouse.name }} </li>
         <li>{{::lang.awb.body.track_number}}: {{::box.tracking }} </li>
         <li>{{::lang.awb.body.created}}: {{::box.created | date : 'dd/MM/yyyy HH:mm'}} </li>
+        <li>{{::lang.awb.body.stock}}: {{::box.box_stock}} </li>
         <li><a style="cursor:pointer;" ng-click="navigate(box)"> {{::lang.awb.body.search_box}} <i class="fa fa-search"></i></a> </li>
         <li class="clearfix bills">
             <h5><i class="fa fa-file"></i> {{::lang.awb.body.bill.title}}</h5>
             <ul class="col-xs-6" ng-repeat="bill in box.bills track by $index">
                 <li>{{::lang.awb.body.bill.id}}: {{::bill.number }}</li>
                 <li>{{::lang.awb.body.bill.products}}: {{:: bill.long_desc }}</li>
+                <li>{{::lang.awb.body.bill.stock}}: {{:: bill.stock }}</li>
                 <li>{{::lang.awb.body.bill.value}}: {{::bill.value | currency }}</li>
-                <li><a download="{{::bill.bill_file_name }}" href="{{::bill.bill_file_path }}" target="_self">{{::lang.awb.body.bill.download}} <i class="fa fa-cloud-download"></i></a></li>
+                <li>
+                    <a download="{{::bill.bill_file_name }}" href="/hbr-selfie{{::bill.bill_file_path }} " target="_self ">{{::lang.awb.body.bill.download}} <i class="fa fa-cloud-download "></i></a></li>
             </ul>
         </li>
     </ul>
 </div>
-<div class="awb-card_footer">
+<div class="awb-card_footer ">
     <span>{{::lang.awb.footer.weight}}: {{::box.box_weight}} Kg.</span>
     <span>{{::lang.awb.footer.value}}: U$D {{::box.box_value}}</span>
 </div>

@@ -17,11 +17,11 @@ function navbarDirective(angular, app) {
 
         function link(scope, element, attrs) {
 
-            scope.$watch(function () {
+            scope.$watch(function() {
                 return sessionStorage.sskey;
-            }, function (newVal, oldVal) {
-                authenticationService.checkAuth().success(function (response) {
-                    scope.showTutorial = response.showTutorial;
+            }, function(newVal, oldVal) {
+                authenticationService.checkAuth().then(function(response) {
+                    scope.showTutorial = response.data.showTutorial;
                 });
                 scope.isLogged = sessionStorage.getItem('sskey') || false;
                 scope.username = sessionStorage.getItem('username') || "";
@@ -34,14 +34,14 @@ function navbarDirective(angular, app) {
             function logout() {
                 $rootScope.showSpinner = true;
                 authenticationService.logout()
-                    .success(function () {
+                    .then(function() {
                         $rootScope.showSpinner = false;
-                        setTimeout(function () {
+                        setTimeout(function() {
                             sessionStorage.clear();
                             window.location.href = 'http://tucourier.com.ar/hbr-selfie/';
                         }, 300);
                     })
-                    .error(function (err) {
+                    .error(function(err) {
                         console.log(err);
                     });
 

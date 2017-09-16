@@ -87,8 +87,16 @@ function awbboxService(agular, app) {
             });
         }
 
-        this._deleteAwbBox = function(awbBox) {
+        this._deleteBox = function(awbBox) {
+            return $http.post('./hbr-selfie/dist/php/awb-box/delete_box.php', {
+                id: awbBox.id
+            })
+        }
 
+        this._deleteBill = function(bill) {
+            return $http.post('./hbr-selfie/dist/php/awb-box/delete_bill.php', {
+                id: bill.id
+            })
         }
     }
 }

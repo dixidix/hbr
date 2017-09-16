@@ -13,17 +13,17 @@ function loginController(angular, app) {
         function login() {
             $rootScope.showSpinner = true;
             authenticationService.login(self.user)
-                .success(function(response) {
+                .then(function(response) {
                     if (!response.errors) {
                         console.log(response.data);
-                        sessionStorage.setItem("sskey", response.sskey);
-                        sessionStorage.setItem("isAdmin", response.isAdmin);
-                        sessionStorage.setItem("clientType", response.client_type);
-                        sessionStorage.setItem("clientType", response.client_type);
-                        if(response.company_name || response.warehouse_name){
-                            sessionStorage.username = response.company_name || response.warehouse_name; 
-                        }else{
-                        sessionStorage.username = response.name + " " + response.lastname;
+                        sessionStorage.setItem("sskey", response.data.sskey);
+                        sessionStorage.setItem("isAdmin", response.data.isAdmin);
+                        sessionStorage.setItem("clientType", response.data.client_type);
+                        sessionStorage.setItem("clientType", response.data.client_type);
+                        if (response.data.company_name || response.data.warehouse_name) {
+                            sessionStorage.username = response.data.company_name || response.data.warehouse_name;
+                        } else {
+                            sessionStorage.username = response.data.name + " " + response.data.lastname;
                         }
 
                         self.loginForm.username.$invalid = false;
@@ -39,7 +39,7 @@ function loginController(angular, app) {
                             }
                         }, 100);
                     } else {
-                        self.loginError = response.errors.loginError;
+                        self.loginError = response.data.errors.loginError;
                         self.loginForm.username.$invalid = true;
                         self.loginForm.password.$invalid = true;
                         self.loginForm.$invalid = true;
