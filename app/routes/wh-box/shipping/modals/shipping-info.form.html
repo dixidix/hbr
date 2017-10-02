@@ -1,0 +1,94 @@
+<form class="shipping-box">
+    <div class="row">
+        <div class="form-group col-xs-6">
+            <label class="control-label" for="freight_val">{{:: modalAddShippingBox.lang.form.add.shipping_info.company }}</label>
+            <input readonly type="text" name="freight_val" class="form-control" ng-model="modalAddShippingBox.shippingBox.user.company_real_name" required>
+        </div>
+        <div class="form-group col-xs-6">
+            <label class="control-label" for="shipping_val">{{:: modalAddShippingBox.lang.form.add.shipping_info.cuit }}</label>
+            <input readonly type="text" name="shipping_val" class="form-control" ng-model="modalAddShippingBox.shippingBox.user.idCode" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-xs-6">
+            <label class="control-label" for="freight_val">{{:: modalAddShippingBox.lang.form.add.shipping_info.address }}</label>
+            <input readonly type="text" name="freight_val" class="form-control" ng-model="modalAddShippingBox.shippingBox.user.address" required>
+        </div>
+        <div class="form-group col-xs-6">
+            <label class="control-label" for="shipping_val">{{:: modalAddShippingBox.lang.form.add.shipping_info.city }}</label>
+            <input readonly type="text" name="shipping_val" class="form-control" ng-model="modalAddShippingBox.shippingBox.user.localidad" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-xs-6">
+            <label class="control-label" for="freight_val">{{:: modalAddShippingBox.lang.form.add.shipping_info.postalcode }}</label>
+            <input readonly type="text" name="freight_val" class="form-control" ng-model="modalAddShippingBox.shippingBox.user.postalcode" required>
+        </div>
+        <div class="form-group col-xs-6">
+            <label class="control-label" for="shipping_val">{{:: modalAddShippingBox.lang.form.add.shipping_info.tel }} </label>
+            <input readonly type="text" name="shipping_val" class="form-control" ng-model="modalAddShippingBox.shippingBox.user.tel" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-xs-4">
+            <label class="control-label" for="freight_val">{{:: modalAddShippingBox.lang.form.add.shipping_info.freight }} </label>
+            <input type="text" name="freight_val" class="form-control" ng-model="modalAddShippingBox.shippingBox.freight_val" required>
+        </div>
+        <div class="form-group col-xs-4">
+            <label class="control-label" for="shipping_val">{{:: modalAddShippingBox.lang.form.add.shipping_info.shipping }}</label>
+            <input type="text" name="shipping_val" class="form-control" ng-model="modalAddShippingBox.shippingBox.shipping_val" required>
+        </div>
+        <div class="form-group col-xs-4">
+            <label class="control-label" for="warehouse_val">{{:: modalAddShippingBox.lang.form.add.shipping_info.hbr_wh_val }}</label>
+            <input type="text" name="warehouse_val" class="form-control" ng-model="modalAddShippingBox.shippingBox.warehouse_val" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-xs-4">
+            <label class="control-label" for="aditional_unit">{{:: modalAddShippingBox.lang.form.add.shipping_info.aditional_unit }}</label>
+            <input type="text" name="aditional_unit" ng-change="modalAddShippingBox.shippingBox.aditional_total = modalAddShippingBox.shippingBox.aditional_unit * modalAddShippingBox.shippingBox.aditional_value" class="form-control" ng-model="modalAddShippingBox.shippingBox.aditional_unit"
+                required>
+        </div>
+        <div class="form-group col-xs-4">
+            <label class="control-label" for="aditional_unit">{{:: modalAddShippingBox.lang.form.add.shipping_info.aditional_value }}</label>
+            <input type="text" name="aditional_unit" ng-change="modalAddShippingBox.shippingBox.aditional_total = modalAddShippingBox.shippingBox.aditional_unit * modalAddShippingBox.shippingBox.aditional_value" class="form-control" placeholder="" ng-model="modalAddShippingBox.shippingBox.aditional_value"
+                required>
+        </div>
+        <div class="form-group col-xs-4">
+            <label class="control-label" for="aditional_total">{{:: modalAddShippingBox.lang.form.add.shipping_info.aditional_total }}</label>
+            <input type="text" name="aditional_total" class="form-control" placeholder="" ng-model="modalAddShippingBox.shippingBox.aditional_total" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-xs-6">
+            <label class="control-label" for="tracking">{{:: modalAddShippingBox.lang.form.add.shipping_info.tracking }}</label>
+            <input type="text" name="tracking" class="form-control" placeholder="" ng-model="modalAddShippingBox.shippingBox.tracking" required>
+        </div>
+        <div class="form-group col-xs-6">
+            <label class="control-label" for="provider">{{:: modalAddShippingBox.lang.form.add.shipping_info.provider }}</label>
+            <input type="text" name="provider" class="form-control" placeholder="" ng-model="modalAddShippingBox.shippingBox.provider" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-xs-6">
+            <label for="bill_file" class="control-label">{{:: modalAddShippingBox.lang.form.add.shipping_info.upload_invoice }}</label>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="fa fa-file-pdf-o"></i></span>
+                <input type="file" name="bill_file" id="bill_file" onchange="angular.element(this).scope().getFilename(this)" required ng-model="modalAddShippingBox.shippingBox.bill_file" uploader-model="modalAddShippingBox.shippingBox.bill_file" />
+            </div>
+
+            <div class="help-block">
+                <p class="text-danger" ng-if="modalAddShippingBox.fileError">{{::modalAddShippingBox.bill.fileError}}</p>
+                <p class="text-danger" ng-if="modalAddShippingBox.errors.bills.files.length"><i class="fa fa-warning"></i> {{:: modalAddShippingBox.errors.bills.files}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="footer">
+                <button ng-click="modalAddShippingBox.finish()" style="width:180px" class="btn btn-hbr-steps add-btn">  {{:: modalAddShippingBox.lang.form.add.title }}  </button>
+                <button ng-click="modalAddShippingBox.cancel()" class="btn btn-hbr-steps">  {{:: modalAddShippingBox.lang.form.add.cancelBtn }}  </button>
+            </div>
+        </div>
+    </div>
+</form>

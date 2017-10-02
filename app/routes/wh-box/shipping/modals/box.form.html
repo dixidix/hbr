@@ -1,0 +1,117 @@
+<form id="boxForm" class="box-info" name="modalAddShippingBox.boxForm">
+    <div class="row">
+        <div class="col-xs-12">
+            <label for="company_name">{{::modalAddShippingBox.lang.form.add.company_name.label}}</label>
+            <select ng-disabled="modalAddShippingBox.isEditing == true" ng-change="modalAddShippingBox.getBoxList(modalAddShippingBox.selectedUser)" class="form-control" required ng-options="user.company_name for user in modalAddShippingBox.users track by user.id"
+                name="users" id="users" ng-model="modalAddShippingBox.selectedUser">
+                        <option value="" disabled="disabled">{{::modalAddShippingBox.lang.form.add.company_name.placeholder}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row" style="margin-top:15px;" ng-if="modalAddShippingBox.box_list.length">
+        <div class="col-xs-12">
+            <label for="company_name"><i class="fa fa-cubes"></i> {{::modalAddShippingBox.lang.form.add.box_list.label}}</label><br>
+            <span><i class="fa fa-info"></i> {{::modalAddShippingBox.lang.form.add.box_list.tip}}</span>
+            <div class="search-box">
+                <input ng-disabled="modalAddShippingBox.isEditing" type="text" placeholder="{{::modalAddShippingBox.lang.form.add.box_list.search}}" class="form-control" ng-model="searchTracking">
+                <span class="icon"><i class="fa fa-search"></i></span>
+            </div>
+            <div class="box-list box-list_tracking">
+                <div class="box" data-toggle="collapse" data-target="#list-box" ng-click="modalAddShippingBox.setTrackingBox(box)" ng-class="box.isActive ? 'active':''" ng-repeat="box in modalAddShippingBox.box_list  | filter: searchTracking track by $index">
+                    <i class="fa" ng-class="box.isActive ? 'fa-dropbox':'fa-cube'"></i><br>
+                    <span>Tracking</span><br>
+                    <span>{{::box.tracking}}</span><br>
+                </div>
+            </div>
+            <div id="list-box" class="box-list box-list_boxes collapse">
+                <div class="box" ng-click="modalAddShippingBox.setBox(trackingBox)" ng-class="trackingBox.isActive ? 'active':''" ng-repeat="trackingBox in modalAddShippingBox.trackingBoxes track by $index">
+                    <i class="fa" ng-class="trackingBox.isActive ? 'fa-dropbox':'fa-cube'"></i><br>
+                    <span>{{::modalAddShippingBox.lang.form.add.box_list.box}} N°{{::trackingBox.id}}</span><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="!modalAddShippingBox.box_list.length && modalAddShippingBox.selectedUser.id">
+        <div class="col-xs-12">
+            <h3>{{::modalAddShippingBox.lang.form.add.box_list.empty}}</h3>
+        </div>
+    </div>
+    <div style="margin-top:25px;" ng-if="modalAddShippingBox.selectedTrackingBox && modalAddShippingBox.box_list.length && modalAddShippingBox.selectedUser.id">
+        <div class="col-xs-12 clearfix bills">
+            <h5><i class="fa fa-file"></i> {{::modalAddShippingBox.lang.form.add.bills.title}}</h5>
+            <ul class="col-xs-6" ng-repeat="bill in modalAddShippingBox.box.bills">
+                <li>{{::modalAddShippingBox.lang.form.add.bills.id}}: {{::bill.number }}</li>
+                <li class="text-overflow">{{::modalAddShippingBox.lang.form.add.bills.products}}: {{:: bill.long_desc }}</li>
+                <li>{{::modalAddShippingBox.lang.form.add.bills.weight}}: {{:: bill.weight }} Kg. </li>
+                <li>{{::modalAddShippingBox.lang.form.add.bills.stock}}: {{:: bill.stock }}</li>
+                <li>{{::modalAddShippingBox.lang.form.add.bills.value}}: {{::bill.value | currency }}</li>
+                <li>
+                    <a download="{{::bill.bill_file_name }}" href="/hbr-selfie{{::bill.bill_file_path }} " target="_self ">{{::modalAddShippingBox.lang.form.add.bills.download}} <i class="fa fa-cloud-download "></i></a></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-6">
+                <label class="control-label" for="warehouse">{{::modalAddShippingBox.lang.form.add.warehouse.label}}</label>
+                <input readonly type="text" name="warehouse" class="form-control" placeholder="{{::modalAddShippingBox.lang.form.add.warehouse.placeholder}}" ng-model="modalAddShippingBox.box.warehouse.name" required>
+            </div>
+            <div class="form-group col-xs-6">
+                <label class="control-label" for="provider">{{::modalAddShippingBox.lang.form.add.provider.label}}</label>
+                <input readonly type="text" name="provider" class="form-control" placeholder="{{::modalAddShippingBox.lang.form.add.provider.placeholder}}" ng-model="modalAddShippingBox.box.provider" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-4">
+                <label class="control-label" for="warehouse">{{::modalAddShippingBox.lang.form.add.quantity.label}}</label>
+                <input readonly type="text" name="warehouse" class="form-control" placeholder="{{::modalAddShippingBox.lang.form.add.quantity.placeholder}}" ng-model="modalAddShippingBox.box.quantity" required>
+            </div>
+            <div class="form-group col-xs-4">
+                <label class="control-label" for="box_partial_weight">{{::modalAddShippingBox.lang.form.add.box_weight.label}}</label>
+                <input readonly type="text" name="box_partial_weight" class="form-control" placeholder="{{::modalAddShippingBox.lang.form.add.box_weight.placeholder}}" ng-model="modalAddShippingBox.box.box_partial_weight" required>
+            </div>
+            <div class="form-group col-xs-4">
+                <label class="control-label" for="box_partial_value">{{::modalAddShippingBox.lang.form.add.partial_value.label}}</label>
+                <input readonly type="text" name="box_partial_value" class="form-control" placeholder="{{::modalAddShippingBox.lang.form.add.partial_value.placeholder}}" ng-model="modalAddShippingBox.box.box_partial_value" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-6">
+                <label class="control-label" for="bill">{{::modalAddShippingBox.lang.form.add.created.label}}</label>
+                <input type="text" readonly name="bill" class="form-control" placeholder="{{::modalAddShippingBox.lang.form.add.created.placeholder}}" ng-value="modalAddShippingBox.box.created | date:'dd/MM/yyyy HH:mm'" required>
+            </div>
+            <div class="form-group col-xs-6">
+                <label for="box_warehouse_value">{{::modalAddShippingBox.lang.form.add.warehouse_val.label}}</label>
+                <input readonly name="box_warehouse_value" id="box_warehouse_value" type="text" class="form-control" placeholder="{{::modalAddShippingBox.lang.form.add.warehouse_val.placeholder}}" ng-model="modalAddShippingBox.box.box_warehouse_value">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-4">
+                <label for="aditional_unit_wh">{{::modalAddShippingBox.lang.form.add.aditional_unit_wh.label}}</label>
+                <input id="aditional_unit_wh" readonly name="aditional_unit_wh" type="text" class="form-control" placeholder="{{::modalAddShippingBox.lang.form.add.aditional_unit.placeholder}}" ng-model="modalAddShippingBox.box.aditional_unit">
+            </div>
+            <div class="form-group col-xs-4">
+                <label for="aditional_value_wh">{{::modalAddShippingBox.lang.form.add.aditional_value_wh.label}}</label>
+                <input id="aditional_value_wh" readonly name="modalAddShippingBox" type="text" class="form-control" placeholder="{{::modalAddShippingBox.lang.form.add.aditional_value_wh.placeholder}}" ng-model="modalAddShippingBox.box.aditional_value">
+            </div>
+            <div class="form-group col-xs-4">
+                <label for="aditional_total_wh">{{::modalAddShippingBox.lang.form.add.aditional_total_wh.label}}</label>
+                <input id="aditional_total_wh" name="aditional_total_wh" readonly type="text" class="form-control" placeholder="{{::modalAddShippingBox.lang.form.add.aditional_total_wh.placeholder}}" ng-model="modalAddShippingBox.box.aditional_total">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="footer">
+                    <button ng-if="modalAddShippingBox.box.status != 2" class="btn btn-hbr-steps add-btn" ng-click="modalAddShippingBox.toShippingBox(modalAddShippingBox.box)">
+                        <i class="fa fa-plus"></i> {{::modalAddShippingBox.lang.form.add.add_wh_box}}
+                    </button>
+                    <button ng-if="modalAddShippingBox.box.status == 2" class="btn btn-hbr-steps add-btn" disabled>
+                            <i class="fa fa-plus"></i> {{::modalAddShippingBox.lang.form.add.added_box}}
+                        </button>
+                    <button class="btn btn-hbr-steps add-btn" ng-click="modalAddShippingBox.nextStep($index)">
+                        {{::modalAddShippingBox.lang.form.add.next_step}} <i class="fa fa-chevron-right"></i>
+                    </button>
+                    <button ng-click="modalAddShippingBox.cancel()" class="btn btn-hbr-steps"> {{:: modalAddShippingBox.lang.form.add.cancelBtn }} </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

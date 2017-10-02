@@ -307,46 +307,250 @@
                     cursor: pointer;
                 }
             }
-            .add-to-box {
-                margin: 0;
-                padding: 0;
-                .popover-content {
-                    padding: 0;
+            .bills {
+                min-height: 140px;
+                padding: 5px 10px;
+                margin-top: 10px;
+                background: rgba(0, 0, 0, 0.05);
+                border-radius: 5px;
+                border: 1px solid $hbr-blue;
+                margin: 25px 0px;
+            }
+            .search-box {
+                input {
+                    border-radius: 5px 5px 0px 0px;
+                    height: 35px;
+                    border-bottom: 0;
+                    margin-bottom: 0;
+                    padding-left: 35px;
                 }
-                .arrow:after {
-                    border-top-color: transparent;
+                .icon {
+                    position: absolute;
+                    top: 53px;
+                    left: 30px;
+                    color: lightgray;
                 }
-                .add-to-box-title {
-                    width: 100%;
-                    padding: 10px 15px;
-                    font-size: 14px;
-                    color: gray;
-                    input {
-                        padding-left: 5px;
-                        margin-top: 15px;
+            }
+            .box-list {
+                display: flex;
+                max-height: 100px;
+                flex-direction: row;
+                border: 1px solid $hbr-blue;
+
+                overflow: hidden;
+                overflow-x: auto;
+                &_tracking {
+                    border-bottom: 0;
+                }
+                &_boxes {
+                    border-radius: 0px 0px 5px 5px;
+                    &.collapse {
+                        border-top: 0;
+                    }
+                    &.collapse.in{
+                        border-top: 1px solid $hbr-blue;
                     }
                 }
-                .add-to-box-body {
+                .box {
+                    cursor: pointer;
+                    text-align: center;
+                    margin: 10px 20px;
+                    min-width: 200px;
+                    width: 200px;
+                    text-align: center;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    max-width: 200px;
+                    i {
+                        color: darken($hbr-light-purple, 30%);
+                        font-size: 18px;
+                    }
+                    &.active {
+                        i {
+                            color: darken($hbr-green, 10%);
+                        }
+                        span {
+                            font-weight: bold;
+                        }
+                    }
+                    span {
+                        min-width: 50px;
+                        width: 50px;
+                        font-size: 14px;
+                    }
+                    &:first-child {
+                        margin-left: 5px;
+                    }
+                }
+            }
+            .nav-tabs {
+                margin-top: 30px;
+                li {
+                    z-index: 0;
+                }
+                .nav-link {
+                    z-index: 0;
+                    font-size: 14px;
+                    border: 1px solid $hbr-blue;
+                    color: $hbr-blue;
+                    background: #e8e8e8;
+                    &:hover,
+                    &:focus,
+                    &:active,
+                    &:active:focus {
+                        border: 1px solid $hbr-blue;
+                    }
+                    .steps {
+                        text-decoration: underline;
+                        font-weight: bold;
+                    }
+                }
+                .active {
+                    .nav-link {
+                        border: 1px solid $hbr-blue;
+                        border-bottom: none;
+                        background: white;
+                        &:hover,
+                        &:focus,
+                        &:active,
+                        &:active:focus {
+                            border: 1px solid $hbr-blue;
+                            border-bottom: none;
+                        }
+                    }
+                }
+                .uib-tab {
+                    &.disabled {
+                        .nav-link {
+                            background: #7a8699;
+                            color: white;
+                        }
+                    }
+                }
+            }
+            .tab-pane {
+                padding: 25px 25px 0px 25px;
+                border: 1px solid $hbr-blue;
+                border-top: none;
+                margin-top: -1px;
+                margin-right: 0px;
+                border-radius: 0px 0px 4px 4px;
+                .footer {
+                    width: 100%;
+                    margin-top: 15px;
+                    border-top: 1px solid $hbr-blue;
+                    padding-top: 15px;
                     display: flex;
                     flex-direction: row;
-                    .btn-flat {
-                        @include btn-flat(50%, 30px);
-                        &-danger {
-                            border-radius: 0px 0px 0px 5px;
-                            transition: all 0.2s ease-in-out;
-                            &:hover {
-                                background-color: darken($hbr-red, 5%);
+                    justify-content: flex-end;
+                    .add-btn {
+                        margin-right: 15px;
+                    }
+                }
+            }
+            .tab-content {
+                margin-bottom: 30px;
+            }
+            form {
+                width: 100%;
+                padding: 15px;
+                &.box-info {
+                    min-height: 350px;
+                    .btn-hbr-steps {
+                        @include hbr-btn-blue(120px, 35px, $hbr-green);
+                        font-size: 14px;
+                        line-height: 16px;
+                        padding: 0px;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                        align-content: center;
+                        .fa {
+                            margin: 0px 5px;
+                        }
+                    }
+                }
+                &.shipping-box {
+                    .btn-hbr-green {
+                        @include hbr-btn-green(auto, 40px, $hbr-blue);
+                        border: 1px solid $hbr-blue;
+                        font-size: 13px;
+                        padding: 10px 30px;
+                        margin-top: 15px;
+                    }
+                    .box {
+                        .delete {
+                            font-size: 15px;
+                            color: red;
+                            position: absolute;
+                            top: 5px;
+                            right: 15px;
+                            cursor: pointer;
+                        }
+                        position: relative;
+                        text-align: center;
+                        margin: 10px 20px;
+                        min-width: 75px;
+                        padding: 15px 0px;
+                        width: 75px;
+                        text-align: center;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        max-width: 75px;
+                        i {
+                            color: darken($hbr-light-purple, 30%);
+                            font-size: 20px;
+                        }
+                        &.active {
+                            i {
+                                color: darken($hbr-green, 10%);
+                            }
+                            span {
+                                font-weight: bold;
                             }
                         }
-                        &-default {
-                            border-radius: 0px 0px 5px 0px;
-                            transition: all 0.2s ease-in-out;
-                            background-color: $hbr-light-purple;
-                            color: white;
-                            &:hover {
-                                background-color: darken($hbr-light-purple, 5%);
-                            }
+                        span {
+                            min-width: 50px;
+                            width: 50px;
+                            font-size: 14px;
                         }
+                        &:first-child {
+                            margin-left: 5px;
+                        }
+                    }
+                    input[type="file"]::-webkit-file-upload-button {
+                        &,
+                        &:active,
+                        &:focus,
+                        &:active:focus,
+                        &:hover {
+                            background-color: $hbr-green;
+                            border: 1px solid $hbr-blue;
+                            color: $hbr-blue;
+                            width: 200px;
+                            height: 40px;
+                            outline: 0;
+                            padding: 0.4em 1em;
+                            font-family: $roboto;
+                        }
+                        &:hover {
+                            background-color: lighten($hbr-green, 5%);
+                            cursor: pointer;
+                        }
+                    }
+                    .btn-hbr-blue {
+                        @include hbr-btn-blue(auto, 40px, $hbr-green);
+                        font-size: 13px;
+                        padding: 10px 30px;
+                        margin-top: 15px;
+                    }
+                    .btn-hbr-steps {
+                        @include hbr-btn-blue(120px, 35px, $hbr-green);
+                        font-size: 14px;
+                        line-height: 16px;
+                        padding: 0px;
+                        margin-left: 5px;
                     }
                 }
             }

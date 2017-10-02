@@ -101,10 +101,10 @@
                 </a>
             </div>
             <div ng-if="dashboard.clientType !== 0 || dashboard.isAdmin == 1">
-                <a href="" ui-sref="dashboard.awb-box" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Box Airway bill">
+                <a href="" ui-sref="dashboard.awb-box" ng-if="dashboard.collapse && dashboard.clientType == 1" tooltip-placement="right" uib-tooltip="Box Airway bill">
                     <li><i class="fa fa-cube"></i></li>
                 </a>
-                <a href="" ui-sref="dashboard.awb-box" ng-if="!dashboard.collapse">
+                <a ng-if="dashboard.clientType == 1" href="" ui-sref="dashboard.awb-box" ng-if="!dashboard.collapse">
                     <li><i class="fa fa-cube"></i><span>Box Airway bill </span></li>
                 </a>
                 <a href="" ui-sref="dashboard.stock_rooms" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="Stock Rooms">

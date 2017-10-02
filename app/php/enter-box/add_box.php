@@ -15,15 +15,8 @@ foreach($_POST as $key=>$value) {
 }
 
 if(empty($errors)){
-    MysqliDB::getInstance()->query("INSERT INTO `awb_boxes`(`uid`,`tracking`,`provider`, `stock`, `remaining`, `value`, `weight`, `whId`, `created`) VALUES (".$uid.",'".$tracking."','".$provider."', ".(int) $stock.",".(int) $stock.", ".(float) $box_value.",  ". (float) $weight.",".$whId.", '".$created."')");
-    $res = MysqliDB::getInstance()->query("SELECT MAX(id) as id FROM `awb_boxes`");		
-    $rows = mysqli_num_rows($res);
-
-    if ($rows > 0){
-        $rss = $res->fetch_array(MYSQLI_ASSOC);
-        $resolve_data['boxId'] = $rss['id'];	
-
-    }
+    MysqliDB::getInstance()->query("INSERT INTO `awb_enter_box`(`awb_boxes_id`,`quantity`,`weight`, `value`, `descrip`, `created`,`aditional_unit`,`aditional_value`,`aditional_total`,`box_warehouse_value`) VALUES (".$id.",'".$quantity."', ".(float) $box_weight.",".(float) $box_value.",'".$long_desc."', '".$created."',".(int) $aditional_unit.",".(float) $aditional_value.",".(float) $aditional_total.",".(float) $box_warehouse_value.")");
+    MysqliDB::getInstance()->query("UPDATE `awb_boxes` SET `remaining`=".(int)$remaining." WHERE `id` = ".(int)$id."");
     $resolve_data['success'] = true;	
     MysqliDB::getInstance()->close();
     echo json_encode($resolve_data);

@@ -14,7 +14,7 @@ function loginController(angular, app) {
             $rootScope.showSpinner = true;
             authenticationService.login(self.user)
                 .then(function(response) {
-                    if (!response.errors) {
+                    if (!response.data.errors) {
                         console.log(response.data);
                         sessionStorage.setItem("sskey", response.data.sskey);
                         sessionStorage.setItem("isAdmin", response.data.isAdmin);
@@ -46,7 +46,7 @@ function loginController(angular, app) {
                         $rootScope.showSpinner = false;
                     }
                 })
-                .error(function(err) {
+                .catch(function(err) {
                     console.log(err);
                 });
         }

@@ -36,6 +36,7 @@
                     "id": "N° Factura",
                     "products": "Descripción",
                     "download": "Descargar",
+                    "weight": "Peso",
                     "stock": "Cantidad",
                     "value": "Valor"
                 },
@@ -63,6 +64,10 @@
                     "label": "Proveedor postal (*)",
                     "placeholder": "Proveedor postal"
                 },
+                "tracking": {
+                    "label": "Código de seguimiento (*)",
+                    "placeholder": "Código de Seguimiento"
+                },
                 "weight": {
                     "label": "Peso total(Kg.)",
                     "placeholder": "Peso en kg"
@@ -70,10 +75,6 @@
                 "stock": {
                     "label": "Cant. total de productos (*)",
                     "placeholder": "Cant. total de productos adquiridos"
-                },
-                "tracking": {
-                    "label": "Tracking (*)",
-                    "placeholder": "Código de tracking"
                 },
                 "value": {
                     "label": "Valor total en Dólares (*)",
@@ -86,8 +87,8 @@
                         "placeholder": "Número de factura"
                     },
                     "value": {
-                        "label": "Valor total en Dólares (*)",
-                        "placeholder": "valor total de la factura en dólares"
+                        "label": "Monto total en Dólares (*)",
+                        "placeholder": "Monto total de la factura en dólares"
                     },
                     "weight": {
                         "label": "Peso total de Factura (Solo si lo conoces) (Kg.)",
@@ -107,8 +108,8 @@
                     "button": "Agregar factura"
                 },
                 "warehouse": {
-                    "label": "Warehouse (*)",
-                    "placeholder": "-- Selecciona un Warehouse --"
+                    "label": "Depósito donde desea envíar la mercaderia (*)",
+                    "placeholder": "-- Selecciona un depósito --"
                 },
                 "submitBtn": "Enviar",
                 "editButton": "Editar",
@@ -120,7 +121,36 @@
                 "title": "Editar Caja"
             },
             "errors": {
-                "required": "Los campos con (*) son requeridos"
+                "required": "Los campos con (*) son requeridos",
+                "provider": {
+                    "required": "El campo Proveedor Postal es Requerido."
+                },
+                "tracking": {
+                    "required": "El campo Código de Seguimiento es Requerido."
+                },
+                "warehouse": {
+                    "required": "Debe seleccionar un depósito al cual desea enviar la mercadería."
+                },
+                "billsQty": {
+                    "required": "Debe agregar al menos una factura."
+                },
+                "bills": {
+                    "number": {
+                        "required": "El número de factura es Requerido."
+                    },
+                    "value": {
+                        "required": "El monto total de la factura es Requerido."
+                    },
+                    "long_desc": {
+                        "required": "Debe agregar una descripción de los productos de la factura."
+                    },
+                    "stock": {
+                        "required": "debe agregar la cantidad de productos que contiene la factura."
+                    },
+                    "files": {
+                        "required": "Debe agregar un archivo pdf o imágen de la factura enviada por la tienda de compras."
+                    }
+                }
             }
         }
     },
@@ -161,6 +191,7 @@
                     "id": "Bill Number",
                     "products": "Description",
                     "download": "Download",
+                    "weight": "Weight",
                     "stock": "stock",
                     "value": "Value"
                 },
@@ -250,11 +281,41 @@
                 "processLbl": "Adding box",
                 "required": "Fields with (*) are required."
             },
+
             "edit": {
                 "title": "Edit box"
             },
             "errors": {
-                "required": "Fields with (*) are required"
+                "required": "All fields with (*) are required",
+                "provider": {
+                    "required": "you must add a postal provider"
+                },
+                "tracking": {
+                    "required": "you must add a tracking code for your delivery"
+                },
+                "warehouse": {
+                    "required": "you must add a warehouse where you want to send your products."
+                },
+                "billsQty": {
+                    "required": "you must add at least one bill to the box."
+                },
+                "bills": {
+                    "number": {
+                        "required": "Bill number is required."
+                    },
+                    "value": {
+                        "required": "Total bill value is required."
+                    },
+                    "long_desc": {
+                        "required": "You must add a description for the products in your bill."
+                    },
+                    "stock": {
+                        "required": "you must add the quantity of products you have in your bill."
+                    },
+                    "files": {
+                        "required": "You must upload a pdf or image of the bill that the store sent to you."
+                    }
+                }
             }
         }
     }

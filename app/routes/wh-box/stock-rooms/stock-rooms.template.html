@@ -3,12 +3,12 @@
     <h3> <i class="fa fa-cubes"></i> {{::stockRooms.lang.room.title}}</h3>
     <hr>
     <div class="action-menu">
-        <div ng-if="stockRooms.isAdmin == 0" class="col-xs-2">
+        <div ng-if="stockRooms.isAdmin == 1 || stockRooms.clientType == 2" class="col-xs-2">
             <div class="input-group">
                 <button class="btn btn-hbr-blue" ng-click="stockRooms.addBox()"><i class="fa fa-plus"></i>{{::stockRooms.lang.room.filter.add}}</button>
             </div>
         </div>
-        <div ng-class="stockRooms.isAdmin == 1 ? 'col-xs-12': 'col-xs-10'">
+        <div class="col-xs-10">
             <div class="input-group">
                 <input id="{{filterField}}" type="text" class="form-control" placeholder="{{::stockRooms.lang.room.filter.placeholder}}" ng-model="stockRooms.searchBy">
                 <span class="input-group-btn">
@@ -18,10 +18,13 @@
                 <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
                     <li ng-if="stockRooms.isAdmin == 1" role="menuitem"><a ng-click="stockRooms.setFilter('company_name', stockRooms.lang.room.filter.list.client_name)">{{::stockRooms.lang.room.filter.list.client_name}}</a></li>
                     <li role="menuitem"><a ng-click="stockRooms.setFilter('id',stockRooms.lang.room.filter.list.box_id)">{{::stockRooms.lang.room.filter.list.box_id}}</a></li>
+                    <li role="menuitem"><a ng-click="stockRooms.setFilter('awb_boxes_id',stockRooms.lang.room.filter.list.awb_boxes_id)">{{::stockRooms.lang.room.filter.list.awb_boxes_id}}</a></li>
                     <li role="menuitem"><a ng-click="stockRooms.setFilter('bill',stockRooms.lang.room.filter.list.bill)">{{::stockRooms.lang.room.filter.list.bill}}</a></li>
                     <li role="menuitem"><a ng-click="stockRooms.setFilter('warehouse_name', 'Warehouse')">Warehouse</a></li>
                     <li role="menuitem"><a ng-click="stockRooms.setFilter('ageGreater', stockRooms.lang.room.filter.list.age_greater)">{{::stockRooms.lang.room.filter.list.age_greater}}</a></li>
                     <li role="menuitem"><a ng-click="stockRooms.setFilter('ageLess', stockRooms.lang.room.filter.list.age_less)">{{::stockRooms.lang.room.filter.list.age_less}}</a></li>
+                    <li role="menuitem"><a ng-click="stockRooms.setFilter('status', stockRooms.lang.room.filter.list.status); stockRooms.searchBy = stockRooms.lang.room.filter.list.status_finished"> {{::stockRooms.lang.room.filter.list.status}}: {{::stockRooms.lang.room.filter.list.status_finished}}</a></li>
+                    <li role="menuitem"><a ng-click="stockRooms.setFilter('status', stockRooms.lang.room.filter.list.status); stockRooms.searchBy = stockRooms.lang.room.filter.list.status_inprogress">{{::stockRooms.lang.room.filter.list.status}}: {{::stockRooms.lang.room.filter.list.status_inprogress}}</a></li>
                     <li role="menuitem"><a ng-click="stockRooms.setFilter('', stockRooms.lang.room.filter.default)">{{::stockRooms.lang.room.filter.list.remove}}</a></li>
                 </ul>
             </div>
@@ -47,25 +50,25 @@
     <div class="stock-card col-xs-4" ng-repeat="box in stockRooms.filteredBoxes track by $index" ng-if="stockRooms.filteredBoxes.length">
         <div class="stock-card__header">
             <h4>Box #{{box.id}}</h4>
-            <h4 ng-if="stockRooms.isAdmin == 1">{{box.user.company_name}}</h4>
-            <h4 ng-if="(stockRooms.isAdmin != 1 && box.status == 0) || stockRooms.isAdmin == 1">
+            <h4 ng-if="box.status == 0">
+                <i style="color:#8388A4" uib-popover-template="'finish-box.html'" popover-class="help  delete-box" popover-placement="top" data-toggle="popover" popover-trigger="outsideClick" class="fa fa-mail-forward"></i>
                 <i ng-click="stockRooms.editBox(box, $index)" class="fa fa-pencil"></i>
                 <i style="color:#ED5E68" uib-popover-template="'delete-box.html'" popover-class="help  delete-box" popover-placement="top" data-toggle="popover" popover-trigger="outsideClick" class="fa fa-close"></i>
             </h4>
-            <h4 style="color:#8388A4" ng-if="stockRooms.isAdmin != 1 && box.status != 0">
-                {{::stockRooms.lang.box.processing}} <i class="fa fa-gears"></i>
+            <h4 ng-if="box.status == 1">
+                <i style="color:#ED5E68" class="fa fa-check"></i>
             </h4>
         </div>
         <ul class="stock-card__data">
-            <li><b>{{::stockRooms.lang.box.bill}}:</b> {{box.bill}}</li>
+            <li><b> <i class="fa fa-user"></i> {{box.user.company_name}}</b></li>
             <li><b>{{::stockRooms.lang.box.age}}:</b> {{box.age}} {{::stockRooms.lang.box.age_unit}}</li>
             <li><b>{{::stockRooms.lang.box.created}}:</b> {{ box.created | date : "dd/MM/yyyy HH:mm" }}</li>
-            <li><b>{{::stockRooms.lang.box.short_desc}}:</b> {{box.short_desc}}</li>
+            <li><b>Awb Box:</b> #{{box.awb_boxes_id}}</li>
             <li><b>Warehouse:</b> {{box.warehouse.name}}</li>
         </ul>
         <div class="stock-card__footer">
-            <span>{{::stockRooms.lang.box.weight}}: <span ng-bind="box.box_weight > 0 ? box.box_weight + ' Kg.' : stockRooms.lang.box.processing"> </span></span>
-            <span>Stock: {{box.box_stock}}</span>
+            <span>{{::stockRooms.lang.box.weight}}: <span ng-bind="box.box_partial_weight > 0 ? box.box_partial_weight + ' Kg.' : stockRooms.lang.box.processing"> </span></span>
+            <span>Stock: {{box.quantity}}</span>
             <span><i class="fa" popover-is-open="isOpen" ng-class="!isOpen ? 'fa-search' : 'fa-close'" uib-popover-template="'stock-card-info.html'" popover-class="help" popover-placement="top" data-toggle="popover" popover-trigger="outsideClick"></i></span>
         </div>
     </div>
@@ -88,6 +91,20 @@
     <div class="col-xs-12 no-padding delete-body">
         <button class="btn-flat btn-flat-danger" ng-click="stockRooms.deleteBox($index, box)">
         {{:: stockRooms.lang.box.delete.confirm }}
+        </button>
+
+        <button class="btn-flat btn-flat-default" ng-click="stockRooms.cancelDeleteBox()">
+         {{:: stockRooms.lang.box.delete.cancel }}
+         </button>
+    </div>
+</script>
+<script type="text/ng-template" id="finish-box.html">
+    <div class="col-xs-12 delete-title">
+        {{:: stockRooms.lang.box.finish.msg }}
+    </div>
+    <div class="col-xs-12 no-padding delete-body">
+        <button class="btn-flat btn-flat-success" ng-click="stockRooms.finishBox($index, box)">
+        {{:: stockRooms.lang.box.finish.confirm }}
         </button>
 
         <button class="btn-flat btn-flat-default" ng-click="stockRooms.cancelDeleteBox()">

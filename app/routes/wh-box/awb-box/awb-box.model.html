@@ -15,15 +15,16 @@
     <ul>
         <li>{{::lang.awb.body.provider}}: {{::box.provider }} </li>
         <li>{{::lang.awb.body.warehouse}}: {{::box.warehouse.name }} </li>
-        <li>{{::lang.awb.body.track_number}}: {{::box.tracking }} </li>
+        <li class="text-overflow">{{::lang.awb.body.track_number}}: {{::box.tracking }} </li>
         <li>{{::lang.awb.body.created}}: {{::box.created | date : 'dd/MM/yyyy HH:mm'}} </li>
         <li>{{::lang.awb.body.stock}}: {{::box.box_stock}} </li>
-        <li><a style="cursor:pointer;" ng-click="navigate(box)"> {{::lang.awb.body.search_box}} <i class="fa fa-search"></i></a> </li>
+        <li ng-if="box.status == 2"><a style="cursor:pointer;" ng-click="navigate(box)"> {{::lang.awb.body.search_box}} <i class="fa fa-search"></i></a> </li>
         <li class="clearfix bills">
             <h5><i class="fa fa-file"></i> {{::lang.awb.body.bill.title}}</h5>
             <ul class="col-xs-6" ng-repeat="bill in box.bills track by $index">
                 <li>{{::lang.awb.body.bill.id}}: {{::bill.number }}</li>
-                <li>{{::lang.awb.body.bill.products}}: {{:: bill.long_desc }}</li>
+                <li class="text-overflow">{{::lang.awb.body.bill.products}}: {{:: bill.long_desc }}</li>
+                <li>{{::lang.awb.body.bill.weight}}: {{:: bill.weight }} Kg. </li>
                 <li>{{::lang.awb.body.bill.stock}}: {{:: bill.stock }}</li>
                 <li>{{::lang.awb.body.bill.value}}: {{::bill.value | currency }}</li>
                 <li>

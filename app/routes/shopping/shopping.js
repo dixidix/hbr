@@ -12,12 +12,12 @@ function shoppingController(angular, app) {
         var self = this; //jshint ignore:line
         function get_userdata() {
             $http.get('./hbr-selfie/dist/php/users.php', {
-                params: {
-                    sskey: sessionStorage.getItem('sskey'),
-                    action: "getUserBySskey"
-                }
-            })
-                .then(function (response) {
+                    params: {
+                        sskey: sessionStorage.getItem('sskey'),
+                        action: "getUserBySskey"
+                    }
+                })
+                .then(function(response) {
                     self.lote.user = response.data;
                 });
         }
@@ -33,12 +33,12 @@ function shoppingController(angular, app) {
             self.lote.total_quantity = 0;
             self.lote.venta_state = 1;
             self.lote.status = "Finalizado";
-            angular.forEach(self.lote.bills, function (k, v) {
+            angular.forEach(self.lote.bills, function(k, v) {
                 self.lote.total_price = parseFloat(self.lote.total_price) + parseFloat(k.total_price);
                 self.lote.parcial_price = parseFloat(self.lote.parcial_price) + parseFloat(k.total_price);
                 self.lote.total_weight = parseFloat(self.lote.total_weight) + parseFloat(k.total_weight);
                 self.lote.total_quantity = parseInt(self.lote.total_quantity) + parseInt(k.quantity);
-                angular.forEach(k.products, function (key, val) {
+                angular.forEach(k.products, function(key, val) {
                     key.categoryId = parseInt(key.category.category_id);
                 });
             });
@@ -62,20 +62,20 @@ function shoppingController(angular, app) {
                     total_remaining_quantity: total_remaining_quantity,
                     method: "POST"
                 })
-                .success(function (response) {
-                    if (response.success) {
+                .then(function(response) {
+                    if (response.data.success) {
                         self.response = response;
                         var sequence = $q.defer();
                         sequence.resolve();
                         sequence = sequence.promise;
-                        angular.forEach(self.lote.bills, function (bill) {
+                        angular.forEach(self.lote.bills, function(bill) {
                             if (whEmail.indexOf(bill.warehouse.email) == -1) {
                                 whEmail.push(bill.warehouse.email);
                             }
-                            sequence = sequence.then(function () {
+                            sequence = sequence.then(function() {
                                 return uploadService.uploadBills(bill, response.ventaId, self.lote.user.id, new Date().getTime())
-                                    .success(function (response) {
-                                        angular.forEach(bill.products, function (product) {
+                                    .then(function(response) {
+                                        angular.forEach(bill.products, function(product) {
                                             product.bill_id = response.bill_id;
                                             product.userId = self.lote.user.id;
                                             uploadService.uploadProducts(product);
@@ -83,15 +83,15 @@ function shoppingController(angular, app) {
                                     });
                             });
                         });
-                        $q.all(sequence).then(function () {
+                        $q.all(sequence).then(function() {
                             $http.post('./hbr-selfie/dist/php/solicitud_venta.php', {
                                 lote: self.response.lote,
                                 date: self.response.date,
                                 email: self.response.email,
                                 name: self.response.name + " " + self.response.lastname,
                                 whEmail: whEmail
-                            }).success(function (response) {
-                                setTimeout(function () {
+                            }).then(function(response) {
+                                setTimeout(function() {
                                     $state.go('dashboard.shopping_list', {}, { reload: true });
                                     self.spinner = false;
                                 }, 2000);
@@ -113,13 +113,13 @@ function shoppingController(angular, app) {
             self.lote.total_quantity = 0;
             self.lote.venta_state = 0;
             self.lote.status = "En Curso";
-            angular.forEach(self.lote.bills, function (k, v) {
+            angular.forEach(self.lote.bills, function(k, v) {
                 k.bill_state = 1;
                 self.lote.total_price = parseFloat(self.lote.total_price) + parseFloat(k.total_price);
                 self.lote.parcial_price = parseFloat(self.lote.parcial_price) + parseFloat(k.total_price);
                 self.lote.total_weight = parseFloat(self.lote.total_weight) + parseFloat(k.total_weight);
                 self.lote.total_quantity = parseInt(self.lote.total_quantity) + parseInt(k.quantity);
-                angular.forEach(k.products, function (key, val) {
+                angular.forEach(k.products, function(key, val) {
                     key.categoryId = parseInt(key.category.category_id);
                 });
             });
@@ -143,20 +143,20 @@ function shoppingController(angular, app) {
                     total_remaining_quantity: total_remaining_quantity,
                     method: "POST"
                 })
-                .success(function (response) {
+                .then(function(response) {
                     if (response.success) {
                         self.response = response;
                         var sequence = $q.defer();
                         sequence.resolve();
                         sequence = sequence.promise;
-                        angular.forEach(self.lote.bills, function (bill) {
+                        angular.forEach(self.lote.bills, function(bill) {
                             if (whEmail.indexOf(bill.warehouse.email) == -1) {
                                 whEmail.push(bill.warehouse.email);
                             }
-                            sequence = sequence.then(function () {
+                            sequence = sequence.then(function() {
                                 return uploadService.uploadBills(bill, response.ventaId, self.lote.user.id, new Date().getTime())
-                                    .success(function (response) {
-                                        angular.forEach(bill.products, function (product) {
+                                    .then(function(response) {
+                                        angular.forEach(bill.products, function(product) {
                                             product.bill_id = response.bill_id;
                                             product.userId = self.lote.user.id;
                                             uploadService.uploadProducts(product);
@@ -164,15 +164,15 @@ function shoppingController(angular, app) {
                                     });
                             });
                         });
-                        $q.all(sequence).then(function () {
+                        $q.all(sequence).then(function() {
                             $http.post('./hbr-selfie/dist/php/solicitud_venta.php', {
                                 lote: self.response.lote,
                                 date: self.response.date,
                                 email: self.response.email,
                                 name: self.response.name + " " + self.response.lastname,
                                 whEmail: whEmail
-                            }).success(function (response) {
-                                setTimeout(function () {
+                            }).then(function(response) {
+                                setTimeout(function() {
                                     $state.go('dashboard.shopping_list', {}, { reload: true });
                                     self.spinner = false;
                                 }, 2000);
@@ -199,26 +199,27 @@ function shoppingController(angular, app) {
             var msg = "Recuerde que tiene 7 dias para seguir comprando dentro de este lote de compra. A la vez hasta que el lote no este cerrado sus envíos no serán despachados a su domicilio. Ante la necesidad de despachar el lote puede optar por finalizar la compra e iniciar una compra nueva.";
             confirm(title, msg);
 
-            $scope.confirmAccept = function () {
+            $scope.confirmAccept = function() {
                 self.updateSave();
                 self.confirmModal.dismiss('cancel');
             }
 
-            $scope.confirmCancel = function () {
+            $scope.confirmCancel = function() {
                 self.confirmModal.dismiss('cancel');
             }
         }
+
         function confirmFinish() {
             var title = "Finalizar Compra";
             var msg = "Esta seguro que desea finalizar la compra? al finalizar la compra ya no podrá seguir agregando facturas al lote de compras, ni eliminar / editar el mismo.";
             confirm(title, msg);
 
-            $scope.confirmAccept = function () {
+            $scope.confirmAccept = function() {
                 self.finish();
                 self.confirmModal.dismiss('cancel');
             }
 
-            $scope.confirmCancel = function () {
+            $scope.confirmCancel = function() {
                 self.confirmModal.dismiss('cancel');
             }
         }
@@ -226,20 +227,20 @@ function shoppingController(angular, app) {
         function get_categories() {
             categoryService
                 .get_categories()
-                .success(function (data) {
+                .then(function(data) {
                     self.categories = data.category_list;
 
                     if (self.lote.bills.length > 0) {
-                        angular.forEach(self.lote.bills, function (bill) {
+                        angular.forEach(self.lote.bills, function(bill) {
                             if (bill.products.length > 0) {
-                                angular.forEach(bill.products, function (product) {
+                                angular.forEach(bill.products, function(product) {
                                     product.category = $filter('filter')(self.categories, { category_id: product.category_id })[0];
                                 });
                             }
                         });
                     }
                 })
-                .error(function (error) {
+                .catch(function(error) {
                     console.log(error);
                 });
         }
@@ -249,7 +250,7 @@ function shoppingController(angular, app) {
                 params: {
                     action: 'getAll'
                 }
-            }).then(function (response) {
+            }).then(function(response) {
                 self.warehouses = response.data.warehouses;
             });
         }
@@ -275,7 +276,7 @@ function shoppingController(angular, app) {
                     self.bill.total_price = 0.00;
                     self.bill.total_weight = 0.00;
                     self.bill.quantity = 0;
-                    angular.forEach(self.bill.products, function (product) {
+                    angular.forEach(self.bill.products, function(product) {
                         self.bill.total_price = (parseFloat(parseFloat(self.bill.total_price) + parseFloat(product.price) * parseInt(product.quantity)).toFixed(2)) || 0.00;
                         self.bill.total_weight = (parseFloat(parseFloat(self.bill.total_weight || 0) + (parseFloat(product.weight || 0) * parseInt(product.quantity))).toFixed(2)) || 0.00;
                         self.bill.quantity = parseInt(parseInt(self.bill.quantity) + parseInt(product.quantity)) || 0;
@@ -297,7 +298,7 @@ function shoppingController(angular, app) {
             self.bill.total_price = 0;
             self.bill.total_weight = 0;
             self.bill.quantity = 0;
-            angular.forEach(self.bill.products, function (item, index) {
+            angular.forEach(self.bill.products, function(item, index) {
                 self.bill.total_price = parseFloat(parseFloat(self.bill.total_price) + (parseFloat(item.price) * parseInt(item.quantity))).toFixed(2) || 0.00;
                 self.bill.total_weight = (parseFloat(parseFloat(self.bill.total_weight || 0) + (parseFloat(item.weight || 0) * parseInt(item.quantity))).toFixed(2)) || 0.00;
                 self.bill.quantity = parseInt(parseInt(self.bill.quantity) + parseInt(item.quantity)) || 0;
@@ -331,7 +332,7 @@ function shoppingController(angular, app) {
 
                 self.aux_product = {};
                 $('.notification').show();
-                setTimeout(function () {
+                setTimeout(function() {
                     $('.notification').hide();
                 }, 3500);
 
@@ -356,13 +357,13 @@ function shoppingController(angular, app) {
             self.bill = bill;
             self.bill.whId = bill.warehouse[0] || bill.warehouse;
 
-            angular.forEach(bill.products, function (key, val) {
+            angular.forEach(bill.products, function(key, val) {
                 key.category = $filter('filter')(self.categories, { category_id: key.category_id })[0];
                 key.total_weight = (parseFloat(key.weight) * parseInt(key.quantity));
                 key.total_price = (parseFloat(key.price) * parseInt(key.quantity));
             });
             self.collapse_purchase = false;
-            setTimeout(function () {
+            setTimeout(function() {
                 $('html, body').animate({ scrollTop: $("#product-info").offset().top }, 100);
             });
         }
@@ -379,7 +380,7 @@ function shoppingController(angular, app) {
 
         function showBills() {
             self.collapse_list = false;
-            setTimeout(function () {
+            setTimeout(function() {
                 $('html, body').animate({ scrollTop: $("#billList").offset().top }, 100);
             }, 200);
         }
@@ -395,7 +396,7 @@ function shoppingController(angular, app) {
                     self.bill.total_price = 0.00;
                     self.bill.total_weight = 0.00;
                     self.bill.quantity = 0;
-                    angular.forEach(self.bill.products, function (product) {
+                    angular.forEach(self.bill.products, function(product) {
                         if (product.product_id === self.aux_product.product_id) {
                             product = self.aux_product;
                         }
@@ -421,7 +422,7 @@ function shoppingController(angular, app) {
             self.lote.total_weight = 0.00;
             self.lote.total_quantity = 0;
 
-            angular.forEach(self.lote.bills, function (bill) {
+            angular.forEach(self.lote.bills, function(bill) {
                 if (bill.bill_id === self.bill.bill_id) {
                     bill = self.bill;
                 }
@@ -437,7 +438,7 @@ function shoppingController(angular, app) {
             self.lote.total_price = 0.00;
             self.lote.total_quantity = 0;
             self.lote.total_weight = 0.00;
-            angular.forEach(self.lote.bills, function (bill) {
+            angular.forEach(self.lote.bills, function(bill) {
                 self.lote.total_price = (parseFloat(self.lote.total_price) + parseFloat(bill.total_price)).toFixed(2);
                 self.lote.total_quantity = parseInt(self.lote.total_quantity) + parseInt(bill.quantity);
                 self.lote.total_weight = (parseFloat(self.lote.total_weight) + parseFloat(bill.total_weight)).toFixed(2);
@@ -448,16 +449,16 @@ function shoppingController(angular, app) {
             self.bill.warehouse = self.bill.whId;
             self.bill.whId = self.bill.whId.id;
             uploadService.edit_bill(self.bill)
-                .then(function (response) {
+                .then(function(response) {
                     if (response.data.success) {
-                        angular.forEach(self.bill.products, function (product) {
+                        angular.forEach(self.bill.products, function(product) {
                             product.bill_id = self.bill.bill_id;
                             product.userId = self.bill.userId;
                             return uploadService.edit_product(product);
                         });
                     }
                 })
-                .finally(function () {
+                .finally(function() {
                     self.bill = {
                         products: [],
                         number: '',
@@ -506,7 +507,7 @@ function shoppingController(angular, app) {
                 self.lote.total_weight = 0.00;
                 self.lote.total_quantity = 0;
 
-                angular.forEach(self.lote.bills, function (bill) {
+                angular.forEach(self.lote.bills, function(bill) {
                     self.lote.total_price = (parseFloat(self.lote.total_price) + parseFloat(bill.total_price)).toFixed(2);
                     self.lote.total_quantity = parseInt(self.lote.total_quantity) + parseInt(bill.quantity);
                     self.lote.total_weight = (parseFloat(self.lote.total_weight) + parseFloat(bill.total_weight)).toFixed(2);
@@ -551,8 +552,7 @@ function shoppingController(angular, app) {
             self.delete_bill = delete_bill;
             self.confirmUpdate = confirmUpdate;
             self.confirmFinish = confirmFinish;
-            self.tabs = [
-                {
+            self.tabs = [{
                     title: "Información Personal",
                     content: "hbr-selfie/dist/routes/shopping/forms/personal-form-tmpl.html",
                     helpText: ''

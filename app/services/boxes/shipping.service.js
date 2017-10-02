@@ -3,7 +3,7 @@ function shippingService(agular, app) {
     shippingService.$inject = ['$http', 'authenticationService'];
 
     function shippingService($http, authenticationService) {
-        this._getLang = function() {
+        this._getLang = function(isAdmin) {
             var isAdmin = parseInt(sessionStorage.getItem('isAdmin'));
             return $http.get('./hbr-selfie/dist/routes/wh-box/shipping/i18n.json').then(function(res) {
                 if (isAdmin == 1) {

@@ -193,46 +193,79 @@ function awbBoxController(angular, app) {
             $state.go('dashboard.awb-box', {}, { reload: true });
         };
 
-        function billIsValid() {
-            var isValid = true;
-            if (!self.bill.number) {
-                isValid = false;
-            }
-            if (!self.bill.value) {
-                isValid = false;
-            }
-            if (!self.bill.long_desc) {
-                isValid = false;
-            }
-            if (!self.bill.stock) {
-                isValid = false;
-            }
-            if (!self.hasFile) {
-                isValid = false;
-            }
 
+        function billIsValid(field) {
+            var isValid = true;
+            field = field || null;
+            if (self.billSubmitted) {
+                if (!self.bill.number.length && (field == null || field == "bill-number")) {
+                    isValid = false;
+                    self.errors.bills.number = self.lang.form.errors.bills.number.required;
+                } else {
+                    self.errors.bills.number = "";
+                }
+                if (!self.bill.value || self.bill.value == 0 && (field == null || field == "bill-value")) {
+                    isValid = false;
+                    self.errors.bills.value = self.lang.form.errors.bills.value.required;
+                } else {
+                    self.errors.bills.value = "";
+                }
+                if (!self.bill.long_desc.length && (field == null || field == "bill-long_desc")) {
+                    isValid = false;
+                    self.errors.bills.long_desc = self.lang.form.errors.bills.long_desc.required;
+                } else {
+                    self.errors.bills.long_desc = "";
+                }
+                if (!self.bill.stock || self.bill.stock == 0 && (field == null || field == "bill-stock")) {
+                    isValid = false;
+                    self.errors.bills.stock = self.lang.form.errors.bills.stock.required;
+                } else {
+                    self.errors.bills.stock = "";
+                }
+                if (!self.bill.hasFile && (field == null || field == "bill-file")) {
+                    isValid = false;
+                    self.errors.bills.files = self.lang.form.errors.bills.files.required;
+                } else {
+                    self.errors.bills.files = "";
+                }
+            }
             return isValid;
         }
 
-        function boxIsValid() {
+        function boxIsValid(field) {
             var isValid = true;
-            if (!self.box.provider) {
-                isValid = false;
+            field = field || null;
+            if (self.boxForm.$submitted) {
+                if (!self.box.provider || !self.box.provider.length && (field == null || field == "box-provider")) {
+                    isValid = false;
+                    self.errors.provider = self.lang.form.errors.provider.required;
+                } else {
+                    self.errors.provider = "";
+                }
+                if (!self.box.tracking || !self.box.tracking.length && (field == null || field == "box-tracking")) {
+                    isValid = false;
+                    self.errors.tracking = self.lang.form.errors.tracking.required;
+                } else {
+                    self.errors.tracking = "";
+                }
+                if (!self.box.whId || self.box.whId && !self.box.whId.id && (field == null || field == "box-warehouse")) {
+                    isValid = false;
+                    self.errors.warehouse = self.lang.form.errors.warehouse.required;
+                } else {
+                    self.errors.warehouse = "";
+                }
+                if (!self.box.bills.length) {
+                    isValid = false;
+                    self.errors.billsQty = self.lang.form.errors.billsQty.required;
+                } else {
+                    self.errors.billsQty = "";
+                }
             }
-            if (!self.box.tracking) {
-                isValid = false;
-            }
-            if (!self.box.whId || self.box.whId && !self.box.whId.id) {
-                isValid = false;
-            }
-            if (!self.box.bills.length) {
-                isValid = false;
-            }
-
             return isValid;
         }
 
         function addBox() {
+            self.boxForm.$submitted = true;
             if (boxIsValid()) {
                 $scope.invalidBox = false;
                 self.spinner = true;
@@ -251,6 +284,7 @@ function awbBoxController(angular, app) {
                     }
                 });
             } else {
+                angular.element('.modal').scrollTop(0);
                 $scope.invalidBox = true;
             }
         };
@@ -259,11 +293,16 @@ function awbBoxController(angular, app) {
             var file = file.files[0];
             if (file) {
                 if (file.type === "application/pdf" || file.type === "image/png" || file.type === "image/jpeg") {
-                    self.hasFile = true;
+                    self.bill.hasFile = true;
+                    self.billIsValid();
                 } else {
-                    self.hasFile = false;
-                    self.fileError = self.lang.form.fileError;
+                    self.bill.hasFile = false;
+                    self.bill.fileError = self.lang.form.fileError;
+                    self.billIsValid();
                 }
+            } else {
+                self.bill.hasFile = false;
+                self.billIsValid();
             }
         }
 
@@ -271,49 +310,58 @@ function awbBoxController(angular, app) {
             self.spinner = true;
             self.box.status = 0;
             var editedBill = false;
-            awbboxService._editBox(self.box).then(function(response) {
-                if (response.data.success && self.box.bills.length) {
-                    var sequence = $q.defer();
-                    sequence.resolve();
-                    sequence = sequence.promise;
-                    angular.forEach(self.box.bills, function(bill) {
-                        if (!bill.id) {
-                            editedBill = true;
-                            sequence = sequence.then(function() {
-                                return awbboxService._editBills(bill, self.box.id);
+            if (boxIsValid()) {
+                awbboxService._editBox(self.box).then(function(response) {
+                    if (response.data.success && self.box.bills.length) {
+                        var sequence = $q.defer();
+                        sequence.resolve();
+                        sequence = sequence.promise;
+                        angular.forEach(self.box.bills, function(bill) {
+                            if (!bill.id) {
+                                editedBill = true;
+                                sequence = sequence.then(function() {
+                                    return awbboxService._addBills(bill, self.box.id);
+                                });
+                            }
+                        });
+                        if (self.isEditing && editedBill) {
+                            $q.all(sequence).then(function() {
+                                self.spinner = false;
+                                setTimeout(function() {
+                                    $uibModalInstance.dismiss('cancel');
+                                    $state.go('dashboard.awb-box', {}, { reload: true });
+                                }, 1000);
                             });
-                        }
-                    });
-                    if (!self.isEditing && editedBill) {
-                        $q.all(sequence).then(function() {
+                        } else {
                             self.spinner = false;
                             $uibModalInstance.dismiss('cancel');
                             $state.go('dashboard.awb-box', {}, { reload: true });
-                        });
+                        }
                     } else {
-                        self.spinner = false;
                         $uibModalInstance.dismiss('cancel');
                         $state.go('dashboard.awb-box', {}, { reload: true });
                     }
-                } else {
-                    $uibModalInstance.dismiss('cancel');
-                    $state.go('dashboard.awb-box', {}, { reload: true });
-                }
-            });
+                });
+            }
         }
 
         function addBill() {
+            self.billSubmitted = true;
             if (billIsValid()) {
                 $scope.invalidBill = false;
+                self.billSubmitted = false;
                 self.box.box_value = parseFloat(parseFloat(self.box.box_value) + parseFloat(self.bill.value)).toFixed(2);
                 self.box.box_weight = parseFloat(parseFloat(self.box.box_weight || 0.00) + parseFloat(self.bill.weight || 0.00)).toFixed(2);
                 self.box.box_stock = parseInt(self.box.box_stock) + parseInt(self.bill.stock);
                 self.box.bills.push(self.bill);
                 self.bill = new billModel();
+                self.errors.bills = self.errors.bills = new BillErrorModel();
+                self.isValid = true;
                 $('#bill_file').val("");
             } else {
                 $scope.invalidBill = true;
             }
+            boxIsValid();
         }
 
         function billModel() {
@@ -323,6 +371,7 @@ function awbBoxController(angular, app) {
             this.stock = 0;
             this.bill_file = "";
             this.long_desc = "";
+            this.hasFile = false;
         }
 
         function boxModel(box) {
@@ -338,24 +387,44 @@ function awbBoxController(angular, app) {
             }
         }
 
+        function BoxErrorModel() {
+            var self = this;
+            self.provider = "";
+            self.tracking = "";
+            self.warehouse = "";
+            self.billsQty = "";
+            self.bills = new BillErrorModel();
+        }
+
+        function BillErrorModel() {
+            var self = this;
+            self.number = "";
+            self.value = "";
+            self.long_desc = "";
+            self.stock = "";
+            self.files = "";
+        }
+
         function removeBill(index, bill) {
             if (self.isEditing) {
                 awbboxService._deleteBill(bill).then(function() {
                     self.box.bills.splice(index, 1);
                     self.box.box_value = parseFloat(parseFloat(self.box.box_value) - parseFloat(bill.value)).toFixed(2);
-                    self.box.weight = parseFloat(parseFloat(self.box.weight) - parseFloat(bill.weight)).toFixed(2);
+                    self.box.box_weight = parseFloat(parseFloat(self.box.box_weight) - parseFloat(bill.weight)).toFixed(2);
                     self.box.box_stock = parseInt(self.box.box_stock) - parseInt(bill.stock);
                     awbboxService._editBox(self.box);
                 })
             } else {
                 self.box.bills.splice(index, 1);
                 self.box.box_value = parseFloat(parseFloat(self.box.box_value) - parseFloat(bill.value)).toFixed(2);
-                self.box.weight = parseFloat(parseFloat(self.box.weight) - parseFloat(bill.weight)).toFixed(2);
+                self.box.box_weight = parseFloat(parseFloat(self.box.box_weight) - parseFloat(bill.weight)).toFixed(2);
                 self.box.box_stock = parseInt(self.box.box_stock) - parseInt(bill.stock);
             }
+            boxIsValid();
         }
 
         function init() {
+            self.billSubmitted = false;
             self.box = new boxModel(box);
             self.isEditing = isEditing;
             self.cancel = cancel;
@@ -363,8 +432,11 @@ function awbBoxController(angular, app) {
             self.bill = new billModel();
             self.spinner = false;
             self.addBill = addBill;
+            self.errors = new BoxErrorModel();
+            self.boxIsValid = boxIsValid;
+            self.billIsValid = billIsValid;
             self.hasFile = false;
-            self.fileError = "";
+            self.bill.fileError = "";
             self.removeBill = removeBill;
             self.edit = edit;
             self.isAdmin = parseInt(sessionStorage.getItem('isAdmin'));

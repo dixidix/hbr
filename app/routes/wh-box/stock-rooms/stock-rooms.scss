@@ -187,6 +187,15 @@
                         background-color: darken($hbr-red, 5%);
                     }
                 }
+                &-success {
+                    border-radius: 0px 0px 0px 5px;
+                    transition: all 0.2s ease-in-out;
+                    color: $hbr-green;
+                    background-color: $hbr-blue;
+                    &:hover {
+                        background-color: darken($hbr-blue, 5%);
+                    }
+                }
                 &-default {
                     border-radius: 0px 0px 5px 0px;
                     transition: all 0.2s ease-in-out;
@@ -204,6 +213,69 @@
 .box-modal {
     .modal {
         &-body {
+            .bills {
+                min-height: 140px;
+                padding: 5px 10px;
+                margin-top: 10px;
+                background: rgba(0, 0, 0, 0.05);
+                border-radius: 5px;
+                border: 1px solid $hbr-blue;
+                margin: 25px 0px;
+            }
+            .search-box {
+                input {
+                    border-radius: 5px 5px 0px 0px;
+                    height: 35px;
+                    border-bottom: 0;
+                    margin-bottom: 0;
+                    padding-left: 35px;
+                }
+                .icon {
+                    position: absolute;
+                    top: 34px;
+                    left: 30px;
+                    color: lightgray;
+                }
+            }
+            .box-list {
+                display: flex;
+                flex-direction: row;
+                border: 1px solid $hbr-blue;
+                overflow: hidden;
+                overflow-x: auto;
+                border-radius: 0px 0px 5px 5px;
+                .box {
+                    cursor: pointer;
+                    text-align: center;
+                    margin: 10px 20px;
+                    min-width: 200px;
+                    width: 200px;
+                    text-align: center;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    max-width: 200px;
+                    i {
+                        color: darken($hbr-light-purple, 30%);
+                        font-size: 18px;
+                    }
+                    &.active {
+                        i {
+                            color: darken($hbr-green, 10%);
+                        }
+                        span {
+                            font-weight: bold;
+                        }
+                    }
+                    span {
+                        min-width: 50px;
+                        width: 50px;
+                        font-size: 14px;
+                    }
+                    &:first-child {
+                        margin-left: 5px;
+                    }
+                }
+            }
             .form-group {
                 &.has-error {
                     .form-control {

@@ -14,8 +14,9 @@ function boxService(agular, app) {
 
         this._getLang = function() {
             var isAdmin = parseInt(sessionStorage.getItem('isAdmin'));
+            var clientType = parseInt(sessionStorage.getItem('clientType'));
             return $http.get('./hbr-selfie/dist/routes/wh-box/stock-rooms/i18n.json').then(function(res) {
-                if (isAdmin == 1) {
+                if (isAdmin == 1 || clientType == 2) {
                     return res.data.en;
                 } else {
                     return res.data.es;
@@ -30,9 +31,9 @@ function boxService(agular, app) {
         this.calculate_room = function(boxes) {
             var room = new Room();
             boxes.forEach(function(box) {
-                room.weight = box.box_weight ? (parseFloat(room.weight) + parseFloat(box.box_weight)).toFixed(2) : room.weight;
-                room.stock = box.box_stock ? (parseInt(room.stock) + parseInt(box.box_stock)) : room.stock;
-                room.room_val = box.box_value ? (parseFloat(room.room_val) + parseFloat(box.box_value)).toFixed(2) : room.room_val;
+                room.weight = box.box_weight ? (parseFloat(room.weight) + parseFloat(box.box_partial_weight)).toFixed(2) : room.weight;
+                room.stock = box.quantity ? (parseInt(room.stock) + parseInt(box.quantity)) : room.stock;
+                room.room_val = box.box_value ? (parseFloat(room.room_val) + parseFloat(box.box_partial_value)).toFixed(2) : room.room_val;
                 room.shipping_val = box.box_shipping_value ? (parseFloat(room.shipping_val) + parseFloat(box.box_shipping_value)).toFixed(2) : room.shipping_val;
                 room.warehouse_val = box.box_warehouse_value ? (parseFloat(room.warehouse_val) + parseFloat(box.box_warehouse_value)).toFixed(2) : room.warehouse_val;
             })
@@ -50,6 +51,25 @@ function boxService(agular, app) {
 
         this._getBoxById = function(boxId) {
             return $http.get('./hbr-selfie/dist/php/box/add.php', { params: { boxId: boxId } });
+        }
+        this._addEnterBox = function(box) {
+            return authenticationService.checkAuth().then(function(response) {
+                box.uid = parseInt(response.data.uid);
+                return $http.post('./hbr-selfie/dist/php/enter-box/add_box.php', {
+                    quantity: box.quantity,
+                    box_value: box.box_partial_value,
+                    box_weight: box.box_partial_weight || "NULL",
+                    aditional_unit: box.aditional_unit,
+                    aditional_value: box.aditional_value,
+                    aditional_total: box.aditional_total,
+                    box_warehouse_value: box.box_warehouse_value || "NULL",
+                    long_desc: box.long_desc || "NULL",
+                    remaining: parseInt(box.remaining) - parseInt(box.quantity),
+                    id: box.id,
+                    awb_boxes_id: box.awb_boxes_id,
+                    created: Math.floor(new Date().getTime())
+                });
+            });
         }
 
         this._addBox = function(box) {
@@ -69,6 +89,10 @@ function boxService(agular, app) {
                     });
                 }
             });
+        }
+
+        this._getAllEnterBoxes = function() {
+            return $http.get('./hbr-selfie/dist/php/enter-box/get_box.php');
         }
 
         this._editBox = function(box) {
@@ -95,9 +119,43 @@ function boxService(agular, app) {
             });
         }
 
+        this._editEnterBox = function(box, baseBox) {
+            return authenticationService.checkAuth().then(function(response) {
+                box.uid = parseInt(response.data.uid);
+                var whId = box.whId ? box.whId.id : box.warehouse.id;
+                var isAdmin = parseInt(response.data.isAdmin);
+                return $http.post('./hbr-selfie/dist/php/enter-box/edit_box.php', {
+                    quantity: box.quantity,
+                    remaining: (parseInt(box.remaining) + parseInt(baseBox.quantity)) - parseInt(box.quantity),
+                    box_value: box.box_partial_value,
+                    box_weight: box.box_partial_weight || "NULL",
+                    aditional_unit: box.aditional_unit,
+                    aditional_value: box.aditional_value,
+                    box_warehouse_value: box.box_warehouse_value || "NULL",
+                    aditional_total: box.aditional_total,
+                    long_desc: box.long_desc || "NULL",
+                    id: box.id,
+                    awb_boxes_id: box.awb_boxes_id,
+                });
+            });
+        }
+
+        this._finishEnterBox = function(box) {
+            return $http.post('./hbr-selfie/dist/php/enter-box/finish_box.php', {
+                id: box.id
+            });
+        }
+
         this._deleteBox = function(box) {
             return $http.post('./hbr-selfie/dist/php/box/delete.php', {
                 id: box.id
+            });
+        }
+        this._deleteEnterBox = function(box) {
+            return $http.post('./hbr-selfie/dist/php/enter-box/delete_box.php', {
+                id: box.id,
+                remaining: box.remaining,
+                awb_boxes_id: box.awb_boxes_id
             });
         }
     }
