@@ -16,7 +16,7 @@ foreach($_POST as $key=>$value) {
 
 if(empty($errors)){
     MysqliDB::getInstance()->query("INSERT INTO `awb_enter_box`(`awb_boxes_id`,`quantity`,`weight`, `value`, `descrip`, `created`,`aditional_unit`,`aditional_value`,`aditional_total`,`box_warehouse_value`) VALUES (".$id.",'".$quantity."', ".(float) $box_weight.",".(float) $box_value.",'".$long_desc."', '".$created."',".(int) $aditional_unit.",".(float) $aditional_value.",".(float) $aditional_total.",".(float) $box_warehouse_value.")");
-    MysqliDB::getInstance()->query("UPDATE `awb_boxes` SET `remaining`=".(int)$remaining." WHERE `id` = ".(int)$id."");
+    MysqliDB::getInstance()->query("UPDATE `awb_boxes` SET `real_remaining`=".(int)$real_remaining.", `status`=1 WHERE `id` = ".(int)$id."");
     $resolve_data['success'] = true;	
     MysqliDB::getInstance()->close();
     echo json_encode($resolve_data);

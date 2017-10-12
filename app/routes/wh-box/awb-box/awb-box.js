@@ -28,6 +28,7 @@ function awbBoxController(angular, app) {
                 templateUrl: './hbr-selfie/dist/routes/wh-box/awb-box/modals/add-box.template.html',
                 controller: 'modalCtrl',
                 controllerAs: 'modal',
+                backdrop: 'static',
                 scope: $scope,
                 size: 'sm',
                 resolve: {
@@ -118,14 +119,21 @@ function awbBoxController(angular, app) {
         }
 
         function navigate(box) {
-            $state.go('dashboard.stock_rooms', { tracking: box.tracking }, { reload: true });
+            $state.go('dashboard.stock_rooms', { boxId: box.id }, { reload: true });
         }
 
         function getAllBoxes(isAdmin) {
-            awbboxService._getAllAwbBoxes().then(function(res) {
-                self.boxes = res.data.awb_boxes;
-                self.filteredBoxes = angular.copy(self.boxes);
-            });
+            if (isAdmin || self.clientType == '2') {
+                awbboxService._getAllAwbBoxes().then(function(res) {
+                    self.boxes = res.data.awb_boxes;
+                    self.filteredBoxes = angular.copy(self.boxes);
+                });
+            } else {
+                awbboxService._getAwbBoxesByUserId().then(function(res) {
+                    self.boxes = res.data.awb_boxes;
+                    self.filteredBoxes = angular.copy(self.boxes);
+                });
+            }
         }
 
         function cancelDeleteBox() {
@@ -161,6 +169,7 @@ function awbBoxController(angular, app) {
         function init() {
             self.searched = false;
             self.isAdmin = parseInt(sessionStorage.getItem('isAdmin'));
+            self.clientType = parseInt(sessionStorage.getItem('clientType'));
             awbboxService._getLang().then(function(lang) {
                 $scope.lang = lang;
                 self.filterName = $scope.lang.filter.default;
@@ -189,6 +198,7 @@ function awbBoxController(angular, app) {
 
         function cancel() {
             self.spinner = false;
+            self.box.bills = self.billCopy;
             $uibModalInstance.dismiss('cancel');
             $state.go('dashboard.awb-box', {}, { reload: true });
         };
@@ -222,12 +232,7 @@ function awbBoxController(angular, app) {
                 } else {
                     self.errors.bills.stock = "";
                 }
-                if (!self.bill.hasFile && (field == null || field == "bill-file")) {
-                    isValid = false;
-                    self.errors.bills.files = self.lang.form.errors.bills.files.required;
-                } else {
-                    self.errors.bills.files = "";
-                }
+
             }
             return isValid;
         }
@@ -345,6 +350,36 @@ function awbBoxController(angular, app) {
             }
         }
 
+        function editBill() {
+            if (billIsValid()) {
+                $scope.invalidBill = false;
+                self.billSubmitted = false;
+                $scope.billEditing = true;
+                self.box.box_value = 0;
+                self.box.box_weight = 0;
+                self.box.box_stock = 0;
+                self.box.bills.forEach(function(bill) {
+                    self.box.box_value = parseFloat(parseFloat(self.box.box_value) + parseFloat(bill.value)).toFixed(2);
+                    self.box.box_weight = parseFloat(parseFloat(self.box.box_weight || 0.00) + parseFloat(bill.weight || 0.00)).toFixed(2);
+                    self.box.box_stock = parseInt(self.box.box_stock) + parseInt(bill.stock);
+                });
+                awbboxService._editBox(self.box).then(function(response) {
+                    awbboxService._editBill(self.bill).then(function() {
+                        $scope.billEditing = false;
+                        self.bill = new billModel();
+                        self.errors.bills = self.errors.bills = new BillErrorModel();
+                        self.isValid = true;
+                        $('#bill_file').val("");
+                        self.billAction = self.lang.form.add.bill.button;
+                        self.billEdit = false;
+                    });
+                });
+            } else {
+                $scope.billEditing = false;
+                $scope.invalidBill = true;
+            }
+        }
+
         function addBill() {
             self.billSubmitted = true;
             if (billIsValid()) {
@@ -406,6 +441,8 @@ function awbBoxController(angular, app) {
         }
 
         function removeBill(index, bill) {
+            self.billAction = self.lang.form.add.bill.button;
+            self.billEdit = false;
             if (self.isEditing) {
                 awbboxService._deleteBill(bill).then(function() {
                     self.box.bills.splice(index, 1);
@@ -413,6 +450,7 @@ function awbBoxController(angular, app) {
                     self.box.box_weight = parseFloat(parseFloat(self.box.box_weight) - parseFloat(bill.weight)).toFixed(2);
                     self.box.box_stock = parseInt(self.box.box_stock) - parseInt(bill.stock);
                     awbboxService._editBox(self.box);
+
                 })
             } else {
                 self.box.bills.splice(index, 1);
@@ -423,15 +461,36 @@ function awbBoxController(angular, app) {
             boxIsValid();
         }
 
+        function prepareEditBill(index, bill) {
+            bill.value = parseFloat(bill.value);
+            bill.weight = parseFloat(bill.weight);
+            bill.stock = parseInt(bill.stock);
+            self.bill = bill;
+            self.billEdit = true;
+            self.billAction = self.lang.form.edit.bill.button;
+            $('#bill_file').val("");
+        }
+
+        function cancelEdit() {
+            self.bill = {};
+            self.billAction = self.lang.form.add.bill.button;
+            $('#bill_file').val("");
+            self.billEdit = false;
+        }
+
         function init() {
             self.billSubmitted = false;
             self.box = new boxModel(box);
+            self.billCopy = angular.copy(self.box.bills) || [];
             self.isEditing = isEditing;
             self.cancel = cancel;
             self.addBox = addBox;
+            self.cancelEdit = cancelEdit;
             self.bill = new billModel();
             self.spinner = false;
             self.addBill = addBill;
+            self.editBill = editBill;
+            self.prepareEditBill = prepareEditBill;
             self.errors = new BoxErrorModel();
             self.boxIsValid = boxIsValid;
             self.billIsValid = billIsValid;
@@ -442,6 +501,8 @@ function awbBoxController(angular, app) {
             self.isAdmin = parseInt(sessionStorage.getItem('isAdmin'));
             awbboxService._getLang(self.isAdmin).then(function(lang) {
                 self.lang = lang;
+                self.billAction = self.lang.form.add.bill.button;
+                self.billEdit = false;
                 if (Object.keys(box).length) {
                     self.box.box_value = parseFloat(box.box_value);
                     self.box.box_stock = parseInt(box.box_stock);

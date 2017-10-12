@@ -81,10 +81,24 @@
                     "label": "Peso Total de la guía (Kg.)",
                     "placeholder": "Peso total de la guía en kg"
                 },
+
                 "total_value": {
                     "label": "Valor Total de la guía (U$D)",
                     "placeholder": "Valor total de la guía en dólares"
                 },
+                "real_total_weight": {
+                    "label": "Peso total real de la guía (Kg.)",
+                    "placeholder": "Peso total de la guía en kg"
+                },
+                "real_total_value": {
+                    "label": "Peso total real de la guía (Kg.)",
+                    "placeholder": "Peso total real de la guía en kg"
+                },
+                "real_stock": {
+                    "label": "Peso total real de la guía (Kg.)",
+                    "placeholder": "Peso total real de la guía en kg"
+                },
+                "real_update_btn": "Actualizar",
                 "box_weight": {
                     "label": "Peso parcial de la caja (Kg.)",
                     "placeholder": "Peso de la caja a crear en kg"
@@ -106,6 +120,7 @@
                     "placeholder": "Valor total del Cargo Adicional"
                 },
                 "title_partial_box": "Crea una caja parcial para guardar en depósito",
+                "title_real_value": "Actualiza al valor real",
                 "title_aditional": "Cargos Adicionales",
                 "title_description": "Descripción de la caja parcial a guardar",
                 "created": {
@@ -270,10 +285,28 @@
                     "label": "Total AWB Weight (Kg.)",
                     "placeholder": "Total weight of airway bill box"
                 },
+
+                "real_update_btn": "Update",
                 "total_value": {
                     "label": "Total AWB Value (U$D)",
                     "placeholder": "Total value of airway bill box"
                 },
+
+                "real_total_weight": {
+                    "label": "Total real weight (Kg.)",
+                    "placeholder": "Total real weight in Kg."
+                },
+
+                "real_value": {
+                    "label": "Total real value (U$D)",
+                    "placeholder": "Total real value of airway bill box"
+                },
+
+                "real_stock": {
+                    "label": "Real stock",
+                    "placeholder": "Total real stock"
+                },
+
                 "box_weight": {
                     "label": "Box Weight (Kg.)",
                     "placeholder": "weight of the box to add"
@@ -287,6 +320,8 @@
                     "placeholder": "Quantity of aditionals charges to calculate"
                 },
                 "title_partial_box": "Create partial box to save into deposit",
+                "title_real_value": "Update to real values",
+
                 "title_description": "Partial box description",
                 "title_aditional": "Aditional Charges",
                 "aditional_value": {

@@ -8,7 +8,7 @@
                 <button class="btn btn-hbr-blue" ng-click="stockRooms.addBox()"><i class="fa fa-plus"></i>{{::stockRooms.lang.room.filter.add}}</button>
             </div>
         </div>
-        <div class="col-xs-10">
+        <div ng-class="(stockRooms.isAdmin == 1 || stockRooms.clientType == 2) ? 'col-xs-10' : 'col-xs-12'">
             <div class="input-group">
                 <input id="{{filterField}}" type="text" class="form-control" placeholder="{{::stockRooms.lang.room.filter.placeholder}}" ng-model="stockRooms.searchBy">
                 <span class="input-group-btn">
@@ -50,12 +50,12 @@
     <div class="stock-card col-xs-4" ng-repeat="box in stockRooms.filteredBoxes track by $index" ng-if="stockRooms.filteredBoxes.length">
         <div class="stock-card__header">
             <h4>Box #{{box.id}}</h4>
-            <h4 ng-if="box.status == 0">
+            <h4 ng-if="box.status == 0 && (stockRooms.clientType == 2 || stockRooms.isAdmin)">
                 <i style="color:#8388A4" uib-popover-template="'finish-box.html'" popover-class="help  delete-box" popover-placement="top" data-toggle="popover" popover-trigger="outsideClick" class="fa fa-mail-forward"></i>
                 <i ng-click="stockRooms.editBox(box, $index)" class="fa fa-pencil"></i>
                 <i style="color:#ED5E68" uib-popover-template="'delete-box.html'" popover-class="help  delete-box" popover-placement="top" data-toggle="popover" popover-trigger="outsideClick" class="fa fa-close"></i>
             </h4>
-            <h4 ng-if="box.status == 1">
+            <h4 ng-if="box.status == 1 && (stockRooms.clientType == 2 || stockRooms.isAdmin)">
                 <i style="color:#ED5E68" class="fa fa-check"></i>
             </h4>
         </div>

@@ -20,7 +20,10 @@ function awbboxService(agular, app) {
         }
 
         this._getAwbBoxesByUserId = function() {
-
+            return authenticationService.checkAuth().then(function(response) {
+                var uid = parseInt(response.data.uid);
+                return $http.get('./hbr-selfie/dist/php/awb-box/get_box.php', { params: { uid: uid } });
+            });
         }
 
         this._getAwbBoxesById = function(awbBoxId) {
@@ -84,6 +87,33 @@ function awbboxService(agular, app) {
                     transformRequest: angular.identity,
                     headers: { 'Content-Type': undefined }
                 });
+            });
+        }
+
+        this._editBill = function(bill) {
+            return authenticationService.checkAuth().then(function(response) {
+                bill.uid = parseInt(response.data.uid);
+                bill.timestamp = Math.floor(new Date().getTime());
+                var formData = new FormData();
+
+                angular.forEach(bill, function(key, value) {
+                    formData.append(value, key);
+                });
+
+                return $http.post('./hbr-selfie/dist/php/awb-box/edit_box_bill.php', formData, {
+                    transformRequest: angular.identity,
+                    headers: { 'Content-Type': undefined }
+                });
+            });
+        }
+
+        this._updateRealValues = function(box) {
+            return $http.post('./hbr-selfie/dist/php/awb-box/update_real_values.php', {
+                real_box_value: parseFloat(box.real_box_value),
+                real_box_weight: parseFloat(box.real_box_weight),
+                real_remaining: parseInt(box.real_remaining),
+                real_box_stock: parseInt(box.real_box_stock),
+                id: parseInt(box.id)
             });
         }
 

@@ -118,7 +118,10 @@
                 "required": "Los campos con (*) son requeridos."
             },
             "edit": {
-                "title": "Editar Caja"
+                "title": "Editar Caja",
+                "bill": {
+                    "button": "Editar factura"
+                }
             },
             "errors": {
                 "required": "Los campos con (*) son requeridos",
@@ -283,7 +286,10 @@
             },
 
             "edit": {
-                "title": "Edit box"
+                "title": "Edit box",
+                "bill": {
+                    "button": "Edit bill"
+                }
             },
             "errors": {
                 "required": "All fields with (*) are required",

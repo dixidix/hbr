@@ -1,8 +1,15 @@
 <?php
 require './../bd.php';
-
-
-	$res = MysqliDB::getInstance()->query("SELECT * from awb_boxes WHERE  deleted = 0");
+$errors = array();
+$resolve_data = array();
+if(!empty($_GET['uid'])){
+$uid = $_GET['uid'];
+}
+	if(empty($_GET['uid'])){
+		$res = MysqliDB::getInstance()->query("SELECT * from awb_boxes WHERE  deleted = 0");
+	} else {
+		$res = MysqliDB::getInstance()->query("SELECT * from awb_boxes WHERE `uid`=".(int)$uid." AND deleted = 0");
+	}
 	$outp="";	
 	while($rs = $res->fetch_array(MYSQLI_ASSOC)) {		
 		$outpm ="";
@@ -17,6 +24,10 @@ require './../bd.php';
         $outp .= '"box_value":'  . (float) $rs["value"] . ',';
 		$outp .= '"box_weight":'  . (float) $rs["weight"] . ',';
 		$outp .= '"status":'  . (int) $rs["status"] . ',';
+		$outp .= '"real_box_value":'  . (float) $rs["real_box_value"] . ',';
+		$outp .= '"real_box_weight":'  . (float) $rs["real_box_weight"] . ',';
+		$outp .= '"real_remaining":'  . (int) $rs["real_remaining"] . ',';
+		$outp .= '"real_box_stock":'  . (int) $rs["real_box_stock"] . ',';
 		$outpwh="";
 		$wh =  MysqliDB::getInstance()->query("SELECT * FROM users where id =" . (int) $rs["whId"] . " and deleted = 0");
 		while($rswh = $wh->fetch_array(MYSQLI_ASSOC)) {

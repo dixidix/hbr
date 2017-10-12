@@ -1,0 +1,14 @@
+{
+    "es": {
+        "hide_menu": "Ocultar Menu",
+        "add_purchase": "Agregar Compra",
+        "show_purchase": "Ver Compras",
+        "show_awb": "Ver Guías"
+    },
+    "en": {
+        "hide_menu": "Hide Menu",
+        "add_purchase": "Add Purchase",
+        "show_purchase": "Show Purchases",
+        "show_awb": "Show Airway bill"
+    }
+}

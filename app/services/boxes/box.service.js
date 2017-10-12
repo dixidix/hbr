@@ -64,7 +64,7 @@ function boxService(agular, app) {
                     aditional_total: box.aditional_total,
                     box_warehouse_value: box.box_warehouse_value || "NULL",
                     long_desc: box.long_desc || "NULL",
-                    remaining: parseInt(box.remaining) - parseInt(box.quantity),
+                    real_remaining: parseInt(box.real_remaining) - parseInt(box.quantity),
                     id: box.id,
                     awb_boxes_id: box.awb_boxes_id,
                     created: Math.floor(new Date().getTime())
@@ -142,7 +142,8 @@ function boxService(agular, app) {
 
         this._finishEnterBox = function(box) {
             return $http.post('./hbr-selfie/dist/php/enter-box/finish_box.php', {
-                id: box.id
+                id: box.id,
+                awb_id: box.awb_boxes_id
             });
         }
 

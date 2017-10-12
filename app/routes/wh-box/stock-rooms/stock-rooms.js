@@ -98,6 +98,7 @@ function stockRoomsController(angular, app) {
                 templateUrl: './hbr-selfie/dist/routes/wh-box/stock-rooms/modals/add-box.template.html',
                 controller: 'modalAddBoxCtrl',
                 controllerAs: 'modalAddBox',
+                backdrop: 'static',
                 size: 'sm',
                 resolve: {
                     box: box,
@@ -117,7 +118,7 @@ function stockRoomsController(angular, app) {
         }
 
         function deleteBox(index, boxToDelete) {
-            boxToDelete.remaining = parseInt(boxToDelete.remaining) + parseInt(boxToDelete.quantity);
+            boxToDelete.real_remaining = parseInt(boxToDelete.real_remaining) + parseInt(boxToDelete.quantity);
             boxService._deleteEnterBox(boxToDelete).then(function() {
                 angular.element('.footer')[0].click();
                 boxService.calculate_room();
@@ -143,15 +144,23 @@ function stockRoomsController(angular, app) {
 
         function getAllBoxes(isAdmin) {
             authenticationService.checkAuth().then(function(response) {
-                var whId = parseInt(response.data.uid);
+                var uid = parseInt(response.data.uid);
                 boxService._getAllEnterBoxes().then(function(response) {
                         self.boxes = response.data.boxes;
                         if (isAdmin == 0) {
-                            self.boxes = self.boxes.filter(function(box) {
-                                if (box.warehouse.id == whId) {
-                                    return box;
-                                }
-                            });
+                            if (self.clientType == 2) {
+                                self.boxes = self.boxes.filter(function(box) {
+                                    if (box.warehouse.id == uid) {
+                                        return box;
+                                    }
+                                });
+                            } else {
+                                self.boxes = self.boxes.filter(function(box) {
+                                    if (box.user.id == uid) {
+                                        return box;
+                                    }
+                                });
+                            }
                         }
                         self.boxes.forEach(function(box) {
                             var created = moment(new Date(parseInt(box.created)));
@@ -160,7 +169,7 @@ function stockRoomsController(angular, app) {
                         self.filteredBoxes = angular.copy(self.boxes);
                         self.room = boxService.calculate_room(self.filteredBoxes);
                         if ($state.params.boxId) {
-                            setFilter('id', self.lang.room.filter.list.box_id);
+                            setFilter('awb_boxes_id', self.lang.room.filter.list.awb_boxes_id);
                             self.searchBy = $state.params.boxId;
                             applyFilter();
                         }
@@ -240,6 +249,14 @@ function stockRoomsController(angular, app) {
             }
         }
 
+        function updateRealValues() {
+            self.updatingRealValues = true;
+            awbboxService._updateRealValues(self.box).then(function(res) {
+                self.updatingRealValues = false;
+            });
+        }
+
+
         function getBoxList(user) {
             self.selectedBox = false;
             authenticationService.checkAuth().then(function(response) {
@@ -280,7 +297,7 @@ function stockRoomsController(angular, app) {
             self.cancel = cancel;
             self.addBox = addBox;
             self.spinner = false;
-
+            self.updateRealValues = updateRealValues;
             self.isAdmin = parseInt(sessionStorage.getItem('isAdmin'));
             boxService._getLang(self.isAdmin).then(function(lang) {
                 self.lang = lang;
@@ -288,9 +305,17 @@ function stockRoomsController(angular, app) {
                     self.box.box_value = parseFloat(box.box_value);
                     self.box.box_stock = parseInt(box.box_stock);
                     self.box.box_weight = parseFloat(box.box_weight);
-                    self.box.aditional_unit = box.aditional_unit || '0';
-                    self.box.aditional_value = box.aditional_value || '0.00';
-                    self.box.aditional_total = box.aditional_total || '0.00';
+
+                    self.box.box_warehouse_value = parseFloat(box.box_warehouse_value);
+
+                    self.box.real_box_value = box.real_box_value || parseFloat(box.box_value);
+                    self.box.real_box_stock = box.real_box_stock || parseInt(box.box_stock);
+                    self.box.real_box_weight = box.real_box_weight || parseFloat(box.box_weight);
+                    self.box.real_remaining = box.real_remaining || parseFloat(box.box_stock);
+
+                    self.box.aditional_unit = parseInt(box.aditional_unit) || '0';
+                    self.box.aditional_value = parseFloat(box.aditional_value) || '0.00';
+                    self.box.aditional_total = parseFloat(box.aditional_total) || '0.00';
                     self.box.whId = box.warehouse;
                     self.lang.form.title = self.lang.form.edit.title;
                 } else {
