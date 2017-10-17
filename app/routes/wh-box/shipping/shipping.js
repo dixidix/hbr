@@ -5,7 +5,7 @@ function shippingController(angular, app) {
     app.controller('shippingCtrl', shippingCtrl);
     shippingCtrl.$inject = ['shippingService', 'boxService', '$uibModal', '$state'];
     app.controller('modalAddShippingBoxCtrl', modalAddShippingBoxCtrl);
-    modalAddShippingBoxCtrl.$inject = ['boxService', 'shippingService', 'authenticationService', '$scope', '$state', '$filter', '$uibModalInstance', '$sce', '$compile', 'box', 'boxes', 'isEditing', '$rootScope', '$http'];
+    modalAddShippingBoxCtrl.$inject = ['boxService', 'shippingService', 'authenticationService', '$scope', '$state', '$filter', '$uibModalInstance', '$sce', '$compile', 'box', 'boxes', 'isEditing', '$rootScope', '$http', '$q'];
 
 
     function shippingCtrl(shippingService, boxService, $uibModal, $state) {
@@ -33,6 +33,7 @@ function shippingController(angular, app) {
         }
 
         function addBox() {
+            self.isEditing = false;
             add();
         }
 
@@ -105,9 +106,9 @@ function shippingController(angular, app) {
             filterBoxes();
         }
 
-        function getAllBoxes(isAdmin) {
-            if (isAdmin == 1) {
-                boxService._getAllBoxes().then(function(response) {
+        function getAllBoxes() {
+            if (self.isAdmin == 1 || self.clientType == 2) {
+                shippingService._getAllShippingBox().then(function(response) {
                         self.boxes = response.data.boxes;
                         self.filteredBoxes = angular.copy(self.boxes);
                         self.boxes.forEach(function(box) {
@@ -119,7 +120,7 @@ function shippingController(angular, app) {
                         console.log(err);
                     })
             } else {
-                boxService._getBoxesByUserId().then(function(response) {
+                shippingService._getBoxesByUserId().then(function(response) {
                         self.boxes = response.data.boxes;
                         self.filteredBoxes = angular.copy(self.boxes);
                         self.boxes.forEach(function(box) {
@@ -149,6 +150,7 @@ function shippingController(angular, app) {
         function init() {
             self.shippingBox = {};
             self.isAdmin = parseInt(sessionStorage.getItem('isAdmin'));
+            self.clientType = parseInt(sessionStorage.getItem('clientType'));
             shippingService._getLang().then(function(lang) {
                 self.lang = lang;
             });
@@ -175,7 +177,7 @@ function shippingController(angular, app) {
         init();
     }
 
-    function modalAddShippingBoxCtrl(boxService, shippingService, authenticationService, $scope, $state, $filter, $uibModalInstance, $sce, $compile, box, boxes, isEditing, $rootScope, $http) {
+    function modalAddShippingBoxCtrl(boxService, shippingService, authenticationService, $scope, $state, $filter, $uibModalInstance, $sce, $compile, box, boxes, isEditing, $rootScope, $http, $q) {
         var self = this;
 
 
@@ -200,9 +202,7 @@ function shippingController(angular, app) {
                         return tb;
                     }
                 });
-                self.trackingBoxes.forEach(function(box) {
-                    box.isActive = false;
-                });
+
             }
         }
 
@@ -239,10 +239,17 @@ function shippingController(angular, app) {
             self.box_list = [];
             self.selectedBox = false;
             authenticationService.checkAuth().then(function(response) {
+                var whid = parseInt(response.data.uid);
                 boxService._getAllEnterBoxes().then(function(res) {
                     self.box_list = res.data.boxes.filter(function(box) {
-                        if (box.user.id == user.id) {
-                            return box;
+                        if (user && box.user.id == user.id) {
+                            if (self.clientType == 2) {
+                                if (box.warehouse.id == whid) {
+                                    return box;
+                                }
+                            } else if (self.isAdmin) {
+                                return box;
+                            }
                         }
                     });
 
@@ -273,18 +280,18 @@ function shippingController(angular, app) {
         }
 
         function calculateShippingWhValue() {
-            self.shippingBox.warehouse.weight = 0;
-            self.shippingBox.warehouse.value = 0;
-            self.shippingBox.warehouse.quantity = 0;
-            self.shippingBox.warehouse.wh_val = 0;
-            self.shippingBox.warehouse.wh_aditional_val = 0;
+            self.shippingBox.total.weight = 0;
+            self.shippingBox.total.value = 0;
+            self.shippingBox.total.quantity = 0;
+            self.shippingBox.total.wh_val = 0;
+            self.shippingBox.total.wh_aditional_val = 0;
 
             self.shippingBox.boxes.forEach(function(box) {
-                self.shippingBox.warehouse.weight = parseFloat(self.shippingBox.warehouse.weight) + parseFloat(box.box_partial_weight);
-                self.shippingBox.warehouse.value = parseFloat(self.shippingBox.warehouse.value) + parseFloat(box.box_partial_value);
-                self.shippingBox.warehouse.quantity = parseInt(self.shippingBox.warehouse.quantity) + parseInt(box.quantity);
-                self.shippingBox.warehouse.wh_val = parseFloat(self.shippingBox.warehouse.wh_val) + parseFloat(box.box_warehouse_value);
-                self.shippingBox.warehouse.wh_aditional_val = parseFloat(self.shippingBox.warehouse.wh_aditional_val) + parseFloat(box.aditional_total);
+                self.shippingBox.total.weight = parseFloat(self.shippingBox.total.weight) + parseFloat(box.box_partial_weight);
+                self.shippingBox.total.value = parseFloat(self.shippingBox.total.value) + parseFloat(box.box_partial_value);
+                self.shippingBox.total.quantity = parseInt(self.shippingBox.total.quantity) + parseInt(box.quantity);
+                self.shippingBox.total.wh_val = parseFloat(self.shippingBox.total.wh_val) + parseFloat(box.box_warehouse_value);
+                self.shippingBox.total.wh_aditional_val = parseFloat(self.shippingBox.total.wh_aditional_val) + parseFloat(box.aditional_total);
             });
         }
 
@@ -316,7 +323,23 @@ function shippingController(angular, app) {
         }
 
         function finish() {
-            console.log(self.shippingBox);
+            shippingService._addShippingBox(self.shippingBox).then(function(res) {
+                var shipping_box_id = res.data.id;
+                if (res.data.success && shipping_box_id) {
+                    var sequence = $q.defer();
+                    sequence.resolve();
+                    sequence = sequence.promise;
+                    self.shippingBox.boxes.forEach(function(box) {
+                        sequence = sequence.then(function() {
+                            box.shipping_box_id = shipping_box_id;
+                            return shippingService._updateEnterBox(box);
+                        });
+                    });
+                    $q.all(sequence).then(function() {
+                        console.log('success');
+                    });
+                }
+            });
         }
 
         function nextStep(index) {
@@ -330,7 +353,7 @@ function shippingController(angular, app) {
 
         function init() {
             self.shippingBox = {
-                warehouse: {
+                total: {
                     weight: 0,
                     value: 0,
                     quantity: 0,
@@ -349,13 +372,14 @@ function shippingController(angular, app) {
                 provider: "",
                 bill_file: ""
             }
-            self.shippingBox = { "warehouse": { "weight": 800, "value": 1750, "quantity": 30, "wh_val": 650.5, "wh_aditional_val": 500 }, "user": { "name": "Johanna", "lastname": "Belmonte", "company_real_name": "Proplanta S.A.", "warehouse_name": "", "tel": "123456 / 123456", "cel": "123456", "id": "21", "email": "joy", "codeType": "1", "idCode": "123123123123", "address": "calle falsa 123", "localidad": "Ciudad Mendoza", "postalcode": "5500", "isAdmin": "0", "isPremium": "0", "client_type": "1", "company_name": "Proplanta" }, "boxes": [{ "id": "1", "box_stock": 60, "quantity": 30, "remaining": 5, "awb_boxes_id": 1, "box_value": 3500, "box_weight": 1600, "box_partial_weight": 800, "box_partial_value": 1750, "long_desc": "Caja1", "created": "1506730703057", "status": 2, "tracking": "0001910199011999", "provider": "FedEx", "box_warehouse_value": "650.5", "aditional_unit": "1", "aditional_value": "500", "aditional_total": "500", "warehouse": { "id": "5", "name": "WH MIA HBR", "tel": "111", "cel": "11111", "email": "pablo.quiroz@tucourier.com.ar", "codeType": 1, "idCode": "123123", "address": "5555 Collins ave apt 14z,", "localidad": "MIAMI BEACH", "postalcode": "132" }, "bills": [{ "id": "1", "uid": "21", "timestamp": "1506730003246", "number": "8888", "stock": "30", "value": "2000", "weight": "1000", "long_desc": "facturaB", "bill_file_name": "andrey-grinkevich-366008.jpg", "bill_file_path": "/dist/files/1506730003246/5f57b264574d49ace1afe8daad93e07c22b3814131fde8f43df1c9d4335cc967.jpg", "$$hashKey": "object:59" }, { "id": "2", "uid": "21", "timestamp": "1506730003243", "number": "9999", "stock": "30", "value": "1500", "weight": "600", "long_desc": "facturaA", "bill_file_name": "bb4dead81d6348db89062e77ea0c287e.jpg", "bill_file_path": "/dist/files/1506730003243/d6b1da053f4792062de58294a556043fcd07eacc7a72de2920899c99a09d6429.jpg", "$$hashKey": "object:60" }], "user": { "name": "Johanna", "lastname": "Belmonte", "company_real_name": "Proplanta S.A.", "warehouse_name": "", "tel": "123456 / 123456", "cel": "123456", "id": "21", "email": "joy", "codeType": "1", "idCode": "123123123123", "address": "calle falsa 123", "localidad": "Ciudad Mendoza", "postalcode": "5500", "isAdmin": "0", "isPremium": "0", "client_type": "1", "company_name": "Proplanta" }, "deleted": "0", "isActive": true }], "freight_val": "100", "shipping_val": "100", "warehouse_val": "100", "aditional_unit": "1", "aditional_value": "100", "aditional_total": 100, "tracking": "1231239123213", "provider": "FeDex", "bill_file": {} }
             if (self.shippingBox.user) {
                 self.selectedUser = self.shippingBox.user;
                 getBoxList(self.shippingBox.user);
             }
             self.finish = finish;
             self.cancel = cancel;
+            self.isAdmin = parseInt(sessionStorage.getItem('isAdmin'));
+            self.clientType = parseInt(sessionStorage.getItem('clientType'));
             self.spinner = false;
             self.searchBy = "";
             self.filterQuery = "";
@@ -369,7 +393,7 @@ function shippingController(angular, app) {
             self.setTrackingBox = setTrackingBox;
             self.box_list = [];
             self.selectedBox = false;
-            self.isEditing = isEditing;
+            self.isEditing = isEditing || false;
             self.boxLang = {};
             self.nextStep = nextStep;
             self.toShippingBox = toShippingBox;

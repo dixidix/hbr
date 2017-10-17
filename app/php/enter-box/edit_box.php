@@ -14,7 +14,10 @@ foreach($_POST as $key=>$value) {
 }
 
 if (empty($errors)){
-    MysqliDB::getInstance()->query("UPDATE `awb_enter_box` SET `quantity`='".$quantity."',`weight`=".(float)$box_weight.",`value`=".(float)$box_value.",`aditional_unit`=".(int)$aditional_unit.", `aditional_value`=".(float)$aditional_value.", `aditional_total`=".(float)$aditional_total.",`box_warehouse_value`=".(float)$box_warehouse_value.", `descrip`='".$long_desc."' WHERE `id` = ".(int)$id."");
+    $shipping_box_id = !empty($_POST['shipping_box_id']) ? $_POST['shipping_box_id'] : NULL;
+
+    MysqliDB::getInstance()->query("UPDATE `awb_enter_box` SET `quantity`='".$quantity."',`weight`=".(float)$box_weight.",`value`=".(float)$box_value.",`aditional_unit`=".(int)$aditional_unit.", `aditional_value`=".(float)$aditional_value.", `aditional_total`=".(float)$aditional_total.",`box_warehouse_value`=".(float)$box_warehouse_value.",`shipping_box_id`=".(int)$shipping_box_id.", `descrip`='".$long_desc."' WHERE `id` = ".(int)$id."");
+
     MysqliDB::getInstance()->query("UPDATE `awb_boxes` SET `remaining`='".$remaining."' WHERE `id` = ".(int)$awb_boxes_id."");
 	$resolve_data['success'] = true;	
 	MysqliDB::getInstance()->close();

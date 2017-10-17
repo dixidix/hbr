@@ -2,9 +2,9 @@
     <div class="row">
         <div class="col-xs-12">
             <label for="company_name">{{::modalAddShippingBox.lang.form.add.company_name.label}}</label>
-            <select ng-disabled="modalAddShippingBox.isEditing == true" ng-change="modalAddShippingBox.getBoxList(modalAddShippingBox.selectedUser)" class="form-control" required ng-options="user.company_name for user in modalAddShippingBox.users track by user.id"
-                name="users" id="users" ng-model="modalAddShippingBox.selectedUser">
-                        <option value="" disabled="disabled">{{::modalAddShippingBox.lang.form.add.company_name.placeholder}}</option>
+            <select ng-disabled="modalAddShippingBox.isEditing == true" ng-change="modalAddShippingBox.getBoxList(modalAddShippingBox.selectedUser.id)" class="form-control" required ng-options="user.company_name for user in modalAddShippingBox.users track by user.id"
+                name="users" id="users" ng-model="modalAddShippingBox.selectedUser.id">
+                        <option value="" disabled>{{::modalAddShippingBox.lang.form.add.company_name.placeholder}}</option>
             </select>
         </div>
     </div>
@@ -17,13 +17,13 @@
                 <span class="icon"><i class="fa fa-search"></i></span>
             </div>
             <div class="box-list box-list_tracking">
-                <div class="box" data-toggle="collapse" data-target="#list-box" ng-click="modalAddShippingBox.setTrackingBox(box)" ng-class="box.isActive ? 'active':''" ng-repeat="box in modalAddShippingBox.box_list  | filter: searchTracking track by $index">
+                <div class="box" ng-click="modalAddShippingBox.setTrackingBox(box)" ng-class="box.isActive ? 'active':''" ng-repeat="box in modalAddShippingBox.box_list  | filter: searchTracking track by $index">
                     <i class="fa" ng-class="box.isActive ? 'fa-dropbox':'fa-cube'"></i><br>
                     <span>Tracking</span><br>
                     <span>{{::box.tracking}}</span><br>
                 </div>
             </div>
-            <div id="list-box" class="box-list box-list_boxes collapse">
+            <div id="list-box" class="box-list box-list_boxes">
                 <div class="box" ng-click="modalAddShippingBox.setBox(trackingBox)" ng-class="trackingBox.isActive ? 'active':''" ng-repeat="trackingBox in modalAddShippingBox.trackingBoxes track by $index">
                     <i class="fa" ng-class="trackingBox.isActive ? 'fa-dropbox':'fa-cube'"></i><br>
                     <span>{{::modalAddShippingBox.lang.form.add.box_list.box}} N°{{::trackingBox.id}}</span><br>

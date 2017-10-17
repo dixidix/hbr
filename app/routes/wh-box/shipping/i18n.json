@@ -9,7 +9,7 @@
                 "title": "Buenos Aires"
             },
             "arrived": {
-                "title": "Despachado"
+                "title": "Consumidor Final"
             }
         },
         "form": {
@@ -22,7 +22,6 @@
                 "submitBtn": "Enviar",
                 "cancelBtn": "Cancelar",
                 "processLbl": "Enviando",
-
                 "add_wh_box": "Agregar Caja",
                 "added_box": "Caja Agregada",
                 "next_step": "Siguiente",
@@ -38,7 +37,7 @@
                     "warehouse_val": "Valor de depósito",
                     "wh_aditional_val": "Valor Adicional de depósito"
                 },
-                "box": "Caja",                
+                "box": "Caja",
                 "shipping_info": {
                     "company": "Empresa",
                     "cuit": "Cuit",
@@ -46,10 +45,10 @@
                     "city": "Localidad",
                     "postalcode": "Código Postal",
                     "tel": "Tel / Cel",
-                    "freight":"Valor de Flete",
-                    "shipping":"Valor de envío",
-                    "hbr_wh_val":"HBR valor de depósito",
-                    "aditional_unit":"Unidad adicional",
+                    "freight": "Valor de Flete",
+                    "shipping": "Valor de envío",
+                    "hbr_wh_val": "HBR valor de depósito",
+                    "aditional_unit": "Unidad adicional",
                     "aditional_value": "Valor Adicional",
                     "aditional_total": "Total Adicional",
                     "tracking": "Código de tracking",
@@ -121,6 +120,10 @@
                     "label": "Cantidad de productos (*)",
                     "placeholder": "Cantidad de productos"
                 },
+                "provider": {
+                    "label": "Proveedor postal (*)",
+                    "placeholder": "Proveedor postal"
+                },
                 "remaining": {
                     "label": "Stock (*)",
                     "placeholder": "Stock restante"
@@ -149,10 +152,19 @@
                     "label": "descripción (*)",
                     "placeholder": "descripción (máximo 100 caracteres)"
                 },
+
+                "box_origin": "Punto de orígen de la caja",
+                "final_costumer": "Consumidor final",
                 "warehouse": {
-                    "label": "Warehouse (*)",
-                    "placeholder": "-- Selecciona un Warehouse --"
+                    "label": "Depósito (*)",
+                    "placeholder": "-- Selecciona un depósito --",
+                    "address": "Dirección",
+                    "localidad": "Localidad",
+                    "postalcode": "Código postal",
+                    "tel": "Tel",
+                    "cel": "Cel"
                 },
+
                 "company_name": {
                     "label": "Cliente (*)",
                     "placeholder": "-- Selecciona un cliente --"
@@ -185,7 +197,7 @@
                 "title": "Buenos Aires"
             },
             "arrived": {
-                "title": "dispatched"
+                "title": "Final Costumer"
             }
         },
         "form": {
@@ -213,7 +225,7 @@
                     "warehouse_val": "Warehouse Value",
                     "wh_aditional_val": "Warehouse Aditional value"
                 },
-                "box": "Box",                
+                "box": "Box",
                 "shipping_info": {
                     "company": "Company name",
                     "cuit": "Cuit",
@@ -221,10 +233,10 @@
                     "city": "City",
                     "postalcode": "Postal Code",
                     "tel": "Tel / Cel",
-                    "freight":"Freight Value",
-                    "shipping":"Shipping Value",
-                    "hbr_wh_val":"HBR Warehouse value",
-                    "aditional_unit":"Aditional Unit",
+                    "freight": "Freight Value",
+                    "shipping": "Shipping Value",
+                    "hbr_wh_val": "HBR Warehouse value",
+                    "aditional_unit": "Aditional Unit",
                     "aditional_value": "Aditional Value",
                     "aditional_total": "Aditional Total",
                     "tracking": "Tracking Code",
@@ -339,9 +351,16 @@
                     "label": "Description (*)",
                     "placeholder": "Description (max. length 50 chars)"
                 },
+                "box_origin": "Box origin point",
+                "final_costumer": "Final costumer",
                 "warehouse": {
                     "label": "Warehouse (*)",
-                    "placeholder": "-- Select a Warehouse --"
+                    "placeholder": "-- Select a Warehouse --",
+                    "address": "Address",
+                    "localidad": "City",
+                    "postalcode": "Postal code",
+                    "tel": "Tel",
+                    "cel": "Cel"
                 },
                 "company_name": {
                     "label": "Company (*)",
