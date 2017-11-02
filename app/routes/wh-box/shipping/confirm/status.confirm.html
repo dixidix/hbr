@@ -1,0 +1,81 @@
+<div class="box box-modal container-fluid" ng-cloak>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="statusCancel()">&times;</button>
+        <h3>
+            <i class="fa fa-dropbox" style="margin-right:5px"></i>{{shipping.lang.sp_box.status_change}} 
+        <span ng-if="spbox.toStatus == 0">{{shipping.lang.board.warehouse.title }}</span>
+        <span ng-if="spbox.toStatus == 1">{{shipping.lang.board.country.title }}</span>
+        <span ng-if="spbox.toStatus == 2">{{shipping.lang.board.arrived.title }}</span>
+    </h3>
+    </div>
+    <div class="modal-body clearfix">
+        <h4>{{shipping.lang.form.add.required }}</h4>
+        <div class="col-xs-12 content">
+            <form>
+                <div class="row">
+                    <div class="form-group col-xs-6">
+                        <label class="control-label" for="leave_date">{{shipping.lang.sp_box.leave_date }} (*)</label>
+                        <input type="date" name="leave_date" class="form-control" ng-model="confirmBox.leave_date" required>
+                    </div>
+                    <div class="form-group col-xs-6">
+                        <label class="control-label" for="arrival_date">{{shipping.lang.sp_box.arrival_date }} (*)</label>
+                        <input type="date" name="arrival_date" class="form-control" ng-model="confirmBox.arrival_date" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xs-6">
+                        <label class="control-label" for="provider">{{shipping.lang.sp_box.provider }}</label>
+                        <input type="text" name="provider" class="form-control" ng-model="confirmBox.provider" required>
+                    </div>
+                    <div class="form-group col-xs-6">
+                        <label class="control-label" for="tracking">{{shipping.lang.sp_box.tracking }}</label>
+                        <input type="text" name="tracking" class="form-control" ng-model="confirmBox.tracking" required>
+                    </div>
+                </div>  
+                <div class="row" ng-if="shipping.isAdmin == 1">
+                    <div class="form-group col-xs-6">
+                        <label class="control-label" for="freight_val">{{shipping.lang.sp_box.freight_val }}</label>
+                        <input type="number" name="freight_val" class="form-control" ng-model="spbox.freight_val" required>
+                    </div>
+                    <div class="form-group col-xs-6">
+                        <label class="control-label" for="shipping_val">{{shipping.lang.sp_box.shipping_val }}</label>
+                        <input type="text" name="shipping_val" class="form-control" ng-model="spbox.shipping_val" required>
+                    </div>
+                </div>
+                <div class="row" ng-if="shipping.isAdmin == 1">
+                    <div class="form-group col-xs-4">
+                        <label for="aditional_unit">{{ shipping.lang.sp_box.aditional_unit }}</label>
+                        <input id="aditional_unit" ng-change="spbox.aditional_total = spbox.aditional_unit * spbox.aditional_value" name="aditional_unit" type="text" class="form-control" ng-model="spbox.aditional_unit">
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <label for="aditional_value">{{ shipping.lang.sp_box.aditional_value }}</label>
+                        <input id="aditional_value" ng-change="spbox.aditional_total = spbox.aditional_unit * spbox.aditional_value" name="aditional_value" type="text" class="form-control" ng-model="spbox.aditional_value">
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <label for="aditional_total">{{ shipping.lang.sp_box.aditional_total }}</label>
+                        <input id="aditional_total" name="aditional_total" readonly type="text" class="form-control" ng-model="spbox.aditional_total">
+                    </div>
+                </div>
+                <div class="row" ng-if="shipping.isAdmin == 1">
+                    <div class="form-group col-xs-12">
+                        <label class="control-label" for="hbr_wh_val">{{shipping.lang.sp_box.hbr_wh_val }}</label>
+                        <input type="text" name="hbr_wh_val" class="form-control" ng-model="spbox.hbr_wh_val" required>
+                    </div>
+                </div>
+                <div class="row" ng-if="shipping.isAdmin == 1">
+                    <div class="col-xs-6">
+                        <label for="bill_file" class="control-label">{{ shipping.lang.sp_box.file }}</label>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-file-pdf-o"></i></span>
+                            <input type="file" name="bill_file" id="bill_file" onchange="angular.element(this).scope().getFilename(this)" ng-model="spbox.bill_file" uploader-model="spbox.bill_file" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer clear-fix">        
+        <button class="btn btn-hbr-blue" ng-disabled="!confirmBox.leave_date || !confirmBox.arrival_date" ng-click="statusAccept()">{{shipping.lang.sp_box.confirm }}</button>
+        <button class="btn btn-hbr-blue" ng-click="statusCancel()">{{shipping.lang.sp_box.cancel }}</button>
+    </div>
+</div>

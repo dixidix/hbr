@@ -53,7 +53,7 @@ tools:
             - test
             - vendor
 
-    # PHP CS Fixer (http://http://cs.sensiolabs.org/).
+    # PHP CS Fixer (https://https://cs.sensiolabs.org/).
     php_cs_fixer:
         enabled:              true
         config:
@@ -76,7 +76,7 @@ tools:
             - test
             - vendor
 
-    # PHP Mess Detector (http://phpmd.org).
+    # PHP Mess Detector (https://phpmd.org).
     php_mess_detector:
         enabled:              true
         config:

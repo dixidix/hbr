@@ -1,0 +1,17 @@
+<div class="box box-modal container-fluid" ng-cloak>
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="deleteCancel()">&times;</button>
+            <h3><i class="fa fa-dropbox" style="margin-right:5px"></i>{{shipping.lang.sp_box.delete}}</h3>
+        </div>
+        <div class="modal-body clearfix">
+            <div class="row">
+                <div class="col-xs-12 content">
+                  <h4>{{shipping.lang.sp_box.delete_msg}}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-hbr-danger" ng-click="deleteAccept()">{{shipping.lang.sp_box.delete }}</button>
+            <button class="btn btn-hbr-blue" ng-click="deleteCancel()">{{shipping.lang.sp_box.cancel }}</button>
+        </div>
+    </div>

@@ -2,7 +2,7 @@
 .awb-box {
     h3 {
         color: $hbr-blue;
-        margin-top: 0;
+        padding-top: 20px;
     }
     hr {
         background-color: $hbr-blue;
@@ -185,42 +185,46 @@
     line-height: 13px !important;
 }
 
-.box-modal {
-    .modal {
-        &-body {
-            .bills {
-                margin-top: 5%;
-                .bill {
-                    color: $hbr-blue;
-                    &-file {
-                        color: $hbr-light-purple;
-                        font-size: 25px;
+.modal-dialog {
+    width: 60%;
+    padding-top: 100px;
+    .box-modal {
+        .modal {
+            &-body {
+                .bills {
+                    margin-top: 5%;
+                    .bill {
+                        color: $hbr-blue;
+                        &-file {
+                            color: $hbr-light-purple;
+                            font-size: 25px;
+                        }
                     }
                 }
-            }
-            .form-group {
-                textarea {
-                    height: 80px;
+                .form-group {
+                    textarea {
+                        height: 80px;
+                    }
                 }
-            }
-            input[type="file"]::-webkit-file-upload-button {
-                &,
-                &:active,
-                &:focus,
-                &:active:focus,
-                &:hover {
-                    background-color: $hbr-green;
-                    border: 1px solid $hbr-blue;
-                    color: $hbr-blue;
-                    width: 200px;
-                    height: 40px;
-                    outline: 0;
-                    padding: 0.4em 1em;
-                    font-family: $roboto;
-                }
-                &:hover {
-                    background-color: lighten($hbr-green, 5%);
-                    cursor: pointer;
+                input[type="file"]::-webkit-file-upload-button {
+                    &,
+                    &:active,
+                    &:focus,
+                    &:active:focus,
+                    &:hover {
+                        background-color: $hbr-green;
+                        border: 1px solid $hbr-blue;
+                        color: $hbr-blue;
+                        width: 200px;
+                        height: 40px;
+                        outline: 0;
+                        padding: 0.4em 1em;
+                        font-family: $roboto;
+                    }
+                    &:hover {
+                        background-color: lighten($hbr-green, 5%);
+                        cursor: pointer;
+                    }
                 }
             }
         }

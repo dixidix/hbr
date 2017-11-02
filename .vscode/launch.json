@@ -7,14 +7,14 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome",
-            "url": "http://localhost:8080",
+            "url": "https://localhost:8080",
             "webRoot": "${workspaceRoot}"
         },
         {
             "name": "Launch localhost",
             "type": "chrome",
             "request": "launch",
-            "url": "http://localhost:3000/hbr-selfie",
+            "url": "https://localhost:3000/hbr-selfie",
             "webRoot": "${workspaceRoot}/wwwroot"
         },
         {

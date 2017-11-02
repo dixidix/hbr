@@ -1,0 +1,40 @@
+<div class="box box-modal container-fluid" ng-cloak>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="locationCancel()">&times;</button>
+        <h3><i class="fa fa-dropbox" style="margin-right:5px"></i>{{shipping.lang.sp_box.location_change}}</h3>
+    </div>
+    <div class="modal-body clearfix">
+        <div class="row">
+            <div class="col-xs-12 content">
+                <h4>{{shipping.lang.sp_box.location_change_msg }}</h4>
+                <h5>{{shipping.lang.form.add.required }}</h5>
+            </div>
+        </div>
+        <form>
+            <div class="row">
+                <div class="form-group col-xs-6">
+                    <label class="control-label" for="leave_date">{{shipping.lang.sp_box.leave_date }} (*)</label>
+                    <input type="date" name="leave_date" class="form-control" ng-model="spbox.wh_leave_date" required>
+                </div>
+                <div class="form-group col-xs-6">
+                    <label class="control-label" for="arrival_date">{{shipping.lang.sp_box.arrival_date }} (*)</label>
+                    <input type="date" name="arrival_date" class="form-control" ng-model="spbox.wh_arrival_date" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-6">
+                    <label class="control-label" for="provider">{{shipping.lang.sp_box.provider }}</label>
+                    <input type="text" name="provider" class="form-control" ng-model="spbox.wh_provider" required>
+                </div>
+                <div class="form-group col-xs-6">
+                    <label class="control-label" for="tracking">{{shipping.lang.sp_box.tracking }}</label>
+                    <input type="text" name="tracking" class="form-control" ng-model="spbox.wh_tracking" required>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-hbr-blue" ng-disabled="!spbox.wh_leave_date || !spbox.wh_arrival_date" ng-click="locationAccept()">{{shipping.lang.sp_box.confirm }}</button>
+        <button class="btn btn-hbr-blue" ng-click="locationCancel()">{{shipping.lang.sp_box.cancel }}</button>
+    </div>
+</div>

@@ -39,7 +39,7 @@ function bundle(gulp, $) {
             .pipe(source("app.bundle.js"))
             .pipe(rename('app.bundle.min.js'))
             .pipe(buffer())
-            // .pipe(uglify())
+            //.pipe(uglify())
             .pipe(gulp.dest("./dist"));
     }
 

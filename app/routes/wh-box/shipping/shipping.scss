@@ -1,8 +1,67 @@
 @import '../../../styles/base';
 .shipping {
+    .popover {
+        left: 170px !important;
+    }
+    .popover.top>.arrow {
+        left: 60%;
+    }
+    .popover-content {
+        width: 235px;
+        max-height: 290px;
+        color: $hbr-blue;
+        padding: 5px 3px;
+        .popover-card {
+            font-size: 11px;
+            border: 2px solid $hbr-blue;
+            border-radius: 5px;
+            .stock-card__header {
+                background: $hbr-blue;
+                padding: 0;
+                color: $hbr-green;
+                padding: 0px 15px;
+                margin-bottom: 15px;
+            }
+            .stock-card__data {
+                max-height: 215px;
+                overflow-y: auto;
+                font-size: 12px;
+                padding: 0 10px;
+                li {
+                    padding: 5px 0px;
+                }
+            }
+        }
+    }
+    .wh_select {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-items: center;
+        select {
+            display: block;
+            width: auto;
+            padding: 0;
+            border: transparent;
+            background: transparent;
+            outline: transparent;
+            box-shadow: none;
+            font-size: 11px;
+            height: auto;
+        }
+    }
+    [draggable] {
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+        /* Required to make elements draggable in old WebKit */
+        -khtml-user-drag: element;
+        -webkit-user-drag: element;
+    }
     h3 {
         color: $hbr-blue;
-        margin-top: 0;
+        padding-top: 20px;
     }
     hr {
         background-color: $hbr-blue;
@@ -79,7 +138,7 @@
             position: relative;
             margin:1%;
             width: 98%;
-            height: 170px;
+            height: 240px;
             background: #fcfcfc;
             border: 1px solid $hbr-blue;
             border-radius: 5px;
@@ -113,13 +172,22 @@
                 padding: 0px 10px;
                 background: $hbr-blue;
                 color: $hbr-green;
+                a {
+                    &:hover {
+                        color: white;
+                    }
+                }
             }
         }
         &_col {
             background: #F5F5F5;
-            min-height: 180px;
+            min-height: 240px;
+            margin-bottom: 5px;
             position: relative;
             width: 32%;
+            &.active {
+                background: darken(#F5F5F5, 20%);
+            }
             &:first-child {
                 margin-right: 1%;
             }
@@ -215,7 +283,7 @@
                     position: relative;
                     margin: 1%;
                     width: 100%;
-                    height: 170px;
+                    height: 200px;
                     background: #fcfcfc;
                     border: 1px solid $hbr-blue;
                     border-radius: 5px;
@@ -252,6 +320,7 @@
                     }
                 }
             }
+
             .btn-hbr-blue {
                 @include hbr-btn-blue(100%, 40px, $hbr-green);
                 padding: 0;
@@ -537,6 +606,7 @@
                             cursor: pointer;
                         }
                     }
+
                     .btn-hbr-blue {
                         @include hbr-btn-blue(auto, 40px, $hbr-green);
                         font-size: 13px;
@@ -562,6 +632,59 @@
                     height: 80px;
                 }
             }
+
+            .input-group {
+                margin: 10px 0px;
+                input {
+                    height: 40px;
+                }
+                button {
+                    height: 40px;
+                    width: 160px;
+                    padding: 0;
+                    font-size: 11px;
+                    display: flex;
+                    flex-direction: row;
+                    align-content: center;
+                    align-items: center;
+                    justify-content: space-around;
+                }
+                a {
+                    cursor: pointer;
+                }
+            }
+            input[type="file"]::-webkit-file-upload-button {
+                &,
+                &:active,
+                &:focus,
+                &:active:focus,
+                &:hover {
+                    background-color: $hbr-green;
+                    border: 1px solid $hbr-blue;
+                    color: $hbr-blue;
+                    width: 200px;
+                    height: 40px;
+                    outline: 0;
+                    padding: 0.4em 1em;
+                    font-family: $roboto;
+                }
+                &:hover {
+                    background-color: lighten($hbr-green, 5%);
+                    cursor: pointer;
+                }
+            }
         }
+    }
+    .btn-hbr-blue {
+        @include hbr-btn-blue(auto, 40px, $hbr-green);
+        font-size: 13px;
+        padding: 10px 30px;
+        margin-top: 15px;
+    }
+    .btn-hbr-danger {
+        @include hbr-btn-danger(auto, 40px, white);
+        font-size: 13px;
+        padding: 10px 30px;
+        margin-top: 15px;
     }
 }

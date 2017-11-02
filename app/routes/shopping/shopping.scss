@@ -2,7 +2,7 @@
 @import '../../styles/modules/main';
 .modal-dialog {
     width: 90%;
-    margin-top: 100px;
+    padding-top: 100px;
     .fa-save {
         margin-right: 15px;
     }
@@ -66,7 +66,7 @@
             background-color: $hbr-green;
             color: $hbr-blue;
             border-color: $hbr-blue;
-            font-family: $museoSans-500;
+            font-family: 'Open Sans', sans-serif;
             min-width: 45px;
         }
         .form-control {
@@ -103,7 +103,7 @@
             list-style: none;
             li {
                 strong {
-                    font-family: $museoSans-500;
+                    font-family: 'Open Sans', sans-serif;
                 }
             }
         }
@@ -165,7 +165,7 @@
             thead {
                 margin-top: 5%;
                 tr {
-                    font-family: $museoSans-500;
+                    font-family: 'Open Sans', sans-serif;
                     background: $hbr-green;
                     color: $hbr-blue;
                     text-align: center;
@@ -395,7 +395,7 @@
         background-color: $hbr-green;
         color: $hbr-blue;
         border-color: $hbr-blue;
-        font-family: $museoSans-500;
+        font-family: 'Open Sans', sans-serif;
         min-width: 45px;
     }
     .btn-hbr-blue {
@@ -469,7 +469,7 @@
             .rounded {
                 thead {
                     tr {
-                        font-family: $museoSans-500;
+                        font-family: 'Open Sans', sans-serif;
                         background: $hbr-green;
                         color: $hbr-blue;
                         text-align: center;
@@ -524,7 +524,7 @@
             width: 100%;
             border-color: $hbr-green;
             strong {
-                font-family: $museoSans-500;
+                font-family: 'Open Sans', sans-serif;
             }
             hr {
                 margin: 5px 0px;
@@ -543,7 +543,7 @@
         .rounded {
             thead {
                 tr {
-                    font-family: $museoSans-500;
+                    font-family: 'Open Sans', sans-serif;
                     background: $hbr-green;
                     color: $hbr-blue;
                     text-align: center;
@@ -676,7 +676,7 @@
             background-color: $hbr-green;
             color: $hbr-blue;
             border-color: $hbr-blue;
-            font-family: $museoSans-500;
+            font-family: 'Open Sans', sans-serif;
             min-width: 45px;
         }
         .btn-hbr-blue {

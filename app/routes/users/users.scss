@@ -1,7 +1,7 @@
 @import '../../styles/base';
 .modal-dialog{
 	width:60%;
-	margin-top:100px;
+	padding-top:100px;
 	.btn-hbr-blue{
 		@include hbr-btn-blue(150px,50px,$hbr-green);
 	}
@@ -82,7 +82,7 @@
         margin-top: 2%;
         thead {
             tr {
-                font-family: $museoSans-500;
+                font-family: 'Open Sans', sans-serif;
                 background: $hbr-green;
                 color: $hbr-blue;
                 text-align: center;

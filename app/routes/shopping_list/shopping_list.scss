@@ -1,7 +1,7 @@
 @import '../../styles/base';
 .modal-dialog {
     width: 90%;
-    margin-top: 100px;
+    padding-top: 100px;
     height:90%;
     .btn-hbr-blue {
         @include hbr-btn-blue(150px, 50px, $hbr-green);
@@ -30,7 +30,7 @@
         .rounded {
             thead {
                 tr {
-                    font-family: $museoSans-500;
+                    font-family: 'Open Sans', sans-serif;
                     background: $hbr-green;
                     color: $hbr-blue;
                     text-align: center;
@@ -108,7 +108,7 @@
         margin-top: 5%;
         thead {
             tr {
-                font-family: $museoSans-500;
+                font-family: 'Open Sans', sans-serif;
                 background: $hbr-green;
                 color: $hbr-blue;
                 text-align: center;

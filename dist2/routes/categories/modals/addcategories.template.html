@@ -1,0 +1,23 @@
+<div class="category wh-modal container-fluid" ng-cloak>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="modalAddcategory.cancel()">&times;</button>
+        <h3><i class="fa fa-book"></i> Add Category</h3>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="row">
+                <div class="form-group col-xs-12">
+                    <label for="name">Category Name  (*)</label>
+                    <input type="text" class="form-control" placeholder="Category name" ng-model="modalAddcategory.category.name">
+                </div>
+            </div>
+            <div class="help-block">
+                    <span class="text-danger" ng-repeat="error in modalAddcategory.error_msgs"><i class="fa fa-times-circle"></i> {{ error }}</span>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-hbr-blue" ng-click="modalAddcategory.addcategory()">Add</button>
+        <button class="btn btn-hbr-blue" ng-click="modalAddcategory.cancel()">Cancel</button>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<script type="text/ng-template" id="deleteuser.html">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="modalDeleteUser.cancel()">&times;</button>
+        <h3 class="modal-title" id="modal-title">Eliminar usuario</h3>
+
+    </div>
+    <div class="modal-body" id="modal-body">
+        <p>Are you sure that you want to delete {{modalDeleteUser.user.name}} {{modalDeleteUser.user.lastname}} {{modalDeleteUser.user.company_name}} ?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-hbr-blue" ng-click="modalDeleteUser.deleteUser()">Delete</button>
+        <button class="btn btn-hbr-blue" ng-click="modalDeleteUser.cancel()">Close</button>
+    </div>
+</script>

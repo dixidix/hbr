@@ -1,10 +1,71 @@
 @import '../../styles/mixins/main';
 @import '../../styles/modules/main';
 
-.navbar{
-        .tooltip-inner {
-        background-color:$hbr-blue;
-        color:$hbr-green;
+.navbar {
+    .langSupport {
+        position: fixed;
+        min-height: 30px;
+        background: #fcfcfc;
+        right: 15px;
+        top: 65px;
+        padding: 5px 10px;
+        border-radius: 0px 0px 5px 5px;
+        box-shadow: 0px 3px 1px rgba(0,0,0,0.5);
+        width: 120px;
+
+        .flag {
+            width: 20px;
+            height: 15px;
+        }
+        .menu {
+            &-selected {
+                cursor: pointer;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                width: 80px;
+            }
+            padding:0;
+            margin:0;
+            li {
+                padding: 10px 0px;
+                height: 15px;
+                &:last-child {
+                    margin-top:10px;
+                    margin-bottom: 0px;
+                }
+                a {
+                    color: gray;
+                }
+                &.active {
+                    a {
+                        color: $hbr-blue;
+                    }
+                }
+            }
+            &-item {
+                cursor: pointer;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            width: 100px;
+            li {
+                text-align: center;
+                a {
+                    cursor: pointer;
+                    font-size: 14px;
+                    width: 100%;
+                }
+            }
+            position: relative;
+        }
+    }
+    .tooltip-inner {
+        background-color: $hbr-blue;
+        color: $hbr-green;
     }
     z-index: 1035;
     position: fixed;
@@ -21,66 +82,65 @@
     padding-left: 2%;
     border:none;
     margin:0;
-
     box-shadow: 0px 1px 7px 0px $black;
     position: fixed;
     z-index: 100001;
-    @include responsive(desktop, large-desktop){
+    @include responsive(desktop, large-desktop) {
         z-index: 9999999999;
         position: fixed;
     }
-    &-brand{
-        float:left;
-        width:20%;
+    &-brand {
+        float: left;
+        width: 20%;
         height: 40px;
-        @include responsive(desktop, large-desktop,large-xl-desktop){
-            width:20%;
+        @include responsive(desktop, large-desktop, large-xl-desktop) {
+            width: 20%;
             height: $navbar-height;
         }
         padding:5px;
         margin:0;
-        img{
-            height:100%;
+        img {
+            height: 100%;
         }
     }
-    ul{
-        width:80%;
-        float:right;
+    ul {
+        width: 80%;
+        float: right;
         list-style: none;
-        padding:0;
-        margin:0;
-        a{
-        display:flex;
-        flex-direction: row;
-        float:right;
-        justify-content: space-between;
-        color:$hbr-blue;
-        font-size: 12px;
-        @include responsive(desktop, large-desktop,large-xl-desktop){
-            font-size: 18px;
-        }
-        text-decoration: none;
-           li{
-               i{
-                   margin:0 10px;
-               }
-            cursor:pointer;
-            align-content: center;
-            align-items: center;
-            display:flex;
+        padding: 0;
+        margin: 0;
+        a {
+            display: flex;
             flex-direction: row;
-            padding:0 15px;
-            @include responsive(desktop, large-desktop){
-            padding:0 15px;
+            float: right;
+            justify-content: space-between;
+            color: $hbr-blue;
+            font-size: 12px;
+            font-weight: 100;
+            @include responsive(desktop, large-desktop, large-xl-desktop) {
+                font-size: 18px;
             }
-            height: $navbar-height;
-            transition: .2s all ease-in-out;
-            border-bottom:5px solid transparent;
-                &:hover{
-                    border-bottom:5px solid $hbr-green;
+            text-decoration: none;
+            li {
+                i {
+                    margin: 0 10px;
+                }
+                cursor:pointer;
+                align-content: center;
+                align-items: center;
+                display:flex;
+                flex-direction: row;
+                padding:0 15px;
+                @include responsive(desktop, large-desktop) {
+                    padding: 0 15px;
+                }
+                height: $navbar-height;
+                transition: .2s all ease-in-out;
+                border-bottom:5px solid transparent;
+                &:hover {
+                    border-bottom: 5px solid $hbr-green;
                 }
             }
         }
-        
     }
 }

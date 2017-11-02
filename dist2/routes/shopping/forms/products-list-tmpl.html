@@ -1,0 +1,99 @@
+<div class="row" ng-if="!shopping.lote.bills.length">
+    <div class="empty-list">
+        <h3>No se han registrado compras asociadas a&uacute;n.</h3>
+    </div>
+</div>
+
+<div class="shopping__purchase-list" ng-if="shopping.lote.bills.length">
+    <div class="row info">
+        <div class="col-xs-12">
+            <span><i class="fa fa-info-circle"></i> En este paso verificaremos tus compras. Encontrar&aacute;s descripci&oacute;n de tus facturas y el resumen del total de tus compras. Para terminar la compra del lote presiona el bot&oacute;n <b><u>"Terminar Compra"</u></b> ubicado en el fondo de la p&aacute;gina. Si deseas Guardar el estado de la compra y seguir luego, presiona el bot&oacute;n <b><u>"Guardar y continuar luego"</u></b> ubicado en el mismo lugar. Sino, si has modificado o no has guardado aun puedes <b><u>"cancelar"</u></b> la operaci&oacute;n.</span>
+        </div>
+    </div>
+    <table class="table table-bordered table-striped table-curved rounded">
+        <thead>
+            <tr>
+                <td class="col-xs-12" colspan="9"><span>Lote de compra (conjunto de tus facturas)</span></td>
+            </tr>
+            <tr>
+                <td><span>N° Factura</span></td>
+                <td><span>Tracking</span></td>
+                <td><span>Prestador Postal</span></td>
+                <td><span>Tienda de compra</span></td>
+                <td><span>Productos</span></td>
+                <td><span>Cant. Productos</span></td>
+                <td><span>Peso Total</span></td>
+                <td><span>Precio Total</span></td>
+                <td><span>Acciones</span></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="bill in shopping.lote.bills track by $index">
+                <td><span>{{ bill.number }}</span></td>
+                <td><span>{{ bill.tracking_number }}</span></td>
+                <td><span>{{ bill.provider }}</span></td>
+                <td><span>{{bill.establishment }}</span></td>
+                <td>
+                    <table class="col-xs-12" ng-if="bill.products.length">
+                        <thead>
+                            <tr style="background-color:transparent;">
+                                <td class="col-xs-3"><span> Categor&iacute;a </span></td>
+                                <td class="col-xs-3"><span> Producto </span></td>
+                                <td class="col-xs-3"><span> Cant. </span></td>
+                                <td class="col-xs-3"><span> Precio </span></td>
+                                <td class="col-xs-3"><span> Peso </span></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="product in bill.products track by $index">
+                                <td>{{ product.category.name }}</td>
+                                <td>{{ product.name }} </td>
+                                <td>{{ product.quantity }} </td>
+                                <td>{{ product.price | currency }}</td>
+                                <td>{{ product.weight }} KG.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td><span>{{ bill.quantity }}</span></td>
+                <td><span>{{ bill.total_weight }} KG. </span></td>
+                <td><span>{{ bill.total_price }}</span></td>
+                <td><span ng-if="bill.bill_state == 0"><i class="fa fa-close" ng-click="shopping.delete_bill(bill, $index);"></i></span>
+                    <span
+                        ng-if="bill.bill_state == 1"> - </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="well well-lg" ng-if="shopping.excedente_peso">
+        <ul>
+            <li>
+                <span class="help-block"><i class="fa fa-warning"></i>  {{ shopping.excedente_peso }}</span>
+            </li>
+        </ul>
+    </div>
+    <div class="well well-lg">
+        <ul>
+            <li>
+                <strong>Peso Total:</strong>
+                <span class="pull-right">{{ shopping.lote.total_weight }} Kg.</span>
+            </li>
+
+            <li>
+                <strong>Cantidad de productos:</strong>
+                <span class="pull-right"> {{ shopping.lote.total_quantity }}</span>
+            </li>
+            <br>
+            <hr>
+            <li><strong>Total Factura:</strong><span class="pull-right"> U$D {{ shopping.lote.total_price }}</span>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <a ui-sref="dashboard.shopping_list" ui-opts="{reload:true}"><button class="btn btn-hbr-red pull-right">Cancelar</button></a>
+        <button class="btn btn-hbr-blue pull-right" ng-click="shopping.confirmUpdate()">Guardar y continuar luego</button>
+        <button class="btn btn-hbr-blue pull-right" ng-click="shopping.confirmFinish()">Terminar Compra</button>
+    </div>
+    </ul>
+</div>
+<div ng-include src="'hbr-selfie/dist/routes/shopping/confirm-modal.template.html'"></div>
