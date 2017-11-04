@@ -196,7 +196,7 @@
 }
 
 .process_payments {
-
+    margin-top:20px;
     .small-col {
         width: 100px;
         word-wrap: break-word;
@@ -221,7 +221,9 @@
     }
     h3 {
         color: $hbr-blue;
-        margin-top: 0;
+		i {
+			font-size: 24px;
+		}
     }
     hr {
         background-color: $hbr-blue;

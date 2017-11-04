@@ -1,9 +1,11 @@
 @import '../../../styles/base';
 .stock-rooms {
+    margin-top: 20px;
     h3 {
-        color: $hbr-blue;
-        padding-top: 20px;
-
+        color: $hbr-blue;    
+        i {
+			font-size: 24px;
+		}
     }
     hr {
         background-color: $hbr-blue;

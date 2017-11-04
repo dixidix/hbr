@@ -1,7 +1,7 @@
 (function() {
     'use strict';    
-    var app = angular.module('baseapp', ['ngAnimate', 'ui.bootstrap', 'ui.router', 'ngSanitize', 'uiSwitch'])
-        .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+    var app = angular.module('baseapp', ['ngAnimate', 'ui.bootstrap', 'ui.router', 'ngSanitize', 'uiSwitch']);
+     app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
             $urlRouterProvider.otherwise("/hbr-selfie");
             $locationProvider.html5Mode(true);
             $stateProvider

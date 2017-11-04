@@ -69,7 +69,9 @@ function navbarDirective(angular, app) {
                 self.openLang = false;
                 self.langSet = localStorage.getItem('lang') || 'es';
                 $scope.$watch('$root.langs', function() {
-                    self.lang = $rootScope.langs.navbar;
+                    if($rootScope && $rootScope.langs && $rootScope.langs.navbar){
+                        self.lang = $rootScope.langs.navbar;
+                    }
                 });
             }
             init();

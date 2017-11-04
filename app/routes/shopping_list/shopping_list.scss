@@ -70,6 +70,7 @@
 }
 
 .shoppingList {
+    margin-top: 20px;
     .payed {
         color: green;
     }
@@ -84,7 +85,10 @@
     }
     h3 {
         color: $hbr-blue;
-        margin-top: 0;
+		i {
+			font-size: 24px;
+		}
+        
     }
     hr {
         background-color: $hbr-blue;

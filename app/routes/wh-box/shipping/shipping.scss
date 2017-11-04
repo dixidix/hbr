@@ -1,5 +1,6 @@
 @import '../../../styles/base';
 .shipping {
+    margin-top: 20px;
     .popover {
         left: 170px !important;
     }
@@ -61,7 +62,9 @@
     }
     h3 {
         color: $hbr-blue;
-        padding-top: 20px;
+        i {
+			font-size: 24px;
+		}
     }
     hr {
         background-color: $hbr-blue;

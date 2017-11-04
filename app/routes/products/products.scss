@@ -19,6 +19,7 @@
 }
 
 .product {
+  margin-top:20px;
   textarea {
     resize: none;
     height:100px;
@@ -34,7 +35,6 @@
   }
   h3 {
     color: $hbr-blue;
-    margin-top: 0;
     i {
       font-size: 24px;
     }

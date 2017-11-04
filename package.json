@@ -5,10 +5,10 @@
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sass": "node-sass app/ -w -o dist2/ --output-style compressed",
-    "sass:build": "node-sass app/ -o dist2/ --output-style compressed",
-    "sass:watch": "node-sass app/ -w -o dist2/ --output-style compressed",
-    "build": "(webpack & npm run sass:build) & (webpack-dev-server | npm run sass:watch)"
+    "sass:build": "node-sass app/ -o dist/ --output-style compressed",
+    "sass:watch": "node-sass app/ -w -o dist/ --output-style compressed",
+    "build": "webpack | webpack-dev-server & npm run sass:build & npm run sass:watch",
+    "start": "npm run sass:build && npm run sass:watch | webpack --watch"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +19,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "bootstrap": "^3.3.7",
+    "browser-sync-webpack-plugin": "^1.2.0",
     "copy-webpack-plugin": "^4.2.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",

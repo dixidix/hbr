@@ -18,8 +18,7 @@ function serve(gulp, $) {
         gulp.watch(['app/*.html', 'app/**/*.html'], ['html', reload]);
         gulp.watch(['app/components/**/*.js', 'app/*.js', 'app/routes/**/*.js', 'app/services/**/*.js'], ['scripts', reload]);
         gulp.watch(['app/php/*.php', 'app/php/**/*.php'], ['scripts', reload]);
-        gulp.watch(['app/*.json', 'app/**/*.json'], ['scripts', reload]);
-
+        gulp.watch(['app/*.json', 'app/**/*.json',  'app/**/**/*.json',  'app/**/**/**/*.json'], ['scripts', reload]);
     }
 
     return {

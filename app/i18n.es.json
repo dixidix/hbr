@@ -114,6 +114,10 @@
                     "label": "Código de seguimiento (*)",
                     "placeholder": "Código de Seguimiento"
                 },
+                "users": {
+                    "label": "Seleciona un cliente (*)",
+                    "placeholder": "Seleciona un cliente"
+                },
                 "weight": {
                     "label": "Peso total(Kg.)",
                     "placeholder": "Peso en kg"
