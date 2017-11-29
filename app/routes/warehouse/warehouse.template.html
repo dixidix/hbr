@@ -1,11 +1,12 @@
-<div class="warehouse container-fluid" ng-cloak>
-		<link rel="stylesheet" type="text/css" href="./hbr-selfie/dist/routes/warehouse/warehouse.css">
-		
+<div class="warehouse container-fluid" >
+	<link rel="stylesheet" type="text/css" href="./hbr-selfie/dist/routes/warehouse/warehouse.css">
+
 	<div>
-		<h3 class="pull-left"><i class="fa fa-home"></i>Manage Warehouse</h3>
-		<button class="btn btn-hbr-blue pull-right" ng-click="warehouses.newWarehouse()"><i class="fa fa-plus"></i>Warehouse</button>
+		<h3 class="pull-left">
+			<i class="fa fa-home"></i>Manage Warehouse</h3>
 	</div>
-	<br><br>
+	<br>
+	<br>
 	<hr>
 
 	<div class="col-xs-12 content" ng-if="!warehouses.warehouses.length && $root.showSpinner == false">
@@ -17,10 +18,16 @@
 	</div>
 	<div class="col-xs-12 content" ng-if="warehouses.warehouses.length">
 		<div class="row">
-			<div class="col-xs-6">
-				<label for="">General Search</label>
+			<div class="col-xs-2">
+				<button class="btn btn-hbr-blue pull-right" ng-click="warehouses.newWarehouse()">
+					<i class="fa fa-plus"></i>Warehouse</button>
+
+			</div>
+			<div class="col-xs-10">
 				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>
+					<span class="input-group-addon" id="basic-addon1">
+						<i class="fa fa-search"></i>
+					</span>
 					<input type="text" name="search" class="form-control" placeholder="General Search" ng-model="generalSearch">
 				</div>
 			</div>
@@ -28,37 +35,89 @@
 		<table class="table table-bordered table-striped table-curved rounded">
 			<thead>
 				<tr>
-					<td><span>Warehouse # ID</span></td>
-					<td><span>Warehouse Name</span></td>
-					<td><span>Contact name</span></td>
-					<td><span>Contact Lastname</span></td>
-					<td><span>Phone</span></td>
-					<td><span>Cellphone</span></td>
-					<td><span>E-Mail</span></td>
-					<td><span>Address</span></td>
-					<td><span>City</span></td>
-					<td><span>Postal Code</span></td>
-					<td><span>ID Type</span></td>
-					<td><span>ID Code</span></td>
-					<td style="width:100px;"><span>Actions</span></td>
+					<td>
+						<span>Warehouse # ID</span>
+					</td>
+					<td>
+						<span>Warehouse Name</span>
+					</td>
+					<td>
+						<span>Contact name</span>
+					</td>
+					<td>
+						<span>Contact Lastname</span>
+					</td>
+					<td>
+						<span>Phone</span>
+					</td>
+					<td>
+						<span>Cellphone</span>
+					</td>
+					<td>
+						<span>E-Mail</span>
+					</td>
+					<td>
+						<span>Address</span>
+					</td>
+					<td>
+						<span>City</span>
+					</td>
+					<td>
+						<span>Postal Code</span>
+					</td>
+					<td>
+						<span>ID Type</span>
+					</td>
+					<td>
+						<span>ID Code</span>
+					</td>
+					<td style="width:100px;">
+						<span>Actions</span>
+					</td>
 
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="warehouse in filtered = ( warehouses.warehouses | filter: generalSearch )  | start: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage | orderBy: 'name' | filter : paginate  track by $index">
-					<td><span> {{warehouse.id }} </span></td>
-					<td><span> {{warehouse.name }} </span></td>
-					<td><span> {{warehouse.user_name }} </span></td>
-					<td><span> {{warehouse.user_lastname }} </span></td>
-					<td><span> {{warehouse.tel }} </span></td>
-					<td><span> {{warehouse.cel }} </span></td>
-					<td><span> {{warehouse.email }} </span></td>
-					<td><span> {{warehouse.address }} </span></td>
-					<td><span> {{warehouse.localidad }} </span></td>
-					<td><span> {{warehouse.postalcode }} </span></td>
-					<td ng-if="warehouse.codeType == 2"><span>Cuil</span></td>
-					<td ng-if="warehouse.codeType == 1"><span>Cuit</span></td>
-					<td><span> {{warehouse.idCode }} </span></td>
+					<td>
+						<span> {{warehouse.id }} </span>
+					</td>
+					<td>
+						<span> {{warehouse.name }} </span>
+					</td>
+					<td>
+						<span> {{warehouse.user_name }} </span>
+					</td>
+					<td>
+						<span> {{warehouse.user_lastname }} </span>
+					</td>
+					<td>
+						<span> {{warehouse.tel }} </span>
+					</td>
+					<td>
+						<span> {{warehouse.cel }} </span>
+					</td>
+					<td>
+						<span> {{warehouse.email }} </span>
+					</td>
+					<td>
+						<span> {{warehouse.address }} </span>
+					</td>
+					<td>
+						<span> {{warehouse.localidad }} </span>
+					</td>
+					<td>
+						<span> {{warehouse.postalcode }} </span>
+					</td>
+					<td ng-if="warehouse.codeType == 2">
+						<span>Cuil</span>
+					</td>
+					<td ng-if="warehouse.codeType == 1">
+						<span>Cuit</span>
+					</td>
+					<td>
+						<span> {{warehouse.idCode }} </span>
+					</td>
 
 					<td class="actions">
 						<i class="fa fa-edit" tooltip-placement="left" uib-tooltip="Edit" ng-click="warehouses.editWarehouse(warehouse)"></i>
@@ -68,6 +127,6 @@
 			</tbody>
 		</table>
 		<uib-pagination next-text="Siguiente" previous-text="Anterior" total-items="filtered.length" data-num-pages="categories.noOfPages"
-		 ng-model="currentPage" class="pagination-sm pull-right" items-per-page="itemsPerPage" boundary-link-numbers="true"></uib-pagination>
+		    ng-model="currentPage" class="pagination-sm pull-right" items-per-page="itemsPerPage" boundary-link-numbers="true"></uib-pagination>
 	</div>
 </div>

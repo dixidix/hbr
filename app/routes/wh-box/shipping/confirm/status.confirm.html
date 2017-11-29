@@ -1,4 +1,4 @@
-<div class="box box-modal container-fluid" ng-cloak>
+<div class="box box-modal container-fluid" >
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="statusCancel()">&times;</button>
         <h3>
@@ -44,16 +44,16 @@
                 </div>
                 <div class="row" ng-if="shipping.isAdmin == 1">
                     <div class="form-group col-xs-4">
-                        <label for="aditional_unit">{{ shipping.lang.sp_box.aditional_unit }}</label>
-                        <input id="aditional_unit" ng-change="spbox.aditional_total = spbox.aditional_unit * spbox.aditional_value" name="aditional_unit" type="text" class="form-control" ng-model="spbox.aditional_unit">
+                        <label for="aditional_unit">{{ shipping.lang.sp_box.aditional_unit_hbr }}</label>
+                        <input id="aditional_unit" ng-change="spbox.aditional_total_hbr = spbox.aditional_unit_hbr * spbox.aditional_value_hbr" name="aditional_unit" type="text" class="form-control" ng-model="spbox.aditional_unit_hbr">
                     </div>
                     <div class="form-group col-xs-4">
-                        <label for="aditional_value">{{ shipping.lang.sp_box.aditional_value }}</label>
-                        <input id="aditional_value" ng-change="spbox.aditional_total = spbox.aditional_unit * spbox.aditional_value" name="aditional_value" type="text" class="form-control" ng-model="spbox.aditional_value">
+                        <label for="aditional_value">{{ shipping.lang.sp_box.aditional_value_hbr }}</label>
+                        <input id="aditional_value" ng-change="spbox.aditional_total_hbr = spbox.aditional_unit_hbr * spbox.aditional_value_hbr" name="aditional_value" type="text" class="form-control" ng-model="spbox.aditional_value_hbr">
                     </div>
                     <div class="form-group col-xs-4">
-                        <label for="aditional_total">{{ shipping.lang.sp_box.aditional_total }}</label>
-                        <input id="aditional_total" name="aditional_total" readonly type="text" class="form-control" ng-model="spbox.aditional_total">
+                        <label for="aditional_total">{{ shipping.lang.sp_box.aditional_total_hbr }}</label>
+                        <input id="aditional_total" name="aditional_total" readonly type="text" class="form-control" ng-model="spbox.aditional_total_hbr">
                     </div>
                 </div>
                 <div class="row" ng-if="shipping.isAdmin == 1">

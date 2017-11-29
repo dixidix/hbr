@@ -19,6 +19,12 @@
     $bsas_leave_date = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['bsas_leave_date']));
     $customer_arrival_date = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['customer_arrival_date']));
 
+    $hbr_wh_val = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['hbr_wh_val']));
+
+    $aditional_unit_hbr = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['aditional_unit_hbr']));
+    $aditional_value_hbr = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['aditional_value_hbr']));
+    $aditional_total_hbr = MysqliDB::double_scape(MysqliDB::getInstance()->mysql_real_escape_string($_POST['aditional_total_hbr']));
+
     $file_name_bill = !empty($_POST['bill_file_name']) ? $_POST['bill_file_name'] : null;
     $path_bill = !empty($_POST['bill_file_path']) ? $_POST['bill_file_path'] : null;
     
@@ -54,7 +60,7 @@
         $path_bill = null;
     }
 
-    MysqliDB::getInstance()->query("UPDATE `awb_shipping_box` SET `edited`='".$edited."',`status`=".(int)$status.",`travel_status`=".(int)$travel_status.",`wh_tracking`='". $wh_tracking."',`bsas_tracking`='".$bsas_tracking."',`wh_provider`='".$wh_provider."', `bsas_provider`='".$bsas_provider."', `wh_arrival_date`='".$wh_arrival_date."', `wh_leave_date`='".$wh_leave_date."', `bsas_arrival_date`='".$bsas_arrival_date."', `bsas_leave_date`='".$bsas_leave_date."', `customer_arrival_date`='".$customer_arrival_date."', `bill_file_name`='".$file_name_bill."',`bill_file_path`='".$path_bill."' WHERE `id` = ".(int)$id."");
+    MysqliDB::getInstance()->query("UPDATE `awb_shipping_box` SET `edited`='".$edited."',`status`=".(int)$status.",`travel_status`=".(int)$travel_status.",`wh_tracking`='". $wh_tracking."',`bsas_tracking`='".$bsas_tracking."',`wh_provider`='".$wh_provider."', `bsas_provider`='".$bsas_provider."', `wh_arrival_date`='".$wh_arrival_date."', `wh_leave_date`='".$wh_leave_date."', `bsas_arrival_date`='".$bsas_arrival_date."', `bsas_leave_date`='".$bsas_leave_date."', `customer_arrival_date`='".$customer_arrival_date."', `bill_file_name`='".$file_name_bill."',`bill_file_path`='".$path_bill."',`hbr_wh_val`=".(float)$hbr_wh_val.",`aditional_unit_hbr`=".(int)$aditional_unit_hbr.",`aditional_value_hbr`=".(float)$aditional_value_hbr.",`aditional_total_hbr`=".(float)$aditional_total_hbr."    WHERE `id` = ".(int)$id."");
     $resolve_data['success'] = true;	
     MysqliDB::getInstance()->close();
     echo json_encode($resolve_data);

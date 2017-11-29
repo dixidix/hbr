@@ -22,8 +22,12 @@
                     <b ng-if="box.status == 1">{{shipping.lang.sp_box.bsas_arrival_date}}:</b>
                     <b ng-if="box.status == 2">{{shipping.lang.sp_box.customer_arrival_date}}:</b>
                  <span>{{ box.arrival_date | date : "dd/MM/yyyy" }}</span></li>
-        <li class="wh_select"><b>{{shipping.lang.sp_box.travel_status.title}}:</b>
-           <select ng-change="shipping.updateTravelStatus(box)" class="form-control" name="travel_status" id="travel_status" ng-model="box.travel_status">
+        <li class="wh_select"><b> {{shipping.lang.sp_box.travel_status.title}}:  </b>
+            <span ng-if="(shipping.isAdmin != 1 && shipping.clientType != 2) && box.travel_status == 0"> {{ shipping.lang.sp_box.travel_status.not_started }}</span>
+            <span ng-if="(shipping.isAdmin != 1 && shipping.clientType != 2) && box.travel_status == 1"> {{ shipping.lang.sp_box.travel_status.shipped }}</span>
+            <span ng-if="(shipping.isAdmin != 1 && shipping.clientType != 2) && box.travel_status == 2"> {{ shipping.lang.sp_box.travel_status.arrived }}</span>
+            
+           <select ng-if="shipping.isAdmin == 1 || shipping.clientType == 2" ng-change="shipping.updateTravelStatus(box)" class="form-control" name="travel_status" id="travel_status" ng-model="box.travel_status">
                <option ng-value="0"> {{ shipping.lang.sp_box.travel_status.not_started }} </option>
                <option ng-value="1"> {{ shipping.lang.sp_box.travel_status.shipped }} </option>
                <option ng-value="2"> {{ shipping.lang.sp_box.travel_status.arrived }} </option>
@@ -31,8 +35,8 @@
        </li>
         <li><b>{{shipping.lang.sp_box.origin}}:</b> {{box.enter_box[0].warehouse.name}}</li>
         <li class="wh_select"><b>{{shipping.lang.sp_box.location}}:</b>
-             <span ng-if="box.status != 0"> {{ box.warehouse_location.name }}</span>
-            <select ng-if="box.status == 0" ng-change="shipping.saveLocation(box)" class="form-control" required ng-options="warehouse.name for warehouse in shipping.warehouses track by warehouse.id" name="warehouses" id="warehouses" ng-model="box.warehouse_location"></select>
+             <span ng-if="box.status != 0 && (shipping.isAdmin != 1 || shipping.clientType != 2)"> {{ box.warehouse_location.name }}</span>
+            <select ng-if="box.status == 0  && (shipping.isAdmin == 1 || shipping.clientType == 2)" ng-change="shipping.saveLocation(box)" class="form-control" required ng-options="warehouse.name for warehouse in shipping.warehouses track by warehouse.id" name="warehouses" id="warehouses" ng-model="box.warehouse_location"></select>
         </li>
     </ul>
     <div class="stock-card__footer">
@@ -52,11 +56,18 @@
             <li ng-if="box.provider"><b>{{shipping.lang.sp_box.provider}}:</b> <span>{{ box.provider }}</span></li>
             <li ng-if="box.tracking"><b>{{shipping.lang.sp_box.tracking}}:</b> <span>{{box.tracking }}</span></li>
             <li ng-if="box.total.value"><b>{{shipping.lang.sp_box.value}}:</b> <span>{{ box.total.value | currency }}</span></li>
-            <li ng-if="box.hbr_wh_val || box.total.wh_val"><b>{{shipping.lang.sp_box.wh_val}}:</b> <span>{{ (box.hbr_wh_val || box.total.wh_val) | currency }}</span></li>
+            <li ng-if="box.total.wh_val"><b>{{shipping.lang.sp_box.wh_val}}:</b> <span>{{  box.total.wh_val | currency }}</span></li>
+            <li ng-if="box.hbr_wh_val"><b>{{shipping.lang.sp_box.hbr_wh_val}}:</b> <span>{{  box.hbr_wh_val | currency }}</span></li>
             <li ng-if="box.total.wh_aditional_val"><b>{{shipping.lang.sp_box.wh_aditional}}:</b> <span>{{ box.total.wh_aditional_val | currency }}</span></li>
             <li ng-if="box.aditional_value"><b>{{shipping.lang.sp_box.aditional_value}}:</b> <span>{{ box.aditional_value | currency }}</span></li>
             <li ng-if="box.freight_val"><b>{{shipping.lang.sp_box.freight_val}}:</b> <span>{{ box.freight_val | currency }}</span></li>
             <li ng-if="box.shipping_val"><b>{{shipping.lang.sp_box.shipping_val}}:</b> <span>{{ box.shipping_val | currency }}</span></li>
+
+            <li ng-if="box.aditional_total_hbr"><b>{{shipping.lang.sp_box.hbr_aditional}}:</b> <span>{{ box.aditional_total_hbr | currency }}</span></li>
+            <li ng-if="box.shipping_val"><b>{{shipping.lang.sp_box.shipping_val}}:</b> <span>{{ box.shipping_val | currency }}</span></li>
+
+            <li ng-if="box.total.total"><b>{{shipping.lang.sp_box.total}}:</b> <span>{{ box.total.total | currency }}</span></li>
+
             <li><b>{{shipping.lang.sp_box.username}}:</b> <span>{{ box.user.name }} {{ box.user.lastname }}</span></li>
             <li><b>{{shipping.lang.sp_box.tel}}:</b> <span>{{ box.user.tel }}</span></li>
             <li><b>{{shipping.lang.sp_box.cel}}:</b> <span>{{ box.user.cel }}</span></li>

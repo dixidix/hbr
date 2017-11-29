@@ -1,4 +1,4 @@
-<div class="dashboard container-fluid" ng-cloak>
+<div class="dashboard container-fluid" >
     <link rel="stylesheet" type="text/css" href="./hbr-selfie/dist/routes/dashboard/dashboard.css">
     <aside ng-class="dashboard.collapse ? 'dashboard__sidebar--collapsed':'dashboard__sidebar'">
         <ul class="menu">
@@ -108,12 +108,6 @@
                     </a>
                     <a href="" ui-sref="dashboard.shipping" ng-if="!dashboard.collapse">
                         <li><i class="fa fa-truck"></i><span>{{ dashboard.lang.shipping }}</span></li>
-                    </a>
-                    <a href="" ui-sref="dashboard.history" ng-if="dashboard.collapse" tooltip-placement="right" uib-tooltip="{{ dashboard.lang.history }}">
-                        <li><i class="fa fa-history"></i></li>
-                    </a>
-                    <a href="" ui-sref="dashboard.history" ng-if="!dashboard.collapse">
-                        <li><i class="fa fa-history"></i><span>{{ dashboard.lang.history }}</span></li>
                     </a>
                 </div>
             </div>

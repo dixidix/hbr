@@ -227,8 +227,8 @@ function shoppingController(angular, app) {
         function get_categories() {
             categoryService
                 .get_categories()
-                .then(function(data) {
-                    self.categories = data.category_list;
+                .then(function(res) {
+                    self.categories = res.data.category_list;
 
                     if (self.lote.bills.length > 0) {
                         angular.forEach(self.lote.bills, function(bill) {

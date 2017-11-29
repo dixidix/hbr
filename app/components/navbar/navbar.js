@@ -30,12 +30,15 @@ function navbarDirective(angular, app) {
             }, true);
         }
 
-        controller.$inject = ['$scope'];
-        function controller($scope, $rootScope, $window) {
+        controller.$inject = ['$scope', '$http'];
+        function controller($scope, $http, $rootScope, $window) {
             var self = this; // jshint:ignore
             function setLang (lang) {
                 $rootScope.showSpinner = true;
                 localStorage.setItem('lang', lang);
+                authenticationService.checkAuth().then(function(response) {
+                $http.post('./hbr-selfie/dist/php/update_lang.php', {lang: lang, uid: response.data.uid});            
+                });  
                 self.lang = lang;
                 $rootScope.setLang(lang).then(function (langs){
                     $rootScope.langs = langs.data;

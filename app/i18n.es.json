@@ -38,7 +38,7 @@
         "manage_users": "Admin. Usuarios",
         "manage_business": "Admin. Empresas",
         "warehouse": "Depósitos",
-        "box_airway_bill": "Órdenes a enviar",
+        "box_airway_bill": "Ordenes a enviar",
         "stock_rooms": "Almacenamiento",
         "shipping": "Seguir Envíos",
         "history": "Historial",
@@ -46,7 +46,7 @@
         "business_packages": "Envíos Empresas"
     },
     "awb_box": {
-        "title": "Órdenes a enviar",
+        "title": "Ordenes a enviar",
         "filter": {
             "placeholder": "Buscar por...",
             "placeholder_created": "día/mes/año",
@@ -67,7 +67,7 @@
         },
         "awb": {
             "header": {
-                "id": "Caja de envío N° ",
+                "id": "Orden N° ",
                 "processing": "Procesando",
                 "processed": "Procesado"
             },
@@ -251,6 +251,7 @@
             "age": "días desde creada",
             "age_unit": "días",
             "processing": "Procesando",
+            "order": "N° orden",
             "status": {
                 "label": "Estado",
                 "progress": "En progreso",
@@ -295,6 +296,10 @@
                     "label": "Valor Total de la guía (U$D)",
                     "placeholder": "Valor total de la guía en dólares"
                 },
+                "real_value": {
+                    "label": "Valor real de la guía (U$D)",
+                    "placeholder": "Valor total real de la guía en dólares"
+                },
                 "real_total_weight": {
                     "label": "Peso total real de la guía (Kg.)",
                     "placeholder": "Peso total de la guía en kg"
@@ -303,9 +308,10 @@
                     "label": "Peso total real de la guía (Kg.)",
                     "placeholder": "Peso total real de la guía en kg"
                 },
+                
                 "real_stock": {
-                    "label": "Peso total real de la guía (Kg.)",
-                    "placeholder": "Peso total real de la guía en kg"
+                    "label": "Cant. real de productos",
+                    "placeholder": "Cantidad real de productos"
                 },
                 "real_update_btn": "Actualizar",
                 "box_weight": {
@@ -406,6 +412,7 @@
     "shipping": {
         "title": "Envíos",
         "board": {
+            "location":"Ubicación",
             "warehouse": {
                 "title": "Depósito"
             },
@@ -597,26 +604,31 @@
             "created": "Creada",
             "edited": "Última edición",
             "origin": "Origen",
-            "location": "Depósito originario",
+            "location": "Depósito",
             "provider": "Proveedor postal",
             "tracking": "Código de seguimiento",
             "value": "Valor de la caja",
             "wh_val": "Valor del depósito",
             "hbr_wh_val": "Valor de depósito HBR",
             "wh_aditional": "Valor adicional de depósito",
-            "aditional_value": "Valor adicional HBR",
-            "aditional_unit": "Unidad adicional HBR",
-            "aditional_total": "Total adicional HBR",
+            "hbr_aditional": "Valor adicional de HBR",
+            "aditional_value": "Valor adicional depósito",
+            "aditional_value_hbr": "Valor adicional HBR",
+            "aditional_unit": "Unidad adicional depósito",
+            "aditional_unit_hbr": "Unidad adicional HBR",
+            "aditional_total": "Total adicional depósito",
+            "aditional_total_hbr": "Total adicional HBR",
+            "total": "Total shipping value",
             "freight_val": "Valor de flete",
             "shipping_val": "Valor de envío",
             "download": "Descargar proforma",
-            "wh_leave_date": "Fecha de salida de depósito",
-            "wh_arrival_date": "Fecha de llegada a depósito",
-            "bsas_leave_date": "Fecha de salida de Bs. As.",
-            "bsas_arrival_date": "Fecha de llegada a Bs. As.",
-            "leave_date": "Fecha de salida",
-            "arrival_date": "Fecha de llegada",
-            "customer_arrival_date": "Fecha de llegada a consumidor final",
+            "wh_leave_date": "Salida de depósito",
+            "wh_arrival_date": "Llegada a depósito",
+            "bsas_leave_date": "Salida de Bs. As.",
+            "bsas_arrival_date": "Llegada a Bs. As.",
+            "leave_date": "Salida",
+            "arrival_date": "Llegada",
+            "customer_arrival_date": "Llegada a consumidor final",
             "shipping_address": "Dirección de envío",
             "username": "Cliente",
             "tel": "Tel",
@@ -627,6 +639,9 @@
             "status_change": "Enviar caja a",
             "location_change": "Cambiar depósito",
             "location_change_msg": "Estas seguro que deseas enviar esta caja a otro depósito ?",
+            "followUp":"Seguir caja en HBR",
+            "link":"Enlace a HBR",
+            "track": "Seguir Envío",
             "confirm": "Confirmar",
             "cancel": "Cancelar",
             "file": "Subir proforma",
@@ -638,6 +653,11 @@
             },
             "delete": "Eliminar caja de envío",
             "delete_msg": "Estas seguro que deseas eliminar esta caja de envío ?"
-        }
+        },
+        "notify":{
+            "subject": "Notificación de estado de entrega",
+            "header": "Estimado cliente:",
+            "msg": "Nos gustaría informarle que ha habido una actualización en el estado de su entrega:"
+        } 
     }
 }

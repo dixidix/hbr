@@ -18,9 +18,10 @@ $_POST = json_decode(file_get_contents('php://input'), true);
 		$outp .= '"shipping_val":"'  . $rs["shipping_val"] . '",';
 		$outp .= '"wh_val":"'  . $rs["wh_val"] . '",';
 		$outp .= '"hbr_wh_val":"'  . $rs["hbr_wh_val"] . '",';
-        $outp .= '"aditional_unit":"'  . $rs["aditional_unit"] . '",';
-		$outp .= '"aditional_value":"'  . $rs["aditional_value"] . '",';
-        $outp .= '"aditional_total":"'  . $rs["aditional_total"] . '",';
+        $outp .= '"aditional_unit_hbr":"'  . $rs["aditional_unit_hbr"] . '",';
+		$outp .= '"aditional_value_hbr":"'  . $rs["aditional_value_hbr"] . '",';
+        $outp .= '"aditional_total_hbr":"'  . $rs["aditional_total_hbr"] . '",';
+        $outp .= '"total_billing":"'  . $rs["total_billing"] . '",';
 
         if($rs["status"] == 0 || $rs["status"] == 1) {
             $outp .= '"tracking":"'  . $rs["wh_tracking"] . '",';
@@ -118,6 +119,7 @@ $_POST = json_decode(file_get_contents('php://input'), true);
                 $outpwh .= '"idCode":"'  . $rswh["idCode"] . '",';
                 $outpwh .= '"address":"'  . $rswh["address"] . '",';
                 $outpwh .= '"localidad":"'  . $rswh["localidad"] . '",';
+                $outpwh .= '"lang":"'  . $rswh["lang"] . '",';
                 $outpwh .= '"postalcode":"'   . $rswh["postalcode"]  . '"}';
             }
     
@@ -140,6 +142,7 @@ $_POST = json_decode(file_get_contents('php://input'), true);
 			$outpwhloc .= '"codeType": '  . $rswhloc["codeType"] . ',';
 			$outpwhloc .= '"idCode":"'  . $rswhloc["idCode"] . '",';
 			$outpwhloc .= '"address":"'  . $rswhloc["address"] . '",';
+			$outpwhloc .= '"lang":"'  . $rswhloc["lang"] . '",';
 			$outpwhloc .= '"localidad":"'  . $rswhloc["localidad"] . '",';
 			$outpwhloc .= '"postalcode":"'   . $rswhloc["postalcode"]  . '"}';
 		}
@@ -168,6 +171,7 @@ $_POST = json_decode(file_get_contents('php://input'), true);
 			$outpmmn .= '"isAdmin":"'  . $rsss["isAdmin"] . '",';
 			$outpmmn .= '"isPremium":"'  . $rsss["isPremium"] . '",';
 			$outpmmn .= '"client_type":"'  . $rsss["client_type"] . '",';
+			$outpmmn .= '"lang":"'  . $rsss["lang"] . '",';
 			$outpmmn .= '"company_name":"'   . $rsss["company_name"].'"}';
 		}
 

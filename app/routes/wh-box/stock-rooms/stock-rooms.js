@@ -121,7 +121,7 @@ function stockRoomsController(angular, app) {
             boxToDelete.real_remaining = parseInt(boxToDelete.real_remaining) + parseInt(boxToDelete.quantity);
             boxService._deleteEnterBox(boxToDelete).then(function() {
                 angular.element('.footer')[0].click();
-                boxService.calculate_room();
+                boxService.calculate_room(self.filteredBoxes);
                 self.filteredBoxes.splice(index, 1);
                 self.boxes.filter(function(box) {
                     if (box.id === boxToDelete.id) {

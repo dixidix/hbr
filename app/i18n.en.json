@@ -65,7 +65,7 @@
         },
         "awb": {
             "header": {
-                "id": "Airway box # ",
+                "id": "Order N° ",
                 "processing": "Processing",
                 "processed": "Processed"
             },
@@ -267,6 +267,7 @@
             "age_unit": "days",
             "weight": "Weight",
             "processing": "Processing",
+            "order": "Order N°",
             "status": {
                 "label": "Status",
                 "progress": "In Progress",
@@ -436,6 +437,7 @@
     "shipping": {
         "title": "Shipping",
         "board": {
+            "location":"Location",
             "warehouse": {
                 "title": "Warehouse"
             },
@@ -666,6 +668,9 @@
             "status_change": "Move box to ",
             "location_change": "Change Warehouse",
             "location_change_msg": "Are you sure that you want to send this box to another warehouse ?",
+            "followUp":"Follow your box in HBR",
+            "link":"Link to HBR",
+            "track": "Track Package",
             "confirm": "Confirm",
             "cancel": "Cancel",
             "file": "Upload invoice",
@@ -677,6 +682,11 @@
             },
             "delete": "Remove Shipping Box",
             "delete_msg": "Are you sure that you want to delete this shipping box ?"
+        },
+        "notify":{
+            "subject": "Delivery status notification",
+            "header": "Dear customer:",
+            "msg": "We'd like to inform you that there has been an update in the status of your shipping boxes:"
         }  
     }
 }

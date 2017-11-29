@@ -149,6 +149,15 @@ function boxService(agular, app) {
                 id: box.id
             });
         }
+        
+        this._notify = function (msg, subject, client_email) {
+            return $http.post('./hbr-selfie/dist/php/notify.php', {
+                msg: msg,
+                client_email: client_email,
+                msg_subject: subject
+            });
+        };
+        
         this._deleteEnterBox = function(box) {
             return $http.post('./hbr-selfie/dist/php/enter-box/delete_box.php', {
                 id: box.id,

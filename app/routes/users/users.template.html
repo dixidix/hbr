@@ -1,11 +1,9 @@
-<div class="users container-fluid" ng-cloak>
+<div class="users container-fluid" >
 		<link rel="stylesheet" type="text/css" href="./hbr-selfie/dist/routes/users/users.css">
 		
 	<div>
 		<h3 class="pull-left" ng-if="users.client_type == 0"><i class="fa fa-users"></i> Manage Users</h3>
-		<button ng-if="users.client_type == 0" class="btn btn-hbr-blue pull-right" ng-click="users.addUser()"><i class="fa fa-plus"></i>User</button>
 		<h3 class="pull-left" ng-if="users.client_type == 1"><i class="fa fa-building"></i>Manage Companies</h3>
-		<button ng-if="users.client_type == 1" class="btn btn-hbr-blue pull-right" ng-click="users.addCompany()"><i class="fa fa-plus"></i>Company</button>
 	</div>
 	<br><br>
 	<hr>
@@ -19,8 +17,11 @@
 	</div>
 	<div class="col-xs-12 content" ng-if="users.userlist.length">
 		<div class="row">
-			<div class="col-xs-6">
-				<label for="">General Search</label>
+			<div class="col-xs-2">
+				<button ng-if="users.client_type == 0" class="btn btn-hbr-blue pull-right" ng-click="users.addUser()"><i class="fa fa-plus"></i>User</button>
+				<button ng-if="users.client_type == 1" class="btn btn-hbr-blue pull-right" ng-click="users.addCompany()"><i class="fa fa-plus"></i>Company</button>
+			</div>
+			<div class="col-xs-10">
 				<div class="input-group">
 					<span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>
 					<input type="text" name="search" class="form-control" placeholder="General Search" ng-model="generalSearch">

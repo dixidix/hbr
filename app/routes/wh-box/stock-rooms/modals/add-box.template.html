@@ -1,4 +1,4 @@
-<div class="box box-modal container-fluid" ng-cloak>
+<div class="box box-modal container-fluid" >
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="modalAddBox.cancel()">&times;</button>
         <h3><i class="fa fa-cubes" style="margin-right:5px"></i>{{modalAddBox.lang.form.title}}</h3>
@@ -110,7 +110,7 @@
                     </div>
                     <div class="form-group col-xs-6">
                         <label for="name">{{modalAddBox.lang.form.add.remaining.label}}</label>
-                        <input min="0" type="number" required class="form-control" placeholder="{{modalAddBox.lang.form.add.remaining.placeholder}}" ng-model="modalAddBox.box.real_remaining">
+                        <input min="1" type="number" required class="form-control" placeholder="{{modalAddBox.lang.form.add.remaining.placeholder}}" ng-model="modalAddBox.box.real_remaining">
                     </div>
                 </div>
                 <div class="row">
@@ -131,7 +131,7 @@
                     </div>
                     <div class="form-group col-xs-4" data-ng-class="{'has-error': modalAddBox.boxForm.add_qty.$invalid }">
                         <label class="control-label" for="name">{{modalAddBox.lang.form.add.add_qty.label}}</label>
-                        <input required min="0" max="{{modalAddBox.box.real_remaining}}" name="add_qty" id="add_qty" type="number" value="0" ng-init="0" required class="form-control" placeholder="{{modalAddBox.lang.form.add.add_qty.placeholder}}" ng-model="modalAddBox.box.quantity">
+                        <input required min="1" max="{{modalAddBox.box.real_remaining}}" name="add_qty" id="add_qty" type="number" value="0" ng-init="0" required class="form-control" placeholder="{{modalAddBox.lang.form.add.add_qty.placeholder}}" ng-model="modalAddBox.box.quantity">
                     </div>
                     <div class="form-group col-xs-4" data-ng-class="{'has-error': modalAddBox.boxForm.box_weight.$invalid }">
                         <label class="control-label" for="box_weight">{{modalAddBox.lang.form.add.box_weight.label}}</label>

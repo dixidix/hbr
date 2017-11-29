@@ -27,9 +27,9 @@
                 .state('dashboard.stock_rooms', { url: "/stock-rooms", params: { boxId: null, spBoxId: null, tracking: null }, templateUrl: "./hbr-selfie/dist/routes/wh-box/stock-rooms/stock-rooms.template.html", data: { title: 'Stock Rooms', requireAuth: true }, controller: "stockRoomsCtrl", controllerAs: "stockRooms" })
                 .state('dashboard.awb-box', { url: "/awb-box", params: { awbId: null }, templateUrl: "./hbr-selfie/dist/routes/wh-box/awb-box/awb-box.template.html", data: { title: 'Box Airway bill', requireAuth: true }, controller: "awbBoxCtrl", controllerAs: "awb" })
                 .state('dashboard.history', { url: "/history", templateUrl: "./hbr-selfie/dist/routes/wh-box/history/history.template.html", data: { title: 'History', requireAuth: true }, controller: "historyCtrl", controllerAs: "history" })
-                .state('dashboard.shipping', { url: "/shipping", templateUrl: "./hbr-selfie/dist/routes/wh-box/shipping/shipping.template.html", data: { title: 'Shipping Page', requireAuth: true }, controller: "shippingCtrl", controllerAs: "shipping" });
-        }])
-        .run(['$rootScope', '$state','$http', '$stateParams', 'authenticationService', function($rootScope, $state,$http, $stateParams, authenticationService) {
+                .state('dashboard.shipping', { url: "/shipping/:id", templateUrl: "./hbr-selfie/dist/routes/wh-box/shipping/shipping.template.html", data: { title: 'Shipping Page', requireAuth: true }, controller: "shippingCtrl", controllerAs: "shipping" });
+            }])
+        .run(['$rootScope', '$location', '$state','$http', '$stateParams', 'authenticationService', function($rootScope,$location, $state,$http, $stateParams, authenticationService) {
             var lang = localStorage.getItem('lang');
 
             $rootScope.setLang = function (lang) {
@@ -47,25 +47,25 @@
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
             $rootScope.showSpinner = false;
-            $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-                $rootScope.showSpinner = true;
-            });
-            $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-                $rootScope.showSpinner = false;
-                if (toState.data.requireAuth) {
+            var postLogInRoute;
+            
+            $rootScope.$on('$stateChangeStart', function (event, nextRoute, currentRoute) {
+                console.log(nextRoute);
+                if (nextRoute.data.requireAuth) {
                     authenticationService.checkAuth().then(function(response) {
                         if (!response.data.isLogged) {
+                            postLogInRoute = $location.path();
                             $state.go('home.login');
-                        }
-                    });
-                } else if (toState.name == "home" || toState.name == "home.login") {
-                    authenticationService.checkAuth().then(function(response) {
-                        if (response.data.isLogged) {
-                            $state.go('dashboard');
+                        } else {                            
+                            if(postLogInRoute){
+                            $location.path(postLogInRoute).replace();
+                            postLogInRoute = null;
+                            } 
                         }
                     });
                 }
             });
+
         }]);
 
     app.filter('start', function() {

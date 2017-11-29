@@ -1,6 +1,6 @@
 <div class="awb-card_header">
-    <h4><i class="fa fa-cube"></i> {{lang.awb.header.id}}: {{box.id }}</h4>
-    <h4 ng-if="awb.isAdmin == 1"> {{box.user.company_name }}</h4>
+    <h4><i class="fa fa-cube"></i> {{lang.awb.header.id}} {{box.id }}</h4>
+    <h4 ng-if="awb.isAdmin == 1" style="max-height:30px; max-width: 250px; overflow:hidden; word-wrap:break-word; text-overflow: ellipsis;"> {{box.user.company_name }}</h4>
     <h4 ng-if="box.status == 0">
         <i style="cursor:pointer;" ng-click="editBox(box, $index)" class="fa fa-pencil"></i>
         <i style="color:#ED5E68;cursor:pointer;" uib-popover-template="'delete-box.html'" popover-class="help  delete-box" popover-placement="left" data-toggle="popover" popover-trigger="outsideClick" class="fa fa-close"></i>

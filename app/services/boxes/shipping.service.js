@@ -23,15 +23,23 @@ function shippingService(agular, app) {
                     uid: uid
                 });
             });
-        }
+        };
 
         this._deleteBox = function (box) {
             return $http.post('./hbr-selfie/dist/php/shipping-box/delete_box.php', {
                 id: box.id,
                 edited: Math.floor(new Date().getTime())
             });
-        }
+        };
 
+        this._notify = function (msg, subject, client_email) {
+            return $http.post('./hbr-selfie/dist/php/notify.php', {
+                msg: msg,
+                client_email: client_email,
+                msg_subject: subject
+            });
+        };
+        
         this._editShippingBox = function(spbox) {
             var whId = spbox.enter_box[0].warehouse.id;
             return authenticationService.checkAuth().then(function(response) {
@@ -50,9 +58,13 @@ function shippingService(agular, app) {
                     bsas_arrival_date:  new Date(spbox.bsas_arrival_date).getTime() || null, 
                     bsas_leave_date:  new Date(spbox.bsas_leave_date).getTime() || null,
                     customer_arrival_date:  new Date(spbox.customer_arrival_date).getTime() || null,
-                    bill_file_name: spbox.bill_file_name || null,
-                    bill_file_path: spbox.bill_file_path || null
-                }
+                    aditional_unit_hbr: spbox.aditional_unit_hbr || "NULL",
+                    aditional_value_hbr: spbox.aditional_value_hbr || "NULL",
+                    aditional_total_hbr: spbox.aditional_total_hbr || "NULL",
+                    bill_file: spbox.bill_file || "NULL",
+                    hbr_wh_val: spbox.hbr_wh_val || "NULL"            
+                };
+
                 var formData = new FormData();                
                 angular.forEach(editBox, function(key, value) {
                     formData.append(value, key);

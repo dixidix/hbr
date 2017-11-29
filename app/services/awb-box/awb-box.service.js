@@ -73,6 +73,14 @@ function awbboxService(agular, app) {
             });
         }
 
+        this._notify = function (msg, subject, client_email) {
+            return $http.post('./hbr-selfie/dist/php/notify.php', {
+                msg: msg,
+                client_email: client_email,
+                msg_subject: subject
+            });
+        };
+
         this._addBills = function(bill, boxId) {
             return authenticationService.checkAuth().then(function(response) {
                 bill.uid = parseInt(response.data.uid);

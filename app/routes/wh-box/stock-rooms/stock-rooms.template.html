@@ -1,4 +1,4 @@
-<div class="stock-rooms container-fluid" ng-cloak>
+<div class="stock-rooms container-fluid" >
         <link rel="stylesheet" type="text/css" href="./hbr-selfie/dist/routes/wh-box/stock-rooms/stock-rooms.css">
         
     <h3> <i class="fa fa-cubes"></i> {{stockRooms.lang.room.title}}</h3>
@@ -65,7 +65,7 @@
             <li><b> <i class="fa fa-user"></i> {{box.user.company_name}}</b></li>
             <li><b>{{stockRooms.lang.box.age}}:</b> {{box.age}} {{stockRooms.lang.box.age_unit}}</li>
             <li><b>{{stockRooms.lang.box.created}}:</b> {{ box.created | date : "dd/MM/yyyy HH:mm" }}</li>
-            <li><b>Awb Box:</b> #{{box.awb_boxes_id}}</li>
+            <li><b>{{stockRooms.lang.box.order}}:</b> #{{box.awb_boxes_id}}</li>
             <li><b>Warehouse:</b> {{box.warehouse.name}}</li>
         </ul>
         <div class="stock-card__footer">
